@@ -15,6 +15,11 @@ class CreateRegistrarsTable extends Migration
     {
         Schema::create('registrars', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('username');
+            $table->string('password');
+            $table->string('name')->nullable();
+            $table->string('id_number')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }
