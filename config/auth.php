@@ -99,27 +99,27 @@ return [
 
         'admins' => [
             'driver' => 'eloquent',
-            'table' => App\Admin::class,
+            'model' => App\Admin::class,
         ],
 
         'deans' => [
             'driver' => 'eloquent',
-            'table' => App\Dean::class,
+            'model' => App\Dean::class,
         ],
 
         'registrars' => [
             'driver' => 'eloquent',
-            'table' => App\Registrar::class,
+            'model' => App\Registrar::class,
         ],
 
         'cashiers' => [
             'driver' => 'eloquent',
-            'table' => App\Cashier::class,
+            'model' => App\Cashier::class,
         ],
 
         'faculties' => [
             'driver' => 'eloquent',
-            'table' => App\Faculty::class,
+            'model' => App\Faculty::class,
         ],
     ],
 

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Registrar Login - {{ env('app_name') }}</title>
+  <title>Student Login - {{ env('app_name') }}</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet"  href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue-light.min.css') }}">
@@ -19,24 +19,36 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="javascript:void(0)"><b>Registrar</b> Login</a>
+    <a href="javascript:void(0)"><b>Student</b> Login</a>
   </div>
   <div class="login-box-body">
     <p class="login-box-msg">{{ env('app_name') }}</p>
-    <form action="#" method="post" autocomplete="off">
-      <div class="form-group has-feedback">
-        <input type="text" name="username" id="username" class="form-control" placeholder="Username">
-        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+    @include('includes.all')
+    <form action="{{ route('student.login.post') }}" method="post" autocomplete="off">
+      {{ csrf_field() }}
+      <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
+        <input id="username" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" placeholder="Enter Student Number" autofocus>
+        @if ($errors->has('student_number'))
+            <span class="help-block">
+                <strong>{{ $errors->first('student_number') }}</strong>
+            </span>
+        @endif
       </div>
-      <div class="form-group has-feedback">
-        <input type="password" name="password" id="password" class="form-control" placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+      <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+        <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password">
+        @if ($errors->has('password'))
+            <span class="help-block">
+                <strong>{{ $errors->first('password') }}</strong>
+            </span>
+        @endif
       </div>
+
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox" name="remember_me"> Remember Me
+              <input type="checkbox" name="remember_me" id="remember_me" checked=""> Remember Me
             </label>
           </div>
         </div>
@@ -45,6 +57,7 @@
         </div>
       </div>
     </form>
+    <a href="#">Click here to register</a>
   </div>
 </div>
 <script src="{{ asset('js/app.js') }}"></script>

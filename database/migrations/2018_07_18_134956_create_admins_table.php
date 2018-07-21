@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDeansTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDeansTable extends Migration
      */
     public function up()
     {
-        Schema::create('deans', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username');
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('firstname');
             $table->string('middle_name')->nullable();
             $table->string('lastname');
@@ -35,6 +35,6 @@ class CreateDeansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deans');
+        Schema::dropIfExists('admins');
     }
 }

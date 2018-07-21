@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminsTable extends Migration
+class CreateActivityLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('activity_logs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username');
-            $table->string('password');
-            $table->string('name')->nullable();
-            $table->string('id_number')->nullable();
-            $table->rememberToken();
+            $table->integer('user_id');
+            $table->tinyInteger('user_type')->default(5); // 1 for admin, 2 for dean, 3 for cashier, 4 for registrar, 5 for faculty, 6 for students
+            $table->string('action')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('activity_logs');
     }
 }

@@ -17,8 +17,12 @@ class CreateCashiersTable extends Migration
             $table->increments('id');
             $table->string('username');
             $table->string('password');
-            $table->string('name')->nullable();
+            $table->string('firstname');
+            $table->string('middle_name')->nullable();
+            $table->string('lastname');
+            $table->string('suffix_name')->nullable();
             $table->string('id_number')->nullable();
+            $table->tinyInteger('active')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });
