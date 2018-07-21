@@ -18,10 +18,10 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="javascript:void(0)"><b>Admin</b> Login</a>
-  </div>
   <div class="login-box-body">
+    <div class="login-logo">
+      <a href="javascript:void(0)"><b>Admin</b> Login</a>
+    </div>
     <p class="login-box-msg">{{ env('app_name') }}</p>
     @include('includes.all')
     <form action="{{ route('admin.login.post') }}" method="post" autocomplete="off">

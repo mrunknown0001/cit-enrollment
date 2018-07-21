@@ -16,6 +16,12 @@ Route::get('/admin', function () {
 
 Route::get('/dean/login', 'LoginController@deanLogin')->name('dean.login');
 
+Route::post('/dean/login', 'LoginController@postDeanLogin')->name('dean.login.post');
+
+Route::get('/dean', function () {
+	return redirect()->route('dean.login');
+});
+
 Route::get('/cashier/login', 'LoginController@cashierLogin')->name('cashier.login');
 
 Route::get('/registrar/login', 'LoginController@registrarLogin')->name('registrar.login');
@@ -42,14 +48,24 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to admin dashboard
 	Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
-	// rotue to view admins
+	// rotue to view deans
 	Route::get('/deans', 'AdminController@deans')->name('admin.deans');
 
-	// route to add admin
+	// route to add dean
 	Route::get('/dean/add', 'AdminController@addDean')->name('admin.add.dean');
 
-	// route to save new admin
+	// route to save new dean
 	Route::post('/dean/add', 'AdminController@postAddDean')->name('admin.add.dean.post');
+
+	// route to update dean
+	Route::get('/dean/{id}/update', 'AdminController@updateDean')->name('admin.update.dean');
+
+	// route to save update on dean
+	Route::post('/dean/update', 'AdminController@postUpdateDean')->name('admin.update.dean.post');
+
+	Route::get('/dean/update', function () {
+		return redirect()->route('admin.deans');
+	});
 });
 
 

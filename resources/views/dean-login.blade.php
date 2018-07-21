@@ -9,6 +9,7 @@
   <link rel="stylesheet"  href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue-light.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -18,12 +19,13 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="javascript:void(0)"><b>Dean</b> Login</a>
-  </div>
   <div class="login-box-body">
+    <div class="login-logo">
+      <a href="javascript:void(0)"><b>Dean</b> Login</a>
+    </div>
     <p class="login-box-msg">{{ env('app_name') }}</p>
-    <form action="#" method="post" autocomplete="off">
+    @include('includes.all')
+    <form action="{{ route('dean.login.post') }}" method="post" autocomplete="off">
       {{ csrf_field() }}
       <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
         <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Enter Username" autofocus>

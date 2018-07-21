@@ -11,4 +11,11 @@ class DeanController extends Controller
     	$this->middleware('auth:dean');
     }
 
+
+    // method use to view dashboard
+    public function dashboard()
+    {
+    	return view('dean.dashboard');
+    }
+
 }

@@ -17,7 +17,7 @@
 				@include('includes.all')
 				<p><a href="{{ route('admin.add.dean') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Dean</a></p>
 				@if(count($deans) > 0)
-				<table class="table table-bordered">
+				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
 							<th class="text-center">Username</th>
@@ -34,13 +34,12 @@
 								{{ strtoupper($d->suffix_name) }}
 							</td>
 							<td class="text-center">
-								<a href="#" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> View Details</a>
+								<a href="{{ route('admin.update.dean', ['id' => $d->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a>
 							</td>
 						</tr>
 						@endforeach
 					</tbody>
 					<tfoot>
-						
 					</tfoot>
 				</table>
 				@else

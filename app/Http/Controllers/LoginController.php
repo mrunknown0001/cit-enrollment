@@ -28,7 +28,7 @@ class LoginController extends Controller
         $remember = $request['remember_me'];
 
         // attempt to login admin
-        if(Auth::guard('admin')->attempt(['username' => $username, 'password' => $password])) {
+        if(Auth::guard('admin')->attempt(['username' => $username, 'password' => $password], $remember)) {
             return redirect()->route('admin.dashboard');
         }
 
@@ -39,7 +39,7 @@ class LoginController extends Controller
     // method use to show login form for student
     public function studentLogin()
     {
-    	return view('student-login');
+    	return GeneralController::auth_check('student-login');
     }
 
 
@@ -68,6 +68,27 @@ class LoginController extends Controller
     public function deanLogin()
     {
     	return view('dean-login');
+    }
+
+
+    // method use to login dean
+    public function postDeanLogin(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        $username = $request['username'];
+        $password = $request['password'];
+        $remember = $request['remember_me'];
+
+        // attempt to login dean
+        if(Auth::guard('dean')->attempt(['username' => $username, 'password' => $password], $remember)) {
+            return redirect()->route('dean.dashboard');
+        }
+
+        return redirect()->back()->with('error', 'Authentication Error!');
     }
 
 
