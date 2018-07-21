@@ -60,7 +60,7 @@
 								<div class="col-md-3">
 							      <div class="form-group{{ $errors->has('suffix_name') ? ' has-error' : '' }}">
 							      	<label for="suffix_name">Suffix</label>
-							        <input id="suffix_name" type="text" class="form-control" name="middlename" value="{{ old('suffix_name') }}" placeholder="Enter Suffix Name" >
+							        <input id="suffix_name" type="text" class="form-control" name="suffix_name" value="{{ old('suffix_name') }}" placeholder="Enter Suffix Name" >
 							        @if ($errors->has('suffix_name'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('suffix_name') }}</strong>

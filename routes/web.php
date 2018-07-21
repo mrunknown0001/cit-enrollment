@@ -89,8 +89,40 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to view cashiers
 	Route::get('/cashiers', 'AdminController@cashiers')->name('admin.cashiers');
 
+	// route to add cashier
+	Route::get('/cashier/add', 'AdminController@addCashier')->name('admin.add.cashier');
+
+	// rotue to save new cashier
+	Route::post('/cashier/add', 'AdminController@postAddCashier')->name('admin.add.cashier.post');
+
+	// route to update cashier
+	Route::get('/cashier/{id}/update', 'AdminController@updateCashier')->name('admin.update.cashier');
+
+	// route to save update on cashier
+	Route::post('/cashier/update', 'AdminController@postUpdateCashier')->name('admin.update.cashier.post');
+
+	Route::get('/cashier/update', function () {
+		return redirect()->route('admin.cashiers');
+	});
+
 	// route to view faculties
 	Route::get('/faculties', 'AdminController@faculties')->name('admin.faculties');
+
+	// route to add faculty
+	Route::get('/faculty/add', 'AdminController@addFaculty')->name('admin.add.faculty');
+
+	// route to save new faculty
+	Route::post('/faculty/add', 'AdminController@postAddFaculty')->name('admin.add.faculty.post');
+
+	// route to update faculty
+	Route::get('/faculty/{id}/update', 'AdminController@updateFaculty')->name('admin.update.faculty');
+
+	// route to save update on faculty
+	Route::post('/faculty/update', 'AdminController@postUpdateFaculty')->name('admin.update.faculty.post');
+
+	Route::get('/faculty/update', function () {
+		return redirect()->route('admin.faculties');
+	});
 
 });
 

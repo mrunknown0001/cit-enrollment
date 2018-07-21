@@ -1,27 +1,27 @@
 @extends('layouts.admin-layout')
 
-@section('title') Registrars @endsection
+@section('title') Cashiers @endsection
 
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Add Registrar</h1>
+		<h1>Add CashierCashiers</h1>
 		<ol class="breadcrumb">
 			<li><a href="javascript:void(0)"><i class="fa fa-users"></i> Home</a></li>
-			<li class="active">Registrars</li>
+			<li class="active">Cashiers</li>
 		</ol>
 	</section>
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p><a href="{{ route('admin.registrars') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Registrars</a></p>
+				<p><a href="{{ route('admin.cashiers') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Cashiers</a></p>
 				@include('includes.all')
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-user"></i> Add Registrar</strong>
+						<strong><i class="fa fa-user"></i> Add Cashiers</strong>
 					</div>
 					<div class="box-body">
-						<form action="{{ route('admin.add.registrar.post') }}" method="POST" role="form" autocomplete="off">
+						<form action="{{ route('admin.add.cashier.post') }}" method="POST" role="form" autocomplete="off">
 							{{ csrf_field() }}
 							<div class="row">
 								<div class="col-md-3">
@@ -81,7 +81,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add Registrar</button>
+								<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add Cashier</button>
 							</div>
 						</form>
 					</div>

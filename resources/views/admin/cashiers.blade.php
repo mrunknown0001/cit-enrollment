@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				<p><a href="#" class="btn btn-primary"><i class="fa fa-plus"></i> Add Cashiers</a></p>
+				<p><a href="{{ route('admin.add.cashier') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Cashiers</a></p>
 				@if(count($cashiers) > 0)
 				<table class="table table-bordered table-hover">
 					<thead>
@@ -26,15 +26,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($cashiers as $s)
+						@foreach($cashiers as $c)
 						<tr>
-							<td>{{ $s->username }}</td>
+							<td>{{ $c->username }}</td>
 							<td>
-								{{ ucwords($r->firstname . ' ' . $s->lastname) }}
-								{{ strtoupper($s->suffix_name) }}
+								{{ ucwords($c->firstname . ' ' . $c->lastname) }}
+								{{ strtoupper($c->suffix_name) }}
 							</td>
 							<td class="text-center">
-								<a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a>
+								<a href="{{ route('admin.update.cashier', ['id' => $c->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a>
 							</td>
 						</tr>
 						@endforeach

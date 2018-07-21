@@ -257,6 +257,104 @@ class AdminController extends Controller
     }
 
 
+    // method use to add cashier
+    public function addCashier()
+    {
+        return view('admin.cashier-add');
+    }
+
+
+    // method use to save new cashier
+    public function postAddCashier(Request $request)
+    {
+        $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'username' => 'required'
+        ]);
+
+        $firstname = $request['firstname'];
+        $lastname = $request['lastname'];
+        $middlename = $request['middlename'];
+        $suffix = $request['suffix_name'];
+        $username = $request['username'];
+
+        // check if the username is already exist
+        $check_username = Cashier::where('username', $username)->first();
+
+        if(count($check_username) > 0) {
+            return redirect()->back()->with('error', 'Username Already Used!');
+        }
+
+        // add new registrar
+        $cashier = new Cashier();
+        $cashier->username = $username;
+        $cashier->password = bcrypt('password');
+        $cashier->firstname = $firstname;
+        $cashier->lastname = $lastname;
+        $cashier->middle_name = $middlename;
+        $cashier->suffix_name = $suffix;
+        $cashier->save();
+
+        // add activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added Cashier');
+
+        // return to deans and add admin with message
+        return redirect()->route('admin.cashiers')->with('success', 'Cashier Added!');
+    }
+
+
+    // method use to update cashier
+    public function updateCashier($id = null)
+    {
+        $cashier = Cashier::findorfail($id);
+
+        return view('admin.cashier-update', ['cashier' => $cashier]);
+    }
+
+
+    // method use to save update on cashier
+    public function postUpdateCashier(Request $request)
+    {
+        $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'username' => 'required'
+        ]);
+
+        $firstname = $request['firstname'];
+        $lastname = $request['lastname'];
+        $middlename = $request['middlename'];
+        $suffix = $request['suffix_name'];
+        $username = $request['username'];
+        $cashier_id = $request['cashier_id'];
+
+        $cashier = Cashier::findorfail($cashier_id);
+
+        // check if the username is already exist
+        $check_username = Cashier::where('username', $username)->first();
+
+        if(count($check_username) > 0 && $username != $cashier->username) {
+            return redirect()->back()->with('error', 'Username Already Used!');
+        }
+
+        // add new dean
+        $cashier->username = $username;
+        $cashier->password = bcrypt('password');
+        $cashier->firstname = $firstname;
+        $cashier->lastname = $lastname;
+        $cashier->middle_name = $middlename;
+        $cashier->suffix_name = $suffix;
+        $cashier->save();
+
+        // add activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Cashier');
+
+        // return to deans and add admin with message
+        return redirect()->route('admin.cashiers')->with('success', 'Cashier Details Updated!');
+    }
+
+
     // method use to view faculties
     public function faculties()
     {
@@ -265,5 +363,103 @@ class AdminController extends Controller
                             ->get();
 
         return view('admin.faculties', ['faculties' => $faculties]);
+    }
+
+
+    // method use to add faculty
+    public function addFaculty()
+    {
+        return view('admin.faculty-add');
+    }
+
+
+    // method use to save new faculty
+    public function postAddFaculty(Request $request)
+    {
+        $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'username' => 'required'
+        ]);
+
+        $firstname = $request['firstname'];
+        $lastname = $request['lastname'];
+        $middlename = $request['middlename'];
+        $suffix = $request['suffix_name'];
+        $username = $request['username'];
+
+        // check if the username is already exist
+        $check_username = Faculty::where('username', $username)->first();
+
+        if(count($check_username) > 0) {
+            return redirect()->back()->with('error', 'Username Already Used!');
+        }
+
+        // add new registrar
+        $faculty = new Faculty();
+        $faculty->username = $username;
+        $faculty->password = bcrypt('password');
+        $faculty->firstname = $firstname;
+        $faculty->lastname = $lastname;
+        $faculty->middle_name = $middlename;
+        $faculty->suffix_name = $suffix;
+        $faculty->save();
+
+        // add activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added Faculty');
+
+        // return to deans and add admin with message
+        return redirect()->route('admin.faculties')->with('success', 'Faculty Added!');
+    }
+
+
+    // method use to update faculty
+    public function updateFaculty($id = null)
+    {
+        $faculty = Faculty::findorfail($id);
+
+        return view('admin.faculty-update', ['faculty' => $faculty]);
+    }
+
+
+    // method use to save update on faculty
+    public function postUpdateFaculty(Request $request)
+    {
+        $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'username' => 'required'
+        ]);
+
+        $firstname = $request['firstname'];
+        $lastname = $request['lastname'];
+        $middlename = $request['middlename'];
+        $suffix = $request['suffix_name'];
+        $username = $request['username'];
+        $faculty_id = $request['faculty_id'];
+
+        $faculty = Faculty::findorfail($faculty_id);
+
+        // check if the username is already exist
+        $check_username = Faculty::where('username', $username)->first();
+
+        if(count($check_username) > 0 && $username != $faculty->username) {
+            return redirect()->back()->with('error', 'Username Already Used!');
+        }
+
+        // add new dean
+        $faculty->username = $username;
+        $faculty->password = bcrypt('password');
+        $faculty->firstname = $firstname;
+        $faculty->lastname = $lastname;
+        $faculty->middle_name = $middlename;
+        $faculty->suffix_name = $suffix;
+        $faculty->save();
+
+        // add activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Faculty');
+
+        // return to deans and add admin with message
+        return redirect()->route('admin.faculties')->with('success', 'Faculty Details Updated!');
     }
 }

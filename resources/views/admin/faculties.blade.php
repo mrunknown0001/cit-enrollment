@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				<p><a href="#" class="btn btn-primary"><i class="fa fa-plus"></i> Add Faculties</a></p>
+				<p><a href="{{ route('admin.add.faculty') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Faculties</a></p>
 				@if(count($faculties) > 0)
 				<table class="table table-bordered table-hover">
 					<thead>
@@ -34,7 +34,7 @@
 								{{ strtoupper($f->suffix_name) }}
 							</td>
 							<td class="text-center">
-								<a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a>
+								<a href="{{ route('admin.update.faculty', ['id' => $f->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a>
 							</td>
 						</tr>
 						@endforeach
