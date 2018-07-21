@@ -48,7 +48,7 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to admin dashboard
 	Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
-	// rotue to view deans
+	// route to view deans
 	Route::get('/deans', 'AdminController@deans')->name('admin.deans');
 
 	// route to add dean
@@ -66,6 +66,32 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/dean/update', function () {
 		return redirect()->route('admin.deans');
 	});
+
+	// route to view registrars
+	Route::get('/registrars', 'AdminController@registrars')->name('admin.registrars');
+
+	// route to add registrar
+	Route::get('/registrar/add', 'AdminController@addRegistrar')->name('admin.add.registrar');
+
+	// route to save new registrar
+	Route::post('/registrar/add', 'AdminController@postAddRegistrar')->name('admin.add.registrar.post');
+
+	// route to update registrar
+	Route::get('/registrar/{id}/update', 'AdminController@updateRegistrar')->name('admin.update.registrar');
+
+	// route to save update on registrar
+	Route::post('/registrar/update', 'AdminController@postUpdateRegistrar')->name('admin.update.registrar.post');
+
+	Route::get('/registrar/update', function () {
+		return redirect()->route('admin.registrars');
+	});
+
+	// route to view cashiers
+	Route::get('/cashiers', 'AdminController@cashiers')->name('admin.cashiers');
+
+	// route to view faculties
+	Route::get('/faculties', 'AdminController@faculties')->name('admin.faculties');
+
 });
 
 
@@ -110,6 +136,6 @@ Route::group(['prefix' => 'faculty'], function () {
  * Route group student
  */
 Route::group(['prefix' => 'student'], function () {
-	// rotue to student dashboard
+	// route to student dashboard
 	Route::get('/dashboard', 'StudentController@dashboard')->name('student.dashboard');
 });
