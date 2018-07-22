@@ -29,6 +29,9 @@ class LoginController extends Controller
 
         // attempt to login admin
         if(Auth::guard('admin')->attempt(['username' => $username, 'password' => $password], $remember)) {
+
+            GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Login');
+
             return redirect()->route('admin.dashboard');
         }
 
@@ -57,6 +60,9 @@ class LoginController extends Controller
 
         // attempt to login admin
         if(Auth::attempt(['student_number' => $sn, 'password' => $password], $remember)) {
+
+            GeneralController::activity_log(Auth::user()->id, 6, 'Student Login');
+
             return redirect()->route('student.dashboard');
         }
 
@@ -85,6 +91,9 @@ class LoginController extends Controller
 
         // attempt to login dean
         if(Auth::guard('dean')->attempt(['username' => $username, 'password' => $password], $remember)) {
+
+            GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Login');
+
             return redirect()->route('dean.dashboard');
         }
 
@@ -113,6 +122,9 @@ class LoginController extends Controller
 
         // attempt to login dean
         if(Auth::guard('cashier')->attempt(['username' => $username, 'password' => $password], $remember)) {
+
+            GeneralController::activity_log(Auth::guard('cashier')->user()->id, 4, 'Cashier Login');
+
             return redirect()->route('cashier.dashboard');
         }
 
@@ -141,6 +153,9 @@ class LoginController extends Controller
 
         // attempt to login registrar
         if(Auth::guard('registrar')->attempt(['username' => $username, 'password' => $password], $remember)) {
+
+            GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Registrar Login');
+
             return redirect()->route('registrar.dashboard');
         }
 
@@ -169,6 +184,9 @@ class LoginController extends Controller
 
         // attempt to login registrar
         if(Auth::guard('faculty')->attempt(['username' => $username, 'password' => $password], $remember)) {
+
+            GeneralController::activity_log(Auth::guard('faculty')->user()->id, 5, 'Faculty Login');
+
             return redirect()->route('faculty.dashboard');
         }
 

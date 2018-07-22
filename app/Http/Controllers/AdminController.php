@@ -12,6 +12,7 @@ use App\Cashier;
 use App\Registrar;
 use App\Faculty;
 use App\ActivityLog;
+use App\Course;
 
 class AdminController extends Controller
 {
@@ -462,4 +463,135 @@ class AdminController extends Controller
         // return to deans and add admin with message
         return redirect()->route('admin.faculties')->with('success', 'Faculty Details Updated!');
     }
+
+
+    // method use to view courses
+    public function courses()
+    {
+        $courses = Course::where('active', 1)
+                    ->orderBy('title', 'asc')
+                    ->paginate(10);
+
+        return view('admin.courses', ['courses' => $courses]);
+    }
+
+
+    // method use to add course
+    public function addCourse()
+    {
+        return view('admin.course-add');
+    }
+
+
+    // method use to save new course
+    public function postAddCourse(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'code' => 'required'
+        ]);
+
+        $title = $request['title'];
+        $code = $request['code'];
+        $major = $request['major'];
+
+        $check_title = Course::where('title', $title)->first();
+        $check_code = Course::where('code', $code)->first();
+
+        if(count($check_title) > 0 || count($check_code) > 0) {
+
+            return redirect()->back()->with('error', 'Please check you input!');
+        }
+
+        // save course
+        $course = new Course();
+        $course->title = $title;
+        $course->code = $code;
+        $course->major = $major;
+        $course->save();
+
+        // add activity log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added Course');
+
+        // return back with success message
+        return redirect()->back()->with('success', 'Course Added!');
+    }
+
+
+    // method use to update course
+    public function updateCourse($id = null)
+    {
+        $course = Course::findorfail($id);
+
+        return view('admin.course-update', ['course' => $course]);
+    }
+
+
+    // method use to save update on course
+    public function postUpdateCourse(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'code' => 'required'
+        ]);
+
+        $title = $request['title'];
+        $code = $request['code'];
+        $major = $request['major'];
+        $course_id = $request['course_id'];
+
+        $course = Course::findorfail($course_id);
+
+        $check_title = Course::where('title', $title)->first();
+        $check_code = Course::where('code', $code)->first();
+
+        if((count($check_title) > 0 && $title != $course->title) || (count($check_code) > 0 && $code != $course->code)) {
+
+            return redirect()->back()->with('error', 'Please check you input!');
+        }
+
+        // save course
+        $course->title = $title;
+        $course->code = $code;
+        $course->major = $major;
+        $course->save();
+
+        // add activity log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Course');
+
+        // return back with success message
+        return redirect()->route('admin.courses')->with('success', 'Course Updated!');
+    }
+
+
+    // method use to view academic year and settings
+    public function academicYear()
+    {
+        return view('admin.academic-year');
+    }
+
+
+    // method use to view year level
+    public function yearLevel()
+    {
+        return view('admin.year-level');
+    }
+
+
+    // method use to view subjects
+    public function subjects()
+    {
+        return view('admin.subjects');
+    }
+
+
+    // route to view activity logs
+    public function activityLogs()
+    {
+        $logs = ActivityLog::orderBy('created_at', 'desc')
+                        ->paginate(15);
+
+        return view('admin.activity-logs', ['logs' => $logs]);
+    }
+
 }

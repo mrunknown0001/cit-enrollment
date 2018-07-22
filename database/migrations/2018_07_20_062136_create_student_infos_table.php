@@ -17,6 +17,7 @@ class CreateStudentInfosTable extends Migration
             $table->increments('id');
             $table->integer('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('users');
+            $table->integer('year_level_id')->unsigned()->nullable();
             $table->string('sex')->nullable();
             $table->string('mobile_number')->nullable();
             $table->string('contact_number')->nullable();

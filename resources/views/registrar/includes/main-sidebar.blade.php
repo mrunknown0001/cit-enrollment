@@ -9,6 +9,18 @@
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
+      <li class="treeview {{ route('registrar.students') == url()->current() || route('registrar.add.student') == url()->current() ? 'active' : '' }}">
+        <a href="#">
+          <i class="fa fa-graduation-cap"></i> <span>Students</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="{{ route('registrar.add.student') }}"><i class="fa fa-circle-o"></i> Add Student</a></li>
+          <li><a href="{{ route('registrar.students') }}"><i class="fa fa-circle-o"></i> View Students</a></li>
+        </ul>
+      </li>
     </ul>
   </section>
 </aside>

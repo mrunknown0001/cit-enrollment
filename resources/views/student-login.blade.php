@@ -57,7 +57,7 @@
         </div>
       </div>
     </form>
-    <a href="#">Click here to register</a>
+    <a href="{{ route('registration') }}">Click here to register</a>
   </div>
 </div>
 <script src="{{ asset('js/app.js') }}"></script>

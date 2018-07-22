@@ -2,6 +2,8 @@
 
 Route::get('/', 'GeneralController@landingPage')->name('landing.page');
 
+Route::get('/registration', 'GeneralController@register')->name('registration');
+
 Route::get('/home', function () {
 	return redirect()->route('landing.page');
 });
@@ -25,6 +27,10 @@ Route::get('/dean', function () {
 Route::get('/cashier/login', 'LoginController@cashierLogin')->name('cashier.login');
 
 Route::post('/cashier/login', 'LoginController@postCashierLogin')->name('cashier.login.post');
+
+Route::get('/cashier', function () {
+	return redirect()->route('cashier.login');
+});
 
 Route::get('/registrar/login', 'LoginController@registrarLogin')->name('registrar.login');
 
@@ -138,6 +144,37 @@ Route::group(['prefix' => 'admin'], function () {
 		return redirect()->route('admin.faculties');
 	});
 
+	// route to view courses
+	Route::get('/courses', 'AdminController@courses')->name('admin.courses');
+
+	// route to add course
+	Route::get('/course/add', 'AdminController@addCourse')->name('admin.add.course');
+
+	// route to save new course
+	Route::post('/course/add', 'AdminController@postAddCourse')->name('admin.add.course.post');
+
+	// route to update course
+	Route::get('/course/{id}/update', 'AdminController@updateCourse')->name('admin.update.course');
+
+	// route to save update on course
+	Route::post('/course/update', 'AdminController@postUpdateCourse')->name('admin.update.course.post');
+
+	Route::get('/course/update', function () {
+		return redirect()->route('admin.courses');
+	});
+
+	// route to view academic year and settings
+	Route::get('/academic/year', 'AdminController@academicYear')->name('admin.academic.year');
+
+	// route to view year level
+	Route::get('/year/level', 'AdminController@yearLevel')->name('admin.year.level');
+
+	// route to view subjects
+	Route::get('/subjects', 'AdminController@subjects')->name('admin.subjects');
+
+	// route to view activity logs
+	Route::get('/activity-logs', 'AdminController@activityLogs')->name('admin.activity.logs');
+
 });
 
 
@@ -166,6 +203,15 @@ Route::group(['prefix' => 'cahier'], function () {
 Route::group(['prefix' => 'registrar'], function () {
 	// route to dean dashboard
 	Route::get('/dashboard', 'RegistrarController@dashboard')->name('registrar.dashboard');
+
+	// route to student operations
+	Route::get('/students', 'RegistrarController@students')->name('registrar.students');
+
+	// route to add student
+	Route::get('/student/add', 'RegistrarController@addStudent')->name('registrar.add.student');
+
+	// route to save new student
+	Route::post('/student/add', 'RegistrarController@postAddStudent')->name('registrar.add.student.post');
 });
 
 

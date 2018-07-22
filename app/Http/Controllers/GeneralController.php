@@ -16,6 +16,13 @@ class GeneralController extends Controller
     }
 
 
+    // method use to go to registration page
+    public function register()
+    {
+        return $this->auth_check('registration');
+    }
+
+
     //////////////////////////////////
     // session logout for all users //
     //////////////////////////////////
@@ -34,17 +41,17 @@ class GeneralController extends Controller
 
             Auth::guard('faculty')->logout();
         }
-        elseif(Auth::guard('registrar')->check()) {
+        elseif(Auth::guard('cashier')->check()) {
             // add activity log
             GeneralController::activity_log(Auth::guard('registrar')->user()->id, 4, 'Cashier Logout');
 
-            Auth::guard('registrar')->logout();
-        }
-        elseif(Auth::guard('cashier')->check()) {
-            // add activity log
-            GeneralController::activity_log(Auth::guard('cashier')->user()->id, 3, 'Cashier Logout');
-
             Auth::guard('cashier')->logout();
+        }
+        elseif(Auth::guard('registrar')->check()) {
+            // add activity log
+            GeneralController::activity_log(Auth::guard('cashier')->user()->id, 3, 'Registrar Logout');
+
+            Auth::guard('registrar')->logout();
         }
         elseif(Auth::guard('dean')->check()) {
             // add activity log
