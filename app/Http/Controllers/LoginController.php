@@ -99,6 +99,27 @@ class LoginController extends Controller
     }
 
 
+    // method use to login cashier
+    public function postCashierLogin(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        $username = $request['username'];
+        $password = $request['password'];
+        $remember = $request['remember_me'];
+
+        // attempt to login dean
+        if(Auth::guard('cashier')->attempt(['username' => $username, 'password' => $password], $remember)) {
+            return redirect()->route('cashier.dashboard');
+        }
+
+        return redirect()->back()->with('error', 'Authentication Error!');
+    }
+
+
     // method use to show login form for registrar
     public function registrarLogin()
     {
@@ -106,9 +127,51 @@ class LoginController extends Controller
     }
 
 
+    // method use to login registrar
+    public function postRegistrarLogin(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        $username = $request['username'];
+        $password = $request['password'] ;
+        $remember = $request['remember_me'];
+
+        // attempt to login registrar
+        if(Auth::guard('registrar')->attempt(['username' => $username, 'password' => $password], $remember)) {
+            return redirect()->route('registrar.dashboard');
+        }
+
+        return redirect()->back()->with('error', 'Authentication Error!');
+    }
+
+
     // method use to show login form for faculty
     public function facultyLogin()
     {
     	return view('faculty-login');
+    }
+
+
+    // method use to login faculty
+    public function postFacultyLogin(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        $username = $request['username'];
+        $password = $request['password'] ;
+        $remember = $request['remember_me'];
+
+        // attempt to login registrar
+        if(Auth::guard('faculty')->attempt(['username' => $username, 'password' => $password], $remember)) {
+            return redirect()->route('faculty.dashboard');
+        }
+
+        return redirect()->back()->with('error', 'Authentication Error!');   
     }
 }

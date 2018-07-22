@@ -24,9 +24,23 @@ Route::get('/dean', function () {
 
 Route::get('/cashier/login', 'LoginController@cashierLogin')->name('cashier.login');
 
+Route::post('/cashier/login', 'LoginController@postCashierLogin')->name('cashier.login.post');
+
 Route::get('/registrar/login', 'LoginController@registrarLogin')->name('registrar.login');
 
+Route::post('/registrar/login', 'LoginController@postRegistrarLogin')->name('registrar.login.post');
+
+Route::get('/registrar', function () {
+	return redirect()->route('registrar.login');
+});
+
 Route::get('/faculty/login', 'LoginController@facultyLogin')->name('faculty.login');
+
+Route::post('/faculty/login', 'LoginController@postFacultyLogin')->name('faculty.login.post');
+
+Route::get('/faculty', function () {
+	return redirect()->route('faculty.login');
+});
 
 Route::get('/student/login', 'LoginController@studentLogin')->name('login');
 

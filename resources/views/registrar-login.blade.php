@@ -23,7 +23,8 @@
       <a href="javascript:void(0)"><b>Registrar</b> Login</a>
     </div>
     <p class="login-box-msg">{{ env('app_name') }}</p>
-    <form action="#" method="post" autocomplete="off">
+    @include('includes.all')
+    <form action="{{ route('registrar.login.post') }}" method="post" autocomplete="off">
       {{ csrf_field() }}
        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
         <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Enter Username" autofocus>

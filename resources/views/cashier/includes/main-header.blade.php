@@ -1,7 +1,7 @@
   <header class="main-header">
     <a href="javascript:void(0)" class="logo">
       <span class="logo-mini"><b>CIT</b></span>
-      <span class="logo-lg"><b>Dean</b></span>
+      <span class="logo-lg"><b>Cashier</b></span>
     </a>
     <nav class="navbar navbar-static-top">
       <a href="javascript:void(0)" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -19,7 +19,7 @@
               <li class="user-header">
                 <img src="{{ asset('uploads/images/avatar.jpg') }}" class="img-circle" alt="User Image">
                 <p>
-                  <small>Dean Member</small>
+                  <small>Cashier Member</small>
                 </p>
               </li>
               <li class="user-body">

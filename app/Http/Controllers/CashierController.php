@@ -11,4 +11,11 @@ class CashierController extends Controller
     	$this->middleware('auth:cashier');
     }
 
+
+    // method use to view dashboard of cashier
+    public function dashboard()
+    {
+    	return view('cashier.dashboard');
+    }
+
 }
