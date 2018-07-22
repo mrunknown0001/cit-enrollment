@@ -15,6 +15,31 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<strong><i class="fa fa-calendar"></i> Academic Year</strong>
+					</div>
+					<div class="box-body">
+						<div class="row">
+							<div class="col-md-6">
+								@if(count($ay) > 0)
+									<p>Current Academic Year: <strong>{{ $ay->from . '-' . $ay->to }}</strong></p>
+									<p>Semester: <strong>{{ $sem->name }}</strong></p>
+									@if($sem->id == 1)
+									@include('admin.includes.select-second-semester')
+									@else
+									@include('admin.includes.close-academic-year')
+									@endif
+								@else
+									@include('admin.includes.academic-year-add')
+								@endif
+							</div>
+						</div>
+					</div>
+					<div class="box-footer">
+						
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>

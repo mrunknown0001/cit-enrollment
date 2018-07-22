@@ -13,6 +13,8 @@ use App\Registrar;
 use App\Faculty;
 use App\ActivityLog;
 use App\Course;
+use App\AcademicYear;
+use App\Semester;
 
 class AdminController extends Controller
 {
@@ -567,7 +569,65 @@ class AdminController extends Controller
     // method use to view academic year and settings
     public function academicYear()
     {
-        return view('admin.academic-year');
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        return view('admin.academic-year', ['ay' => $ay, 'sem' => $sem]);
+    }
+
+
+    // method use to add new academic year
+    public function postAddAcademicYear(Request $request)
+    {
+        $request->validate([
+            'start_year' => 'required',
+            'end_year' => 'required'
+        ]);
+
+        $sy = $request['start_year'];
+        $ey = $request['end_year'];
+
+        // check if there is current active ay
+        $check_active_ay = AcademicYear::where('active', 1)->first();
+
+        if(count($check_active_ay) > 0) {
+            return redirect()->back()->with('error', 'There is an active Academic Year. Please close first!');
+        }
+
+        // add academic year
+        $ay = new AcademicYear();
+        $ay->from = $sy;
+        $ay->to = $ey;
+        $ay->save();
+
+        // activate first semester
+        $sem = Semester::find(1);
+        $sem->active = 1;
+        $sem->save();
+
+        // add activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added New Academic Year and Activated First Semester');
+
+        // return with message
+        return redirect()->route('admin.academic.year')->with('success', 'Added New Academic Year!');
+    }
+
+
+    // method use to select second semester
+    public function selectSecondSemester()
+    {
+        $first = Semester::findorfail(1);
+        $first->active = 0;
+        $first->save();
+
+        $sem = Semester::findorfail(2);
+        $sem->active = 1;
+        $sem->save();
+
+        // add activity log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Activated Second Semester');
+
+        return redirect()->route('admin.academic.year')->with('success', 'Second Semester Selected!');
     }
 
 

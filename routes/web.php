@@ -166,6 +166,16 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to view academic year and settings
 	Route::get('/academic/year', 'AdminController@academicYear')->name('admin.academic.year');
 
+	// route to add new academic year
+	Route::post('/academic/year/add', 'AdminController@postAddAcademicYear')->name('admin.add.academic.year');
+
+	Route::get('/academic/year/add', function () {
+		return redirect()->route('admin.academic.year');
+	});
+
+	// route to select second semester
+	Route::get('/semester/select/second', 'AdminController@selectSecondSemester')->name('admin.select.second.semester');
+
 	// route to view year level
 	Route::get('/year/level', 'AdminController@yearLevel')->name('admin.year.level');
 

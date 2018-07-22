@@ -19,5 +19,9 @@ class DatabaseSeeder extends Seeder
         	'firstname' => 'John',
             'lastname' => 'Doe'
         ]);
+
+        $this->call(SemesterSeeder::class);
+        $this->call(UsersSeeder::class);
+
     }
 }
