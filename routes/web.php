@@ -69,6 +69,20 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to admin dashboard
 	Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
+	// route to enable enrollment
+	Route::post('/enrollment/enable', 'AdminController@enableEnrollment')->name('admin.enable.enrollment');
+
+	Route::get('/enrollment/enable', function () {
+		return redirect()->route('admin.dashboard');
+	});
+
+	// route to disable enrollment
+	Route::post('/enrollment/disable', 'AdminController@disableEnrollment')->name('admin.disable.enrollment');
+
+	Route::get('/enrollment/disable', function () {
+		return redirect()->route('admin.dashboard');
+	});
+
 	// route to view deans
 	Route::get('/deans', 'AdminController@deans')->name('admin.deans');
 
@@ -233,6 +247,16 @@ Route::group(['prefix' => 'admin'], function () {
 
 	// route to save new subject
 	Route::post('/subject/add', 'AdminController@postAddSubject')->name('admin.add.subject.post');
+
+	// route to update subject
+	Route::get('/subject/{id}/update', 'AdminController@updateSubject')->name('admin.update.subject');
+
+	// route to save update on subject
+	Route::post('/subject/update', 'AdminController@postUpdateSubject')->name('admin.update.subject.post');
+
+	Route::get('/subject/update', function () {
+		return redirect()->route('admin.subjects');
+	});
 
 	// route to view activity logs
 	Route::get('/activity-logs', 'AdminController@activityLogs')->name('admin.activity.logs');

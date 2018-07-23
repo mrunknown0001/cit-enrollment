@@ -34,11 +34,11 @@
 							<tbody>
 								@foreach($subjects as $s)
 								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td class="text-center">{{ strtoupper($s->code) }}</td>
+									<td>{{ ucwords($s->description) }}</td>
+									<td class="text-center">{{ $s->units }}</td>
 									<td class="text-center">
-										<a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a>
+										<a href="{{ route('admin.update.subject', ['id' => $s->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a>
 									</td>
 								</tr>
 								@endforeach
@@ -60,6 +60,6 @@
 	</section>
 </div>
 <script>
-	
+
 </script>
 @endsection

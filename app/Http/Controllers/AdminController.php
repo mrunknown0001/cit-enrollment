@@ -18,6 +18,7 @@ use App\Semester;
 use App\YearLevel;
 use App\CourseMajor;
 use App\Subject;
+use App\EnrollmentSetting;
 
 class AdminController extends Controller
 {
@@ -30,7 +31,60 @@ class AdminController extends Controller
     // method to view dashboard of admin
     public function dashboard()
     {
-    	return view('admin.dashboard');
+        $es = EnrollmentSetting::find(1);
+
+    	return view('admin.dashboard', ['es' => $es]);
+    }
+
+
+    // method use to enable enrollment
+    public function enableEnrollment(Request $request)
+    {
+        $request->validate([
+            'password' => 'required'
+        ]);
+
+        $password = $request['password'];
+
+        if(!password_verify($password, Auth::guard('admin')->user()->password)) {
+           return redirect()->back()->with('error', 'Invalid Password!');
+        }
+
+        $es = EnrollmentSetting::find(1);
+        $es->active = 1;
+        $es->save();
+
+        // add activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Enabled Enrollment');
+
+        // return to deans and add admin with message
+        return redirect()->route('admin.dashboard')->with('success', 'Enrollment Enabled!');
+    
+    }
+
+
+    // method use to disable enrollment
+    public function disableEnrollment(Request $request)
+    {
+        $request->validate([
+            'password' => 'required'
+        ]);
+
+        $password = $request['password'];
+
+        if(!password_verify($password, Auth::guard('admin')->user()->password)) {
+           return redirect()->back()->with('error', 'Invalid Password!');
+        }
+
+        $es = EnrollmentSetting::find(1);
+        $es->active = 0;
+        $es->save();
+
+        // add activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Disabled Enrollment');
+
+        // return to deans and add admin with message
+        return redirect()->route('admin.dashboard')->with('success', 'Enrollment Disabled!');
     }
 
 
@@ -876,15 +930,121 @@ class AdminController extends Controller
     public function addSubject()
     {
         $courses = Course::where('active', 1)->get();
+        $yl = YearLevel::get();
+        $sem = Semester::get();
 
-        return view('admin.subject-add', ['courses' => $courses]);
+        return view('admin.subject-add', ['courses' => $courses, 'yl' => $yl, 'sem' => $sem]);
     }
 
 
     // method use to save new subject
     public function postAddSubject(Request $request)
     {
-        return $request;
+        $request->validate([
+            'code' => 'required|unique:subjects',
+            'description' => 'required',
+            'units' => 'required|numeric',
+            'course' => 'required',
+            'year_level' => 'required',
+            'semester' => 'required'
+        ]);
+
+        $code = $request['code'];
+        $description = $request['description'];
+        $units = $request['units'];
+        $course_id = $request['course'];
+        $major_id = $request['major'];
+        $year_level_id = $request['year_level'];
+        $semester_id = $request['semester'];
+
+        $course = Course::findorfail($course_id);
+        $major = CourseMajor::find($major_id);
+
+        // save new subject
+        $sub = new Subject();
+        $sub->code = $code;
+        $sub->description = $description;
+        $sub->units = $units;
+        $sub->course_id = $course->id;
+        if(count($major) > 0) {
+            $sub->major_id = $major->id;
+        }
+        else {
+            $sub->major_id = null;
+        }
+        $sub->year_level_id = $year_level_id;
+        $sub->semester_id = $semester_id;
+        $sub->save();
+
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added New Subject');
+
+        return redirect()->back()->with('success', 'Subject Added!');
+
+    }
+
+
+    // method use to update subject
+    public function updateSubject($id = null)
+    {
+        $subject = Subject::findorfail($id);
+        $courses = Course::orderBy('title', 'asc')->get();
+        $yl = YearLevel::get();
+        $sem = Semester::get();
+
+        return view('admin.subject-update', ['subject' => $subject, 'courses' => $courses, 'yl' => $yl, 'sem' => $sem]);
+    }
+
+
+    // method use to save update on subject
+    public function postUpdateSubject(Request $request)
+    {
+        $request->validate([
+            'code' => 'required',
+            'description' => 'required',
+            'units' => 'required|numeric',
+            'course' => 'required',
+            'year_level' => 'required',
+            'semester' => 'required'
+        ]);
+
+        $subject_id = $request['subject_id'];
+        $code = $request['code'];
+        $description = $request['description'];
+        $units = $request['units'];
+        $course_id = $request['course'];
+        $major_id = $request['major'];
+        $year_level_id = $request['year_level'];
+        $semester_id = $request['semester'];
+
+        $course = Course::findorfail($course_id);
+        $major = CourseMajor::find($major_id);
+
+        $sub = Subject::findorfail($subject_id);
+
+        // check if code exists
+        $check_code = Subject::where('code', $code)->first();
+
+        if(count($check_code) > 0 && $sub->code != $code) {
+            return redirect()->back()->with('error', 'Subject Code Exists. Please Check your input');
+        }
+
+        $sub->code = $code;
+        $sub->description = $description;
+        $sub->units = $units;
+        $sub->course_id = $course->id;
+        if(count($major) > 0) {
+            $sub->major_id = $major->id;
+        }
+        else {
+            $sub->major_id = null;
+        }
+        $sub->year_level_id = $year_level_id;
+        $sub->semester_id = $semester_id;
+        $sub->save();
+
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Subject');
+
+        return redirect()->route('admin.subjects')->with('success', 'Subject Updated!');
     }
 
 

@@ -39,7 +39,7 @@
 							            </span>
 							        @endif
 							      </div>
-							      <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+							      <div class="form-group{{ $errors->has('major_name') ? ' has-error' : '' }}">
 							      	<label for="major_name">Major Name</label>
 							        <input id="major_name" type="text" class="form-control" name="major_name" value="{{ old('major_name') }}" placeholder="Enter Course Code" >
 							        @if ($errors->has('major_name'))

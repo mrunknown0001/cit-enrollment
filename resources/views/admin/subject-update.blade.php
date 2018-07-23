@@ -18,16 +18,17 @@
 				@include('includes.all')
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-book"></i> Add Subject</strong>
+						<strong><i class="fa fa-book"></i> Update Subject</strong>
 					</div>
 					<div class="box-body">
-						<form action="{{ route('admin.add.subject.post') }}" method="POST" autocomplete="off">
+						<form action="{{ route('admin.update.subject.post') }}" method="POST" autocomplete="off">
 							{{ csrf_field() }}
+							<input type="hidden" name="subject_id" value="{{ $subject->id }}">
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
 										<label for="code">Subject Code</label>
-										<input id="code" type="text" class="form-control" name="code" value="{{ old('code') }}" placeholder="Enter Subject Code" required>
+										<input id="code" type="text" class="form-control" name="code" value="{{ $subject->code }}" placeholder="Enter Subject Code" required>
 										@if ($errors->has('code'))
 										<span class="help-block">
 											<strong>{{ $errors->first('code') }}</strong>
@@ -36,7 +37,7 @@
 									</div>
 									<div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
 										<label for="description">Subject Description</label>
-										<input id="description" type="text" class="form-control" name="description" value="{{ old('description') }}" placeholder="Enter Subject Description" required>
+										<input id="description" type="text" class="form-control" name="description" value="{{ $subject->description }}" placeholder="Enter Subject Description" required>
 										@if ($errors->has('description'))
 										<span class="help-block">
 											<strong>{{ $errors->first('description') }}</strong>
@@ -45,7 +46,7 @@
 									</div>
 									<div class="form-group{{ $errors->has('units') ? ' has-error' : '' }}">
 										<label for="units">Subject Units</label>
-										<input id="units" type="number" class="form-control" name="units" value="{{ old('units') }}" placeholder="Enter Subject Units" required>
+										<input id="units" type="number" class="form-control" name="units" value="{{ $subject->units }}" placeholder="Enter Subject Units" required>
 										@if ($errors->has('units'))
 										<span class="help-block">
 											<strong>{{ $errors->first('units') }}</strong>
@@ -60,7 +61,7 @@
 											<option value="">Select Course</option>
 											@if(count($courses) > 0)
 												@foreach($courses as $c)
-													<option value="{{ $c->id }}">{{ $c->code }}</option>
+													<option value="{{ $c->id }}" {{ $subject->id == $c->id ? 'selected' : '' }}>{{ $c->code }}</option>
 												@endforeach
 											@else
 											<option value="">No Available Course</option>
@@ -90,7 +91,7 @@
 											<option value="">Select Year Level</option>
 											@if(count($yl) > 0)
 												@foreach($yl as $y)
-												<option value="{{ $y->id }}">{{ $y->name }}</option>
+												<option value="{{ $y->id }}" {{ $subject->year_level_id == $y->id ? 'selected' : '' }}>{{ $y->name }}</option>
 												@endforeach
 											@else
 											<option value="">No Available Year Level</option>
@@ -108,7 +109,7 @@
 											<option value="">Select Semester</option>
 											@if(count($sem) > 0)
 												@foreach($sem as $s)
-												<option value="{{ $s->id }}">{{ $s->name }}</option>
+												<option value="{{ $s->id }}" {{ $subject->id == $s->id ? 'selected' : '' }}>{{ $s->name }}</option>
 												@endforeach
 											@else
 											<option value="">No Available Semester</option>
@@ -123,7 +124,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add Subject</button>
+								<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Update Subject</button>
 							</div>
 						</form>
 					</div>
