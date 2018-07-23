@@ -12,13 +12,16 @@
         </button>
       </div>
       <div class="modal-body">
-		<p>Click button below to Close Academic Year</p>
+		    <p>Please Enter Password to Close Academic Year and click Close Academic Year button</p>
+        <form action="{{ route('admin.close.academic.year.post') }}" method="POST">
+          {{ csrf_field() }}
+          <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Enter Password" required="">
+          </div>
       </div>
       <div class="modal-footer">
-        <form action="#" method="POST">
-        	{{ csrf_field() }}
-  			<button type="submit" class="btn btn-primary">Close Academic Year</button>
-  		</form>
+        <button type="submit" class="btn btn-primary">Close Academic Year</button>
+      </form>
       </div>
     </div>
   </div>

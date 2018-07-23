@@ -156,11 +156,30 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to update course
 	Route::get('/course/{id}/update', 'AdminController@updateCourse')->name('admin.update.course');
 
+	Route::get('/course/update', function () {
+		return redirect()->route('admin.courses');
+	});
+
 	// route to save update on course
 	Route::post('/course/update', 'AdminController@postUpdateCourse')->name('admin.update.course.post');
 
-	Route::get('/course/update', function () {
-		return redirect()->route('admin.courses');
+	// route to view course major
+	Route::get('/course/majors', 'AdminController@courseMajor')->name('admin.course.majors');
+
+	// route to add course major
+	Route::get('/course/major/add', 'AdminController@addCourseMajor')->name('admin.add.course.major');
+
+	// route to save new course major
+	Route::post('/course/major/add', 'AdminController@postAddCourseMajor')->name('admin.add.course.major.post');
+
+	// route to update course major
+	Route::get('/course/major/{id}/update', 'AdminController@updateCourseMajor')->name('admin.update.course.major');
+
+	// route to save update on course major
+	Route::post('/course/major/update', 'AdminController@postUpdateCourseMajor')->name('admin.update.course.major.post');
+
+	Route::get('/course/major/update', function () {
+		return redirect()->route('admin.course.majors');
 	});
 
 	// route to view academic year and settings
@@ -174,10 +193,33 @@ Route::group(['prefix' => 'admin'], function () {
 	});
 
 	// route to select second semester
-	Route::get('/semester/select/second', 'AdminController@selectSecondSemester')->name('admin.select.second.semester');
+	Route::post('/semester/select/second', 'AdminController@postSelectSecondSemester')->name('admin.select.second.semester.post');
+
+	Route::get('/semester/select/second', function () {
+		return redirect()->route('admin.academic.year');
+	});
+
+	// route to close academic year
+	Route::post('/academic/year/close', 'AdminController@postCloseAcademicYear')->name('admin.close.academic.year.post');
+
+	Route::get('/academic/year/close', function () {
+		return redirect()->route('admin.academic.year');
+	});
 
 	// route to view year level
 	Route::get('/year/level', 'AdminController@yearLevel')->name('admin.year.level');
+
+	// rotue to add year level
+	Route::get('/year/level/add', 'AdminController@addYearLevel')->name('admin.add.year.level');
+
+	// route to save new year level
+	Route::post('/year/level/add', 'AdminController@postAddYearLevel')->name('admin.add.year.level.post');
+
+	// route to update year level
+	Route::get('/year/level/{id}/update', 'AdminController@updateYearLevel')->name('admin.update.year.level');
+
+	// route to save update on year level
+	Route::post('/year/level/update', 'AdminController@postUpdateYearLevel')->name('admin.update.year.level.post');
 
 	// route to view subjects
 	Route::get('/subjects', 'AdminController@subjects')->name('admin.subjects');

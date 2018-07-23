@@ -44,15 +44,6 @@
 							            </span>
 							        @endif
 							      </div>
-							      <div class="form-group{{ $errors->has('major') ? ' has-error' : '' }}">
-							      	<label for="major">Major <em>(Optional)</em></label>
-							        <input id="major" type="text" class="form-control" name="major" value="{{ $course->major }}" placeholder="Enter Major" >
-							        @if ($errors->has('major'))
-							            <span class="help-block">
-							                <strong>{{ $errors->first('major') }}</strong>
-							            </span>
-							        @endif
-							      </div>
 								</div>
 							</div>
 							<div class="form-group">

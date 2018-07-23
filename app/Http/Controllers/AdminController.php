@@ -15,6 +15,8 @@ use App\ActivityLog;
 use App\Course;
 use App\AcademicYear;
 use App\Semester;
+use App\YearLevel;
+use App\CourseMajor;
 
 class AdminController extends Controller
 {
@@ -495,7 +497,6 @@ class AdminController extends Controller
 
         $title = $request['title'];
         $code = $request['code'];
-        $major = $request['major'];
 
         $check_title = Course::where('title', $title)->first();
         $check_code = Course::where('code', $code)->first();
@@ -509,7 +510,6 @@ class AdminController extends Controller
         $course = new Course();
         $course->title = $title;
         $course->code = $code;
-        $course->major = $major;
         $course->save();
 
         // add activity log
@@ -539,7 +539,6 @@ class AdminController extends Controller
 
         $title = $request['title'];
         $code = $request['code'];
-        $major = $request['major'];
         $course_id = $request['course_id'];
 
         $course = Course::findorfail($course_id);
@@ -555,7 +554,6 @@ class AdminController extends Controller
         // save course
         $course->title = $title;
         $course->code = $code;
-        $course->major = $major;
         $course->save();
 
         // add activity log
@@ -563,6 +561,106 @@ class AdminController extends Controller
 
         // return back with success message
         return redirect()->route('admin.courses')->with('success', 'Course Updated!');
+    }
+
+
+    // method use to view course majors
+    public function courseMajor()
+    {
+        $majors = CourseMajor::get();
+
+        return view('admin.majors', ['majors' => $majors]);
+    }
+
+
+    // method use to add course majors
+    public function addCourseMajor()
+    {
+        $courses = Course::get();
+
+        return view('admin.major-add', ['courses' => $courses]);
+    }
+
+
+    // method use to save new course major
+    public function postAddCourseMajor(Request $request)
+    {
+        $request->validate([
+            'course' => 'required',
+            'major_name' => 'required'
+        ]);
+
+        $course_id = $request['course'];
+        $name = $request['major_name'];
+
+        $course = Course::findorfail($course_id);
+
+        // check if there is duplicate
+        $check_duplicate = CourseMajor::where('course_id', $course->id)
+                                ->where('name', $name)
+                                ->first();
+
+        if(count($check_duplicate) > 0) {
+            return redirect()->back()->with('error', 'Duplicate Record Found!');
+        }
+
+        // save new course major
+        $major = new CourseMajor();
+        $major->course_id = $course->id;
+        $major->name = $name;
+        $major->save();
+
+        // add activity log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added Course Major');
+
+        // return back with success message
+        return redirect()->route('admin.course.majors')->with('success', 'Course Major Added!');
+    }
+
+
+    // method use to update course major
+    public function updateCourseMajor($id = null)
+    {
+        $major = CourseMajor::findorfail($id);
+        $courses = Course::get();
+
+        return view('admin.major-update', ['major' => $major, 'courses' => $courses]);
+    }
+
+
+    // method use to save update on course major
+    public function postUpdateCourseMajor(Request $request)
+    {
+        $request->validate([
+            'course' => 'required',
+            'major_name' => 'required'
+        ]);
+
+        $course_id = $request['course'];
+        $name = $request['major_name'];
+        $major_id = $request['major_id'];
+
+        $course = Course::findorfail($course_id);
+        $major = CourseMajor::findorfail($major_id);
+
+        // check if there is duplicate
+        $check_duplicate = CourseMajor::where('course_id', $course->id)
+                                ->where('name', $name)
+                                ->first();
+
+        if(count($check_duplicate) > 0 && $major->name != $name) {
+            return redirect()->back()->with('error', 'Duplicate Record Found!');
+        }
+
+        $major->course_id = $course->id;
+        $major->name = $name;
+        $major->save();
+
+        // add activity log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Course Major');
+
+        // return back with success message
+        return redirect()->route('admin.course.majors')->with('success', 'Course Major Updated!');
     }
 
 
@@ -594,6 +692,14 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'There is an active Academic Year. Please close first!');
         }
 
+        $check_duplicate_ay = AcademicYear::where('from', $sy)
+                                    ->where('to', $ey)
+                                    ->first();
+
+        if(count($check_duplicate_ay) > 0) {
+            return redirect()->back()->with('error', 'Duplicate Academic Year!');
+        }
+
         // add academic year
         $ay = new AcademicYear();
         $ay->from = $sy;
@@ -614,8 +720,18 @@ class AdminController extends Controller
 
 
     // method use to select second semester
-    public function selectSecondSemester()
+    public function postSelectSecondSemester(Request $request)
     {
+        $request->validate([
+            'password' => 'required'
+        ]);
+
+        $password = $request['password'];
+
+        if(!password_verify($password, Auth::guard('admin')->user()->password)) {
+            return redirect()->back()->with('error', 'Invalid Password!');
+        }
+
         $first = Semester::findorfail(1);
         $first->active = 0;
         $first->save();
@@ -624,6 +740,10 @@ class AdminController extends Controller
         $sem->active = 1;
         $sem->save();
 
+        // add operations in this part closing and saving other data needed
+        // reset all settings needed to start a new sem
+
+
         // add activity log
         GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Activated Second Semester');
 
@@ -631,10 +751,95 @@ class AdminController extends Controller
     }
 
 
+    // method use to close active academic year
+    public function postCloseAcademicYear(Request $request)
+    {
+         $request->validate([
+            'password' => 'required'
+        ]);
+
+        $password = $request['password'];
+
+        if(!password_verify($password, Auth::guard('admin')->user()->password)) {
+            return redirect()->back()->with('error', 'Invalid Password!');
+        }
+
+        // close academic year
+        // operations goes here
+
+        $ay = AcademicYear::where('active', 1)->first();
+        $ay->active = 0;
+        $ay->save();
+
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Closed Academic Year');
+
+        return redirect()->route('admin.academic.year')->with('success', 'Academic Year is Close. Congratulations!!!');
+
+    }
+
+
     // method use to view year level
     public function yearLevel()
     {
-        return view('admin.year-level');
+        $yls = YearLevel::get();
+
+        return view('admin.year-level', ['year_levels' => $yls]);
+    }
+
+
+    // method use to add year level
+    public function addYearLevel()
+    {
+        return view('admin.year-level-add');
+    }
+
+
+    // method use to save new year level
+    public function postAddYearLevel(Request $request)
+    {
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $name = $request['name'];
+
+        // add new year level
+        $yl = new YearLevel();
+        $yl->name = $name;
+        $yl->save();
+
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added New Yearl Level');
+
+        return redirect()->route('admin.year.level')->with('success', 'New Year Level Added!');
+    }
+
+
+    // method use to udpate year level
+    public function updateYearLevel($id = null)
+    {
+        $yl = YearLevel::findorfail($id);
+
+        return view('admin.year-level-update', ['yl' => $yl]);
+    }
+
+
+    // method use to save update on year level
+    public function postUpdateYearLevel(Request $request)
+    {
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $name = $request['name'];
+        $id = $request['yl_id'];
+
+        $yl = YearLevel::findorfail($id);
+        $yl->name = $name;
+        $yl->save();
+
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Yearl Level');
+
+        return redirect()->route('admin.year.level')->with('success', 'Year Level Updated!');
     }
 
 

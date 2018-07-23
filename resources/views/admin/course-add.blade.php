@@ -43,7 +43,7 @@
 							            </span>
 							        @endif
 							      </div>
-							      <div class="form-group{{ $errors->has('major') ? ' has-error' : '' }}">
+<!-- 							      <div class="form-group{{ $errors->has('major') ? ' has-error' : '' }}">
 							      	<label for="major">Major <em>(Optional)</em></label>
 							        <input id="major" type="text" class="form-control" name="major" value="{{ old('major') }}" placeholder="Enter Major" >
 							        @if ($errors->has('major'))
@@ -51,7 +51,7 @@
 							                <strong>{{ $errors->first('major') }}</strong>
 							            </span>
 							        @endif
-							      </div>
+							      </div> -->
 								</div>
 							</div>
 							<div class="form-group">

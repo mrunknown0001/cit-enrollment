@@ -12,11 +12,14 @@
         </button>
       </div>
       <div class="modal-body">
-		<p>Click button below to activate Second Semester</p>
+		<p>Please Enter password activate Second Semester and click Activate Second Semester</p>
+		<form action="{{ route('admin.select.second.semester.post') }}" method="POST">
+        	{{ csrf_field() }}
+        	<div class="form-group">
+        		<input type="password" name="password" class="form-control" placeholder="Enter Password" required="">
+        	</div>
       </div>
       <div class="modal-footer">
-        <form action="{{ route('admin.select.second.semester') }}" method="GET">
-        	{{ csrf_field() }}
 			<button type="submit" class="btn btn-primary">Activate Second Semester</button>
 		</form>
       </div>

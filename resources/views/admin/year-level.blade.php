@@ -14,7 +14,42 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
+				<p><a href="{{ route('admin.add.year.level') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Year Level</a></p>
 				@include('includes.all')
+				
+				@if(count($year_levels) > 0)
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<strong><i class="fa fa-bars"></i> Year Level</strong>
+					</div>
+					<div class="box-body">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th class="text-center">Name</th>
+									<th class="text-center">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($year_levels as $y)
+								<tr>
+									<td class="text-center">{{ ucwords($y->name) }}</td>
+									<td class="text-center"><a href="{{ route('admin.update.year.level', ['id' => $y->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a></td>
+								</tr>
+								@endforeach
+							</tbody>
+							<tfoot>
+								
+							</tfoot>
+						</table>
+					</div>
+					<div class="box-footer">
+						
+					</div>
+				</div>
+				@else
+				<p class="text-center">No Year Level Available</p>
+				@endif
 			</div>
 		</div>
 	</section>

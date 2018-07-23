@@ -23,7 +23,7 @@
           <li><a href="{{ route('admin.faculties') }}"><i class="fa fa-circle-o"></i> Faculties</a></li>
         </ul>
       </li>
-      <li class="treeview {{ route('admin.courses') == url()->current() || route('admin.add.course') == url()->current() ? 'active' : '' }}">
+      <li class="treeview {{ route('admin.courses') == url()->current() || route('admin.course.majors') == url()->current() ? 'active' : '' }}">
         <a href="javascript:void(0)">
           <i class="fa fa-book"></i> <span>Courses</span>
           <span class="pull-right-container">
@@ -31,8 +31,8 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="{{ route('admin.add.course') }}"><i class="fa fa-circle-o"></i> Add Course</a></li>
           <li><a href="{{ route('admin.courses') }}"><i class="fa fa-circle-o"></i> View Courses</a></li>
+          <li><a href="{{ route('admin.course.majors') }}"><i class="fa fa-circle-o"></i> View Course Majors</a></li>
         </ul>
       </li>
       <li class="{{ route('admin.academic.year') == url()->current() ? 'active' : '' }}">

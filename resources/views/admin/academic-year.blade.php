@@ -15,6 +15,12 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
+				@if ($errors->has('password'))
+					<div class="alert alert-danger text-center top-space">
+						<a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<b>{{ $errors->first('password') }}</b>
+					</div>
+		        @endif
 				<div class="box box-primary">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-calendar"></i> Academic Year</strong>
