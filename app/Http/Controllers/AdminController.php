@@ -17,6 +17,7 @@ use App\AcademicYear;
 use App\Semester;
 use App\YearLevel;
 use App\CourseMajor;
+use App\Subject;
 
 class AdminController extends Controller
 {
@@ -846,7 +847,44 @@ class AdminController extends Controller
     // method use to view subjects
     public function subjects()
     {
-        return view('admin.subjects');
+        $subjects = Subject::orderBy('code', 'asc')
+                        ->paginate(15);
+
+        return view('admin.subjects', ['subjects' => $subjects]);
+    }
+
+
+    // method use to get course major to use in form add subject
+    public function getCourseMajors($id = null)
+    {
+        $majors = CourseMajor::where('course_id', $id)->get();
+
+        $course_majors = null;
+
+        foreach($majors as $m) {
+            $course_majors[] = [
+                        'id' => $m->id,
+                        'name' => $m->name
+                    ];
+        }
+
+        return $course_majors;
+    }
+
+
+    // method use to add subject
+    public function addSubject()
+    {
+        $courses = Course::where('active', 1)->get();
+
+        return view('admin.subject-add', ['courses' => $courses]);
+    }
+
+
+    // method use to save new subject
+    public function postAddSubject(Request $request)
+    {
+        return $request;
     }
 
 

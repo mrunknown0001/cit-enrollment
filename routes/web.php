@@ -60,6 +60,7 @@ Route::get('/student/registration', 'RegistrationController@index')->name('stude
 
 Route::get('/logout', 'GeneralController@logout')->name('logout');
 
+
 /*
  * Route group admin
  * route protected guard in controller 
@@ -223,6 +224,15 @@ Route::group(['prefix' => 'admin'], function () {
 
 	// route to view subjects
 	Route::get('/subjects', 'AdminController@subjects')->name('admin.subjects');
+
+	// route to add subject
+	Route::get('/subject/add', 'AdminController@addSubject')->name('admin.add.subject');
+
+	// route to get course major on selected course
+	Route::get('/course/{id}/majors/get', 'AdminController@getCourseMajors')->name('admin.get.course.majors');
+
+	// route to save new subject
+	Route::post('/subject/add', 'AdminController@postAddSubject')->name('admin.add.subject.post');
 
 	// route to view activity logs
 	Route::get('/activity-logs', 'AdminController@activityLogs')->name('admin.activity.logs');

@@ -15,6 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
+				<p class="text-center">Enrollment On/Off</p>
 			</div>
 		</div>
 	</section>
