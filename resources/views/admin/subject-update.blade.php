@@ -85,6 +85,18 @@
 										</span>
 										@endif
 									</div>
+									<div class="form-group{{ $errors->has('curriculum') ? ' has-error' : '' }}">
+										<label for="curriculum">Select Curriculum</label>
+										<select name="curriculum" id="curriculum" class="form-control">
+											<option value="">Select Curriculum</option>
+
+										</select>
+										@if ($errors->has('curriculum'))
+										<span class="help-block">
+											<strong>{{ $errors->first('curriculum') }}</strong>
+										</span>
+										@endif
+									</div>
 									<div class="form-group{{ $errors->has('year_level') ? ' has-error' : '' }}">
 										<label for="year_level">Select Year Level</label>
 										<select name="year_level" id="year_level" class="form-control" required="">
@@ -145,6 +157,38 @@
 	        Object.keys(result).forEach(function(key) {
 
 			  $('#major').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
+			  
+			});
+	    }});
+
+	    // another for curriculum
+		$.ajax({url: "/admin/course/" + courseId + "/curriculum/get", success: function(result){
+	        Object.keys(result).forEach(function(key) {
+
+			  $('#curriculum').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
+			  
+			});
+	    }});
+
+	});
+
+	$(document).ready(function () {
+
+		var courseId = $("#course").val();
+
+		$.ajax({url: "/admin/course/" + courseId + "/majors/get", success: function(result){
+	        Object.keys(result).forEach(function(key) {
+
+			  $('#major').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
+			  
+			});
+	    }});
+
+	    // another for curriculum
+		$.ajax({url: "/admin/course/" + courseId + "/curriculum/get", success: function(result){
+	        Object.keys(result).forEach(function(key) {
+
+			  $('#curriculum').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
 			  
 			});
 	    }});

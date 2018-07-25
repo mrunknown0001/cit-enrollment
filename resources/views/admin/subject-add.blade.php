@@ -73,14 +73,27 @@
 										@endif
 									</div>
 									<div class="form-group{{ $errors->has('major') ? ' has-error' : '' }}">
-										<label for="major">Course Major</label>
+										<label for="major">Select Course Major</label>
 										<select name="major" id="major" class="form-control">
-											<option value="">Select Course Major</option>
+											<option value="">No Course Major</option>
 
 										</select>
 										@if ($errors->has('major'))
 										<span class="help-block">
 											<strong>{{ $errors->first('major') }}</strong>
+										</span>
+										@endif
+									</div>
+									
+									<div class="form-group{{ $errors->has('curriculum') ? ' has-error' : '' }}">
+										<label for="curriculum">Select Curriculum</label>
+										<select name="curriculum" id="curriculum" class="form-control">
+											<option value="">Select Curriculum</option>
+
+										</select>
+										@if ($errors->has('curriculum'))
+										<span class="help-block">
+											<strong>{{ $errors->first('curriculum') }}</strong>
 										</span>
 										@endif
 									</div>
@@ -144,6 +157,15 @@
 	        Object.keys(result).forEach(function(key) {
 
 			  $('#major').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
+			  
+			});
+	    }});
+
+	    // another for curriculum
+		$.ajax({url: "/admin/course/" + courseId + "/curriculum/get", success: function(result){
+	        Object.keys(result).forEach(function(key) {
+
+			  $('#curriculum').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
 			  
 			});
 	    }});

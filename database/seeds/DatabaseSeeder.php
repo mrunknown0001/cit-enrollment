@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
             'lastname' => 'Doe'
         ]);
 
+        DB::table('enrollment_settings')->insert([
+            'active' => 0
+        ]);
+
         $this->call(SemesterSeeder::class);
         $this->call(UsersSeeder::class);
         $this->call(YearLevelSeeder::class);

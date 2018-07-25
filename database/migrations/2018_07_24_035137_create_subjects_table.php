@@ -21,6 +21,7 @@ class CreateSubjectsTable extends Migration
             $table->integer('course_id')->unsigned();
             $table->foreign('course_id')->references('id')->on('courses');
             $table->integer('major_id')->unsigned()->nullable();
+            $table->integer('curriculum_id')->unsigned();
             $table->integer('year_level_id')->unsigned();
             $table->integer('semester_id')->unsigned();
             $table->tinyInteger('active')->default(1);

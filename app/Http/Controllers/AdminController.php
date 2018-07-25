@@ -19,6 +19,7 @@ use App\YearLevel;
 use App\CourseMajor;
 use App\Subject;
 use App\EnrollmentSetting;
+use App\Curriculum;
 
 class AdminController extends Controller
 {
@@ -719,6 +720,104 @@ class AdminController extends Controller
     }
 
 
+    // method use to view all curricula 
+    public function curricula()
+    {
+        $curricula = Curriculum::where('active', 1)->orderBy('created_at', 'desc')
+                                ->paginate(15);
+
+        return view('admin.curricula', ['curricula' => $curricula]);
+    }
+
+
+    // method use to add curriculum
+    public function addCurriculum()
+    {
+        $courses = Course::where('active', 1)->orderBy('title', 'asc')->get();
+
+        return view('admin.curriculum-add', ['courses' => $courses]);
+    }
+
+
+    // method use to save new curriculum
+    public function postAddCurriculum(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'course' => 'required'
+        ]);
+
+        $name = $request['name'];
+        $course_id = $request['course'];
+        $major_id = $request['major'];
+
+        $course = Course::findorfail($course_id);
+
+        // save new curriculum
+        $cu = new Curriculum();
+        $cu->name = $name;
+        $cu->course_id = $course->id;
+        $cu->major_id = $major_id;
+        $cu->save();
+
+        // add activity log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added Curriculum');
+
+        // return back with success message
+        return redirect()->route('admin.curricula')->with('success', 'Curriculum Added!');
+    }
+
+
+    // method use to update curriculum
+    public function updateCurriculum($id = null)
+    {
+        $courses = Course::where('active', 1)->orderBy('created_at', 'desc')->get();
+        $curriculum = Curriculum::findorfail($id);
+
+        return view('admin.curriculum-update', ['curriculum' => $curriculum, 'courses' => $courses ]);
+    }
+
+
+    // method use to save update on curriculum
+    public function postUpdateCurriculum(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'course' => 'required'
+        ]);
+
+        $name = $request['name'];
+        $course_id = $request['course'];
+        $major_id = $request['major'];
+        $curriculum_id = $request['curriculum_id'];
+
+        $course = Course::findorfail($course_id);
+        $cu = Curriculum::findorfail($curriculum_id);
+
+        $check = Curriculum::where('name', $name)
+                        ->where('course_id', $course->id)
+                        ->where('major_id', $major_id)
+                        ->first();
+
+        if(count($check) > 0 && $cu->name != $name) {
+            return redirect()->back()->with('error', 'Duplicate Curriculum Found!');
+        }
+
+
+        // save new curriculum
+        $cu->name = $name;
+        $cu->course_id = $course->id;
+        $cu->major_id = $major_id;
+        $cu->save();
+
+        // add activity log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Curriculum');
+
+        // return back with success message
+        return redirect()->route('admin.curricula')->with('success', 'Curriculum Updated!');
+    }
+
+
     // method use to view academic year and settings
     public function academicYear()
     {
@@ -908,10 +1007,10 @@ class AdminController extends Controller
     }
 
 
-    // method use to get course major to use in form add subject
+    // method use to get course major to use in form add/update subject
     public function getCourseMajors($id = null)
     {
-        $majors = CourseMajor::where('course_id', $id)->get();
+        $majors = CourseMajor::where('course_id', $id)->where('active', 1)->get();
 
         $course_majors = null;
 
@@ -923,6 +1022,24 @@ class AdminController extends Controller
         }
 
         return $course_majors;
+    }
+
+
+    // method use to get course curriculum to use in form add/update subject
+    public function getCourseCurriculum($id = null)
+    {
+        $curriculum = Curriculum::where('course_id', $id)->where('active', 1)->get();
+
+        $course_cu = null;
+
+        foreach($curriculum as $c) {
+            $course_cu[] = [
+                        'id' => $c->id,
+                        'name' => $c->name
+                    ];
+        }
+
+        return $course_cu;
     }
 
 
@@ -946,7 +1063,8 @@ class AdminController extends Controller
             'units' => 'required|numeric',
             'course' => 'required',
             'year_level' => 'required',
-            'semester' => 'required'
+            'semester' => 'required',
+            'curriculum' => 'required'
         ]);
 
         $code = $request['code'];
@@ -956,6 +1074,7 @@ class AdminController extends Controller
         $major_id = $request['major'];
         $year_level_id = $request['year_level'];
         $semester_id = $request['semester'];
+        $curriculum_id = $request['curriculum'];
 
         $course = Course::findorfail($course_id);
         $major = CourseMajor::find($major_id);
@@ -972,6 +1091,7 @@ class AdminController extends Controller
         else {
             $sub->major_id = null;
         }
+        $sub->curriculum_id = $curriculum_id;
         $sub->year_level_id = $year_level_id;
         $sub->semester_id = $semester_id;
         $sub->save();

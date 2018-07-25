@@ -197,6 +197,25 @@ Route::group(['prefix' => 'admin'], function () {
 		return redirect()->route('admin.course.majors');
 	});
 
+	// route to view all curriculum
+	Route::get('/curricula', 'AdminController@curricula')->name('admin.curricula');
+
+	// route to add curriculum
+	Route::get('/curriculum/add', 'AdminController@addCurriculum')->name('admin.add.curriculum');
+
+	// route to save new curriculum
+	Route::post('/curriculum/add', 'AdminController@postAddCurriculum')->name('admin.add.curriculum.post');
+
+	// route to update curriculum
+	Route::get('/curriculum/{id}/update', 'AdminController@updateCurriculum')->name('admin.update.curriculum');
+
+	// route to save update of curriculum
+	Route::post('/curriculum/update', 'AdminController@postUpdateCurriculum')->name('admin.update.curriculum.post');
+
+	Route::get('/curriculum/update', function () {
+		return redirect()->route('admin.curricula');
+	});
+
 	// route to view academic year and settings
 	Route::get('/academic/year', 'AdminController@academicYear')->name('admin.academic.year');
 
@@ -244,6 +263,9 @@ Route::group(['prefix' => 'admin'], function () {
 
 	// route to get course major on selected course
 	Route::get('/course/{id}/majors/get', 'AdminController@getCourseMajors')->name('admin.get.course.majors');
+
+	// route to get course curriculum on selected course
+	Route::get('/course/{id}/curriculum/get', 'AdminController@getCourseCurriculum')->name('admin.get.course.curriculum');
 
 	// route to save new subject
 	Route::post('/subject/add', 'AdminController@postAddSubject')->name('admin.add.subject.post');
