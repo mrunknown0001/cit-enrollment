@@ -7,6 +7,7 @@ use Auth;
 use App\Http\Controllers\GeneralController;
 
 use App\User;
+use App\Course;
 
 class RegistrarController extends Controller
 {
@@ -36,7 +37,9 @@ class RegistrarController extends Controller
     // method use to add student
     public function addStudent()
     {
-    	return view('registrar.student-add');
+        $courses = Course::where('active', 1)->orderBy('title', 'asc')->get();
+
+    	return view('registrar.student-add', ['courses' => $courses]);
     }
 
 

@@ -21,13 +21,14 @@
 						<strong><i class="fa fa-book"></i> Update Curriculum</strong>
 					</div>
 					<div class="box-body">
+						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
 						<form action="{{ route('admin.update.curriculum.post') }}" method="POST" role="form" autocomplete="off">
 							{{ csrf_field() }}
 							<input type="hidden" name="curriculum_id" value="{{ $curriculum->id }}">
 							<div class="row">
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-							      	<label for="name">Curriculum Name</label>
+							      	<label for="name">Curriculum Name</label><label class="label-required">*</label>
 							        <input id="name" type="text" class="form-control" name="name" value="{{ $curriculum->name }}" placeholder="Enter Curriculum Name" >
 							        @if ($errors->has('name'))
 							            <span class="help-block">
@@ -36,7 +37,7 @@
 							        @endif
 							      </div>
 							      <div class="form-group{{ $errors->has('course') ? ' has-error' : '' }}">
-							      	<label for="course">Select Course</label>
+							      	<label for="course">Select Course</label><label class="label-required">*</label>
 							        <select id="course" name="course" class="form-control">
 							        	<option value="">Select Course</option>
 										@if(count($courses) > 0)

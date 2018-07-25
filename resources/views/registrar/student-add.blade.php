@@ -21,26 +21,14 @@
 						<strong><i class="fa fa-graduation-cap"></i> Add Student</strong>
 					</div>
 					<div class="box-body">
+						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
 						<form action="{{ route('registrar.add.student.post') }}" method="POST" role="form" autocomplete="off">
 							{{ csrf_field() }}
 							<div class="row">
 								<div class="col-md-6">
-							      <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
-							      	<label for="student_number">Student Number</label>
-							        <input id="student_number" type="text" class="form-control" name="student_number" value="{{ old('firstname') }}" placeholder="Enter Student Number" autofocus>
-							        @if ($errors->has('student_number'))
-							            <span class="help-block">
-							                <strong>{{ $errors->first('student_number') }}</strong>
-							            </span>
-							        @endif
-							      </div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
-							      	<label for="firstname">Firstname</label>
-							        <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" placeholder="Enter Firstname" autofocus>
+							      	<label for="firstname">Firstname</label><label class="label-required">*</label>
+							        <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" placeholder="Enter Firstname" autofocus required="">
 							        @if ($errors->has('firstname'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('firstname') }}</strong>
@@ -61,8 +49,8 @@
 								</div>
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
-							      	<label for="lastname">Lastname</label>
-							        <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" placeholder="Enter Lastname" >
+							      	<label for="lastname">Lastname</label><label class="label-required">*</label>
+							        <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" placeholder="Enter Lastname" required>
 							        @if ($errors->has('lastname'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('lastname') }}</strong>
@@ -80,6 +68,69 @@
 							            </span>
 							        @endif
 							      </div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+							      <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
+							      	<label for="student_number">Student Number</label><label class="label-required">*</label>
+							        <input id="student_number" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" placeholder="Enter Student Number" required>
+							        @if ($errors->has('student_number'))
+							            <span class="help-block">
+							                <strong>{{ $errors->first('student_number') }}</strong>
+							            </span>
+							        @endif
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+							      <div class="form-group{{ $errors->has('course') ? ' has-error' : '' }}">
+							      	<label for="course">Select Course</label><label class="label-required">*</label>
+							        <select name="course" id="course" class="form-control" required="">
+							        	<option value="">Select Course</option>
+							        	@if(count($courses) > 0)
+											@foreach($courses as $c)
+												<option value="{{ $c->id }}">{{ $c->title }}</option>
+											@endforeach
+							        	@else
+											<option value="">No Available Course</option>
+							        	@endif
+							        </select>
+							        @if ($errors->has('course'))
+							            <span class="help-block">
+							                <strong>{{ $errors->first('course') }}</strong>
+							            </span>
+							        @endif
+									</div>
+								</div>
+								<div class="col-md-6">
+							      <div class="form-group{{ $errors->has('curriculum') ? ' has-error' : '' }}">
+							      	<label for="curriculum">Select Curriculum</label><label class="label-required">*</label>
+							        <select name="curriculum" id="curriculum" class="form-control" required="">
+							        	<option value="">Select Curriculum</option>
+							        	
+							        </select>
+							        @if ($errors->has('curriculum'))
+							            <span class="help-block">
+							                <strong>{{ $errors->first('curriculum') }}</strong>
+							            </span>
+							        @endif
+									</div>
+								</div>
+								<div class="col-md-6">
+							      <div class="form-group{{ $errors->has('major') ? ' has-error' : '' }}">
+							      	<label for="major">Select Major</label>
+							        <select name="major" id="major" class="form-control">
+							        	<option value="">Select Curriculum</option>
+							        	
+							        </select>
+							        @if ($errors->has('major'))
+							            <span class="help-block">
+							                <strong>{{ $errors->first('major') }}</strong>
+							            </span>
+							        @endif
+									</div>
 								</div>
 							</div>
 							<div class="form-group">

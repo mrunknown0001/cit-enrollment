@@ -1142,7 +1142,8 @@ class AdminController extends Controller
             'units' => 'required|numeric',
             'course' => 'required',
             'year_level' => 'required',
-            'semester' => 'required'
+            'semester' => 'required',
+            'curriculum' => 'required'
         ]);
 
         $subject_id = $request['subject_id'];

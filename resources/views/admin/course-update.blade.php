@@ -21,13 +21,14 @@
 						<strong><i class="fa fa-book"></i> Update Course</strong>
 					</div>
 					<div class="box-body">
+						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
 						<form action="{{ route('admin.update.course.post') }}" method="POST" role="form" autocomplete="off">
 							{{ csrf_field() }}
 							<input type="hidden" name="course_id" value="{{ $course->id }}">
 							<div class="row">
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-							      	<label for="title">Course Title</label>
+							      	<label for="title">Course Title</label><label class="label-required">*</label>
 							        <input id="title" type="text" class="form-control" name="title" value="{{ $course->title }}" placeholder="Enter Course Title" >
 							        @if ($errors->has('title'))
 							            <span class="help-block">
@@ -36,7 +37,7 @@
 							        @endif
 							      </div>
 							      <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
-							      	<label for="title">Course Code</label>
+							      	<label for="title">Course Code</label><label class="label-required">*</label>
 							        <input id="code" type="text" class="form-control" name="code" value="{{ $course->code }}" placeholder="Enter Course Code" >
 							        @if ($errors->has('code'))
 							            <span class="help-block">

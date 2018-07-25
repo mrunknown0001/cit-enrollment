@@ -13,3 +13,7 @@ a:hover {
 a:active {
     text-decoration: none;
 }
+
+.label-required {
+  color:red;
+}

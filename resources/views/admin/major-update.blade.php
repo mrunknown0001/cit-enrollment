@@ -21,13 +21,14 @@
 						<strong><i class="fa fa-book"></i> Update Course Major</strong>
 					</div>
 					<div class="box-body">
+						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
 						<form action="{{ route('admin.update.course.major.post') }}" method="POST" role="form" autocomplete="off">
 							{{ csrf_field() }}
 							<input type="hidden" name="major_id" value="{{ $major->id }}">
 							<div class="row">
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('course') ? ' has-error' : '' }}">
-							      	<label for="course">Select Course</label>
+							      	<label for="course">Select Course</label><label class="label-required">*</label>
 							        <select name="course" id="course" class="form-control">
 							        	<option value="">Select Course</option>
 										@foreach($courses as $c)
@@ -41,7 +42,7 @@
 							        @endif
 							      </div>
 							      <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-							      	<label for="major_name">Major Name</label>
+							      	<label for="major_name">Major Name</label><label class="label-required">*</label>
 							        <input id="major_name" type="text" class="form-control" name="major_name" value="{{ $major->name }}" placeholder="Enter Course Code" >
 							        @if ($errors->has('major_name'))
 							            <span class="help-block">

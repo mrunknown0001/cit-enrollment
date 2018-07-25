@@ -21,12 +21,13 @@
 						<strong><i class="fa fa-book"></i> Add Subject</strong>
 					</div>
 					<div class="box-body">
+						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
 						<form action="{{ route('admin.add.subject.post') }}" method="POST" autocomplete="off">
 							{{ csrf_field() }}
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
-										<label for="code">Subject Code</label>
+										<label for="code">Subject Code</label><label class="label-required">*</label>
 										<input id="code" type="text" class="form-control" name="code" value="{{ old('code') }}" placeholder="Enter Subject Code" required>
 										@if ($errors->has('code'))
 										<span class="help-block">
@@ -35,7 +36,7 @@
 										@endif
 									</div>
 									<div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-										<label for="description">Subject Description</label>
+										<label for="description">Subject Description</label><label class="label-required">*</label>
 										<input id="description" type="text" class="form-control" name="description" value="{{ old('description') }}" placeholder="Enter Subject Description" required>
 										@if ($errors->has('description'))
 										<span class="help-block">
@@ -44,7 +45,7 @@
 										@endif
 									</div>
 									<div class="form-group{{ $errors->has('units') ? ' has-error' : '' }}">
-										<label for="units">Subject Units</label>
+										<label for="units">Subject Units</label><label class="label-required">*</label>
 										<input id="units" type="number" class="form-control" name="units" value="{{ old('units') }}" placeholder="Enter Subject Units" required>
 										@if ($errors->has('units'))
 										<span class="help-block">
@@ -55,7 +56,7 @@
 								</div>
 								<div class="col-md-6">
 									<div class="form-group{{ $errors->has('course') ? ' has-error' : '' }}">
-										<label for="course">Course</label>
+										<label for="course">Course</label><label class="label-required">*</label>
 										<select name="course" id="course" class="form-control" required="">
 											<option value="">Select Course</option>
 											@if(count($courses) > 0)
@@ -86,7 +87,7 @@
 									</div>
 									
 									<div class="form-group{{ $errors->has('curriculum') ? ' has-error' : '' }}">
-										<label for="curriculum">Select Curriculum</label>
+										<label for="curriculum">Select Curriculum</label><label class="label-required">*</label>
 										<select name="curriculum" id="curriculum" class="form-control">
 											<option value="">Select Curriculum</option>
 
@@ -98,7 +99,7 @@
 										@endif
 									</div>
 									<div class="form-group{{ $errors->has('year_level') ? ' has-error' : '' }}">
-										<label for="year_level">Select Year Level</label>
+										<label for="year_level">Select Year Level</label><label class="label-required">*</label>
 										<select name="year_level" id="year_level" class="form-control" required="">
 											<option value="">Select Year Level</option>
 											@if(count($yl) > 0)
@@ -116,7 +117,7 @@
 										@endif
 									</div>
 									<div class="form-group{{ $errors->has('semester') ? ' has-error' : '' }}">
-										<label for="semester">Select Semester</label>
+										<label for="semester">Select Semester</label><label class="label-required">*</label>
 										<select name="semester" id="semester" class="form-control" required="">
 											<option value="">Select Semester</option>
 											@if(count($sem) > 0)
@@ -158,6 +159,14 @@
 	        Object.keys(result).forEach(function(key) {
 
 			  $('#major').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
+			  
+			});
+	    }});
+
+		$.ajax({url: "/admin/course/" + courseId + "/curriculum/get", success: function(result){
+	        Object.keys(result).forEach(function(key) {
+
+			  $('#curriculum').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
 			  
 			});
 	    }});

@@ -21,12 +21,13 @@
 						<strong><i class="fa fa-user"></i> Add Registrar</strong>
 					</div>
 					<div class="box-body">
+						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
 						<form action="{{ route('admin.add.registrar.post') }}" method="POST" role="form" autocomplete="off">
 							{{ csrf_field() }}
 							<div class="row">
 								<div class="col-md-3">
 							      <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
-							      	<label for="firstname">Firstname</label>
+							      	<label for="firstname">Firstname</label><label class="label-required">*</label>
 							        <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" placeholder="Enter Firstname" autofocus>
 							        @if ($errors->has('firstname'))
 							            <span class="help-block">
@@ -48,7 +49,7 @@
 								</div>
 								<div class="col-md-3">
 							      <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
-							      	<label for="lastname">Lastname</label>
+							      	<label for="lastname">Lastname</label><label class="label-required">*</label>
 							        <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" placeholder="Enter Lastname" >
 							        @if ($errors->has('lastname'))
 							            <span class="help-block">
@@ -70,7 +71,7 @@
 								</div>
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-							      	<label for="username">Username</label>
+							      	<label for="username">Username</label><label class="label-required">*</label>
 							        <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Enter Username" autofocus>
 							        @if ($errors->has('username'))
 							            <span class="help-block">

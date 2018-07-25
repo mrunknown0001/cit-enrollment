@@ -16,6 +16,22 @@
 			<div class="col-md-12">
 				@include('includes.all')
 				<p><a href="{{ route('registrar.add.student') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Student</a></p>
+
+				<div class="row">
+					<div class="col-md-4">
+						<form action="#" method="get" class="" autocomplete="off">
+							<div class="input-group">
+								<input type="text" name="q" class="form-control" placeholder="Search...">
+								<span class="input-group-btn">
+									<button type="submit" name="search" id="search-btn" class="btn btn-flat btn-primary"><i class="fa fa-search"></i>
+								</button>
+								</span>
+							</div>
+						</form>						
+					</div>
+				</div>
+
+
 				@if(count($students) > 0)
 
 
