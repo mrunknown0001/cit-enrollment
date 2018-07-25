@@ -1043,6 +1043,24 @@ class AdminController extends Controller
     }
 
 
+    // method use to get major per curriculum in form add/update
+    public function getMajorCurriculum($id = null)
+    {
+        $curriculum = Curriculum::where('major_id', $id)->where('active', 1)->get();
+
+        $course_cu = null;
+
+        foreach($curriculum as $c) {
+            $course_cu[] = [
+                        'id' => $c->id,
+                        'name' => $c->name
+                    ];
+        }
+
+        return $course_cu;
+    }
+
+
     // method use to add subject
     public function addSubject()
     {
@@ -1135,6 +1153,7 @@ class AdminController extends Controller
         $major_id = $request['major'];
         $year_level_id = $request['year_level'];
         $semester_id = $request['semester'];
+        $curriculum_id = $request['curriculum'];
 
         $course = Course::findorfail($course_id);
         $major = CourseMajor::find($major_id);
@@ -1158,6 +1177,7 @@ class AdminController extends Controller
         else {
             $sub->major_id = null;
         }
+        $sub->curriculum_id = $curriculum_id;
         $sub->year_level_id = $year_level_id;
         $sub->semester_id = $semester_id;
         $sub->save();

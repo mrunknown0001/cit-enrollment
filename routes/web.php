@@ -267,6 +267,9 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to get course curriculum on selected course
 	Route::get('/course/{id}/curriculum/get', 'AdminController@getCourseCurriculum')->name('admin.get.course.curriculum');
 
+	// route to get curriculum based on major
+	Route::get('/major/{id}/curriculum/get', 'AdminController@getMajorCurriculum')->name('admin.get.major.curriculum');
+
 	// route to save new subject
 	Route::post('/subject/add', 'AdminController@postAddSubject')->name('admin.add.subject.post');
 

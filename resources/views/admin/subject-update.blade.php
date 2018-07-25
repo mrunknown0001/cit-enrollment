@@ -161,15 +161,6 @@
 			});
 	    }});
 
-	    // another for curriculum
-		$.ajax({url: "/admin/course/" + courseId + "/curriculum/get", success: function(result){
-	        Object.keys(result).forEach(function(key) {
-
-			  $('#curriculum').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
-			  
-			});
-	    }});
-
 	});
 
 	$(document).ready(function () {
@@ -184,15 +175,19 @@
 			});
 	    }});
 
-	    // another for curriculum
-		$.ajax({url: "/admin/course/" + courseId + "/curriculum/get", success: function(result){
+	});
+
+	$("#major").change(function () {
+		var courseId = $("#course").val();
+		var majorId = $("#major").val();
+
+		$.ajax({url: "/admin/major/" + majorId + "/curriculum/get", success: function(result){
 	        Object.keys(result).forEach(function(key) {
 
 			  $('#curriculum').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
 			  
 			});
 	    }});
-
 	});
 </script>
 @endsection
