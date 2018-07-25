@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+  <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -18,7 +19,6 @@
   @yield('content')
   @include('includes.footer')
 </div>
-<script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
 </body>
 </html>

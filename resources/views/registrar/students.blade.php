@@ -30,7 +30,7 @@
 						</form>						
 					</div>
 				</div>
-
+				<p></p>
 
 				@if(count($students) > 0)
 

@@ -120,9 +120,9 @@
 								</div>
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('major') ? ' has-error' : '' }}">
-							      	<label for="major">Select Major</label>
+							      	<label for="major">Select Course Major</label>
 							        <select name="major" id="major" class="form-control">
-							        	<option value="">Select Curriculum</option>
+							        	<option value="">No Course Major</option>
 							        	
 							        </select>
 							        @if ($errors->has('major'))
@@ -146,4 +146,27 @@
 		</div>
 	</section>
 </div>
+<script>
+	$("#course").change(function () {
+
+		var courseId = $("#course").val();
+
+		$.ajax({url: "/registrar/course/" + courseId + "/majors/get", success: function(result){
+	        Object.keys(result).forEach(function(key) {
+
+			  $('#major').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
+			  
+			});
+	    }});
+
+		$.ajax({url: "/registrar/course/" + courseId + "/curriculum/get", success: function(result){
+	        Object.keys(result).forEach(function(key) {
+
+			  $('#curriculum').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
+			  
+			});
+	    }});
+
+	});
+</script>
 @endsection

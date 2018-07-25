@@ -323,6 +323,13 @@ Route::group(['prefix' => 'registrar'], function () {
 
 	// route to save new student
 	Route::post('/student/add', 'RegistrarController@postAddStudent')->name('registrar.add.student.post');
+
+	// route to get major to be use in add student form
+	Route::get('/course/{id}/majors/get', 'RegistrarController@getCourseMajor')->name('registrar.get.course.major');
+
+	// route to get curriculum to use in add student form
+	Route::get('/course/{id}/curriculum/get', 'RegistrarController@getCourseCurriculum')->name('registrar.get.course.curriculum');
+
 });
 
 

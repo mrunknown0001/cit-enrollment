@@ -8,6 +8,9 @@ use App\Http\Controllers\GeneralController;
 
 use App\User;
 use App\Course;
+use App\CourseMajor;
+use App\Curriculum;
+use App\CourseEnrolled;
 
 class RegistrarController extends Controller
 {
@@ -49,7 +52,9 @@ class RegistrarController extends Controller
     	$request->validate([
     		'student_number' => 'required|unique:users',
     		'firstname' => 'required',
-    		'lastname' => 'required'
+    		'lastname' => 'required',
+            'course' => 'required',
+            'curriculum' => 'required'
     	]);
 
     	$sn = $request['student_number'];
@@ -57,6 +62,12 @@ class RegistrarController extends Controller
     	$lastname = $request['lastname'];
     	$middlename = $request['middlename'];
     	$suffix = $request['suffix_name'];
+        $course_id = $request['course'];
+        $major_id = $request['major'];
+        $curriculum_id = $request['curriculum'];
+
+        $course = Course::findorfail($course_id);
+        $curriculum = Curriculum::findorfail($curriculum_id);
 
     	$student = new User();
     	$student->student_number = $sn;
@@ -66,10 +77,41 @@ class RegistrarController extends Controller
     	$student->suffix_name = $suffix;
     	$student->save();
 
+        $ce = new CourseEnrolled();
+        $ce->student_id = $student->id;
+        $ce->course_id = $course->id;
+        $ce->major_id = $major_id;
+        $ce->curriculum_id = $curriculum->id;
+        $ce->save();
+
     	// add activitly log
+        GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Registrar Added Student');
 
     	// redirect back with success message
     	return redirect()->back()->with('success', 'Student Added!');
+    }
+
+
+    // method use to get major oncourses
+    public function getCourseMajor($id = null)
+    {
+        $majors = CourseMajor::where('course_id', $id)
+                            ->where('active', 1)
+                            ->get();
+
+        return $majors;
+
+    }
+
+
+    // method use to get curriculum of cousre
+    public function getCourseCurriculum($id = null)
+    {
+        $cu = Curriculum::where('course_id', $id)
+                        ->where('active', 1)
+                        ->get();
+
+        return $cu;
     }
 
 }
