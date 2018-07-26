@@ -1,8 +1,8 @@
 <aside class="main-sidebar">
   <section class="sidebar">
     <ul class="sidebar-menu" data-widget="tree">
-      <li class="header">
-        Navigation
+      <li class="header text-center">
+        Registrar Menu
       </li>
       <li class="{{ route('registrar.dashboard') == url()->current() ? 'active' : ''}}">
         <a href="{{ route('registrar.dashboard') }}">

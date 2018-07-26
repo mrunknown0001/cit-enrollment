@@ -62,7 +62,7 @@
 											@endif
 										</td>
 										<td class="text-center">
-											<a href="#" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a>
+											<a href="{{ route('registrar.update.student', ['id' => $s->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a>
 										</td>
 									</tr>
 								@endforeach

@@ -4,6 +4,10 @@ Route::get('/', 'GeneralController@landingPage')->name('landing.page');
 
 Route::get('/registration', 'GeneralController@register')->name('registration');
 
+Route::get('/student/registration', 'RegistrationController@studentShowDetails')->name('student.show.details');
+
+Route::post('/student/registration', 'RegistrationController@postRegisterStudent')->name('registrer.student.post');
+
 Route::get('/home', function () {
 	return redirect()->route('landing.page');
 });
@@ -56,7 +60,7 @@ Route::get('/student', function () {
 	return redirect()->route('student.login');
 });
 
-Route::get('/student/registration', 'RegistrationController@index')->name('student.registration');
+// Route::get('/student/registration', 'RegistrationController@index')->name('student.registration');
 
 Route::get('/logout', 'GeneralController@logout')->name('logout');
 
@@ -323,6 +327,12 @@ Route::group(['prefix' => 'registrar'], function () {
 
 	// route to save new student
 	Route::post('/student/add', 'RegistrarController@postAddStudent')->name('registrar.add.student.post');
+
+	// rotue to update student
+	Route::get('/student/{id}/update', 'RegistrarController@updateStudent')->name('registrar.update.student');
+
+	// route to save update student
+	Route::post('/student/update', 'RegistrarController@postUpdateStudent')->name('registrar.update.student.post');
 
 	// route to get major to be use in add student form
 	Route::get('/course/{id}/majors/get', 'RegistrarController@getCourseMajor')->name('registrar.get.course.major');

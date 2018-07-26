@@ -24,13 +24,17 @@
     </div>
     <p class="login-box-msg">{{ env('app_name') }}</p>
     @include('includes.all')
-    <form action="{{ route('student.show.details') }}" method="get" autocomplete="off">
+    <p>Name: <strong>{{ ucwords($student->firstname . ' ' . $student->lastname) }}</strong></p>
+    <p>Student Number: <strong>{{ $student->student_number }}</strong></p>
+    <p>If this is you. Please enter Password to Create Account</p>
+    <form action="{{ route('registrer.student.post') }}" method="POST" autocomplete="off">
       {{ csrf_field() }}
-      <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
-        <input id="username" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" placeholder="Enter Student Number" autofocus>
-        @if ($errors->has('student_number'))
+      <input type="hidden" name="student_id" value="{{ $student->id }}">
+      <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+        <input id="password" type="password" class="form-control" name="password" value="{{ old('student_number') }}" placeholder="Enter Password" required="">
+        @if ($errors->has('password'))
             <span class="help-block">
-                <strong>{{ $errors->first('student_number') }}</strong>
+                <strong>{{ $errors->first('password') }}</strong>
             </span>
         @endif
       </div>
@@ -44,7 +48,8 @@
         </div>
       </div>
     </form>
-    <a href="{{ route('login') }}">Click here to Login</a>
+    <p><a href="{{ route('registration') }}">Cancel</a></p>
+    <p>Already have an account? <a href="{{ route('login') }}">Click here to Login</a></p>
   </div>
 </div>
 <script src="{{ asset('js/app.js') }}"></script>

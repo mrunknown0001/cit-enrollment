@@ -18,17 +18,18 @@
 				@include('includes.all')
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-graduation-cap"></i> Add Student</strong>
+						<strong><i class="fa fa-graduation-cap"></i> Update Student</strong>
 					</div>
 					<div class="box-body">
 						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
-						<form action="{{ route('registrar.add.student.post') }}" method="POST" role="form" autocomplete="off">
+						<form action="{{ route('registrar.update.student.post') }}" method="POST" role="form" autocomplete="off">
 							{{ csrf_field() }}
+							<input type="hidden" name="student_id" value="{{ $student->id }}">
 							<div class="row">
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
 							      	<label for="firstname">Firstname</label><label class="label-required">*</label>
-							        <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" placeholder="Enter Firstname" autofocus required="">
+							        <input id="firstname" type="text" class="form-control" name="firstname" value="{{ $student->firstname }}" placeholder="Enter Firstname" autofocus required="">
 							        @if ($errors->has('firstname'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('firstname') }}</strong>
@@ -39,7 +40,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('middlename') ? ' has-error' : '' }}">
 							      	<label for="middlename">Middlename</label>
-							        <input id="middlename" type="text" class="form-control" name="middlename" value="{{ old('middlename') }}" placeholder="Enter Middlename" >
+							        <input id="middlename" type="text" class="form-control" name="middlename" value="{{ $student->middle_name }}" placeholder="Enter Middlename" >
 							        @if ($errors->has('middlename'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('middlename') }}</strong>
@@ -50,7 +51,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
 							      	<label for="lastname">Lastname</label><label class="label-required">*</label>
-							        <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" placeholder="Enter Lastname" required>
+							        <input id="lastname" type="text" class="form-control" name="lastname" value="{{ $student->lastname }}" placeholder="Enter Lastname" required>
 							        @if ($errors->has('lastname'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('lastname') }}</strong>
@@ -61,7 +62,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('suffix_name') ? ' has-error' : '' }}">
 							      	<label for="suffix_name">Suffix</label>
-							        <input id="suffix_name" type="text" class="form-control" name="suffix_name" value="{{ old('suffix_name') }}" placeholder="Enter Suffix Name" >
+							        <input id="suffix_name" type="text" class="form-control" name="suffix_name" value="{{ $student->suffix_name }}" placeholder="Enter Suffix Name" >
 							        @if ($errors->has('suffix_name'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('suffix_name') }}</strong>
@@ -74,7 +75,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
 							      	<label for="student_number">Student Number</label><label class="label-required">*</label>
-							        <input id="student_number" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" placeholder="Enter Student Number" required>
+							        <input id="student_number" type="text" class="form-control" name="student_number" value="{{ $student->student_number }}" placeholder="Enter Student Number" required>
 							        @if ($errors->has('student_number'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('student_number') }}</strong>
@@ -91,7 +92,7 @@
 							        	<option value="">Select Course</option>
 							        	@if(count($courses) > 0)
 											@foreach($courses as $c)
-												<option value="{{ $c->id }}">{{ $c->title }}</option>
+												<option value="{{ $c->id }}" {{ $student->enrolled->course_id == $c->id ? 'selected' : '' }}>{{ $c->title }}</option>
 											@endforeach
 							        	@else
 											<option value="">No Available Course</option>
@@ -125,7 +126,7 @@
 							        	<option value="">Select Year Level</option>
 							        	@if(count($yl) > 0)
 											@foreach($yl as $y)
-												<option value="{{ $y->id }}">{{ ucwords($y->name) }}</option>
+												<option value="{{ $y->id }}" {{ $student->info->year_level_id == $y->id ? 'selected' : '' }}>{{ ucwords($y->name) }}</option>
 											@endforeach
 							        	@else
 										
@@ -154,7 +155,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add Student</button>
+								<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Update Student Info</button>
 							</div>
 						</form>
 					</div>
@@ -168,6 +169,28 @@
 </div>
 <script>
 	$("#course").change(function () {
+
+		var courseId = $("#course").val();
+
+		$.ajax({url: "/registrar/course/" + courseId + "/majors/get", success: function(result){
+	        Object.keys(result).forEach(function(key) {
+
+			  $('#major').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
+			  
+			});
+	    }});
+
+		$.ajax({url: "/registrar/course/" + courseId + "/curriculum/get", success: function(result){
+	        Object.keys(result).forEach(function(key) {
+
+			  $('#curriculum').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
+			  
+			});
+	    }});
+
+	});
+
+	$(document).ready(function () {
 
 		var courseId = $("#course").val();
 

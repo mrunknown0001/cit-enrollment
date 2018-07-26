@@ -28,4 +28,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function enrolled()
+    {
+        return $this->hasOne('App\CourseEnrolled', 'student_id');
+    }
+
+
+    public function info()
+    {
+        return $this->hasOne('App\StudentInfo', 'student_id');
+    }
 }
