@@ -24,14 +24,19 @@
               </li>
               <li class="user-body">
                 <div class="row">
-                  
+                  <div class="col-md-4">
+                    <a href="{{ route('admin.profile') }}" class="btn btn-default btn-sm"><i class="fa fa-user"></i> Profile</a>
+                  </div>
+                  <div class="col-md-8">
+                    <a href="#" class="btn btn-default btn-sm"><i class="fa fa-key"></i> Change Password</a>
+                  </div>
                 </div>
               </li>
               <li class="user-footer">
                 <div class="pull-left">
                 </div>
                 <div class="pull-right">
-                  <a href="{{ route('logout') }}" class="btn btn-default btn-flat">Logout</a>
+                  <a href="{{ route('logout') }}" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> Logout</a>
                 </div>
               </li>
             </ul>

@@ -73,6 +73,15 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to admin dashboard
 	Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
+	// route to view proifle of admin
+	Route::get('/profile', 'AdminController@profile')->name('admin.profile');
+
+	// route to update profile admin
+	Route::get('/profile/update', 'AdminController@updateProfile')->name('admin.update.profile');
+
+	// route to save update on admin profile
+	Route::post('/profile/update', 'AdminController@postUpdateProfile')->name('admin.update.profile.post');
+
 	// route to enable enrollment
 	Route::post('/enrollment/enable', 'AdminController@enableEnrollment')->name('admin.enable.enrollment');
 

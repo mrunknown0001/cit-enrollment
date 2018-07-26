@@ -6,7 +6,7 @@
       </div>
       <div class="pull-left info">
         <p>{{ ucwords(Auth::user()->firstname . ' ' . Auth::user()->lastname) }}</p>
-        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        <p>{{ Auth::user()->student_number }}</p>
       </div>
     </div>
     <ul class="sidebar-menu" data-widget="tree">

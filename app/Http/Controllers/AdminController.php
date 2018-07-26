@@ -7,6 +7,7 @@ use Auth;
 use App\Http\Controllers\GeneralController;
 
 use App\User;
+use App\Admin;
 use App\Dean;
 use App\Cashier;
 use App\Registrar;
@@ -35,6 +36,50 @@ class AdminController extends Controller
         $es = EnrollmentSetting::find(1);
 
     	return view('admin.dashboard', ['es' => $es]);
+    }
+
+
+    // method use to view profile of admin
+    public function profile()
+    {
+        return view('admin.profile');
+    }
+
+
+    // method use to update profile of admin
+    public function updateProfile()
+    {
+        return view('admin.profile-update');
+    }
+
+
+    // method use to save update on admin profile
+    public function postUpdateProfile(Request $request)
+    {
+        $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required'
+        ]);
+
+        $firstname = $request['firstname'];
+        $middlename = $request['middlename'];
+        $lastname = $request['lastname'];
+        $suffix = $request['suffix_name'];
+        $id_number = $request['id_number'];
+
+        $admin = Admin::find(Auth::guard('admin')->user()->id);
+        $admin->firstname = $firstname;
+        $admin->middle_name = $middlename;
+        $admin->lastname = $lastname;
+        $admin->suffix_name = $suffix;
+        $admin->id_number = $id_number;
+        $admin->save();
+
+        // add activity log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Profile');
+
+        return redirect()->route('admin.profile')->with('success', 'Profile Updated!');
+
     }
 
 
