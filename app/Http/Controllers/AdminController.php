@@ -68,6 +68,14 @@ class AdminController extends Controller
         $id_number = $request['id_number'];
 
         $admin = Admin::find(Auth::guard('admin')->user()->id);
+
+        // check id number existence
+        $check_id = Admin::where('id_number')->first();
+
+        if(count($check_id) > 0 && $admin->id_number == $id_number && $id_number != null) {
+            return redirect()->back()->with('error', 'ID Number Exists!');
+        }
+
         $admin->firstname = $firstname;
         $admin->middle_name = $middlename;
         $admin->lastname = $lastname;
@@ -80,6 +88,47 @@ class AdminController extends Controller
 
         return redirect()->route('admin.profile')->with('success', 'Profile Updated!');
 
+    }
+
+
+    // method use to change password
+    public function changePassword()
+    {
+        return view('admin.password-change');
+    }
+
+
+    // method use to save new password
+    public function postChangePassword(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required|confirmed'
+        ]);
+
+        $old_password = $request['old_password'];
+        $password = $request['password'];
+
+        // check old password if matched to the correct password
+        if(!password_verify($old_password, Auth::guard('admin')->user()->password)) {
+            return redirect()->back()->with('error', 'Incorrect Old Password!');
+        }
+
+        // check if the new password is same as the old
+        if(password_verify($password, Auth::guard('admin')->user()->password)) {
+            return redirect()->back()->with('error', 'New Password Entered is Same as Old Password!');
+        }
+
+        // change password
+        $admin = Admin::find(Auth::guard('admin')->user()->id);
+        $admin->password = bcrypt($password);
+        $admin->save();
+
+        // add activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Change Password');
+
+        // return to deans and add admin with message
+        return redirect()->route('admin.dashboard')->with('success', 'Password Changed!');
     }
 
 

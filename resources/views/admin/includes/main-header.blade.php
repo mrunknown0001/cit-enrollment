@@ -28,7 +28,7 @@
                     <a href="{{ route('admin.profile') }}" class="btn btn-default btn-sm"><i class="fa fa-user"></i> Profile</a>
                   </div>
                   <div class="col-md-8">
-                    <a href="#" class="btn btn-default btn-sm"><i class="fa fa-key"></i> Change Password</a>
+                    <a href="{{ route('admin.change.password') }}" class="btn btn-default btn-sm"><i class="fa fa-key"></i> Change Password</a>
                   </div>
                 </div>
               </li>

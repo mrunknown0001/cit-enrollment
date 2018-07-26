@@ -82,6 +82,12 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to save update on admin profile
 	Route::post('/profile/update', 'AdminController@postUpdateProfile')->name('admin.update.profile.post');
 
+	// route to change password of the admin
+	Route::get('/password/change', 'AdminController@changePassword')->name('admin.change.password');
+
+	// route to save new password
+	Route::post('/password/change', 'AdminController@postChangePassword')->name('admin.change.password.post');
+
 	// route to enable enrollment
 	Route::post('/enrollment/enable', 'AdminController@enableEnrollment')->name('admin.enable.enrollment');
 
@@ -309,15 +315,21 @@ Route::group(['prefix' => 'dean'], function () {
 	// route to dean dashboard
 	Route::get('/dashboard', 'DeanController@dashboard')->name('dean.dashboard');
 
-});
+	// route to view profile of the dean
+	Route::get('/profile', 'DeanController@profile')->name('dean.profile');
 
+	// route to update profile of the dean
+	Route::get('/profile/update', 'DeanController@updateProfile')->name('dean.update.profile');
 
-/*
- * Route group cashier
- */
-Route::group(['prefix' => 'cahier'], function () {
-	// route to dean dashboard
-	Route::get('/dashboard', 'CashierController@dashboard')->name('cashier.dashboard');
+	// route to save updaet on profile of the dean
+	Route::post('/profile/update', 'DeanController@postUpdateProfile')->name('dean.update.profile.post');
+
+	// route to change password of the dean
+	Route::get('/password/change', 'DeanController@changePassword')->name('dean.change.password');
+
+	// route to save new password of the dean
+	Route::post('/password/change', 'DeanController@postChangePassword')->name('dean.change.password.post');
+
 });
 
 
@@ -325,8 +337,14 @@ Route::group(['prefix' => 'cahier'], function () {
  * Route group registrar
  */
 Route::group(['prefix' => 'registrar'], function () {
-	// route to dean dashboard
+	// route to registrar dashboard
 	Route::get('/dashboard', 'RegistrarController@dashboard')->name('registrar.dashboard');
+
+	// route to view profile of registrar
+	Route::get('/profile', 'RegistrarController@profile')->name('registrar.profile');
+
+	// route to change password of registrar
+	Route::get('/password/change', 'RegistrarController@changePassword')->name('registrar.change.password');
 
 	// route to student operations
 	Route::get('/students', 'RegistrarController@students')->name('registrar.students');
@@ -353,10 +371,21 @@ Route::group(['prefix' => 'registrar'], function () {
 
 
 /*
+ * Route group cashier
+ */
+Route::group(['prefix' => 'cahier'], function () {
+	// route to cashier dashboard
+	Route::get('/dashboard', 'CashierController@dashboard')->name('cashier.dashboard');
+
+
+});
+
+
+/*
  * Route group faculty
  */
 Route::group(['prefix' => 'faculty'], function () {
-	// route to dean dashboard
+	// route to faculty dashboard
 	Route::get('/dashboard', 'FacultyController@dashboard')->name('faculty.dashboard');
 });
 
