@@ -321,7 +321,7 @@ Route::group(['prefix' => 'dean'], function () {
 	// route to update profile of the dean
 	Route::get('/profile/update', 'DeanController@updateProfile')->name('dean.update.profile');
 
-	// route to save updaet on profile of the dean
+	// route to save update on profile of the dean
 	Route::post('/profile/update', 'DeanController@postUpdateProfile')->name('dean.update.profile.post');
 
 	// route to change password of the dean
@@ -342,6 +342,18 @@ Route::group(['prefix' => 'registrar'], function () {
 
 	// route to view profile of registrar
 	Route::get('/profile', 'RegistrarController@profile')->name('registrar.profile');
+
+	// route to update profile of registrar
+	Route::get('/profile/update', 'RegistrarController@updateProfile')->name('registrar.update.profile');
+
+	// route to save update in profile of registrar
+	Route::post('/profile/update', 'RegistrarController@postUpdateProfile')->name('registrar.update.profile.post');
+
+	// route to change password for registrar
+	Route::get('/password/change', 'RegistrarController@changePassword')->name('registrar.change.password');
+
+	// route to save new password for registrar
+	Route::post('/password/change', 'RegistrarController@postChangePassword')->name('registrar.change.password.post');
 
 	// route to change password of registrar
 	Route::get('/password/change', 'RegistrarController@changePassword')->name('registrar.change.password');
@@ -377,7 +389,20 @@ Route::group(['prefix' => 'cahier'], function () {
 	// route to cashier dashboard
 	Route::get('/dashboard', 'CashierController@dashboard')->name('cashier.dashboard');
 
+	// route to view profile of cashier
+	Route::get('/profile', 'CashierController@profile')->name('cashier.profile');
 
+	// route to update profile of cashier
+	Route::get('/profile/update', 'CashierController@updateProfile')->name('cashier.update.profile');
+
+	// rotue to save update of profile
+	Route::post('/profile/update', 'CashierController@postUpdateProfile')->name('cashier.update.profile.post');
+
+	// route to change password of cashier
+	Route::get('/password/change', 'CashierController@changePassword')->name('cashier.change.password');
+
+	// route to save new password of cashier
+	Route::post('/password/change', 'CashierController@postChangePassword')->name('cashier.change.password.post');
 });
 
 

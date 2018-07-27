@@ -1,11 +1,11 @@
-@extends('layouts.registrar-layout')
+@extends('layouts.cashier-layout')
 
-@section('title') Registrar Profile @endsection
+@section('title') Cashier Profile @endsection
 
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Registrar Profile</h1>
+		<h1>Cashier Profile</h1>
 		<ol class="breadcrumb">
 			<li><a href="javascript:void(0)"><i class="fa fa-user"></i> Home</a></li>
 			<li class="active">Profile</li>
@@ -17,14 +17,14 @@
 				@include('includes.all')
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-user"></i> Registrar Profile</strong>
+						<strong><i class="fa fa-user"></i> Cashier Profile</strong>
 					</div>
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-6">
-								<p>Name: <strong>{{ ucwords(Auth::guard('registrar')->user()->firstname . ' ' . Auth::guard('registrar')->user()->lastname) }}</strong></p>
-								<p>ID Number: <strong>{{ Auth::guard('registrar')->user()->id_number }}</strong></p>
-								<p><a href="{{ route('registrar.update.profile') }}" class="btn btn-default"><i class="fa fa-pencil"></i> Update Profile</a></p>
+								<p>Name: <strong>{{ ucwords(Auth::guard('cashier')->user()->firstname . ' ' . Auth::guard('cashier')->user()->lastname) }}</strong></p>
+								<p>ID Number: <strong>{{ Auth::guard('cashier')->user()->id_number }}</strong></p>
+								<p><a href="{{ route('cashier.update.profile') }}" class="btn btn-default"><i class="fa fa-pencil"></i> Update Profile</a></p>
 							</div>
 						</div>
 					</div>

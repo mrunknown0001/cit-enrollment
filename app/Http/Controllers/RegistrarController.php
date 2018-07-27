@@ -7,6 +7,7 @@ use Auth;
 use App\Http\Controllers\GeneralController;
 
 use App\User;
+use App\Registrar;
 use App\StudentInfo;
 use App\Course;
 use App\CourseMajor;
@@ -26,6 +27,98 @@ class RegistrarController extends Controller
     public function dashboard()
     {
     	return view('registrar.dashboard');
+    }
+
+
+    // method use to view profile of registrar
+    public function profile()
+    {
+        return view('registrar.profile');
+    }
+
+
+    // method use to update profile of registrar
+    public function updateProfile()
+    {
+        return view('registrar.profile-update');
+    }
+
+
+    // method use to save update to profile of registrar
+    public function postUpdateProfile(Request $request)
+    {
+        $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required'
+        ]);
+
+        $firstname = $request['firstname'];
+        $middlename = $request['middlename'];
+        $lastname = $request['lastname'];
+        $suffix = $request['suffix_name'];
+        $id_number = $request['id_number'];
+
+        $registrar = Registrar::find(Auth::guard('registrar')->user()->id);
+
+        // check id number existence
+        $check_id = Registrar::where('id_number')->first();
+
+        if(count($check_id) > 0 && $registrar->id_number == $id_number && $id_number != null) {
+            return redirect()->back()->with('error', 'ID Number Exists!');
+        }
+
+        $registrar->firstname = $firstname;
+        $registrar->middle_name = $middlename;
+        $registrar->lastname = $lastname;
+        $registrar->suffix_name = $suffix;
+        $registrar->id_number = $id_number;
+        $registrar->save();
+
+        // add activity log
+        GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Registrar Updated Profile');
+
+        return redirect()->route('registrar.profile')->with('success', 'Profile Updated!');
+    }
+
+
+    // method use to change password
+    public function changePassword()
+    {
+        return view('registrar.password-change');
+    }
+
+
+    // method use to save new password
+    public function postChangePassword(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required|confirmed'
+        ]);
+
+        $old_password = $request['old_password'];
+        $password = $request['password'];
+
+        // check old password if matched to the correct password
+        if(!password_verify($old_password, Auth::guard('registrar')->user()->password)) {
+            return redirect()->back()->with('error', 'Incorrect Old Password!');
+        }
+
+        // check if the new password is same as the old
+        if(password_verify($password, Auth::guard('registrar')->user()->password)) {
+            return redirect()->back()->with('error', 'New Password Entered is Same as Old Password!');
+        }
+
+        // change password
+        $registrar = Registrar::find(Auth::guard('registrar')->user()->id);
+        $registrar->password = bcrypt($password);
+        $registrar->save();
+
+        // add activty log
+        GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Registrar Change Password');
+
+        // return to deans and add admin with message
+        return redirect()->route('registrar.dashboard')->with('success', 'Password Changed!');
     }
 
 

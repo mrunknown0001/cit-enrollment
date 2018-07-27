@@ -108,7 +108,7 @@ class DeanController extends Controller
         $dean->save();
 
         // add activty log
-        GeneralController::activity_log(Auth::guard('dean')->user()->id, 1, 'Dean Change Password');
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Change Password');
 
         // return to deans and add admin with message
         return redirect()->route('dean.dashboard')->with('success', 'Password Changed!');
