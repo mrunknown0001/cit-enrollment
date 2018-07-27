@@ -412,6 +412,21 @@ Route::group(['prefix' => 'cahier'], function () {
 Route::group(['prefix' => 'faculty'], function () {
 	// route to faculty dashboard
 	Route::get('/dashboard', 'FacultyController@dashboard')->name('faculty.dashboard');
+
+	// route to view profile of faculty
+	Route::get('/profile', 'FacultyController@profile')->name('faculty.profile');
+
+	// route to update profile of faculty
+	Route::get('/profile/update', 'FacultyController@updateProfile')->name('faculty.update.profile');
+
+	// route to save update in profile of faculty
+	Route::post('/profile/update', 'FacultyController@postUpdateProfile')->name('faculty.update.profile.post');
+
+	// route to change password
+	Route::get('/password/change', 'FacultyController@changePassword')->name('faculty.change.password');
+
+	// route to save new password
+	Route::post('/password/change', 'FacultyController@postChangePassword')->name('faculty.change.password.post');
 });
 
 
