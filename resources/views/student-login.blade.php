@@ -27,7 +27,7 @@
     <form action="{{ route('student.login.post') }}" method="post" autocomplete="off">
       {{ csrf_field() }}
       <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
-        <input id="username" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" placeholder="Enter Student Number" autofocus>
+        <input id="username" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" placeholder="Enter Student Number" required autofocus>
         @if ($errors->has('student_number'))
             <span class="help-block">
                 <strong>{{ $errors->first('student_number') }}</strong>
@@ -36,7 +36,7 @@
       </div>
 
       <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-        <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password">
+        <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password" required>
         @if ($errors->has('password'))
             <span class="help-block">
                 <strong>{{ $errors->first('password') }}</strong>

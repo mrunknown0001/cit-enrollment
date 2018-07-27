@@ -18,6 +18,7 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="{{ route('registrar.add.student') }}"><i class="fa fa-circle-o"></i> Add Student</a></li>
+          <li><a href="#" onclick="alert('Batch Import Students')"><i class="fa fa-circle-o"></i> Import Students Soon to Add</a></li>
           <li><a href="{{ route('registrar.students') }}"><i class="fa fa-circle-o"></i> View Students</a></li>
         </ul>
       </li>

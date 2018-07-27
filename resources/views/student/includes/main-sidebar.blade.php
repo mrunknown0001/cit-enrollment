@@ -13,8 +13,8 @@
       <li class="header text-center">
         Student Menu
       </li>
-      <li class="{{ route('registrar.dashboard') == url()->current() ? 'active' : ''}}">
-        <a href="{{ route('registrar.dashboard') }}">
+      <li class="{{ route('student.dashboard') == url()->current() ? 'active' : ''}}">
+        <a href="{{ route('student.dashboard') }}">
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>

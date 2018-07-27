@@ -436,4 +436,10 @@ Route::group(['prefix' => 'faculty'], function () {
 Route::group(['prefix' => 'student'], function () {
 	// route to student dashboard
 	Route::get('/dashboard', 'StudentController@dashboard')->name('student.dashboard');
+
+	// route to view profile
+	Route::get('/profile', 'StudentController@profile')->name('student.profile');
+
+	// rotue to change password of student
+	Route::get('/password/change', 'StudentController@changePassword')->name('student.change.password');
 });

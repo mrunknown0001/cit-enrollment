@@ -17,4 +17,11 @@ class StudentController extends Controller
     {
     	return view('student.dashboard');
     }
+
+
+    // method use  to show profile
+    public function profile()
+    {
+    	return view('student.profile');
+    }
 }
