@@ -456,6 +456,10 @@ Route::group(['prefix' => 'student'], function () {
 	// route to save proifle update
 	Route::post('/profile/update', 'StudentController@postUpdateProfile')->name('student.update.profile.post');
 
+	Route::get('/profile/update', function () {
+		return redirect()->route('student.dashboard');
+	});
+
 	// rotue to change password of student
 	Route::get('/password/change', 'StudentController@changePassword')->name('student.change.password');
 });
