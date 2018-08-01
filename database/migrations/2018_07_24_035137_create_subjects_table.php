@@ -16,8 +16,9 @@ class CreateSubjectsTable extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->integer('units');
+            $table->integer('prerequisite')->nullable(); // subject id of prerequisite subject
             $table->integer('course_id')->unsigned();
             $table->foreign('course_id')->references('id')->on('courses');
             $table->integer('major_id')->unsigned()->nullable();
