@@ -23,6 +23,11 @@
           <li><a href="{{ route('admin.faculties') }}"><i class="fa fa-circle-o"></i> Faculties</a></li>
         </ul>
       </li>
+      <li class="{{ route('admin.students') == url()->current() ? 'active' : '' }}">
+        <a href="{{ route('admin.students') }}">
+          <i class="fa fa-graduation-cap"></i> <span>Students</span>
+        </a>
+      </li>
       <li class="treeview {{ route('admin.courses') == url()->current() || route('admin.course.majors') == url()->current() || route('admin.curricula') == url()->current() ? 'active' : '' }}">
         <a href="javascript:void(0)">
           <i class="fa fa-book"></i> <span>Courses</span>

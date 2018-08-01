@@ -24,7 +24,7 @@
 							<div class="col-md-6">
 								<p>Name: <strong>{{ ucwords(Auth::user()->firstname . ' ' . Auth::user()->lastname) }}</strong></p>
 								<p>ID Number: <strong>{{ Auth::user()->student_number }}</strong></p>
-								<p><a href="#" class="btn btn-default"><i class="fa fa-pencil"></i> Update Profile</a></p>
+								<p><a href="{{ route('student.update.profile', ['id' => Auth::user()->id]) }}" class="btn btn-default"><i class="fa fa-pencil"></i> Update Profile</a></p>
 							</div>
 						</div>
 					</div>

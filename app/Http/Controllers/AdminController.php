@@ -619,6 +619,34 @@ class AdminController extends Controller
     }
 
 
+    // method use to show all students
+    public function students()
+    {
+        $students = User::where('active', 1)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(15);
+
+        return view('admin.students', ['students' => $students]);
+    }
+
+
+    // method use to reset student password
+    public function postResetStudentPassword(Request $request)
+    {
+        $student_id = $request['student_id'];
+
+        $student = User::findorfail($student_id);
+        $student->password = bcrypt('password');
+        $student->save();
+
+        // add activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Reset Student Password');
+
+        // return to deans and add admin with message
+        return redirect()->route('admin.students')->with('success', 'Student Password is Reset!');
+    }
+
+
     // method use to view courses
     public function courses()
     {
@@ -1159,10 +1187,11 @@ class AdminController extends Controller
     public function addSubject()
     {
         $courses = Course::where('active', 1)->get();
+        $subjects = Subject::where('active', 1)->get(['id', 'code']);
         $yl = YearLevel::get();
         $sem = Semester::get();
 
-        return view('admin.subject-add', ['courses' => $courses, 'yl' => $yl, 'sem' => $sem]);
+        return view('admin.subject-add', ['courses' => $courses, 'subjects' => $subjects, 'yl' => $yl, 'sem' => $sem]);
     }
 
 
@@ -1187,6 +1216,7 @@ class AdminController extends Controller
         $year_level_id = $request['year_level'];
         $semester_id = $request['semester'];
         $curriculum_id = $request['curriculum'];
+        $prerequisite = $request['prerequisite'];
 
         $course = Course::findorfail($course_id);
         $major = CourseMajor::find($major_id);
@@ -1203,6 +1233,7 @@ class AdminController extends Controller
         else {
             $sub->major_id = null;
         }
+        $sub->prerequisite = $prerequisite;
         $sub->curriculum_id = $curriculum_id;
         $sub->year_level_id = $year_level_id;
         $sub->semester_id = $semester_id;
@@ -1219,11 +1250,12 @@ class AdminController extends Controller
     public function updateSubject($id = null)
     {
         $subject = Subject::findorfail($id);
+        $subjects = Subject::where('active', 1)->get(['id', 'code']);
         $courses = Course::orderBy('title', 'asc')->get();
         $yl = YearLevel::get();
         $sem = Semester::get();
 
-        return view('admin.subject-update', ['subject' => $subject, 'courses' => $courses, 'yl' => $yl, 'sem' => $sem]);
+        return view('admin.subject-update', ['subject' => $subject, 'subjects' => $subjects, 'courses' => $courses, 'yl' => $yl, 'sem' => $sem]);
     }
 
 

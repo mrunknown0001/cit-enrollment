@@ -53,6 +53,24 @@
 										</span>
 										@endif
 									</div>
+									<div class="form-group{{ $errors->has('prerequisite') ? ' has-error' : '' }}">
+										<label for="prerequisite">Subject Prerequisite</label>
+										<select class="form-control" id="prerequisite" name="prerequisite">
+											<option value="">No Prerequisite</option>
+											@if(count($subjects) > 0)
+												@foreach($subjects as $s)
+													<option value="{{ $s->id }}">{{ $s->code }}</option>
+												@endforeach
+											@else
+												<option value="">No Subjects Found</option>
+											@endif
+										</select>
+										@if ($errors->has('prerequisite'))
+										<span class="help-block">
+											<strong>{{ $errors->first('prerequisite') }}</strong>
+										</span>
+										@endif
+									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group{{ $errors->has('course') ? ' has-error' : '' }}">

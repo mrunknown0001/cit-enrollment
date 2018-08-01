@@ -178,6 +178,16 @@ Route::group(['prefix' => 'admin'], function () {
 		return redirect()->route('admin.faculties');
 	});
 
+	// route to view all students
+	Route::get('/students', 'AdminController@students')->name('admin.students');
+
+	// route to reset password of student
+	Route::post('/student/reset/password', 'AdminController@postResetStudentPassword')->name('admin.reset.student.password.post');
+
+	Route::get('/student/reset/password', function () {
+		return abort(404);
+	});
+
 	// route to view courses
 	Route::get('/courses', 'AdminController@courses')->name('admin.courses');
 
@@ -439,6 +449,12 @@ Route::group(['prefix' => 'student'], function () {
 
 	// route to view profile
 	Route::get('/profile', 'StudentController@profile')->name('student.profile');
+
+	// route to update profile
+	Route::get('/profile/{id}/update', 'StudentController@updateProfile')->name('student.update.profile');
+
+	// route to save proifle update
+	Route::post('/profile/update', 'StudentController@postUpdateProfile')->name('student.update.profile.post');
 
 	// rotue to change password of student
 	Route::get('/password/change', 'StudentController@changePassword')->name('student.change.password');
