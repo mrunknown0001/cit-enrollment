@@ -7,6 +7,7 @@ use App\Http\Controllers\GeneralController;
 use Auth;
 
 use App\User;
+use App\Avatar;
 
 class RegistrationController extends Controller
 {
@@ -55,6 +56,10 @@ class RegistrationController extends Controller
     	$student->registered = 1;
     	$student->active = 1;
     	$student->save();
+
+        $avatar = new Avatar();
+        $avatar->student_id = $student->id;
+        $avatar->save();
 
     	// authenticate
     	return redirect()->route('login')->with('success', 'Registration Successful!');    	

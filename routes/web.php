@@ -462,4 +462,10 @@ Route::group(['prefix' => 'student'], function () {
 
 	// rotue to change password of student
 	Route::get('/password/change', 'StudentController@changePassword')->name('student.change.password');
+
+	// route to save new password
+	Route::post('/password/change', 'StudentController@postChangePassword')->name('student.change.password.post');
+
+	// route to change avatar of the student
+	
 });

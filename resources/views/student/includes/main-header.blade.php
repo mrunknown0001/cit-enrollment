@@ -19,7 +19,7 @@
               <li class="user-header">
                 <img src="{{ asset('uploads/images/avatar.jpg') }}" class="img-circle" alt="User Image">
                 <p>
-                  <small>Student</small>
+                  <small><a href="#" style="color: white;">Change Avatar</a></small>
                 </p>
               </li>
               <li class="user-body">

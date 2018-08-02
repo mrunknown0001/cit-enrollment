@@ -1,4 +1,4 @@
-@extends('layouts.registrar-layout')
+@extends('layouts.student-layout')
 
 @section('title') Password @endsection
 
@@ -23,7 +23,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
-								<form action="{{ route('registrar.change.password.post') }}" method="POST">
+								<form action="{{ route('student.change.password.post') }}" method="POST">
 									{{ csrf_field() }}
 									<div class="form-group{{ $errors->has('old_password') ? ' has-error' : '' }}">
 										<label for="old_password">Old Password</label><label class="label-required">*</label>
