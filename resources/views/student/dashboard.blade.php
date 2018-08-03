@@ -15,6 +15,22 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<strong><i class="fa fa-graduation-cap"></i> Educational Profile</strong>
+					</div>
+					<div class="box-body">
+						<div class="row">
+							<div class="col-md-6">
+								<p>Course: <strong>{{ Auth::user()->enrolled->course->title }}</strong></p>
+								<p>Year Level: <strong>{{ Auth::user()->info->year_level->name }}</strong></p>
+							</div>
+						</div>
+					</div>
+					<div class="box-footer">
+						
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>

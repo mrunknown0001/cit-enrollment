@@ -9,6 +9,7 @@ use App\Http\Controllers\PaymentController;
 
 use App\User;
 use App\StudentInfo;
+use App\Avatar;
 
 class StudentController extends Controller
 {
@@ -135,5 +136,48 @@ class StudentController extends Controller
 
         return redirect()->back()->with('success', 'Password Change!');
 
+    }
+
+
+    // method use to change avatar
+    public function uploadProfileImage()
+    {
+        return view('student.profile-image-upload');
+    }
+
+
+    // method use to upload profile image
+    public function postUploadProfileImage(Request $request)
+    {
+        // get current time and append the upload file extension to it,
+        // then put that name to $photoName variable.
+        $photoname = time().'.'.$request->image->getClientOriginalExtension();
+
+        /*
+        talk the select file and move it public directory and make avatars
+        folder if doesn't exsit then give it that unique name.
+        */
+        $request->image->move(public_path('uploads/images'), $photoname);
+
+
+        $avatar = Avatar::where('student_id', Auth::user()->id)->first();
+
+        // save photoname to database
+        if(count($avatar) < 1) {
+            $avatar = new Avatar();
+            $avatar->student_id = Auth::user()->id;
+            $avatar->name = $photoname;
+            $avatar->save();
+        }
+        else {
+            $avatar->name = $photoname;
+            $avatar->save();
+        }
+
+        // add activity log
+        GeneralController::activity_log(Auth::user()->id, 6, 'Student Change Avatar');
+
+        // return to dashboard
+        return redirect()->route('student.dashboard')->with('success', 'Avatar Uploaded!');
     }
 }

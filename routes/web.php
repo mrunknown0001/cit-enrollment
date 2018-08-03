@@ -466,6 +466,9 @@ Route::group(['prefix' => 'student'], function () {
 	// route to save new password
 	Route::post('/password/change', 'StudentController@postChangePassword')->name('student.change.password.post');
 
-	// route to change avatar of the student
-	
+	// route to change profile image of the student
+	Route::get('/profile/image/upload', 'StudentController@uploadProfileImage')->name('student.upload.profile.image');
+
+	// route to save new profile image
+	Route::post('/profile/image/upload', 'StudentController@postUploadProfileImage')->name('student.upload.profile.image.post');
 });

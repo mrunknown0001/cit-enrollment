@@ -12,14 +12,14 @@
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ asset('uploads/images/avatar.jpg') }}" class="user-image" alt="User Image">
+              <img src="@if(Auth::user()->avatar->name != null) {{ asset('uploads/images/'.Auth::user()->avatar->name) }} @else {{ asset('uploads/avatar.jpg') }} @endif" class="user-image" alt="User Image">
               <span class="hidden-xs">{{ ucwords(Auth::user()->firstname . ' ' . Auth::user()->lastname) }} <i class="fa fa-caret-down"></i></span>
             </a>
             <ul class="dropdown-menu">
               <li class="user-header">
-                <img src="{{ asset('uploads/images/avatar.jpg') }}" class="img-circle" alt="User Image">
+                <img src="@if(Auth::user()->avatar->name != null) {{ asset('uploads/images/'.Auth::user()->avatar->name) }} @else {{ asset('uploads/avatar.jpg') }} @endif" class="img-circle" alt="User Image">
                 <p>
-                  <small><a href="#" style="color: white;">Change Avatar</a></small>
+                  <small><a href="{{ route('student.upload.profile.image') }}" style="color: white;">Change Avatar</a></small>
                 </p>
               </li>
               <li class="user-body">

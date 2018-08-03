@@ -24,6 +24,15 @@ class DatabaseSeeder extends Seeder
             'active' => 0
         ]);
 
+        DB::table('mode_of_payments')->insert([
+            [
+                'name' => 'Paypal'
+            ],
+            [
+                'name' => 'Card Payment'
+            ]
+        ]);
+
         $this->call(SemesterSeeder::class);
         $this->call(UsersSeeder::class);
         $this->call(YearLevelSeeder::class);
