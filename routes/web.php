@@ -359,6 +359,9 @@ Route::group(['prefix' => 'dean'], function () {
 	// route to save new password of the dean
 	Route::post('/password/change', 'DeanController@postChangePassword')->name('dean.change.password.post');
 
+	// route to view schedule management
+	Route::get('/schedules', 'DeanController@schedules')->name('dean.schedules');
+
 });
 
 

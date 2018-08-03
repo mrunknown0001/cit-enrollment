@@ -114,4 +114,11 @@ class DeanController extends Controller
         return redirect()->route('dean.dashboard')->with('success', 'Password Changed!');
     }
 
+
+    // method use to show schedules
+    public function schedules()
+    {
+        
+    }
+
 }

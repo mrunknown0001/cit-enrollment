@@ -12,12 +12,12 @@
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ asset('uploads/images/avatar.jpg') }}" class="user-image" alt="User Image">
+              <img src="{{ asset('uploads/avatar.jpg') }}" class="user-image" alt="User Image">
               <span class="hidden-xs">{{ ucwords(Auth::user()->firstname . ' ' . Auth::user()->lastname) }} <i class="fa fa-caret-down"></i></span>
             </a>
             <ul class="dropdown-menu">
               <li class="user-header">
-                <img src="{{ asset('uploads/images/avatar.jpg') }}" class="img-circle" alt="User Image">
+                <img src="{{ asset('uploads/avatar.jpg') }}" class="img-circle" alt="User Image">
                 <p>
                   <small>Cashier Member</small>
                 </p>
