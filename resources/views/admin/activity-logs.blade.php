@@ -63,7 +63,7 @@
 				                            @elseif($log->user_type == 5)
 				                            Faculty
 				                            @elseif($log->user_type == 6)
-				                            Student}
+				                            Student
 				                            @else
 				                            N/A
 				                            @endif

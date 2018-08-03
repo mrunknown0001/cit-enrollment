@@ -312,6 +312,25 @@ Route::group(['prefix' => 'admin'], function () {
 		return redirect()->route('admin.subjects');
 	});
 
+	// route to show rooms management
+	Route::get('/rooms', 'AdminController@rooms')->name('admin.rooms');
+
+	// route to add room
+	Route::get('/room/add', 'AdminController@addRoom')->name('admin.add.room');
+
+	// route to save room
+	Route::post('/room/add', 'AdminController@postAddRoom')->name('admin.add.room.post');
+
+	// route to update room
+	Route::get('/room/{id}/update', 'AdminController@updateRoom')->name('admin.update.room');
+
+	// route to save room changes
+	Route::post('/room/update', 'AdminController@postUpdateRoom')->name('admin.update.room.post');
+
+	Route::get('/room/update', function () {
+		return redirect()->route('admin.rooms');
+	});
+
 	// route to view activity logs
 	Route::get('/activity-logs', 'AdminController@activityLogs')->name('admin.activity.logs');
 
