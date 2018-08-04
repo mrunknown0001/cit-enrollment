@@ -399,6 +399,9 @@ Route::group(['prefix' => 'registrar'], function () {
 	// route to student operations
 	Route::get('/students', 'RegistrarController@students')->name('registrar.students');
 
+	// route to search students
+	Route::get('/student/search', 'RegistrarController@searchStudent')->name('registrar.search.student');
+
 	// route to add student
 	Route::get('/student/add', 'RegistrarController@addStudent')->name('registrar.add.student');
 
@@ -499,4 +502,7 @@ Route::group(['prefix' => 'student'], function () {
 
 	// route to save new profile image
 	Route::post('/profile/image/upload', 'StudentController@postUploadProfileImage')->name('student.upload.profile.image.post');
+
+	// route to show enrollment page
+	Route::get('/enrollment', 'StudentController@enrollment')->name('student.enrollment');
 });

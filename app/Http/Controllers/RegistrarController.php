@@ -132,6 +132,17 @@ class RegistrarController extends Controller
     }
 
 
+    // method use to search students
+    public function searchStudent(Request $request)
+    {
+        $key = $request['q'];
+
+        $students = GeneralController::students_search($key);
+
+        return view('registrar.students-search-result', ['students' => $students, 'key' => $key]);
+    }
+
+
     // method use to add student
     public function addStudent()
     {

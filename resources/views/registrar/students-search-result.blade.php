@@ -5,7 +5,7 @@
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Students</h1>
+		<h1>Students Search Result: "{{ $key }}"</h1>
 		<ol class="breadcrumb">
 			<li><a href="javascript:void(0)"><i class="fa fa-graduation-cap"></i> Home</a></li>
 			<li class="active">Students</li>
@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				<p><a href="{{ route('registrar.add.student') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Student</a></p>
+				<p><a href="{{ route('registrar.students') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Students</a></p>
 
 				<div class="row">
 					<div class="col-md-4">

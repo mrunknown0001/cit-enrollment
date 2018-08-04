@@ -18,6 +18,11 @@
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
+      <li class="{{ route('student.enrollment') == url()->current() ? 'active' : '' }}">
+        <a href="{{ route('student.enrollment') }}">
+          <i class="fa fa-file-text-o"></i> <span>Enrollment</span>
+        </a>
+      </li>
     </ul>
   </section>
 </aside>

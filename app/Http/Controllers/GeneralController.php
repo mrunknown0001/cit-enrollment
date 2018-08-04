@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 
 use App\ActivityLog;
+use App\User;
 
 class GeneralController extends Controller
 {
@@ -114,6 +115,22 @@ class GeneralController extends Controller
 
 
     }
+
+
+    /////////////////////////////////////////////////////////////////////
+    // method use to search students in users and student_infos tables //
+    /////////////////////////////////////////////////////////////////////
+    public static function students_search($keyword = null)
+    {
+        $students = User::where('firstname', "like", "%$keyword%")
+                        ->orwhere('lastname', "like", "%$keyword%")
+                        ->orwhere('student_number', "like", "%$keyword%")
+                        ->orderBy('lastname', 'asc')
+                        ->paginate(10);
+                        
+        return $students;
+    }
+
 
 
     ///////////////////////////////////////

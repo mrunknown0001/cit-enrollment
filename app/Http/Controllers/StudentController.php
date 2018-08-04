@@ -10,6 +10,10 @@ use App\Http\Controllers\PaymentController;
 use App\User;
 use App\StudentInfo;
 use App\Avatar;
+use App\EnrollmentSetting;
+use App\RegistrationPayment;
+use App\AcademicYear;
+use App\Semester;
 
 class StudentController extends Controller
 {
@@ -22,6 +26,9 @@ class StudentController extends Controller
     // method to show student dashboard
     public function dashboard()
     {
+
+        // check status if regular or irregular
+        
     	return view('student.dashboard');
     }
 
@@ -179,5 +186,32 @@ class StudentController extends Controller
 
         // return to dashboard
         return redirect()->route('student.dashboard')->with('success', 'Avatar Uploaded!');
+    }
+
+
+    // method use to show enrollment page to student
+    public function enrollment()
+    {
+        // check active academic year and active semester
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        if(count($ay) < 1 && count($sem) < 1) {
+            return redirect()->route('student.dashboard')->with('error', 'No active Academic Year or Semester!');
+        }
+
+        // check if enrollment is active
+        $enrollment_status = EnrollmentSetting::find(1);
+
+        // check if paid for pre-registration
+        $reg_payment = RegistrationPayment::where('student_id', Auth::user()->id)->where('active', 1)->first();
+
+        if(count($reg_payment) < 1) {
+            return redirect()->route('student.dashboard')->with('error', 'Registration Payment Not Paid!');
+        } 
+
+        // check course/major/curriculum to load subject based on year level and semester
+
+        return view('student.enrollment', ['es' => $enrollment_status]);
     }
 }

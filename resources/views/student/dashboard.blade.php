@@ -15,6 +15,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
+				
+				{{-- check if student is regular or irregular --}}
+				<p class="text-center"><a href="#">Registration Payment. Click here.</a></p>
+
 				<div class="box box-primary">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-graduation-cap"></i> Educational Profile</strong>
