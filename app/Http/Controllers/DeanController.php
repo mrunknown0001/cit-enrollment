@@ -7,6 +7,11 @@ use Auth;
 use App\Http\Controllers\GeneralController;
 
 use App\Dean;
+use App\Schedule;
+use App\Room;
+use App\Subject;
+use App\AcademicYear;
+use App\Semester;
 
 class DeanController extends Controller
 {
@@ -118,7 +123,110 @@ class DeanController extends Controller
     // method use to show schedules
     public function schedules()
     {
-        
+        $schedules = Schedule::where('active', 1)->get();
+        $mon = Schedule::where('active', 1)->where('day', 1)->orderBy('start_time', 'asc')->get();
+        $tue = Schedule::where('active', 1)->where('day', 2)->orderBy('start_time', 'asc')->get();
+        $wed = Schedule::where('active', 1)->where('day', 3)->orderBy('start_time', 'asc')->get();
+        $thu = Schedule::where('active', 1)->where('day', 4)->orderBy('start_time', 'asc')->get();
+        $fri = Schedule::where('active', 1)->where('day', 5)->orderBy('start_time', 'asc')->get();
+        $sat = Schedule::where('active', 1)->where('day', 6)->orderBy('start_time', 'asc')->get();
+        $sun = Schedule::where('active', 1)->where('day', 7)->orderBy('start_time', 'asc')->get();
+
+        return view('dean.schedules', ['schedules' => $schedules, 'monday' => $mon, 'tuesday' => $tue, 'wednesday' => $wed, 'thursday' => $thu, 'friday' => $fri, 'saturday' => $sat, 'sunday' => $sun]);
+
+    }
+
+
+    // method use to add schedule
+    public function addSchedule()
+    {
+        // room, subjects, time, days
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $subjects = Subject::where('active', 1)->orderBy('code', 'asc')->get();
+
+        return view('dean.schedule-add', ['rooms' => $rooms, 'subjects' => $subjects]);
+    }
+
+
+    // method use to save new schedule
+    public function postAddSchedule(Request $request)
+    {
+        $request->validate([
+            'room' => 'required',
+            'subject' => 'required',
+            'day' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required'
+        ]);
+
+        $room_id = $request['room'];
+        $subject_id = $request['subject'];
+        $day = $request['day'];
+        $st = $request['start_time'];
+        $et = $request['end_time'];
+
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        $subject = Subject::findorfail($subject_id);
+        $room = Room::findorfail($room_id);
+
+        if($st > $et) {
+            return redirect()->back()->with('error', 'Invalid End Time. End Time must later than STart Time');
+        }
+
+        //////////////////////////////////////////////////////
+        // check if there is dupplicate or confict schedule //
+        //////////////////////////////////////////////////////
+        // check for duplicate
+        $schedule = Schedule::where('active', 1)
+                        ->where('room_id', $room_id)
+                        ->where('subject_id', $subject->id)
+                        ->where('day', $day)
+                        ->where('start_time', $st)
+                        ->where('end_time', $et)
+                        ->first();
+        if(count($schedule) > 0) {
+            return redirect()->back()->with('error', 'Duplicate Schedule Found!');
+        }
+
+        $schedule = Schedule::where('active', 1)
+                        ->where('room_id', $room_id)
+                        ->where('day', $day)
+                        ->where('start_time', $st)
+                        ->where('end_time', $et)
+                        ->first();
+        if(count($schedule) > 0) {
+            return redirect()->back()->with('error', 'Time Slot Filled Up!');
+        }
+
+        // ckeck for start time conflict on the day
+        $schedules = Schedule::where('active', 1)
+                        ->where('room_id', $room_id)
+                        ->where('day', $day)
+                        ->get();
+
+        foreach($schedules as $sch) {
+            if(($sch->end_time > $st && $sch->end_time < $et) || ($sch->start_time > $st && $sch->start_time < $et) || $sch->start_time == $st || $sch->end_time == $et) {
+                return redirect()->back()->with('error', 'Time conflict on ' . GeneralController::get_day($sch->day) . ' ' . GeneralController::get_time($sch->start_time) . '-' . GeneralController::get_time($sch->end_time));
+            }
+        }
+
+
+        // add new sched
+        $sched = new Schedule();
+        $sched->room_id = $room->id;
+        $sched->subject_id = $subject->id;
+        $sched->day = $day;
+        $sched->start_time = $st;
+        $sched->end_time = $et;
+        $sched->save();
+
+        // add activty log
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Added New Schedule');
+
+        // return to deans and add admin with message
+        return redirect()->back()->with('success', 'Schedule Added!');
     }
 
 }

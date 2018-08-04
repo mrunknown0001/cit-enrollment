@@ -20,8 +20,6 @@ class CreateSchedulesTable extends Migration
             $table->foreign('room_id')->references('id')->on('rooms');
             $table->integer('subject_id')->unsigned();
             $table->foreign('subject_id')->references('id')->on('subjects');
-            $table->integer('academic_year_id')->unsigned();
-            $table->integer('semester_id')->unsigned();
             $table->integer('start_time');
             $table->integer('end_time');
             $table->tinyInteger('active')->default(1);

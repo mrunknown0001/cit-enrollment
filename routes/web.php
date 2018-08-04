@@ -362,6 +362,12 @@ Route::group(['prefix' => 'dean'], function () {
 	// route to view schedule management
 	Route::get('/schedules', 'DeanController@schedules')->name('dean.schedules');
 
+	// route to add schedule
+	Route::get('/schedule/add', 'DeanController@addSchedule')->name('dean.add.schedule');
+
+	// route to save new schedule
+	Route::post('/schedule/add', 'DeanController@postAddSchedule')->name('dean.add.schedule.post');
+
 });
 
 
