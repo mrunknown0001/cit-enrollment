@@ -20,6 +20,10 @@ use Redirect;
 use Session;
 use URL;
 
+
+use App\RegistrationPayment;
+use App\Payment as PaymentTable;
+
 class PaymentController extends Controller
 {
     private $_api_context;
@@ -54,8 +58,8 @@ class PaymentController extends Controller
 
         $item_1 = new Item();
 
-        $item_1->setName('Tuition Payment') /** item name **/
-            ->setCurrency('USD')
+        $item_1->setName($request->get('name')) /** item name **/
+            ->setCurrency('PHP')
             ->setQuantity(1)
             ->setPrice($request->get('amount')); /** unit price **/
 
@@ -63,17 +67,17 @@ class PaymentController extends Controller
         $item_list->setItems(array($item_1));
 
         $amount = new Amount();
-        $amount->setCurrency('USD')
+        $amount->setCurrency('PHP')
             ->setTotal($request->get('amount'));
 
         $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($item_list)
-            ->setDescription('Your transaction description');
+            ->setDescription($request->get('description'));
 
         $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(URL::to('status')) /** Specify return URL **/
-            ->setCancelUrl(URL::to('status'));
+        $redirect_urls->setReturnUrl(route('student.paypal.payment.status')) /** Specify return URL **/
+            ->setCancelUrl(route('student.paypal.payment.status'));
 
         $payment = new Payment();
         $payment->setIntent('Sale')
@@ -90,12 +94,12 @@ class PaymentController extends Controller
             if (\Config::get('app.debug')) {
 
                 \Session::put('error', 'Connection timeout');
-                return Redirect::to('/');
+                return redirect()->route('student.dashboard');
 
             } else {
 
                 \Session::put('error', 'Some error occur, sorry for inconvenient');
-                return Redirect::to('/');
+                return redirect()->route('student.dashboard');
 
             }
 
@@ -123,7 +127,7 @@ class PaymentController extends Controller
         }
 
         \Session::put('error', 'Unknown error occurred');
-        return Redirect::to('/');
+        return redirect()->route('student.dashboard');
 
     }
 
@@ -137,7 +141,7 @@ class PaymentController extends Controller
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
 
             \Session::put('error', 'Payment failed');
-            return Redirect::to('/');
+            return redirect()->route('student.dashboard');
 
         }
 
@@ -150,16 +154,20 @@ class PaymentController extends Controller
 
         if ($result->getState() == 'approved') {
 
-            \Session::put('success', 'Payment success');
+            // registration for the first payment of the student
+            // check if there is existing active payment in registration payment record of the student
 
-            // save the status of the payment of assessment
+            // add to payment and what type of payment if possible
 
-            return Redirect::to('/');
+            // add to status enrolled a student, if registered and paid the firs paymnet of the tuition
+            // if paid the second payment: note: first payment is registration, second payment is the first payment if the tuition fee that is divisible by four
+
+            return redirect()->route('student.payments')->with('success', 'Paypal Payment Successful!');
 
         }
 
-        \Session::put('error', 'Payment failed');
-        return Redirect::to('/');
+        // \Session::put('error', 'Payment failed');
+        return redirect()->route('student.dashboard')->with('error', 'Payment Failed');
 
     }
 

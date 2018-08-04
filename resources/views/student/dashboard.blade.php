@@ -17,7 +17,10 @@
 				@include('includes.all')
 				
 				{{-- check if student is regular or irregular --}}
-				<p class="text-center"><a href="#">Registration Payment. Click here.</a></p>
+				{{-- show only if the student is regular and enrollment is active --}}
+				@if($es->active == 1)
+					@include('student.includes.registration-payment')
+				@endif
 
 				<div class="box box-primary">
 					<div class="box-header with-border">

@@ -23,6 +23,11 @@
           <i class="fa fa-file-text-o"></i> <span>Enrollment</span>
         </a>
       </li>
+      <li class="{{ route('student.payments') == url()->current() ? 'active' : '' }}">
+        <a href="{{ route('student.payments') }}">
+          <i class="fa fa-money"></i> <span>Payment</span>
+        </a>
+      </li>
     </ul>
   </section>
 </aside>

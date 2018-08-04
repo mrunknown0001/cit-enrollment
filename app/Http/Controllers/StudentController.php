@@ -14,6 +14,7 @@ use App\EnrollmentSetting;
 use App\RegistrationPayment;
 use App\AcademicYear;
 use App\Semester;
+use App\Payment;
 
 class StudentController extends Controller
 {
@@ -29,7 +30,9 @@ class StudentController extends Controller
 
         // check status if regular or irregular
         
-    	return view('student.dashboard');
+        $es = EnrollmentSetting::find(1);
+
+    	return view('student.dashboard', ['es' => $es]);
     }
 
 
@@ -203,6 +206,10 @@ class StudentController extends Controller
         // check if enrollment is active
         $enrollment_status = EnrollmentSetting::find(1);
 
+        if($enrollment_status->active == 0) {
+            return redirect()->back()->with('error', 'Enrollment is Inactive!');
+        }
+
         // check if paid for pre-registration
         $reg_payment = RegistrationPayment::where('student_id', Auth::user()->id)->where('active', 1)->first();
 
@@ -213,5 +220,30 @@ class StudentController extends Controller
         // check course/major/curriculum to load subject based on year level and semester
 
         return view('student.enrollment', ['es' => $enrollment_status]);
+    }
+
+
+    // method use to show payments
+    public function payments()
+    {
+        $payments = Payment::where('student_id', Auth::user()->id)
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(15);
+
+        return view('student.payments', ['payments' => $payments]);
+    }
+
+
+    // method use to go to paypal registration payment
+    public function paypalRegistrationPayment()
+    {
+        return view('student.payment-registration-paypal');
+    }
+
+
+    // method use to go to card registration payment
+    public function cardRegistrationPayment()
+    {
+        return view('student.payment-registration-card');
     }
 }
