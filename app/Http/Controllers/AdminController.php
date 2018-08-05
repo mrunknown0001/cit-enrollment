@@ -22,6 +22,8 @@ use App\Subject;
 use App\EnrollmentSetting;
 use App\Curriculum;
 use App\Room;
+use App\UnitPrice;
+use App\Miscellaneous;
 
 class AdminController extends Controller
 {
@@ -1127,6 +1129,110 @@ class AdminController extends Controller
                         ->paginate(15);
 
         return view('admin.subjects', ['subjects' => $subjects]);
+    }
+
+
+    // method use to view unit prices and miscellaneous management
+    public function unitPriceMisc()
+    {
+        $unit_price = UnitPrice::find(1);
+        $misc = Miscellaneous::orderBy('name', 'asc')->get();
+        return view('admin.unit-misc', ['misc' => $misc, 'unit_price' => $unit_price]);
+    }
+
+
+    // method use to add misc fee
+    public function addMiscFee()
+    {
+        return view('admin.misc-add');
+    }
+
+
+    // method use to save new misc fee
+    public function postAddMiscFee(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'amount' => 'required|numeric'
+        ]);
+
+        $name = $request['name'];
+        $amount = $request['amount'];
+
+        // save new misc fee
+        $misc = new Miscellaneous();
+        $misc->name = $name;
+        $misc->amount = $amount;
+        $misc->save();
+
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added Miscellaneous Fee');
+
+        // return back with message
+        return redirect()->back()->with('success', 'New Miscellaneous Fee Added!');
+    }
+
+
+    // method use to update misc fee
+    public function updateMiscFee($id = null)
+    {
+        $misc = Miscellaneous::findorfail($id);
+
+        return view('admin.misc-update', ['misc' => $misc]);
+    }
+
+
+    // method use to save updates on misc fee
+    public function postUpdateMiscFee(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'amount' => 'required|numeric'
+        ]);
+
+        $name = $request['name'];
+        $amount = $request['amount'];
+        $misc_id = $request['misc_id'];
+
+        $misc = Miscellaneous::findorfail($misc_id);
+
+        $misc->name = $name;
+        $misc->amount = $amount;
+        $misc->save();
+
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Miscellaneous Fee');
+
+        // return to unit and misc fee with message
+        return redirect()->route('admin.unit.price.misc')->with('success', 'Miscellaneous Fee Updated!');
+    }
+
+
+    // method use to update unit price
+    public function updateUnitPrice()
+    {
+        $price = UnitPrice::find(1);
+
+        return view('admin.unit-price-update', ['price' => $price]);
+    }
+
+
+    // method use to save update on unit price
+    public function postUpdateUnitPrice(Request $request)
+    {
+        $request->validate([
+            'amount' => 'required|numeric'
+        ]);
+
+        $amount = $request['amount'];
+
+        $price = UnitPrice::find(1);
+        $price->amount = $amount;
+        $price->save();
+
+
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Unit Price');
+
+        return redirect()->route('admin.unit.price.misc')->with('success', 'Unit Price Updated!');
+
     }
 
 

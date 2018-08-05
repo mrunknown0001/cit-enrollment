@@ -146,7 +146,7 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to add cashier
 	Route::get('/cashier/add', 'AdminController@addCashier')->name('admin.add.cashier');
 
-	// rotue to save new cashier
+	// route to save new cashier
 	Route::post('/cashier/add', 'AdminController@postAddCashier')->name('admin.add.cashier.post');
 
 	// route to update cashier
@@ -272,7 +272,7 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to view year level
 	Route::get('/year/level', 'AdminController@yearLevel')->name('admin.year.level');
 
-	// rotue to add year level
+	// route to add year level
 	Route::get('/year/level/add', 'AdminController@addYearLevel')->name('admin.add.year.level');
 
 	// route to save new year level
@@ -311,6 +311,31 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/subject/update', function () {
 		return redirect()->route('admin.subjects');
 	});
+
+	// route to show miscellaneous fee and unit price
+	Route::get('/price-and-miscellaneous', 'AdminController@unitPriceMisc')->name('admin.unit.price.misc');
+
+	// route to add misc fee
+	Route::get('/miscellaneous/fee/add', 'AdminController@addMiscFee')->name('admin.add.misc.fee');
+
+	// route to save new misc fee
+	Route::post('/miscellaneous/fee/add', 'AdminController@postAddMiscFee')->name('admin.add.misc.fee.post');
+
+	// route to update misc fee
+	Route::get('/miscellaneous/fee/{id}/update', 'AdminController@updateMiscFee')->name('admin.update.misc.fee');
+
+	// route to save updae on misc fee
+	Route::post('/miscellaneous/fee/update', 'AdminController@postUpdateMiscFee')->name('admin.update.misc.fee.post');
+
+	Route::get('/miscellaneous/fee/update', function () {
+		return redirect()->route('admin.unit.price.misc');
+	});
+
+	// route to update unit price
+	Route::get('/unit/price/update', 'AdminController@updateUnitPrice')->name('admin.update.unit.price');
+
+	// route to save update in unit price
+	Route::post('/unit/price/update', 'AdminController@postUpdateUnitPrice')->name('admin.update.unit.price.post');
 
 	// route to show rooms management
 	Route::get('/rooms', 'AdminController@rooms')->name('admin.rooms');
@@ -408,7 +433,7 @@ Route::group(['prefix' => 'registrar'], function () {
 	// route to save new student
 	Route::post('/student/add', 'RegistrarController@postAddStudent')->name('registrar.add.student.post');
 
-	// rotue to update student
+	// route to update student
 	Route::get('/student/{id}/update', 'RegistrarController@updateStudent')->name('registrar.update.student');
 
 	// route to save update student
@@ -436,7 +461,7 @@ Route::group(['prefix' => 'cahier'], function () {
 	// route to update profile of cashier
 	Route::get('/profile/update', 'CashierController@updateProfile')->name('cashier.update.profile');
 
-	// rotue to save update of profile
+	// route to save update of profile
 	Route::post('/profile/update', 'CashierController@postUpdateProfile')->name('cashier.update.profile.post');
 
 	// route to change password of cashier
@@ -491,7 +516,7 @@ Route::group(['prefix' => 'student'], function () {
 		return redirect()->route('student.dashboard');
 	});
 
-	// rotue to change password of student
+	// route to change password of student
 	Route::get('/password/change', 'StudentController@changePassword')->name('student.change.password');
 
 	// route to save new password

@@ -56,6 +56,11 @@
           <i class="fa fa-book"></i> <span>Subjects</span>
         </a>
       </li>
+      <li class="{{ route('admin.unit.price.misc') == url()->current() ? 'active' : '' }}">
+        <a href="{{ route('admin.unit.price.misc') }}">
+          <i class="fa fa-dollar"></i> <span>Price &amp; Misc</span>
+        </a>
+      </li>
       <li class="{{ route('admin.rooms') == url()->current() ? 'active' : '' }}">
         <a href="{{ route('admin.rooms') }}">
           <i class="fa fa-building"></i> <span>Rooms</span>
