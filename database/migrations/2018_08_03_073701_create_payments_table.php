@@ -21,7 +21,8 @@ class CreatePaymentsTable extends Migration
             $table->integer('semester_id')->unsigned();
             $table->integer('mode_of_payment_id')->unsigned();
             $table->float('amount', 8,2);
-            $table->integer('payment_number'); // up to 4 installment payment
+            $table->integer('payment_number')->nullable(); // up to 4 installment payment
+            $table->string('description')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
         });

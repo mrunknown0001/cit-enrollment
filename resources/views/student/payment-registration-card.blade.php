@@ -21,7 +21,31 @@
 						<strong><i class="fa fa-credit-card"></i> Card Registration Payment</strong>
 					</div>
 					<div class="box-body">
+						<div class="row">
+							<div class="col-md-6">
+								<form action="{{ route('student.review.card.registration.payment') }}" method="GET" autocomplete="off">
+									{{ csrf_field() }}
+									
+									<input type="hidden" name="mop" value="card">
+									<input type="hidden" name="currency" value="PHP">
+									<input type="hidden" name="name" value="{{ env('app_name') }}">
+									<input type="hidden" name="description" value="Registration Payment using Card">
 
+									<div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
+										<label for="amount">Enter Amount to Pay</label><label class="label-required">*</label>
+										<input id="amount" type="number" class="form-control" name="amount" placeholder="Enter Amount to Pay" min="500" required="">
+										@if ($errors->has('amount'))
+											<span class="help-block">
+												<strong>{{ $errors->first('amount') }}</strong>
+											</span>
+										@endif
+									</div>
+									<div class="form-group">
+										<button type="submit" class="btn btn-primary">Pay with Card</button>
+									</div>
+								</form>
+							</div>
+						</div>
 					</div>
 					<div class="box-footer">
 						

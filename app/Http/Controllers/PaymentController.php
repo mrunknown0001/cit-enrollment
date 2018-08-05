@@ -168,9 +168,20 @@ class PaymentController extends Controller
                 
                 $rp->active = 1;
                 $rp ->save();
+
+                // get the last payment with inactive status
+                $payment = PaymentTable::where('student_id', Auth::user()->id)
+                                        ->where('active', 0)
+                                        ->orderBy('created_at', 'desc')
+                                        ->first();
+                if(count($payment) > 0) {
+                    $payment->active = 1;
+                    $payment->save();
+                }
             }
 
-            // add to payment and what type of payment if possible
+            // add to payment and what type of payment 
+            // to deduct to the total payable of the student to the current semester of the academic year
 
             // add to status enrolled a student, if registered and paid the firs paymnet of the tuition
             // if paid the second payment: note: first payment is registration, second payment is the first payment if the tuition fee that is divisible by four

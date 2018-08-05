@@ -23,7 +23,7 @@
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-6">
-								<form action="#" method="POST" autocomplete="off">
+								<form action="{{ route('student.paypal.registration.payment.post') }}" method="POST" autocomplete="off">
 									{{ csrf_field() }}
 									
 									<input type="hidden" name="mop" value="paypal">

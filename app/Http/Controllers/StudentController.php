@@ -238,6 +238,8 @@ class StudentController extends Controller
     // method use to go to paypal registration payment
     public function paypalRegistrationPayment()
     {
+        // redirect back if regitration payment is paid
+
         return view('student.payment-registration-paypal');
     }
 
@@ -267,6 +269,16 @@ class StudentController extends Controller
             $reg_payment->amount = $request->get('amount');
             $reg_payment->active = 0;
             $reg_payment->save();
+
+            $payment = new Payment();
+            $payment->student_id = Auth::user()->id;
+            $payment->academic_year_id = $ay->id;
+            $payment->semester_id = $sem->id;
+            $payment->mode_of_payment_id = 2;
+            $payment->amount = $amount;
+            $payment->description = 'Registration Payment using Card';
+            $payment->active = 0;
+            $payment->save();
         }
 
         // new paypal payment instance
@@ -279,6 +291,71 @@ class StudentController extends Controller
     // method use to go to card registration payment
     public function cardRegistrationPayment()
     {
+        // redirect back if regitration payment is paid
+        
         return view('student.payment-registration-card');
+    }
+
+
+    // method use to review card payment registration
+    public function reviewCardRegistrationPayment(Request $request)
+    {
+        $amount = $request['amount'];
+        $currency = $request['currency'];
+        $name = $request['name'];
+        $description = $request['description'];
+
+        return view('student.payment-registration-card-review', ['amount' => $amount, 'currency' => $currency, 'name' => $name, 'description' => $description]);
+    }
+
+
+    // method use to process payment registration using card payment
+    public function postCardRegistrationPayment(Request $request)
+    {
+
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        // Token is created using Checkout or Elements!
+        // Get the payment token ID submitted by the form:
+        $token = $request['stripeToken'];
+        $amount = $request['amount'];
+        $description = $request['description'];
+
+        $charge = \Stripe\Charge::create([
+            'amount' => $amount,
+            'currency' => 'php',
+            'description' => $description,
+            'source' => $token,
+        ]);
+
+        // add to registration payment
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        $reg_payment = new RegistrationPayment();
+        $reg_payment->student_id = Auth::user()->id;
+        $reg_payment->mode_of_payment_id = 2;
+        $reg_payment->academic_year_id = $ay->id;
+        $reg_payment->semester_id = $sem->id;
+        $reg_payment->amount = $amount;
+        $reg_payment->active = 1;
+        $reg_payment->save();
+
+        // add to payment and what type of payment 
+        // to deduct to the total payable of the student to the current semester of the academic year
+        $payment = new Payment();
+        $payment->student_id = Auth::user()->id;
+        $payment->academic_year_id = $ay->id;
+        $payment->semester_id = $sem->id;
+        $payment->mode_of_payment_id = 2;
+        $payment->amount = $amount;
+        $payment->description = 'Registration Payment using Card';
+        $payment->save();
+
+        // add to activity log
+
+        // return message
+        return redirect()->route('student.payments')->with('success', 'Payment using Card is Successful!');
+
     }
 }

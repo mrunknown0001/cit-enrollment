@@ -521,4 +521,11 @@ Route::group(['prefix' => 'student'], function () {
 
 	// route to go to card payment for registration payment
 	Route::get('/payment/registration/card', 'StudentController@cardRegistrationPayment')->name('student.card.registration.payment');
+
+	// route to card payment in registration payment
+	Route::get('/payment/registration/card/review', 'StudentController@reviewCardRegistrationPayment')->name('student.review.card.registration.payment');
+
+	// route to pay with card
+	Route::post('/payment/registration/card', 'StudentController@postCardRegistrationPayment')->name('student.card.registration.payment.post');
+
 });
