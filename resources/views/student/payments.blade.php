@@ -22,10 +22,36 @@
 						<strong><i class="fa fa-credit-cardcap"></i> Payments</strong>
 					</div>
 					<div class="box-body">
-
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th class="text-center">MOP</th>
+									<th class="text-center">Amount</th>
+									<th class="text-center">Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($payments as $p)
+									<tr>
+										<td class="text-center">
+											{{ $p->mop->name }}
+										</td>
+										<td class="text-center">
+											&#8369; {{ $p->amount }}
+										</td>
+										<td>
+											{{ $p->description }}
+										</td>
+									</tr>
+								@endforeach
+							</tbody>
+							<tfoot>
+								
+							</tfoot>
+						</table>
 					</div>
 					<div class="box-footer">
-						
+						{{ $payments->links() }}
 					</div>
 				</div>
 				@else

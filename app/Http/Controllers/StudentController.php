@@ -274,8 +274,8 @@ class StudentController extends Controller
             $payment->student_id = Auth::user()->id;
             $payment->academic_year_id = $ay->id;
             $payment->semester_id = $sem->id;
-            $payment->mode_of_payment_id = 2;
-            $payment->amount = $amount;
+            $payment->mode_of_payment_id = 1;
+            $payment->amount = $request->get('amount');
             $payment->description = 'Registration Payment using Card';
             $payment->active = 0;
             $payment->save();
@@ -321,6 +321,7 @@ class StudentController extends Controller
         $amount = $request['amount'];
         $description = $request['description'];
 
+
         $charge = \Stripe\Charge::create([
             'amount' => $amount,
             'currency' => 'php',
@@ -337,7 +338,7 @@ class StudentController extends Controller
         $reg_payment->mode_of_payment_id = 2;
         $reg_payment->academic_year_id = $ay->id;
         $reg_payment->semester_id = $sem->id;
-        $reg_payment->amount = $amount;
+        $reg_payment->amount = substr($amount, 0, -2);
         $reg_payment->active = 1;
         $reg_payment->save();
 
@@ -348,9 +349,11 @@ class StudentController extends Controller
         $payment->academic_year_id = $ay->id;
         $payment->semester_id = $sem->id;
         $payment->mode_of_payment_id = 2;
-        $payment->amount = $amount;
+        $payment->amount = substr($amount, 0, -2);
         $payment->description = 'Registration Payment using Card';
         $payment->save();
+
+        // add student to enrolled to the current academic year and semester
 
         // add to activity log
 

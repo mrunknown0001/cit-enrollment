@@ -30,6 +30,9 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Card Payment'
+            ],
+            [
+                'name' => 'Over the Counter via Cashier'
             ]
         ]);
 

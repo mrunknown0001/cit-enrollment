@@ -159,7 +159,10 @@ class PaymentController extends Controller
             // registration for the first payment of the student
             // check if there is existing active payment in registration payment record of the student
             $rp = RegistrationPayment::where('student_id', Auth::user()->id)
-                                    ->where('active', 1)
+                                    ->where('active', 0)
+                                    ->where('academic_year_id', $ay->id)
+                                    ->where('semester_id', $sem->id)
+                                    ->orderBy('created_at', 'desc')
                                     ->first();
 
             if(count($rp) > 0) {
@@ -170,14 +173,19 @@ class PaymentController extends Controller
                 $rp ->save();
 
                 // get the last payment with inactive status
-                $payment = PaymentTable::where('student_id', Auth::user()->id)
+                $reg_payment = PaymentTable::where('student_id', Auth::user()->id)
                                         ->where('active', 0)
+                                        ->where('academic_year_id', $ay->id)
+                                        ->where('semester_id', $sem->id)
                                         ->orderBy('created_at', 'desc')
                                         ->first();
-                if(count($payment) > 0) {
-                    $payment->active = 1;
-                    $payment->save();
+
+                if(count($reg_payment) > 0) {
+                    $reg_payment->active = 1;
+                    $reg_payment->save();
                 }
+
+                // add student to enrolled to the current academic year and semester
             }
 
             // add to payment and what type of payment 
