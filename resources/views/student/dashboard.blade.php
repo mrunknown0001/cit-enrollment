@@ -19,7 +19,9 @@
 				{{-- check if student is regular or irregular --}}
 				{{-- show only if the student is regular and enrollment is active --}}
 				@if($es->active == 1)
-					@include('student.includes.registration-payment')
+					@if(count($rp) < 1) 
+						@include('student.includes.registration-payment')
+					@endif
 				@endif
 
 				<div class="box box-primary">

@@ -33,6 +33,10 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        DB::table('unit_prices')->insert([
+            'amount' => 200
+        ]);
+
         $this->call(SemesterSeeder::class);
         $this->call(UsersSeeder::class);
         $this->call(YearLevelSeeder::class);

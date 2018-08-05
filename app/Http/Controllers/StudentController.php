@@ -31,8 +31,9 @@ class StudentController extends Controller
         // check status if regular or irregular
         
         $es = EnrollmentSetting::find(1);
+        $rp = RegistrationPayment::where('student_id', Auth::user()->id)->where('active', 1)->first();
 
-    	return view('student.dashboard', ['es' => $es]);
+    	return view('student.dashboard', ['es' => $es, 'rp' => $rp]);
     }
 
 
@@ -240,6 +241,40 @@ class StudentController extends Controller
         return view('student.payment-registration-paypal');
     }
 
+
+    // method use to add record in registration payment and redirect to payWithPaypal method
+    public function registrationPaymentWithPaypal(Request $request)
+    {
+
+        // add unconrfirmed registration payment for the student
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        // registration for the first payment of the student
+        // check if there is existing active payment in registration payment record of the student
+        $rp = RegistrationPayment::where('student_id', Auth::user()->id)
+                                ->where('active', 1)
+                                ->first();
+
+        if(count($rp) < 1) {
+            // add new record for registration payment
+            // make student legible for enrollment
+            $reg_payment = new RegistrationPayment();
+            $reg_payment->student_id = Auth::user()->id;
+            $reg_payment->mode_of_payment_id = 1;
+            $reg_payment->academic_year_id = $ay->id;
+            $reg_payment->semester_id = $sem->id;
+            $reg_payment->amount = $request->get('amount');
+            $reg_payment->active = 0;
+            $reg_payment->save();
+        }
+
+        // new paypal payment instance
+        $paypal = new PaymentController();
+
+        return $paypal->payWithpaypal($request);
+    }
+    
 
     // method use to go to card registration payment
     public function cardRegistrationPayment()

@@ -21,7 +21,7 @@
 						<strong><i class="fa fa-file-text-o"></i> Enrollment</strong>
 					</div>
 					<div class="box-body">
-
+						<p>Load all subjects in the box. Show rooms, time and day in subject schedules</p>
 					</div>
 					<div class="box-footer">
 						

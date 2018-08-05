@@ -21,8 +21,12 @@ use Session;
 use URL;
 
 
+use Auth;
+use App\Http\Controllers\GeneralController;
 use App\RegistrationPayment;
 use App\Payment as PaymentTable;
+use App\AcademicYear;
+use App\Semester;
 
 class PaymentController extends Controller
 {
@@ -45,12 +49,7 @@ class PaymentController extends Controller
 
     }
 
-    public function index()
-    {
-        return view('paywithpaypal');
-    }
-
-    public function payWithpaypal(Request $request)
+    public function payWithpaypal($request)
     {
 
         $payer = new Payer();
@@ -140,8 +139,8 @@ class PaymentController extends Controller
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
 
-            \Session::put('error', 'Payment failed');
-            return redirect()->route('student.dashboard');
+            // \Session::put('error', 'Payment failed');
+            return redirect()->route('student.dashboard')->with('error', 'Payment Failed!');
 
         }
 
@@ -154,15 +153,30 @@ class PaymentController extends Controller
 
         if ($result->getState() == 'approved') {
 
+            $ay = AcademicYear::where('active', 1)->first();
+            $sem = Semester::where('active', 1)->first();
+
             // registration for the first payment of the student
             // check if there is existing active payment in registration payment record of the student
+            $rp = RegistrationPayment::where('student_id', Auth::user()->id)
+                                    ->where('active', 1)
+                                    ->first();
+
+            if(count($rp) > 0) {
+                // add new record for registration payment
+                // make student legible for enrollment
+                
+                $rp->active = 1;
+                $rp ->save();
+            }
 
             // add to payment and what type of payment if possible
 
             // add to status enrolled a student, if registered and paid the firs paymnet of the tuition
             // if paid the second payment: note: first payment is registration, second payment is the first payment if the tuition fee that is divisible by four
 
-            return redirect()->route('student.payments')->with('success', 'Paypal Payment Successful!');
+
+            return redirect()->route('student.payments')->with('success', 'Paypal Payment Successful! ');
 
         }
 

@@ -57,7 +57,7 @@ Route::get('/student/login', 'LoginController@studentLogin')->name('login');
 Route::post('/student/login', 'LoginController@postStudentLogin')->name('student.login.post');
 
 Route::get('/student', function () {
-	return redirect()->route('student.login');
+	return redirect()->route('login');
 });
 
 // Route::get('/student/registration', 'RegistrationController@index')->name('student.registration');
@@ -513,7 +513,8 @@ Route::group(['prefix' => 'student'], function () {
 	Route::get('/payment/registration/paypal', 'StudentController@paypalRegistrationPayment')->name('student.paypal.registration.payment');
 
 	// route to pay with paypal
-	Route::post('/payment/registration/paypal', 'PaymentController@payWithPaypal')->name('student.paypal.registration.payment.post');
+	// Route::post('/payment/registration/paypal', 'PaymentController@payWithPaypal')->name('student.paypal.registration.payment.post');
+	Route::post('/payment/registration/paypal', 'StudentController@RegistrationPaymentWithPaypal')->name('student.paypal.registration.payment.post');
 
 	// route to show paypal payment status
 	Route::get('/paypal/payment/status', 'PaymentController@getPaymentStatus')->name('student.paypal.payment.status');
