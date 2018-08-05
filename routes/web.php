@@ -469,6 +469,9 @@ Route::group(['prefix' => 'cahier'], function () {
 
 	// route to save new password of cashier
 	Route::post('/password/change', 'CashierController@postChangePassword')->name('cashier.change.password.post');
+
+	// route to view all payments
+	Route::get('/payments', 'CashierController@payments')->name('cashier.payments');
 });
 
 

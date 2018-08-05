@@ -7,6 +7,10 @@ use Auth;
 use App\Http\Controllers\GeneralController;
 
 use App\Cashier;
+use App\Payment;
+use App\Balance;
+use App\RegistrationPayment;
+use App\User;
 
 class CashierController extends Controller
 {
@@ -112,6 +116,16 @@ class CashierController extends Controller
 
         // return to deans and add admin with message
         return redirect()->route('cashier.dashboard')->with('success', 'Password Changed!');
+    }
+
+
+    // method use to view payments
+    public function payments()
+    {
+        $payments = Payment::orderBy('created_at', 'desc')
+                        ->paginate(15);
+
+        return view('cashier.payments', ['payments' => $payments]);
     }
 
 }
