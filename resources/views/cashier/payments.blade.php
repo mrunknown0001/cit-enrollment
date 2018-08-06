@@ -34,6 +34,7 @@
 											<th class="text-center">MOP</th>
 											<th class="text-center">Amount</th>
 											<th class="text-center">Description</th>
+											<th class="text-center">Date &amp; Time</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -50,6 +51,9 @@
 											</td>
 											<td>
 												{{ $p->description }}
+											</td>
+											<td>
+												{{ date('l, F j, Y g:i:s a', strtotime($p->created_at)) }}
 											</td>
 										</tr>
 										@endforeach
