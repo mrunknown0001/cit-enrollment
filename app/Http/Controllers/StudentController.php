@@ -15,6 +15,14 @@ use App\RegistrationPayment;
 use App\AcademicYear;
 use App\Semester;
 use App\Payment;
+use App\Balance;
+use App\Curriculum;
+use App\Course;
+use App\CourseEnrolled;
+use App\Subject;
+use App\UnitPrice;
+use App\Miscellaneous;
+
 
 class StudentController extends Controller
 {
@@ -219,8 +227,33 @@ class StudentController extends Controller
         } 
 
         // check course/major/curriculum to load subject based on year level and semester
+        $course_enrolled = CourseEnrolled::where('student_id', Auth::user()->id)
+                                ->where('active', 1)
+                                ->first();
 
-        return view('student.enrollment', ['es' => $enrollment_status]);
+        $subjects = Subject::where('course_id', $course_enrolled->course_id)
+                        ->where('curriculum_id', $course_enrolled->curriculum_id)
+                        ->where('year_level_id', Auth::user()->info->year_level_id)
+                        ->where('semester_id', $sem->id)
+                        ->get();
+
+        $total_units = $subjects->sum('units');
+
+        // get misc and unit price
+        $unit_price = UnitPrice::find(1);
+        $misc = Miscellaneous::all();
+
+        $total_misc = $misc->sum('amount');
+
+        // total balance and/or payable of student 
+        // (unit price * total units) + total misc
+        $total_payable = ($total_units * $unit_price->amount) + $total_misc;
+
+        // check if there is active balance in the balances tables
+        // if there is existing, nothing to do
+        // if there is not, create an active record to the database
+
+        return view('student.enrollment', ['es' => $enrollment_status, 'subjects' => $subjects, 'total_units' => $total_units, 'total_misc' => $total_misc, 'total_payable' => $total_payable, 'ay' => $ay, 'sem' => $sem]);
     }
 
 

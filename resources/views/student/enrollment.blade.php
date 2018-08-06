@@ -21,7 +21,30 @@
 						<strong><i class="fa fa-file-text-o"></i> Enrollment</strong>
 					</div>
 					<div class="box-body">
-						<p>Load all subjects in the box. Show rooms, time and day in subject schedules</p>
+						<p>Academic Year: <strong>{{ $ay->from . '-' . $ay->to }}</strong></p>
+						<p>Semester: <strong>{{ $sem->name }}</strong></p>
+						
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th class="text-center">Code</th>
+									<th class="text-center">Description</th>
+									<th class="text-center">Units</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($subjects as $s)
+								<tr>
+									<td class="text-center">{{ $s->code }}</td>
+									<td class="text-center">{{ $s->description }}</td>
+									<td class="text-center">{{ $s->units }}</td>
+								</tr>
+								@endforeach
+							</tbody>
+							<tfoot></tfoot>
+						</table>
+						<hr>
+						<p>Total Payable: <strong>&#8369; {{ $total_payable }}</strong></p>
 					</div>
 					<div class="box-footer">
 						
