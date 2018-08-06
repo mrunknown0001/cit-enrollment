@@ -48,7 +48,7 @@
 						</table>	
 					</div>
 					<div class="box-footer">
-						
+						{{ $subjects->links() }}
 					</div>
 				</div>
 
