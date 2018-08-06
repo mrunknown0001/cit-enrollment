@@ -128,4 +128,11 @@ class CashierController extends Controller
         return view('cashier.payments', ['payments' => $payments]);
     }
 
+
+    // method use to make over the counter payment for the student
+    public function studentCounterPayment()
+    {
+        return view('cashier.payment-student-cashier');
+    }
+
 }

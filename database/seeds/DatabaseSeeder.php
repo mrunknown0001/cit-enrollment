@@ -40,9 +40,14 @@ class DatabaseSeeder extends Seeder
             'amount' => 200
         ]);
 
-        $this->call(SemesterSeeder::class);
+
         $this->call(UsersSeeder::class);
         $this->call(YearLevelSeeder::class);
+        $this->call(SemesterSeeder::class);
+        $this->call(CourseSeeder::class);
+        $this->call(MajorSeeder::class);
+        $this->call(CurriculumSeeder::class);
+        $this->call(SubjectSeeder::class);
 
     }
 }

@@ -472,6 +472,9 @@ Route::group(['prefix' => 'cahier'], function () {
 
 	// route to view all payments
 	Route::get('/payments', 'CashierController@payments')->name('cashier.payments');
+
+	// route to make over the counter payment of the cashier
+	Route::get('/payment/counter/student', 'CashierController@studentCounterPayment')->name('cashier.student.counter.payment');
 });
 
 

@@ -17,7 +17,7 @@
 				@include('includes.all')
 				@if(count($payments) > 0)
 				<p>
-					<a href="#" class="btn btn-primary btn-xs"><i class="fa fa-money"></i> Make Payment</a>
+					<a href="{{ route('cashier.student.counter.payment') }}" class="btn btn-primary btn-xs"><i class="fa fa-money"></i> Make Payment</a>
 					<a href="#" class="btn btn-primary btn-xs"><i class="fa fa-bar-chart"></i> Generate Report</a>
 				</p>
 				<div class="box box-primary">

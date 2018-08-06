@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CourseSeeder extends Seeder
+class MajorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,10 +11,10 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('courses')->insert([
+        DB::table('course_majors')->insert([
         	[
-        		'title' => 'Bachelor of Secondary Education',
-        		'code' => 'BSED'
+        		'name' => 'Major In English',
+        		'course_id' => 1
         	]
         ]);
     }
