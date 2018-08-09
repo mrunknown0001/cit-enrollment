@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-6">
               <p class="text-center">
-                <a href="#">
+                <a href="{{ route('student.tuition.fee.card.payment') }}">
                   <i class="fa fa-credit-card fa-4x"></i><br>Card Payment
                 </a>
               </p>

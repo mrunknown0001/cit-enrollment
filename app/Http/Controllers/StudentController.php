@@ -455,7 +455,19 @@ class StudentController extends Controller
     // method use to pay tuition fee using payapl
     public function tuitionFeePaypalPayment()
     {
-        return view('student.payment-paypal');
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        $balance = Balance::where('student_id', Auth::user()->id)
+                            ->where('academic_year_id', $ay->id)
+                            ->where('semester_id', $sem->id)
+                            ->first();
+
+        if(ceil($balance->balance) < 1) {
+            return redirect()->route('student.balance')->with('info', 'You have zero balance in Tuition fee.');
+        }
+
+        return view('student.payment-paypal', ['balance' => $balance]);
     }
 
 
@@ -479,5 +491,87 @@ class StudentController extends Controller
         $paypal = new PaymentController();
 
         return $paypal->payWithpaypal($request);
+    }
+
+
+    // method use to pay tuition fee card payment
+    public function tuitionFeeCardPayment()
+    {
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        $balance = Balance::where('student_id', Auth::user()->id)
+                            ->where('academic_year_id', $ay->id)
+                            ->where('semester_id', $sem->id)
+                            ->first();
+
+        if(ceil($balance->balance) < 1) {
+            return redirect()->route('student.balance')->with('info', 'You have zero balance in Tuition fee.');
+        }
+
+        return view('student.payment-card', ['balance' => $balance]);
+    }
+
+
+    // method use to pay tuition fee using card
+    public function reviewTuitionFeeCardPayment(Request $request)
+    {
+        $amount = $request['amount'];
+        $currency = $request['currency'];
+        $name = $request['name'];
+        $description = $request['description'];
+
+        return view('student.payment-card-review', ['amount' => $amount, 'currency' => $currency, 'name' => $name, 'description' => $description]);
+    }
+
+
+    // method use to make tuition fee payment using card
+    public function postTuitionFeeCardPayment(Request $request)
+    {
+
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        // Token is created using Checkout or Elements!
+        // Get the payment token ID submitted by the form:
+        $token = $request['stripeToken'];
+        $amount = $request['amount'];
+        $description = $request['description'];
+
+
+        $charge = \Stripe\Charge::create([
+            'amount' => $amount,
+            'currency' => 'php',
+            'description' => $description,
+            'source' => $token,
+        ]);
+
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        // add to payment and what type of payment 
+        // to deduct to the total payable of the student to the current semester of the academic year
+        $payment = new Payment();
+        $payment->student_id = Auth::user()->id;
+        $payment->academic_year_id = $ay->id;
+        $payment->semester_id = $sem->id;
+        $payment->mode_of_payment_id = 2;
+        $payment->amount = substr($amount, 0, -2);
+        $payment->description = 'Tuition Fee Payment using Card';
+        $payment->save();
+
+        // deduct in balance
+        $balance = Balance::where('student_id', Auth::user()->id)
+                        ->where('academic_year_id', $ay->id)
+                        ->where('semester_id', $sem->id)
+                        ->first();
+
+        $balance->balance -= $payment->amount;
+        $balance->save();
+
+        // add activity log
+
+        // return with success message
+        return redirect()->route('student.payments')->with('success', 'Payment using Card is Successful!');
+
     }
 }

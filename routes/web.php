@@ -575,5 +575,12 @@ Route::group(['prefix' => 'student'], function () {
 	Route::post('/payment/tuition-fee/paypal', 'StudentController@postTuitionFeePaypalPayment')->name('student.tuition.fee.paypal.payment.post');
 
 	// route to make tuition fee payment using card
+	Route::get('/payment/tuition-fee/card', 'StudentController@tuitionFeeCardPayment')->name('student.tuition.fee.card.payment');
+
+	// route to review tuition fee using card
+	Route::get('/payment/tuition-fee/card/review', 'StudentController@reviewTuitionFeeCardPayment')->name('student.review.tuition.fee.card.payment');
+
+	// route to pay tuition using card
+	Route::post('/payment/tuition-fee/card', 'StudentController@postTuitionFeeCardPayment')->name('student.tuition.fee.card.payment.post');
 
 });

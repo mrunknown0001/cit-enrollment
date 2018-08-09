@@ -15,7 +15,11 @@
 		<div class="row">
 			<div class="col-md-12">
 				@if(count($enrolled) > 0)
-					@include('student.includes.make-payment')
+					@if(count($balance) > 0)
+						@if(ceil($balance->balance) > 0)
+							@include('student.includes.make-payment')
+						@endif
+					@endif
 				@endif
 
 				@include('includes.all')

@@ -5,7 +5,7 @@
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Review Card Registration Payment</h1>
+		<h1>Review Tuition Fee Card Payment</h1>
 		<ol class="breadcrumb">
 			<li><a href="javascript:void(0)"><i class="fa fa-credit-card"></i> Home</a></li>
 			<li class="active">Payment</li>
@@ -18,14 +18,14 @@
 				
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-credit-card"></i> Review Card Registration Payment</strong>
+						<strong><i class="fa fa-credit-card"></i> Review Tuition Fee Card Payment</strong>
 					</div>
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-6">
 								<label class="label-required">Click Pay with Card button to continue...</label>
 								<p>Paying: <strong>&#8369; {{ $amount }}</strong></p>
-								<form action="{{ route('student.card.registration.payment.post') }}" method="POST" autocomplete="off">
+								<form action="{{ route('student.tuition.fee.card.payment.post') }}" method="POST" autocomplete="off">
 									{{ csrf_field() }}
 									<input type="hidden" name="amount" value="{{ $amount . '00' }}">
 									<input type="hidden" name="description" value="{{ $description }}">
@@ -42,7 +42,7 @@
 										</script>
 									</div>
 									<div class="form-group">
-										<a href="{{ route('student.card.registration.payment') }}">Cancel</a>
+										<a href="{{ route('student.tuition.fee.card.payment') }}">Cancel</a>
 									</div>
 								</form>
 							</div>

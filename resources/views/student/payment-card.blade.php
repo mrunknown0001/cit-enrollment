@@ -5,9 +5,9 @@
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Tuition Fee Paypal Payment</h1>
+		<h1>Tuition Fee Card Payment</h1>
 		<ol class="breadcrumb">
-			<li><a href="javascript:void(0)"><i class="fa fa-paypal"></i> Home</a></li>
+			<li><a href="javascript:void(0)"><i class="fa fa-credit-card"></i> Home</a></li>
 			<li class="active">Payment</li>
 		</ol>
 	</section>
@@ -18,19 +18,20 @@
 				
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-paypal"></i> Tuition Fee Paypal Payment</strong>
+						<strong><i class="fa fa-credit-card"></i> Tuition Fee Card Payment</strong>
 					</div>
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-6">
 								<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
 								<p>Balance: <strong>&#8369; {{ $balance->balance }}</strong></p>
-								<form action="{{ route('student.tuition.fee.paypal.payment.post') }}" method="POST" autocomplete="off">
+								<form action="{{ route('student.review.tuition.fee.card.payment') }}" method="GET" autocomplete="off">
 									{{ csrf_field() }}
-									<input type="hidden" name="mop" value="paypal">
+									
+									<input type="hidden" name="mop" value="card">
 									<input type="hidden" name="currency" value="PHP">
-									<input type="hidden" name="name" value="Tuition Fee Paypal Payment">
-									<input type="hidden" name="description" value="Tuition Fee Payment using Paypal">
+									<input type="hidden" name="name" value="{{ env('app_name') }}">
+									<input type="hidden" name="description" value="Tuition Fee Payment using Card">
 
 									<div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
 										<label for="amount">Enter Amount to Pay</label><label class="label-required">*</label>
@@ -42,7 +43,7 @@
 										@endif
 									</div>
 									<div class="form-group">
-										<button type="submit" class="btn btn-primary">Pay with Paypal</button>
+										<button type="submit" class="btn btn-primary">Pay with Card</button>
 										&nbsp; &nbsp; &nbsp;
 										<a href="{{ route('student.balance') }}">Cancel</a>
 									</div>
