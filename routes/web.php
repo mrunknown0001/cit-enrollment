@@ -543,6 +543,9 @@ Route::group(['prefix' => 'student'], function () {
 	// route to show enrollment page
 	Route::get('/enrollment', 'StudentController@enrollment')->name('student.enrollment');
 
+	// route to show balance
+	Route::get('/balance', 'StudentController@balance')->name('student.balance');
+
 	// route to show payments made
 	Route::get('/payments', 'StudentController@payments')->name('student.payments');
 
@@ -564,5 +567,13 @@ Route::group(['prefix' => 'student'], function () {
 
 	// route to pay with card
 	Route::post('/payment/registration/card', 'StudentController@postCardRegistrationPayment')->name('student.card.registration.payment.post');
+
+	// route to make tuition fee payment using paypal
+	Route::get('/payment/tuition-fee/paypal', 'StudentController@tuitionFeePaypalPayment')->name('student.tuition.fee.paypal.payment');
+
+	// route to perform tuiton payment payment using paypal
+	Route::post('/payment/tuition-fee/paypal', 'StudentController@postTuitionFeePaypalPayment')->name('student.tuition.fee.paypal.payment.post');
+
+	// route to make tuition fee payment using card
 
 });

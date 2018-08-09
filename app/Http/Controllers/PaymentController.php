@@ -23,10 +23,18 @@ use URL;
 
 use Auth;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\EnrollmentController;
 use App\RegistrationPayment;
 use App\Payment as PaymentTable;
 use App\AcademicYear;
 use App\Semester;
+use App\Balance;
+use App\EnrolledStudent;
+use App\CourseEnrolled;
+use App\Subject;
+use App\UnitPrice;
+use App\Miscellaneous;
+
 
 class PaymentController extends Controller
 {
@@ -173,26 +181,81 @@ class PaymentController extends Controller
                 $rp ->save();
 
                 // get the last payment with inactive status
-                $reg_payment = PaymentTable::where('student_id', Auth::user()->id)
+                $s_payment = PaymentTable::where('student_id', Auth::user()->id)
                                         ->where('active', 0)
                                         ->where('academic_year_id', $ay->id)
                                         ->where('semester_id', $sem->id)
                                         ->orderBy('created_at', 'desc')
                                         ->first();
 
-                if(count($reg_payment) > 0) {
-                    $reg_payment->active = 1;
-                    $reg_payment->save();
+                if(count($s_payment) > 0) {
+                    $s_payment->active = 1;
+                    $s_payment->save();
                 }
 
                 // add student to enrolled to the current academic year and semester
+                EnrollmentController::enroll_student(Auth::user()->id);
+            }
+            else {
+                $s_payment = PaymentTable::where('student_id', Auth::user()->id)
+                                    ->where('mode_of_payment_id', 1)
+                                    ->where('academic_year_id', $ay->id)
+                                    ->where('semester_id', $sem->id)
+                                    ->where('active', 0)
+                                    ->orderBy('created_at', 'desc')
+                                    ->first();
+
+                if(count($s_payment) > 0) {
+                    $s_payment->active = 1;
+                    $s_payment->save();
+                }
             }
 
-            // add to payment and what type of payment 
-            // to deduct to the total payable of the student to the current semester of the academic year
+            // compute balance if not created and deduct
+            $balance = Balance::where('student_id', Auth::user()->id)
+                            ->where('academic_year_id', $ay->id)
+                            ->where('semester_id', $sem->id)
+                            ->first();
 
-            // add to status enrolled a student, if registered and paid the firs paymnet of the tuition
-            // if paid the second payment: note: first payment is registration, second payment is the first payment if the tuition fee that is divisible by four
+            if(count($balance) > 0) {
+                // deduct payment
+                $balance->balance -= $s_payment->amount;
+                $balance->save();
+            }
+            else {
+                // get total payable for the sem
+                // check course/major/curriculum to load subject based on year level and semester
+                $course_enrolled = CourseEnrolled::where('student_id', Auth::user()->id)
+                                        ->where('active', 1)
+                                        ->first();
+
+                $subjects = Subject::where('course_id', $course_enrolled->course_id)
+                                ->where('curriculum_id', $course_enrolled->curriculum_id)
+                                ->where('year_level_id', Auth::user()->info->year_level_id)
+                                ->where('semester_id', $sem->id)
+                                ->get();
+
+                $total_units = $subjects->sum('units');
+
+                // get misc and unit price
+                $unit_price = UnitPrice::find(1);
+                $misc = Miscellaneous::all();
+
+                $total_misc = $misc->sum('amount');
+
+                // total balance and/or payable of student 
+                // (unit price * total units) + total misc
+                $total_payable = ($total_units * $unit_price->amount) + $total_misc;
+
+                // create balance and deduct amount payment
+                $balance = new Balance();
+                $balance->student_id = Auth::user()->id;
+                $balance->academic_year_id = $ay->id;
+                $balance->semester_id = $sem->id;
+                $balance->balance = $total_payable - $s_payment->amount;
+                $balance->total = $total_payable;
+                $balance->save();
+            }
 
 
             return redirect()->route('student.payments')->with('success', 'Paypal Payment Successful! ');
@@ -203,5 +266,6 @@ class PaymentController extends Controller
         return redirect()->route('student.dashboard')->with('error', 'Payment Failed');
 
     }
+
 
 }

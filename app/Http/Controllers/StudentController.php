@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\EnrollmentController;
 
 use App\User;
 use App\StudentInfo;
@@ -22,6 +23,7 @@ use App\CourseEnrolled;
 use App\Subject;
 use App\UnitPrice;
 use App\Miscellaneous;
+use App\EnrolledStudent;
 
 
 class StudentController extends Controller
@@ -257,6 +259,27 @@ class StudentController extends Controller
     }
 
 
+    // method use to show balance for the current semester
+    public function balance()
+    {
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        $balance = Balance::where('student_id', Auth::user()->id)
+                        ->where('academic_year_id', $ay->id)
+                        ->where('semester_id', $sem->id)
+                        ->first();
+
+        $enrolled = EnrolledStudent::where('student_id', Auth::user()->id)
+                        ->where('academic_year_id', $ay->id)
+                        ->where('semester_id', $sem->id)
+                        ->where('status', 1)
+                        ->first();
+
+        return view('student.balance', ['balance' => $balance, 'enrolled' => $enrolled]);
+    }
+
+
     // method use to show payments
     public function payments()
     {
@@ -309,7 +332,7 @@ class StudentController extends Controller
             $payment->semester_id = $sem->id;
             $payment->mode_of_payment_id = 1;
             $payment->amount = $request->get('amount');
-            $payment->description = 'Registration Payment using Card';
+            $payment->description = 'Registration Payment Paypal';
             $payment->active = 0;
             $payment->save();
         }
@@ -386,12 +409,75 @@ class StudentController extends Controller
         $payment->description = 'Registration Payment using Card';
         $payment->save();
 
+        // check course/major/curriculum to load subject based on year level and semester
+        $course_enrolled = CourseEnrolled::where('student_id', Auth::user()->id)
+                                ->where('active', 1)
+                                ->first();
+
+        $subjects = Subject::where('course_id', $course_enrolled->course_id)
+                        ->where('curriculum_id', $course_enrolled->curriculum_id)
+                        ->where('year_level_id', Auth::user()->info->year_level_id)
+                        ->where('semester_id', $sem->id)
+                        ->get();
+
+        $total_units = $subjects->sum('units');
+
+        // get misc and unit price
+        $unit_price = UnitPrice::find(1);
+        $misc = Miscellaneous::all();
+
+        $total_misc = $misc->sum('amount');
+
+        // total balance and/or payable of student 
+        // (unit price * total units) + total misc
+        $total_payable = ($total_units * $unit_price->amount) + $total_misc;
+
+        // create balance and deduct amount payment
+        $balance = new Balance();
+        $balance->student_id = Auth::user()->id;
+        $balance->academic_year_id = $ay->id;
+        $balance->semester_id = $sem->id;
+        $balance->balance = $total_payable - $payment->amount;
+        $balance->total = $total_payable;
+        $balance->save();
+
         // add student to enrolled to the current academic year and semester
+        EnrollmentController::enroll_student(Auth::user()->id);
 
         // add to activity log
 
         // return message
         return redirect()->route('student.payments')->with('success', 'Payment using Card is Successful!');
 
+    }
+
+
+    // method use to pay tuition fee using payapl
+    public function tuitionFeePaypalPayment()
+    {
+        return view('student.payment-paypal');
+    }
+
+
+    // method use to perform payment in paypal
+    public function postTuitionFeePaypalPayment(Request $request)
+    {
+        // add unconrfirmed registration payment for the student
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        $payment = new Payment();
+        $payment->student_id = Auth::user()->id;
+        $payment->academic_year_id = $ay->id;
+        $payment->semester_id = $sem->id;
+        $payment->mode_of_payment_id = 1;
+        $payment->amount = $request->get('amount');
+        $payment->description = 'Tuition Fee Payment Paypal';
+        $payment->active = 0;
+        $payment->save();
+
+        $paypal = new PaymentController();
+
+        return $paypal->payWithpaypal($request);
     }
 }
