@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>@yield('title') | {{ env('app_name') }} </title>
+        <title>@yield('title') | Online Enrollment for CIT Colleges of Paniqui Foundation Inc. </title>
         <link rel="stylesheet"  href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
         <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue-light.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Student Login - {{ env('app_name') }}</title>
+  <title>Student Login - Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet"  href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue-light.min.css') }}">
@@ -22,7 +22,7 @@
     <div class="login-logo">
       <a href="javascript:void(0)"><b>Student</b> Login</a>
     </div>
-    <p class="login-box-msg">{{ env('app_name') }}</p>
+    <p class="login-box-msg">Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</p>
     @include('includes.all')
     <form action="{{ route('student.login.post') }}" method="post" autocomplete="off">
       {{ csrf_field() }}

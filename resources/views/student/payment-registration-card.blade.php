@@ -28,7 +28,7 @@
 									
 									<input type="hidden" name="mop" value="card">
 									<input type="hidden" name="currency" value="PHP">
-									<input type="hidden" name="name" value="{{ env('app_name') }}">
+									<input type="hidden" name="name" value="Online Enrollment for CIT Colleges of Paniqui Foundation Inc.">
 									<input type="hidden" name="description" value="Registration Payment using Card">
 
 									<div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
