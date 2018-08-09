@@ -373,7 +373,9 @@ class StudentController extends Controller
     public function postCardRegistrationPayment(Request $request)
     {
 
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        // \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        \Stripe\Stripe::setApiKey('sk_test_gUBJYfvvnCq1QvzEARJvLfGm');
 
         // Token is created using Checkout or Elements!
         // Get the payment token ID submitted by the form:
@@ -533,7 +535,9 @@ class StudentController extends Controller
     public function postTuitionFeeCardPayment(Request $request)
     {
 
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        // \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        \Stripe\Stripe::setApiKey('sk_test_gUBJYfvvnCq1QvzEARJvLfGm');
 
         // Token is created using Checkout or Elements!
         // Get the payment token ID submitted by the form:
