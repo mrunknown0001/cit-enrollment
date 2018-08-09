@@ -129,7 +129,7 @@ class RegistrarController extends Controller
     // method use on student operations
     public function students()
     {
-    	$students = User::orderBy('created_at')
+    	$students = User::orderBy('lastname', 'asc')
     				->paginate(15);
 
     	return view('registrar.students', ['students' => $students]);

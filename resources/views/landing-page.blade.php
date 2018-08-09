@@ -20,12 +20,17 @@
     a {
       margin-top: 5px;
     }
+    .black-opcity {
+      background: rgba(0, 0, 0, 0.4) !important;
+      height: 100%;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
   <header id="home">
     <div class="bg-img" style="background-image: url({{ asset('landing/img/bg.jpg') }});">
-      <div class="overlay"></div>
+      <div class="black-opcity"></div>
     </div>
     <div class="home-wrapper">
       <div class="container">

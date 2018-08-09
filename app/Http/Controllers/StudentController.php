@@ -265,6 +265,10 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
+        if(count($ay) < 1 && count($sem) < 1) {
+            return redirect()->route('student.dashboard')->with('error', 'Admin Setup not fisnished! No Active Academic Year!');
+        } 
+
         $balance = Balance::where('student_id', Auth::user()->id)
                         ->where('academic_year_id', $ay->id)
                         ->where('semester_id', $sem->id)
