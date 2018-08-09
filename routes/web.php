@@ -445,6 +445,12 @@ Route::group(['prefix' => 'registrar'], function () {
 	// route to get curriculum to use in add student form
 	Route::get('/course/{id}/curriculum/get', 'RegistrarController@getCourseCurriculum')->name('registrar.get.course.curriculum');
 
+	// route to import students to the system
+	Route::get('/students/import', 'RegistrarController@importStudents')->name('registrar.import.students');
+
+	// route to save import students to the system
+	Route::post('/students/import', 'RegistrarController@postImportStudents')->name('registrar.import.students.post');
+
 });
 
 

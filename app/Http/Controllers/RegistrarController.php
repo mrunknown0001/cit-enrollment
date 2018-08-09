@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Controllers\GeneralController;
+use Excel;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Http\UploadedFile;
+use DB;
 
 use App\User;
 use App\Registrar;
@@ -307,6 +311,124 @@ class RegistrarController extends Controller
                         ->get();
 
         return $cu;
+    }
+
+
+    // method use to import students
+    public function importStudents()
+    {
+        $courses = Course::where('active', 1)->orderBy('title', 'asc')->get();
+        $yl = YearLevel::get();
+
+        return view('registrar.students-import', ['courses' => $courses, 'yl' => $yl]);
+    }
+
+
+    // method use to save import students
+    public function postImportStudents(Request $request)
+    {
+        $request->validate([
+            'students' => 'required',
+            'course' => 'required',
+            'curriculum' => 'required',
+            'year_level' => 'required'
+        ]);
+
+        $course_id = $request['course'];
+        $curriculum_id = $request['curriculum'];
+        $year_level_id = $request['year_level'];
+        $major_id = $request['major'];
+
+        $year_level = YearLevel::findorfail($yl_id);
+        $course = Course::findorfail($course_id);
+        $curriculum = Curriculum::findorfail($curriculum_id);
+
+        if(Input::hasFile('students')){
+            $path = Input::file('students')->getRealPath();
+            $data[] = Excel::selectSheetsByIndex(0)->load($path, function($reader) {
+                    // $reader->get();
+                    $reader->skipColumns(1);
+                })->get();
+        }
+        else {
+            return redirect()->back()->with('error', 'Error! Please Try Again!');
+        }
+
+        $insert = [];
+        $info = [];
+
+        // get last student id of student in the student_infos table
+        $last_student = StudentInfo::orderBy('id', 'desc')->first(['id']);
+        $ref_id = $last_student->id + 1;
+
+        foreach ($data as $value) {
+            
+            foreach ($value as $row) {
+                if($row->student_number != null) {
+
+                    // check each student number if it is already in database
+                    $check_student_number = User::where('student_number', $row->student_number)->first();
+
+
+                    if(!empty($check_student_number)) {
+                        return redirect()->back()->with('error', 'Student Exist! Please Remove Student with Student Number: ' . $row->student_number . ' - ' . ucwords($row->firstname . ' ' . $row->lastname));
+                    }
+
+                    else {
+
+                        // for users table
+                        $insert[] = [
+                                'student_number' => $row->student_number,
+                                'lastname' => $row->lastname,
+                                'firstname' => $row->firstname
+                            ];
+
+
+                        $enrolled[] = [
+                                'student_id' => $ref_id,
+                                'course_id' => $course->id,
+                                'curriculum_id' => $curriculum->id,
+                                'major_id' => $major_id
+                            ];
+
+                        // for student info table
+                        $info[] = [
+                                'student_id' => $ref_id,
+                                'year_level_id' => $year_level->id,
+                                'sex' => $row->sex,
+                                'date_of_birth' => date('Y-m-d', strtotime($row->birthday)),
+                                'home_address' => $row->address,
+                                'email' => $row->email,
+                                'mobile_number' => $row->number
+                            ];
+
+                    }
+
+
+                }
+            }
+            $ref_id += 1;
+        }
+
+        // insert in users and student_infos tables
+        if(!empty($insert)) {
+            // insert data to users
+            DB::table('users')->insert($insert);
+
+            // insert import data to studentimport
+            DB::table('student_infos')->insert($info);
+
+            // insert to course_enrolled
+            DB::table('course_enrolleds')->insert($enrolled);
+        }
+
+        // add activtiy log
+        GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Registrar Import Students');
+
+
+        // return with success message
+        return redirect()->route('registrar.students')->with('success', 'Students Import Successful!');
+        
     }
 
 }
