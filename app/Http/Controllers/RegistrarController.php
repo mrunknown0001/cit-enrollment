@@ -339,7 +339,7 @@ class RegistrarController extends Controller
         $year_level_id = $request['year_level'];
         $major_id = $request['major'];
 
-        $year_level = YearLevel::findorfail($yl_id);
+        $year_level = YearLevel::findorfail($year_level_id);
         $course = Course::findorfail($course_id);
         $curriculum = Curriculum::findorfail($curriculum_id);
 
@@ -359,7 +359,12 @@ class RegistrarController extends Controller
 
         // get last student id of student in the student_infos table
         $last_student = StudentInfo::orderBy('id', 'desc')->first(['id']);
-        $ref_id = $last_student->id + 1;
+        if(count($last_student) > 0) {
+            $ref_id = $last_student->id + 1;
+        }
+        else {
+            $ref_id = 1;
+        }
 
         foreach ($data as $value) {
             
@@ -404,10 +409,11 @@ class RegistrarController extends Controller
 
                     }
 
-
+                    $ref_id += 1;
                 }
+
             }
-            $ref_id += 1;
+            
         }
 
         // insert in users and student_infos tables
