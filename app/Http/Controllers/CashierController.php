@@ -11,6 +11,8 @@ use App\Payment;
 use App\Balance;
 use App\RegistrationPayment;
 use App\User;
+use App\AcademicYear;
+use App\Semester;
 
 class CashierController extends Controller
 {
@@ -116,6 +118,20 @@ class CashierController extends Controller
 
         // return to deans and add admin with message
         return redirect()->route('cashier.dashboard')->with('success', 'Password Changed!');
+    }
+
+
+    // method use to view balances of students
+    public function balances()
+    {
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        $balances = Balance::where('academic_year_id', $ay->id)
+                        ->where('semester_id', $sem->id)
+                        ->paginate(15);
+
+        return view('cashier.balances', ['balances' => $balances]);
     }
 
 

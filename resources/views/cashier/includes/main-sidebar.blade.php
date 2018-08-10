@@ -9,6 +9,11 @@
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
+      <li>
+        <a href="{{ route('cashier.balances') }}">
+          <i class="fa fa-rub"></i> <span>Balances</span>
+        </a>
+      </li>
       <li class="{{ route('cashier.payments') == url()->current() ? 'active' : '' }}">
         <a href="{{ route('cashier.payments') }}">
           <i class="fa fa-money"></i> <span>Payments</span>
