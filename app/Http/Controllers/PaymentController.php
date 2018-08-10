@@ -148,6 +148,7 @@ class PaymentController extends Controller
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
 
             // \Session::put('error', 'Payment failed');
+            PaymentTable::where('active', 0)->delete();
             return redirect()->route('student.dashboard')->with('error', 'Payment Failed!');
 
         }
@@ -263,6 +264,8 @@ class PaymentController extends Controller
         }
 
         // \Session::put('error', 'Payment failed');
+        PaymentTable::where('active', 0)->delete();
+
         return redirect()->route('student.dashboard')->with('error', 'Payment Failed');
 
     }
