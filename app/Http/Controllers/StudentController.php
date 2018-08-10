@@ -288,6 +288,7 @@ class StudentController extends Controller
     public function payments()
     {
         $payments = Payment::where('student_id', Auth::user()->id)
+                            ->where('active', 1)
                             ->orderBy('created_at', 'desc')
                             ->paginate(15);
 
@@ -317,6 +318,17 @@ class StudentController extends Controller
         $rp = RegistrationPayment::where('student_id', Auth::user()->id)
                                 ->where('active', 1)
                                 ->first();
+
+        // check if there is pending payment subject for finishing
+        $unfinished_payment = Payment::where('student_id', Auth::user()->id)
+                                    ->where('academic_year_id', $ay->id)
+                                    ->where('semester_id', $sem->id)
+                                    ->where('active', 0)
+                                    ->first();
+
+        if(count($unfinished_payment) > 0) {
+            return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+        }
 
         if(count($rp) < 1) {
             // add new record for registration payment
@@ -372,6 +384,21 @@ class StudentController extends Controller
     // method use to process payment registration using card payment
     public function postCardRegistrationPayment(Request $request)
     {
+        // add to registration payment
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        // check if there is pending payment subject for finishing
+        $unfinished_payment = Payment::where('student_id', Auth::user()->id)
+                                    ->where('academic_year_id', $ay->id)
+                                    ->where('semester_id', $sem->id)
+                                    ->where('active', 0)
+                                    ->first();
+
+        if(count($unfinished_payment) > 0) {
+            return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+        }
+
 
         // \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
@@ -391,9 +418,7 @@ class StudentController extends Controller
             'source' => $token,
         ]);
 
-        // add to registration payment
-        $ay = AcademicYear::where('active', 1)->first();
-        $sem = Semester::where('active', 1)->first();
+
 
         $reg_payment = new RegistrationPayment();
         $reg_payment->student_id = Auth::user()->id;
@@ -484,6 +509,17 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
+        // check if there is pending payment subject for finishing
+        $unfinished_payment = Payment::where('student_id', Auth::user()->id)
+                                    ->where('academic_year_id', $ay->id)
+                                    ->where('semester_id', $sem->id)
+                                    ->where('active', 0)
+                                    ->first();
+
+        if(count($unfinished_payment) > 0) {
+            return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+        }
+
         $payment = new Payment();
         $payment->student_id = Auth::user()->id;
         $payment->academic_year_id = $ay->id;
@@ -534,6 +570,19 @@ class StudentController extends Controller
     // method use to make tuition fee payment using card
     public function postTuitionFeeCardPayment(Request $request)
     {
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        // check if there is pending payment subject for finishing
+        $unfinished_payment = Payment::where('student_id', Auth::user()->id)
+                                    ->where('academic_year_id', $ay->id)
+                                    ->where('semester_id', $sem->id)
+                                    ->where('active', 0)
+                                    ->first();
+
+        if(count($unfinished_payment) > 0) {
+            return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+        }
 
         // \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
@@ -553,8 +602,7 @@ class StudentController extends Controller
             'source' => $token,
         ]);
 
-        $ay = AcademicYear::where('active', 1)->first();
-        $sem = Semester::where('active', 1)->first();
+
 
         // add to payment and what type of payment 
         // to deduct to the total payable of the student to the current semester of the academic year

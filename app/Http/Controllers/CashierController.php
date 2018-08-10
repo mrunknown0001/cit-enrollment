@@ -122,7 +122,8 @@ class CashierController extends Controller
     // method use to view payments
     public function payments()
     {
-        $payments = Payment::orderBy('created_at', 'desc')
+        $payments = Payment::where('active', 1)
+                        ->orderBy('created_at', 'desc')
                         ->paginate(15);
 
         return view('cashier.payments', ['payments' => $payments]);
