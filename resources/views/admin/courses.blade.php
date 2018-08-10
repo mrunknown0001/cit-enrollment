@@ -15,7 +15,11 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				<p><a href="{{ route('admin.add.course') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Course</a></p>
+				{{-- <p><a href="{{ route('admin.add.course') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Course</a></p> --}}
+
+				<p><button class="btn btn-primary" data-toggle="modal" data-target="#addCourse"><i class="fa fa-plus"></i> Add Course</button></p>
+				@include('admin.includes.modal-course-add')
+
 				@if(count($courses) > 0)
 				<div class="box box-primary">
 					<div class="box-header with-border">
@@ -36,9 +40,11 @@
 										<td>{{ ucwords($c->title) }}</td>
 										<td>{{ strtoupper($c->code) }}</td>
 										<td class="text-center">
-											<a href="{{ route('admin.update.course', ['id' => $c->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+											{{-- <a href="{{ route('admin.update.course', ['id' => $c->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Edit</a> --}}
+											<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#updateCourse-{{ $c->id }}" ><i class="fa fa-pencil"></i> Update</button>
 										</td>
 									</tr>
+								@include('admin.includes.modal-course-update')
 								@endforeach
 							</tbody>
 							<tfoot>

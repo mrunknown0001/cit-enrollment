@@ -15,7 +15,11 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				<p><a href="{{ route('admin.add.cashier') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Cashiers</a></p>
+				{{-- <p><a href="{{ route('admin.add.cashier') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Cashiers</a></p> --}}
+
+				<p><button class="btn btn-primary" data-toggle="modal" data-target="#addCashier"><i class="fa fa-plus"></i> Add Cashier</button></p>
+				@include('admin.includes.modal-cashier-add')
+
 				@if(count($cashiers) > 0)
 				<div class="box box-primary">
 					<div class="box-header with-border">
@@ -39,9 +43,11 @@
 										{{ strtoupper($c->suffix_name) }}
 									</td>
 									<td class="text-center">
-										<a href="{{ route('admin.update.cashier', ['id' => $c->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a>
+										{{-- <a href="{{ route('admin.update.cashier', ['id' => $c->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a> --}}
+										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#updateCashier-{{ $c->id }}"><i class="fa fa-pencil"></i> Update</button>
 									</td>
 								</tr>
+								@include('admin.includes.modal-cashier-update')
 								@endforeach
 							</tbody>
 							<tfoot>
