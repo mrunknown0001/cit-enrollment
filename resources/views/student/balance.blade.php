@@ -7,7 +7,7 @@
 	<section class="content-header">
 		<h1>Balance</h1>
 		<ol class="breadcrumb">
-			<li><a href="javascript:void(0)"><i class="fa fa-usd"></i> Home</a></li>
+			<li><a href="javascript:void(0)"><i class="fa fa-rub"></i> Home</a></li>
 			<li class="active">Balance</li>
 		</ol>
 	</section>
@@ -26,7 +26,7 @@
 
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-usd"></i> Balance</strong>
+						<strong><i class="fa fa-rub"></i> Balance</strong>
 					</div>
 					<div class="box-body">
 						@if(count($balance) > 0)

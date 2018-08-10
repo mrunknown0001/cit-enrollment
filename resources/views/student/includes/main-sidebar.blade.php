@@ -25,7 +25,7 @@
       </li>
       <li class="{{ route('student.balance') == url()->current() ? 'active' : '' }}">
         <a href="{{ route('student.balance') }}">
-          <i class="fa fa-usd"></i> <span>Balance</span>
+          <i class="fa fa-rub"></i> <span>Balance</span>
         </a>
       </li>
       <li class="{{ route('student.payments') == url()->current() ? 'active' : '' }}">

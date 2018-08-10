@@ -7,7 +7,7 @@
 	<section class="content-header">
 		<h1>Unit Price and Miscellaneous</h1>
 		<ol class="breadcrumb">
-			<li><a href="javascript:void(0)"><i class="fa fa-dollar"></i> Home</a></li>
+			<li><a href="javascript:void(0)"><i class="fa fa-rub"></i> Home</a></li>
 			<li class="active">Unit Price and Miscellaneous</li>
 		</ol>
 	</section>
@@ -16,8 +16,8 @@
 			<div class="col-md-12">
 				@include('includes.all')
 				<div class="box box-primary">
-					<div class="box-header with-border">
-						<strong><i class="fa fa-dollar"></i> Unit Price and Miscellaneous</strong>
+					<div class="box-header with-rub">
+						<strong><i class="fa fa-rub"></i> Unit Price and Miscellaneous</strong>
 					</div>
 					<div class="box-body">
 						<p><a href="{{ route('admin.add.misc.fee') }}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Add Miscellaneous Fee</a></p>

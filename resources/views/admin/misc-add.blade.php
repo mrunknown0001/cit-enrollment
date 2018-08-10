@@ -7,7 +7,7 @@
 	<section class="content-header">
 		<h1>Add Miscellaneous Fee</h1>
 		<ol class="breadcrumb">
-			<li><a href="javascript:void(0)"><i class="fa fa-dollar"></i> Home</a></li>
+			<li><a href="javascript:void(0)"><i class="fa fa-rub"></i> Home</a></li>
 			<li class="active">Unit Price and Miscellaneous</li>
 		</ol>
 	</section>
@@ -18,7 +18,7 @@
 				@include('includes.all')
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-dollar"></i> Add Miscellaneous Fee</strong>
+						<strong><i class="fa fa-rub"></i> Add Miscellaneous Fee</strong>
 					</div>
 					<div class="box-body">
 						<div class="row">
