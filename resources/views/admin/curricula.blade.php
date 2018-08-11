@@ -15,7 +15,12 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				<p><a href="{{ route('admin.add.curriculum') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Course Curriculum</a></p>
+				
+				{{-- <p><a href="{{ route('admin.add.curriculum') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Course Curriculum</a></p> --}}
+
+				<p><button class="btn btn-primary" data-toggle="modal" data-target="#addCurriculum"><i class="fa fa-plus"></i> Add Course Curriculum</button></p>
+				@include('admin.includes.modal-curriculum-add')
+
 				@if(count($curricula) > 0)
 				<div class="box box-primary">
 					<div class="box-header with-border">
@@ -45,7 +50,10 @@
 										</td>
 										<td class="text-center">
 											<a href="{{ route('admin.update.curriculum', ['id' => $c->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a>
+
+											{{--<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#updateCurriculum-{{ $c->id }}"><i class="fa fa-pencil"></i> Update</button>--}}
 										</td>
+										@include('admin.includes.modal-curriculum-update')
 									</tr>
 								@endforeach
 							</tbody>
@@ -65,4 +73,37 @@
 		</div>
 	</section>
 </div>
+<script>
+	$(".course").click(function () {
+		var courseId = $(".course").val();
+
+		if(courseId == '') {
+			$('.major')
+			    .empty()
+			    .append('<option selected="selected" value="">No Course Major</option>')
+			;
+		}
+	});
+
+	$(".course").change(function () {
+
+		var courseId = $(".course").val();
+
+		if(courseId == '') {
+			$('.major')
+			    .empty()
+			    .append('<option selected="selected" value="">No Course Major</option>')
+			;
+		}
+		else {
+			$.ajax({url: "/admin/course/" + courseId + "/majors/get", success: function(result){
+		        Object.keys(result).forEach(function(key) {
+
+				  $('.major').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
+				  
+				});
+		    }});
+		}
+	});
+</script>
 @endsection

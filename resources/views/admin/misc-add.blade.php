@@ -23,6 +23,7 @@
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-6">
+								<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
 								<form action="{{ route('admin.add.misc.fee.post') }}" method="POST" autocomplete="off">
 									{{ csrf_field() }}
 								      <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

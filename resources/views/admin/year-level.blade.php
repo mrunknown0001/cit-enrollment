@@ -14,7 +14,11 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p><a href="{{ route('admin.add.year.level') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Year Level</a></p>
+				{{-- <p><a href="{{ route('admin.add.year.level') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Year Level</a></p> --}}
+
+				<p><button class="btn btn-primary" data-toggle="modal" data-target="#addYearLevel"><i class="fa fa-plus"></i> Add Year Level</button></p>
+				@include('admin.includes.modal-year-level-add')
+
 				@include('includes.all')
 				
 				@if(count($year_levels) > 0)
@@ -34,8 +38,13 @@
 								@foreach($year_levels as $y)
 								<tr>
 									<td class="text-center">{{ ucwords($y->name) }}</td>
-									<td class="text-center"><a href="{{ route('admin.update.year.level', ['id' => $y->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a></td>
+									<td class="text-center">
+										{{-- <a href="{{ route('admin.update.year.level', ['id' => $y->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update
+										</a> --}}
+										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#updateYearLevel-{{ $y->id }}"><i class="fa fa-pencil"></i> Update</button>
+									</td>
 								</tr>
+								@include('admin.includes.modal-year-level-update')
 								@endforeach
 							</tbody>
 							<tfoot>

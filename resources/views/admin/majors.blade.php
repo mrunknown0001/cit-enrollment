@@ -15,7 +15,12 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				<p><a href="{{ route('admin.add.course.major') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Course Major</a></p>
+				
+				{{-- <p><a href="{{ route('admin.add.course.major') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Course Major</a></p> --}}
+
+				<p><button class="btn btn-primary" data-toggle="modal" data-target="#addMajor"><i class="fa fa-plus"></i> Add Course Major</button></p>
+				@include('admin.includes.modal-major-add')
+
 				@if(count($majors) > 0)
 				<div class="box box-primary">
 					<div class="box-header with-border">
@@ -35,8 +40,12 @@
 								<tr>
 									<td>{{ $m->name }}</td>
 									<td class="text-center">{{ strtoupper($m->course->code) }}</td>
-									<td class="text-center"><a href="{{ route('admin.update.course.major', ['id' => $m->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a></td>
+									<td class="text-center">
+										{{-- <a href="{{ route('admin.update.course.major', ['id' => $m->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a> --}}
+										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#updateMajor-{{ $m->id }}"><i class="fa fa-pencil"></i> Update</button>
+									</td>
 								</tr>
+								@include('admin.includes.modal-major-update')
 								@endforeach
 							</tbody>
 							<tfoot>

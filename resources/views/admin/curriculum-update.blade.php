@@ -38,7 +38,7 @@
 							      </div>
 							      <div class="form-group{{ $errors->has('course') ? ' has-error' : '' }}">
 							      	<label for="course">Select Course</label><label class="label-required">*</label>
-							        <select id="course" name="course" class="form-control">
+							        <select id="course" name="course" class="form-control course">
 							        	<option value="">Select Course</option>
 										@if(count($courses) > 0)
 											@foreach($courses as $c)
@@ -56,7 +56,7 @@
 							      </div>
 							      <div class="form-group{{ $errors->has('major') ? ' has-error' : '' }}">
 							      	<label for="major">Select Course Major</label>
-							        <select id="major" name="major" class="form-control">
+							        <select id="major" name="major" class="form-control major">
 							        	<option value="">No Course Major</option>
 
 							        </select>
@@ -82,17 +82,36 @@
 	</section>
 </div>
 <script>
-	$("#course").change(function () {
+	$(".course").click(function () {
+		var courseId = $(".course").val();
 
-		var courseId = $("#course").val();
+		if(courseId == '') {
+			$('.major')
+			    .empty()
+			    .append('<option selected="selected" value="">No Course Major</option>')
+			;
+		}
+	});
 
-		$.ajax({url: "/admin/course/" + courseId + "/majors/get", success: function(result){
-	        Object.keys(result).forEach(function(key) {
+	$(".course").change(function () {
 
-			  $('#major').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
-			  
-			});
-	    }});
+		var courseId = $(".course").val();
+
+		if(courseId == '') {
+			$('.major')
+			    .empty()
+			    .append('<option selected="selected" value="">No Course Major</option>')
+			;
+		}
+		else {
+			$.ajax({url: "/admin/course/" + courseId + "/majors/get", success: function(result){
+		        Object.keys(result).forEach(function(key) {
+
+				  $('.major').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
+				  
+				});
+		    }});
+		}
 	});
 
 	$(document).ready(function () {

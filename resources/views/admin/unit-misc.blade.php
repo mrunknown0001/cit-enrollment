@@ -20,7 +20,11 @@
 						<strong><i class="fa fa-rub"></i> Unit Price and Miscellaneous</strong>
 					</div>
 					<div class="box-body">
-						<p><a href="{{ route('admin.add.misc.fee') }}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Add Miscellaneous Fee</a></p>
+						{{-- <p><a href="{{ route('admin.add.misc.fee') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Miscellaneous Fee</a></p> --}}
+						
+						<p><button class="btn btn-primary" data-toggle="modal" data-target="#addMisc"><i class="fa fa-plus"></i> Add Miscellaneous Fee</button></p>
+						@include('admin.includes.modal-misc-add')
+
 						<div class="row">
 							<div class="col-md-6">
 								@if(count($misc) > 0)
@@ -35,9 +39,11 @@
 										<td class="text-center">{{ ucwords($m->name) }}</td>
 										<td class="text-center">&#8369; {{ $m->amount }}</td>
 										<td class="text-center">
-											<a href="{{ route('admin.update.misc.fee', ['id' => $m->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a>
+											{{--<a href="{{ route('admin.update.misc.fee', ['id' => $m->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a>--}}
+											<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#updateMiscFee-{{ $m->id }}"><i class="fa fa-pencil"></i> Update</button>
 										</td>
 									</tr>
+									@include('admin.includes.modal-misc-update')
 									@endforeach
 								</table>
 								@else
@@ -55,8 +61,11 @@
 											&#8369; {{ $unit_price->amount }}
 										</td>
 										<td class="text-center">
-											<a href="{{ route('admin.update.unit.price') }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a>
+											{{-- <a href="{{ route('admin.update.unit.price') }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a> --}}
+
+											<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#updateUnitPrice"><i class="fa fa-pencil"></i> Update</button>
 										</td>
+										@include('admin.includes.modal-unit-price-update')
 									</tr>
 								</table>
 							</div>

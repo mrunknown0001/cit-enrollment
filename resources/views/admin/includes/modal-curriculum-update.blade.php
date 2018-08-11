@@ -1,0 +1,74 @@
+<div class="modal fade" id="updateCurriculum-{{ $c->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <strong>Update Course Curriculum</strong>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+            <p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
+            <form action="{{ route('admin.update.curriculum.post') }}" method="POST" role="form" autocomplete="off">
+              {{ csrf_field() }}
+              <input type="hidden" name="curriculum_id" value="{{ $c->id }}">
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                      <label for="name">Curriculum Name</label><label class="label-required">*</label>
+                      <input id="name" type="text" class="form-control" name="name" value="{{ $c->name }}" placeholder="Enter Curriculum Name" >
+                      @if ($errors->has('name'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('name') }}</strong>
+                          </span>
+                      @endif
+                    </div>
+                    <div class="form-group{{ $errors->has('course') ? ' has-error' : '' }}">
+                      <label for="course">Select Course</label><label class="label-required">*</label>
+                      <select id="course" name="course" class="form-control course">
+                        <option value="">Select Course</option>
+                    @if(count($courses) > 0)
+                      @foreach($courses as $co)
+                        <option value="{{ $co->id }}" {{ $c->course_id == $co->id ? 'selected' : '' }}>{{ $co->code }}</option>
+                      @endforeach
+                    @else
+                    <option value="">No Available Course</option>
+                    @endif
+                      </select>
+                      @if ($errors->has('course'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('course') }}</strong>
+                          </span>
+                      @endif
+                    </div>
+                    <div class="form-group{{ $errors->has('major') ? ' has-error' : '' }}">
+                      <label for="major">Select Course Major</label>
+                      <select id="major" name="major" class="form-control major">
+                        <option value="">No Course Major</option>
+                        @if($c->major_id != null)
+                        <option value="{{ $c->major->id }}" selected>{{ $c->major->name }}</option>
+                        @endif
+                      </select>
+                      @if ($errors->has('major'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('major') }}</strong>
+                          </span>
+                      @endif
+                    </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Update Curriculum</button>
+              </div>
+            </form>
+
+
+      </div>
+      <div class="modal-footer">
+        Update Course Curriculum Form
+      </div>
+    </div>
+  </div>
+</div>

@@ -748,9 +748,13 @@ class AdminController extends Controller
     // method use to view course majors
     public function courseMajor()
     {
+        $courses = Course::where('active', 1)
+                        ->orderBy('title', 'asc')
+                        ->get();
+
         $majors = CourseMajor::get();
 
-        return view('admin.majors', ['majors' => $majors]);
+        return view('admin.majors', ['majors' => $majors, 'courses' => $courses]);
     }
 
 
@@ -848,10 +852,15 @@ class AdminController extends Controller
     // method use to view all curricula 
     public function curricula()
     {
+
+        $courses = Course::where('active', 1)
+                        ->orderBy('title', 'asc')
+                        ->get();
+
         $curricula = Curriculum::where('active', 1)->orderBy('created_at', 'desc')
                                 ->paginate(15);
 
-        return view('admin.curricula', ['curricula' => $curricula]);
+        return view('admin.curricula', ['curricula' => $curricula, 'courses' => $courses]);
     }
 
 
@@ -1243,6 +1252,10 @@ class AdminController extends Controller
 
         $course_majors = null;
 
+        if(count($majors) < 1) {
+            return null;
+        }
+
         foreach($majors as $m) {
             $course_majors[] = [
                         'id' => $m->id,
@@ -1261,6 +1274,10 @@ class AdminController extends Controller
 
         $course_cu = null;
 
+        if(count($curriculum) < 1) {
+            return null;
+        }
+
         foreach($curriculum as $c) {
             $course_cu[] = [
                         'id' => $c->id,
@@ -1278,6 +1295,10 @@ class AdminController extends Controller
         $curriculum = Curriculum::where('major_id', $id)->where('active', 1)->get();
 
         $course_cu = null;
+
+        if(count($curriculum) < 1) {
+            return null;
+        }
 
         foreach($curriculum as $c) {
             $course_cu[] = [
@@ -1457,7 +1478,7 @@ class AdminController extends Controller
 
         GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added New Room');
 
-        return redirect()->route('admin.add.room')->with('success', 'New Room Added!');
+        return redirect()->route('admin.rooms')->with('success', 'New Room Added!');
     }
 
 

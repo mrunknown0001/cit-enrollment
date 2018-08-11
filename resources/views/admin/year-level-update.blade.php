@@ -21,6 +21,7 @@
 						<strong><i class="fa fa-book"></i> Update Year Level</strong>
 					</div>
 					<div class="box-body">
+						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
 						<form action="{{ route('admin.update.year.level.post') }}" method="POST" role="form" autocomplete="off">
 							{{ csrf_field() }}
 							<input type="hidden" name="yl_id" value="{{ $yl->id }}">
