@@ -123,6 +123,9 @@ class DeanController extends Controller
     // method use to show schedules
     public function schedules()
     {
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $subjects = Subject::where('active', 1)->orderBy('code', 'asc')->get();
+
         $schedules = Schedule::where('active', 1)->get();
         $mon = Schedule::where('active', 1)->where('day', 1)->orderBy('start_time', 'asc')->get();
         $tue = Schedule::where('active', 1)->where('day', 2)->orderBy('start_time', 'asc')->get();
@@ -132,7 +135,7 @@ class DeanController extends Controller
         $sat = Schedule::where('active', 1)->where('day', 6)->orderBy('start_time', 'asc')->get();
         $sun = Schedule::where('active', 1)->where('day', 7)->orderBy('start_time', 'asc')->get();
 
-        return view('dean.schedules', ['schedules' => $schedules, 'monday' => $mon, 'tuesday' => $tue, 'wednesday' => $wed, 'thursday' => $thu, 'friday' => $fri, 'saturday' => $sat, 'sunday' => $sun]);
+        return view('dean.schedules', ['schedules' => $schedules, 'monday' => $mon, 'tuesday' => $tue, 'wednesday' => $wed, 'thursday' => $thu, 'friday' => $fri, 'saturday' => $sat, 'sunday' => $sun, 'rooms' => $rooms, 'subjects' => $subjects]);
 
     }
 
