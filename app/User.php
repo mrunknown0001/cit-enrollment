@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Cashier\Billable;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -45,5 +46,10 @@ class User extends Authenticatable
     public function avatar()
     {
         return $this->hasOne('App\Avatar', 'student_id');
+    }
+
+    public function balance()
+    {
+        return $this->hasOne('App\Balance', 'student_id');
     }
 }

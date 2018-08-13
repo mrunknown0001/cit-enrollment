@@ -16,7 +16,7 @@
 		@include('includes.all')
 		<div class="row">
 			<div class="col-md-4">
-				<form action="{{ route('registrar.search.student') }}" method="get" class="" autocomplete="off">
+				<form action="{{ route('cashier.search.student') }}" method="get" class="" autocomplete="off">
 					<div class="input-group">
 						<input type="text" name="q" class="form-control" placeholder="Search Student">
 						<span class="input-group-btn">

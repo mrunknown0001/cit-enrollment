@@ -485,6 +485,9 @@ Route::group(['prefix' => 'cahier'], function () {
 	// route to make over the counter payment of the cashier
 	Route::get('/payment/counter/student', 'CashierController@studentCounterPayment')->name('cashier.student.counter.payment');
 
+	// route to search students in cashier
+	Route::get('/student/search', 'CashierController@studentSearch')->name('cashier.search.student');
+
 	// route to generate report payment
 });
 

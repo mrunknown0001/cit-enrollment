@@ -152,4 +152,15 @@ class CashierController extends Controller
         return view('cashier.payment-student-cashier');
     }
 
+
+    // method use to search students
+    public function studentSearch(Request $request)
+    {
+        $keyword = $request['q'];
+
+        $students = GeneralController::students_search($keyword);
+
+        return view('cashier.payment-student-search-cashier', ['students' => $students, 'keyword' => $keyword]);
+    }
+
 }
