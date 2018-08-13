@@ -163,4 +163,60 @@ class CashierController extends Controller
         return view('cashier.payment-student-search-cashier', ['students' => $students, 'keyword' => $keyword]);
     }
 
+
+    // method use to make payment by the cashier
+    public function makePayment($id = null)
+    {
+        $student = User::findorfail($id);
+
+        return view('cashier.payment-make', ['student' => $student]);
+    }
+
+
+    // method use to finalize payment of the walkin
+    public function postMakePayment(Request $request)
+    {
+        $request->validate([
+            'amount' => 'required|numeric'
+        ]);
+
+        $student_id = $request['student_id'];
+        $amount = $request['amount'];
+        $remark = $request['remark'];
+
+        $student = User::findorfail($student_id);
+        $ay = AcademicYear::whereActive(1)->first();
+        $sem = Semester::whereActive(1)->first();
+
+        $balance = Balance::where('student_id', $student->id)
+                            ->where('academic_year_id', $ay->id)
+                            ->where('semester_id', $sem->id)
+                            ->first();
+
+        // make the deduction of payed amount to the current balance of student
+        $payment = new Payment();
+        $payment->student_id = $student->id;
+        $payment->academic_year_id = $ay->id;
+        $payment->semester_id = $sem->id;
+        $payment->mode_of_payment_id = 3;
+        $payment->amount = $amount;
+        $payment->description = $remark;
+        $payment->save();
+
+        $balance->balance -= $payment->amount;
+        $balance->save();
+
+        // add to activity log
+
+        // return in payment with message
+        return redirect()->route('cashier.payments')->with('success', 'Payment Saved!');
+    }
+
+
+    // method use to generate report in payments
+    public function generateReportPayment()
+    {
+        return 'Add Report Generate Module in Cashier';
+    }
+
 }

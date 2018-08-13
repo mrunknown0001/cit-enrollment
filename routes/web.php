@@ -488,7 +488,18 @@ Route::group(['prefix' => 'cahier'], function () {
 	// route to search students in cashier
 	Route::get('/student/search', 'CashierController@studentSearch')->name('cashier.search.student');
 
+	// route to make payment of the cashier 
+	Route::get('/payment/student/{id}/make', 'CashierController@makePayment')->name('cashier.make.payment');
+
+	// route to finalize payment
+	Route::post('/payment/student/make', 'CashierController@postMakePayment')->name('cashier.make.payment.post');
+
+	Route::get('//payment/student/make', function () {
+		return abort(404);
+	});
+
 	// route to generate report payment
+	Route::get('/payment/report/generate', 'CashierController@generateReportPayment')->name('cashier.generate.report.payment');
 });
 
 

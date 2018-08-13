@@ -54,7 +54,7 @@
 
 										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#studentBalance-{{ $s->id }}"><i class="fa fa-eye"></i> View Balance</button>
 
-										<button class="btn btn-default btn-xs" data-toggle="modal" data-target=""><i class="fa fa-money"> Make Payment</i></button>
+										<a href="{{ route('cashier.make.payment', ['id' => $s->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-money"> Make Payment</i></a>
 									</td>
 								</tr>
 								@include('cashier.includes.modal-student-info')
