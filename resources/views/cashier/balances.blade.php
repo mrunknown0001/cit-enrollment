@@ -14,9 +14,10 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				@include('includes.all')
 
 				@if(count($balances) > 0)
+					<p><a href="#" class="btn btn-primary btn-xs">Generate Student Balances</a></p>
+					@include('includes.all')
 					<div class="box box-primary">
 						<div class="box-header with-border">
 							<strong><i class="fa fa-rub"></i> Balances</strong>
@@ -51,6 +52,7 @@
 						</div>
 					</div>
 				@else
+					@include('includes.all')
 					<p class="text-center">No Balances!</p>
 				@endif
 			</div>

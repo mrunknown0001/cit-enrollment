@@ -216,7 +216,7 @@ class CashierController extends Controller
     // method use to generate report in payments
     public function generateReportPayment()
     {
-        return 'Add Report Generate Module in Cashier';
+        return view('cashier.report-generate');
     }
 
 }
