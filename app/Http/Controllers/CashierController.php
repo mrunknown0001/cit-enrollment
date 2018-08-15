@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Controllers\GeneralController;
+use Excel;
 
 use App\Cashier;
 use App\Payment;
@@ -13,6 +14,7 @@ use App\RegistrationPayment;
 use App\User;
 use App\AcademicYear;
 use App\Semester;
+
 
 class CashierController extends Controller
 {
@@ -217,6 +219,150 @@ class CashierController extends Controller
     public function generateReportPayment()
     {
         return view('cashier.report-generate');
+    }
+
+
+    // method use to generate all report
+    public function generateAllReportPayment()
+    {
+        $pays = Payment::get(['student_id', 'mode_of_payment_id', 'amount', 'created_at']);
+
+        if(count($pays) < 1) {
+            return redirect()->back()->with('error', 'No Payment Found!');
+        }
+
+        $payments = array();
+
+        foreach($pays as $p) {
+            array_push($payments, [
+                'Student' => $p->student->firstname . ' ' . $p->student->lastname,
+                'Student_Number' => $p->student->student_number,
+                'MOP' => $p->mop->name,
+                'Amount' => $p->amount,
+                'Date_Time' => date('F j, Y g:i:s a', strtotime($p->created_at))
+            ]);
+        }
+
+        $filename = 'All Payments Made';
+
+        Excel::create($filename, function($excel) use ($payments) {
+            $excel->sheet('payment', function($sheet) use ($payments)
+            {
+                $sheet->fromArray($payments);
+            });
+       })->download('xls');
+    }
+
+
+    // method use to generate current semester payment
+    public function currentSemesterPayment()
+    {
+        $ay = AcademicYear::whereActive(1)->first();
+        $sem = Semester::whereActive(1)->first();
+
+        if(count($ay) < 1 && count($sem) < 1) {
+            return redirect()->back()->with('info', 'Please Contact Admin to check for active AY and Semester!');
+        }
+
+        // get all the payment made
+        $pays = Payment::where('academic_year_id', $ay->id)->where('semester_id', $sem->id)->get(['student_id', 'mode_of_payment_id', 'amount', 'created_at']);
+
+        if(count($pays) < 1) {
+            return redirect()->back()->with('error', 'No Payment Found!');
+        }
+
+        $payments = array();
+
+        foreach($pays as $p) {
+            array_push($payments, [
+                'Student' => $p->student->firstname . ' ' . $p->student->lastname,
+                'Student_Number' => $p->student->student_number,
+                'MOP' => $p->mop->name,
+                'Amount' => $p->amount,
+                'Date_Time' => date('F j, Y g:i:s a', strtotime($p->created_at))
+            ]);
+        }
+
+        $filename = $ay->from . '-' . $ay->to . '--' . $sem->name . '--' . 'Payments';
+
+        Excel::create($filename, function($excel) use ($payments) {
+            $excel->sheet('payment', function($sheet) use ($payments)
+            {
+                $sheet->fromArray($payments);
+            });
+       })->export('xls');
+    }
+
+
+    // method use to generate payment report using custom date range
+    public function generateReportPaymentCustomDate(Request $request)
+    {
+        $request->validate([
+            'start_date' => 'required',
+            'end_date' => 'required'
+        ]);
+
+        $start = $request['start_date'];
+        $end = $request['end_date'];
+
+        $pays = Payment::where('created_at', '>=', $start)->where('created_at', '<=', $end)->get(['student_id', 'mode_of_payment_id', 'amount', 'created_at']);
+
+        if(count($pays) < 1) {
+            return redirect()->back()->with('error', 'No Payment Found!');
+        }
+
+        $payments = array();
+
+        foreach($pays as $p) {
+            array_push($payments, [
+                'Student' => $p->student->firstname . ' ' . $p->student->lastname,
+                'Student_Number' => $p->student->student_number,
+                'MOP' => $p->mop->name,
+                'Amount' => $p->amount,
+                'Date_Time' => date('F j, Y g:i:s a', strtotime($p->created_at))
+            ]);
+        }
+
+        $filename = $start . '--' . $end . '--' . 'Payments';
+
+        Excel::create($filename, function($excel) use ($payments) {
+            $excel->sheet('payment', function($sheet) use ($payments)
+            {
+                $sheet->fromArray($payments);
+            });
+       })->download('xls');
+    }
+
+
+    // method use to generate balance report
+    public function generateReportBalance()
+    {
+        $bal = Balance::where('balance', '>', 0)->get(['student_id', 'academic_year_id', 'semester_id', 'balance', 'total', 'created_at']);
+
+
+        if(count($bal) < 1) {
+            return redirect()->back()->with('error', 'No Balance Found!');
+        }
+
+        $balances = array();
+
+        foreach($bal as $p) {
+            array_push($balances, [
+                'Student' => $p->student->firstname . ' ' . $p->student->lastname,
+                'Student_Number' => $p->student->student_number,
+                'Amount_Balance' => $p->balance,
+                'Date_Time' => date('F j, Y g:i:s a', strtotime($p->created_at))
+            ]);
+        }
+
+        $filename = date('F j, Y', strtotime(now())) . '-' . 'Balance';
+
+        Excel::create($filename, function($excel) use ($balances) {
+            $excel->sheet('balance', function($sheet) use ($balances)
+            {
+                $sheet->fromArray($balances);
+            });
+       })->download('xls');        
     }
 
 }

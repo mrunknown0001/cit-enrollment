@@ -21,8 +21,8 @@
 						<strong><i class="fa fa-bar-chart"></i> Generate Report</strong>
 					</div>
 					<div class="box-body">
-						<p><a href="#" class="btn btn-primary"> All Payments</a></p>
-						<p><a href="#" class="btn btn-primary"> Payments in Current</a></p>
+						<p><a href="{{ route('cashier.generate.all.report.payment') }}" class="btn btn-primary"> All Payments</a></p>
+						<p><a href="{{ route('cashier.payment.current.semester.report') }}" class="btn btn-primary"> Payments in Current Semester</a></p>
 						<p><button class="btn btn-primary" data-toggle="modal" data-target="#dateRangePayment">Custom Date Range Payment</button></p>
 						@include('cashier.includes.modal-payment-date-range')
 					</div>

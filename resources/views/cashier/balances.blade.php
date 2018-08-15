@@ -16,7 +16,7 @@
 			<div class="col-md-12">
 
 				@if(count($balances) > 0)
-					<p><a href="#" class="btn btn-primary btn-xs">Generate Student Balances</a></p>
+					<p><a href="{{ route('cashier.balance.generate') }}" class="btn btn-primary btn-xs">Generate Student Balances</a></p>
 					@include('includes.all')
 					<div class="box box-primary">
 						<div class="box-header with-border">

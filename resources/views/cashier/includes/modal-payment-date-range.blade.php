@@ -10,12 +10,12 @@
       <div class="modal-body">
 
 
-        <form action="#" method="GET">
+        <form action="{{ route('cashier.payment.generate.report.custom.date') }}" method="GET">
           <div class="form-group">
-            <input type="date" name="start_date" id="start_date" class="form-control" placeholder="mm/dd/yyyy">
+            <input type="date" name="start_date" id="start_date" class="form-control" placeholder="mm/dd/yyyy" required="">
           </div>
           <div class="form-group">
-            <input type="date" name="end_date" id="end_date" class="form-control" placeholder="mm/dd/yyyy">
+            <input type="date" name="end_date" id="end_date" class="form-control" placeholder="mm/dd/yyyy" required="">
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Generate Report</button>

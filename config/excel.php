@@ -246,7 +246,7 @@ return array(
             | Insert array starting from this cell address as the top left coordinate
             |--------------------------------------------------------------------------
             */
-            'startCell'            => 'A1',
+            'startCell'            => 'C1',
 
             /*
             |--------------------------------------------------------------------------

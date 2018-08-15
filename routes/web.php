@@ -500,6 +500,18 @@ Route::group(['prefix' => 'cahier'], function () {
 
 	// route to generate report payment
 	Route::get('/payment/report/generate', 'CashierController@generateReportPayment')->name('cashier.generate.report.payment');
+
+	// route to generate payment report
+	Route::get('/payment/report/generate/all', 'CashierController@generateAllReportPayment')->name('cashier.generate.all.report.payment');
+
+	// route to generate payment make in current semester
+	Route::get('/payment/report/generate/current/semester', 'CashierController@currentSemesterPayment')->name('cashier.payment.current.semester.report');
+
+	// route to generate payment report using custom range of payments
+	Route::get('/payment/report/generate/custom/date', 'CashierController@generateReportPaymentCustomDate')->name('cashier.payment.generate.report.custom.date');
+
+	// route to generate report for balances
+	Route::get('/balance/generate/report', 'CashierController@generateReportBalance')->name('cashier.balance.generate');
 });
 
 
