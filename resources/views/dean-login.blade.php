@@ -16,9 +16,29 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <script src="{{ asset('js/app.js') }}"></script>
+  <style type="text/css">
+    .vertical-center {
+      margin-top: 100px !important;
+    }
+  </style>
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
+@include('includes.modal-dean-login')
+<script type="text/javascript">
+    $(window).on('load',function(){
+        $('#deanLogin').modal('show');
+    });
+</script>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 text-center vertical-center">
+    <button class="btn btn-primary" id="centerButton" data-toggle="modal" data-target="#deanLogin"><i class="fa fa-key"></i> Dean Login</button>
+    <br>
+    <a href="{{ route('landing.page') }}" class="btn btn-link">go to landing page</a>
+  </div>
+</div>
+{{-- <div class="login-box">
   <div class="login-box-body">
     <div class="login-logo">
       <a href="javascript:void(0)"><b>Dean</b> Login</a>
@@ -60,6 +80,6 @@
     </form>
   </div>
 </div>
-<script src="{{ asset('js/app.js') }}"></script>
+--}}
 </body>
 </html>
