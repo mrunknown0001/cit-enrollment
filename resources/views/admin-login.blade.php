@@ -15,9 +15,26 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <script src="{{ asset('js/app.js') }}"></script>
+  <style type="text/css">
+    .vertical-center {
+      margin-top: 100px !important;
+    }
+  </style>
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
+@include('includes.modal-admin-login')
+<script type="text/javascript">
+    $(window).on('load',function(){
+        $('#adminLogin').modal('show');
+    });
+</script>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 text-center vertical-center">
+    <button class="btn btn-primary" id="centerButton" data-toggle="modal" data-target="#adminLogin"><i class="fa fa-key"></i> Admin Login</button>
+  </div>
+</div>
+{{-- <div class="login-box">
   <div class="login-box-body">
     <div class="login-logo">
       <a href="javascript:void(0)"><b>Admin</b> Login</a>
@@ -60,6 +77,14 @@
     </form>
   </div>
 </div>
-<script src="{{ asset('js/app.js') }}"></script>
+<div id="preloader">
+  <div class="preloader">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+--}}
 </body>
 </html>

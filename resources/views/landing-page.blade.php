@@ -39,8 +39,10 @@
             <div class="home-content">
               <h1 class="white-text">Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</h1>
               <!-- <p class="white-text">App Description</p> -->
-              <a href="{{ route('registration') }}" class="btn btn-primary btn-lg">Student Registration</a>
-              <a href="{{ route('login') }}" class="btn btn-primary btn-lg">Student Login</a>
+              {{-- <a href="{{ route('registration') }}" class="btn btn-primary btn-lg">Student Registration</a> --}}
+              <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#studentRegistration">Student Registration</button>
+              {{-- <a href="{{ route('login') }}" class="btn btn-primary btn-lg">Student Login</a> --}}
+              <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#studentLogin">Student Login</button>
             </div>
           </div>
 
@@ -57,6 +59,8 @@
 			<span></span>
 		</div>
 	</div>
+  @include('includes.modal-student-registration')
+  @include('includes.modal-student-login')
   <script src="{{ asset('js/app.js') }}"></script>
   <script type="text/javascript" src="{{ asset('landing/js/main.js') }}"></script>
 </body>

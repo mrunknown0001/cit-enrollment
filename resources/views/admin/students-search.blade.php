@@ -5,7 +5,7 @@
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Students</h1>
+		<h1>Students Search Result: "{{ $key }}"</h1>
 		<ol class="breadcrumb">
 			<li><a href="javascript:void(0)"><i class="fa fa-graduation-cap"></i> Home</a></li>
 			<li class="active">Students</li>
@@ -79,7 +79,7 @@
 					</div>
 				</div>
 				@else
-				<p class="text-center">No Students</p>
+				<p class="text-center">No Students Mathed with "{{ $key }}"</p>
 				@endif
 			</div>
 		</div>

@@ -633,6 +633,17 @@ class AdminController extends Controller
     }
 
 
+    // method use to search students
+    public function studentsSearch(Request $request)
+    {
+        $key = $request['q'];
+
+        $students = GeneralController::students_search($key);
+
+        return view('admin.students-search', ['students' => $students, 'key' => $key]);
+    }
+
+
     // method use to reset student password
     public function postResetStudentPassword(Request $request)
     {

@@ -181,6 +181,9 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to view all students
 	Route::get('/students', 'AdminController@students')->name('admin.students');
 
+	// route to search students
+	Route::get('/students/search', 'AdminController@studentsSearch')->name('admin.students.search');
+
 	// route to reset password of student
 	Route::post('/student/reset/password', 'AdminController@postResetStudentPassword')->name('admin.reset.student.password.post');
 
