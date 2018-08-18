@@ -18,6 +18,9 @@ use App\CourseMajor;
 use App\Curriculum;
 use App\CourseEnrolled;
 use App\YearLevel;
+use App\AcademicYear;
+use App\Semester;
+use App\EnrolledStudent;
 
 class RegistrarController extends Controller
 {
@@ -435,6 +438,22 @@ class RegistrarController extends Controller
         // return with success message
         return redirect()->route('registrar.students')->with('success', 'Students Import Successful!');
         
+    }
+
+
+    // method use to get all enrooled students in the current semester
+    public function getCurrentEnrolledStudents()
+    {
+        $ay = AcademicYear::whereActive(1)->first();
+        $sem = Semester::whereActive(1)->first();
+
+
+        $students = EnrolledStudent::whereAcademicYearId($ay->id)
+                                ->whereSemesterId($sem->id)
+                                ->whereStatus(1)
+                                ->get();
+
+        // download in excel format
     }
 
 }

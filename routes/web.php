@@ -454,6 +454,9 @@ Route::group(['prefix' => 'registrar'], function () {
 	// route to save import students to the system
 	Route::post('/students/import', 'RegistrarController@postImportStudents')->name('registrar.import.students.post');
 
+	// route to get enrolled student in current semester of the current ay
+	Route::get('/student/enrolled/semester/current', 'RegistrarController@getCurrentEnrolledStudents')->name('registrar.get.current.enrolled.students');
+
 });
 
 

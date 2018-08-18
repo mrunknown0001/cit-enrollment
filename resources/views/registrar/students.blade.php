@@ -15,7 +15,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				<p><a href="{{ route('registrar.add.student') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Student</a></p>
+				<p>
+					<a href="{{ route('registrar.add.student') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Student</a>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#generateReport"><i class="fa fa-bar-chart"></i> Generate Report</button>
+				</p>
 
 				<div class="row">
 					<div class="col-md-4">
@@ -30,6 +33,7 @@
 						</form>						
 					</div>
 				</div>
+
 				<p></p>
 
 				@if(count($students) > 0)
@@ -82,4 +86,5 @@
 		</div>
 	</section>
 </div>
+@include('registrar.includes.modal-report-generate')
 @endsection
