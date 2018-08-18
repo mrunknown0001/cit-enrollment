@@ -448,12 +448,32 @@ class RegistrarController extends Controller
         $sem = Semester::whereActive(1)->first();
 
 
-        $students = EnrolledStudent::whereAcademicYearId($ay->id)
+        $stds = EnrolledStudent::whereAcademicYearId($ay->id)
                                 ->whereSemesterId($sem->id)
                                 ->whereStatus(1)
                                 ->get();
 
+        $students = array();
+
+        foreach($stds as $s) {
+            array_push($students, [
+                'Student' => ucwords($s->student->firstname . ' ' . $s->student->lastname),
+                'Student Number' => $s->student_number,
+                'Year Level' => '',
+                'Course' => ''
+            ]);
+        }
+
         // download in excel format
+        $filename = 'Students Enrolled in ' . $sem->name . '-' . $ay->from . '-' . $ay->to;
+
+        Excel::create($filename, function($excel) use ($students) {
+            $excel->sheet('students_enrolled', function($sheet) use ($students)
+            {
+                $sheet->fromArray($students);
+            });
+       })->export('xls');
+
     }
 
 }
