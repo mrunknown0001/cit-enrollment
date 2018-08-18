@@ -458,9 +458,9 @@ class RegistrarController extends Controller
         foreach($stds as $s) {
             array_push($students, [
                 'Student' => ucwords($s->student->firstname . ' ' . $s->student->lastname),
-                'Student Number' => $s->student_number,
-                'Year Level' => '',
-                'Course' => ''
+                'Student Number' => $s->student->student_number,
+                'Year Level' => $s->student->info->year_level->name,
+                'Course' => $s->student->enrolled->course->title
             ]);
         }
 
@@ -468,7 +468,7 @@ class RegistrarController extends Controller
         $filename = 'Students Enrolled in ' . $sem->name . '-' . $ay->from . '-' . $ay->to;
 
         Excel::create($filename, function($excel) use ($students) {
-            $excel->sheet('students_enrolled', function($sheet) use ($students)
+            $excel->sheet('Enrolled Students', function($sheet) use ($students)
             {
                 $sheet->fromArray($students);
             });

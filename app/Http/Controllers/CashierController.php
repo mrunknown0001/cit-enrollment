@@ -236,10 +236,10 @@ class CashierController extends Controller
         foreach($pays as $p) {
             array_push($payments, [
                 'Student' => $p->student->firstname . ' ' . $p->student->lastname,
-                'Student_Number' => $p->student->student_number,
-                'MOP' => $p->mop->name,
+                'Student Number' => $p->student->student_number,
+                'Mof of Payment' => $p->mop->name,
                 'Amount' => $p->amount,
-                'Date_Time' => date('F j, Y g:i:s a', strtotime($p->created_at))
+                'Date & Time' => date('F j, Y g:i:s a', strtotime($p->created_at))
             ]);
         }
 
@@ -276,10 +276,10 @@ class CashierController extends Controller
         foreach($pays as $p) {
             array_push($payments, [
                 'Student' => $p->student->firstname . ' ' . $p->student->lastname,
-                'Student_Number' => $p->student->student_number,
-                'MOP' => $p->mop->name,
+                'Student Number' => $p->student->student_number,
+                'Mode of Payment' => $p->mop->name,
                 'Amount' => $p->amount,
-                'Date_Time' => date('F j, Y g:i:s a', strtotime($p->created_at))
+                'Date & Time' => date('F j, Y g:i:s a', strtotime($p->created_at))
             ]);
         }
 
@@ -316,10 +316,10 @@ class CashierController extends Controller
         foreach($pays as $p) {
             array_push($payments, [
                 'Student' => $p->student->firstname . ' ' . $p->student->lastname,
-                'Student_Number' => $p->student->student_number,
-                'MOP' => $p->mop->name,
+                'Student Number' => $p->student->student_number,
+                'Mode of Payment' => $p->mop->name,
                 'Amount' => $p->amount,
-                'Date_Time' => date('F j, Y g:i:s a', strtotime($p->created_at))
+                'Date & Time' => date('F j, Y g:i:s a', strtotime($p->created_at))
             ]);
         }
 
@@ -349,9 +349,9 @@ class CashierController extends Controller
         foreach($bal as $p) {
             array_push($balances, [
                 'Student' => $p->student->firstname . ' ' . $p->student->lastname,
-                'Student_Number' => $p->student->student_number,
-                'Amount_Balance' => $p->balance,
-                'Date_Time' => date('F j, Y g:i:s a', strtotime($p->created_at))
+                'Student Number' => $p->student->student_number,
+                'Amount Balance' => $p->balance,
+                'Date & Time' => date('F j, Y g:i:s a', strtotime($p->created_at))
             ]);
         }
 
