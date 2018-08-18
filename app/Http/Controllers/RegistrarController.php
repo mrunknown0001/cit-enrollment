@@ -447,11 +447,19 @@ class RegistrarController extends Controller
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
 
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('info', 'Please Check AcademicYear and Semester in Admin!');
+        }
+
 
         $stds = EnrolledStudent::whereAcademicYearId($ay->id)
                                 ->whereSemesterId($sem->id)
                                 ->whereStatus(1)
                                 ->get();
+
+        if(count($stds) < 1) {
+            return redirect()->back()->with('info', 'No Enrolled Students!');
+        }
 
         $students = array();
 
