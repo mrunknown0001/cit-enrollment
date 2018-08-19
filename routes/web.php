@@ -586,6 +586,9 @@ Route::group(['prefix' => 'student'], function () {
 	// route to show payments made
 	Route::get('/payments', 'StudentController@payments')->name('student.payments');
 
+	// route to view payments details
+	Route::get('/payment/{id}/details', 'StudentController@paymentDetails')->name('student.payment.details');
+
 	// route to go to paypal payment for registration payment
 	Route::get('/payment/registration/paypal', 'StudentController@paypalRegistrationPayment')->name('student.paypal.registration.payment');
 

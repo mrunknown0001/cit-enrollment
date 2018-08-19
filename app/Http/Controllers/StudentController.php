@@ -296,6 +296,15 @@ class StudentController extends Controller
     }
 
 
+    // method use to view payment details
+    public function paymentDetails($id = null)
+    {
+        $payment = Payment::findorfail($id);
+
+        return view('student.payment-details', ['payment' => $payment]);
+    }
+
+
     // method use to go to paypal registration payment
     public function paypalRegistrationPayment()
     {

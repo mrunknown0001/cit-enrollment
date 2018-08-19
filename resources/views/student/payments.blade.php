@@ -29,6 +29,7 @@
 									<th class="text-center">Amount</th>
 									<th class="text-center">Description</th>
 									<th class="text-center">Date &amp; Time</th>
+									<th class="text-center">Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -45,6 +46,9 @@
 										</td>
 										<td class="text-center">
 											{{ date('l, F j, Y g:i:s a', strtotime($p->created_at)) }}
+										</td>
+										<td class="text-center">
+											<a href="{{ route('student.payment.details', ['id' => $p->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-eye"></i> View</a>
 										</td>
 									</tr>
 								@endforeach
