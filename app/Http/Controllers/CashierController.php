@@ -209,6 +209,7 @@ class CashierController extends Controller
         $balance->save();
 
         // add to activity log
+        GeneralController::activity_log(Auth::guard('cashier')->user()->id, 4, 'Cashier Student Payment with Student No.: ' . $student->student_number);
 
         // return in payment with message
         return redirect()->route('cashier.payments')->with('success', 'Payment Saved!');
@@ -244,6 +245,8 @@ class CashierController extends Controller
         }
 
         $filename = 'All Payments Made';
+
+        GeneralController::activity_log(Auth::guard('cashier')->user()->id, 4, 'Cashier Downloaded All Payment Made');
 
         Excel::create($filename, function($excel) use ($payments) {
             $excel->sheet('payment', function($sheet) use ($payments)
@@ -285,6 +288,8 @@ class CashierController extends Controller
 
         $filename = $ay->from . '-' . $ay->to . '--' . $sem->name . '--' . 'Payments';
 
+        GeneralController::activity_log(Auth::guard('cashier')->user()->id, 4, 'Cashier Downloaded Current Payment Made in the Current Semester');
+
         Excel::create($filename, function($excel) use ($payments) {
             $excel->sheet('payment', function($sheet) use ($payments)
             {
@@ -325,6 +330,8 @@ class CashierController extends Controller
 
         $filename = $start . '--' . $end . '--' . 'Payments';
 
+        GeneralController::activity_log(Auth::guard('cashier')->user()->id, 4, 'Cashier Downloaded Payment with Custom Date Range');
+
         Excel::create($filename, function($excel) use ($payments) {
             $excel->sheet('payment', function($sheet) use ($payments)
             {
@@ -356,6 +363,8 @@ class CashierController extends Controller
         }
 
         $filename = date('F j, Y', strtotime(now())) . '-' . 'Balance';
+
+        GeneralController::activity_log(Auth::guard('cashier')->user()->id, 4, 'Cashier Generate Balance Report');
 
         Excel::create($filename, function($excel) use ($balances) {
             $excel->sheet('balance', function($sheet) use ($balances)
