@@ -57,6 +57,8 @@ class RegistrationController extends Controller
     	$student->active = 1;
     	$student->save();
 
+        GeneralController::activity_log($student->id, 6, 'Student Registered an Account');
+
         $avatar = new Avatar();
         $avatar->student_id = $student->id;
         $avatar->save();

@@ -258,6 +258,7 @@ class PaymentController extends Controller
                 $balance->save();
             }
 
+            GeneralController::activity_log(Auth::user()->id, 6, 'Student Payment using Paypal');
 
             return redirect()->route('student.payments')->with('success', 'Paypal Payment Successful! ');
 

@@ -515,6 +515,7 @@ class StudentController extends Controller
         EnrollmentController::enroll_student(Auth::user()->id);
 
         // add to activity log
+        GeneralController::activity_log(Auth::user()->id, 6, 'Student Payment using Card');
 
         // return message
         return redirect()->route('student.payments')->with('success', 'Payment using Card is Successful!');
@@ -687,6 +688,7 @@ class StudentController extends Controller
         $balance->save();
 
         // add activity log
+        GeneralController::activity_log(Auth::user()->id, 6, 'Student Payment using card');
 
         // return with success message
         return redirect()->route('student.payments')->with('success', 'Payment using Card is Successful!');
