@@ -181,6 +181,9 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to add faculty load
 	Route::post('/faculty/load/add', 'AdminController@postAddFacultyLoad')->name('admin.add.faculty.load.post');
 
+	// route to delete faculty load
+	Route::get('/faculty/load/delete/{id}/a/b/c', 'AdminController@deleteFacultyLoad')->name('admin.delete.faculty.load');
+
 	Route::get('/faculty/load/add', function () {
 		return redirect()->route('admin.faculties');
 	});

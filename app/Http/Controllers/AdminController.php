@@ -672,6 +672,20 @@ class AdminController extends Controller
     }
 
 
+    // method use to delete faculty load
+    public function deleteFacultyLoad($id = null)
+    {
+        $load = FacultySubjectLoad::findorfail($id);
+        $load->delete();
+
+        // add activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Remove Faculty Load');
+
+        // return to deans and add admin with message
+        return redirect()->route('admin.faculties')->with('success', 'Faculty Load Removed!');
+    }
+
+
     // method use to show all students
     public function students()
     {
