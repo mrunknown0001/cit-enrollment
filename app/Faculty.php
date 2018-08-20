@@ -26,4 +26,9 @@ class Faculty extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function subjects()
+    {
+        return $this->hasMany('App\FacultySubjectLoad', 'faculty_id');
+    }
 }

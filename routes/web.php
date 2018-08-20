@@ -178,6 +178,13 @@ Route::group(['prefix' => 'admin'], function () {
 		return redirect()->route('admin.faculties');
 	});
 
+	// route to add faculty load
+	Route::post('/faculty/load/add', 'AdminController@postAddFacultyLoad')->name('admin.add.faculty.load.post');
+
+	Route::get('/faculty/load/add', function () {
+		return redirect()->route('admin.faculties');
+	});
+
 	// route to view all students
 	Route::get('/students', 'AdminController@students')->name('admin.students');
 

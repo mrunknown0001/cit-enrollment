@@ -17,7 +17,10 @@
 				@include('includes.all')
 				{{-- <p><a href="{{ route('admin.add.faculty') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Faculty</a></p> --}}
 
-				<p><button class="btn btn-primary" data-toggle="modal" data-target="#addFaculty"><i class="fa fa-plus"></i> Add Faculty</button></p>
+				<p>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#addFaculty"><i class="fa fa-plus"></i> Add Faculty</button>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#addFacultyLoad"><i class="fa"></i> Faculty Subject Load</button>
+				</p>
 				@include('admin.includes.modal-faculty-add')
 
 				@if(count($faculties) > 0)
@@ -44,7 +47,10 @@
 									</td>
 									<td class="text-center">
 										{{-- <a href="{{ route('admin.update.faculty', ['id' => $f->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a> --}}
+										
+										<button class="btn btn-default btn-xs" data-toggle="modal"><i class="fa fa-eye"></i> View Load</button>
 										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#updateFaculty-{{ $f->id }}"><i class="fa fa-pencil"></i> Update</button>
+
 									</td>
 								</tr>
 								@include('admin.includes.modal-faculty-update')
@@ -66,4 +72,5 @@
 		</div>
 	</section>
 </div>
+@include('admin.includes.modal-faculty-add-load')
 @endsection

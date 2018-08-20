@@ -322,6 +322,10 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+        }
+
         // registration for the first payment of the student
         // check if there is existing active payment in registration payment record of the student
         $rp = RegistrationPayment::where('student_id', Auth::user()->id)
@@ -376,6 +380,10 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+        }
+
         // check if there is pending payment subject for finishing
         $unfinished_payment = Payment::where('student_id', Auth::user()->id)
                                     ->where('academic_year_id', $ay->id)
@@ -426,6 +434,10 @@ class StudentController extends Controller
         // add to registration payment
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
+
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+        }
 
         // check if there is pending payment subject for finishing
         $unfinished_payment = Payment::where('student_id', Auth::user()->id)
@@ -530,6 +542,10 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+        }
+
         // check if there is pending payment subject for finishing
         $unfinished_payment = Payment::where('student_id', Auth::user()->id)
                                     ->where('academic_year_id', $ay->id)
@@ -560,6 +576,10 @@ class StudentController extends Controller
         // add unconrfirmed registration payment for the student
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
+
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+        }
 
         // check if there is pending payment subject for finishing
         $unfinished_payment = Payment::where('student_id', Auth::user()->id)
@@ -593,6 +613,10 @@ class StudentController extends Controller
     {
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
+
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+        }
 
         // check if there is pending payment subject for finishing
         $unfinished_payment = Payment::where('student_id', Auth::user()->id)
@@ -635,6 +659,10 @@ class StudentController extends Controller
     {
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
+
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+        }
 
         // check if there is pending payment subject for finishing
         $unfinished_payment = Payment::where('student_id', Auth::user()->id)

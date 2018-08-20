@@ -31,7 +31,7 @@
 									<input type="hidden" name="description" value="{{ $description }}">
 									<div class="form-group">
 										<script
-											src="https://checkout.stripe.com/checkout.js" class="stripe-button btn btn-primary"
+											src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 											data-key="pk_test_0tUxQsySTpP3YXHTUHS148lv"
 											data-amount="{{ $amount . '00' }}"
 											data-currency="php"

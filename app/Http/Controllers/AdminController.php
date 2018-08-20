@@ -24,6 +24,7 @@ use App\Curriculum;
 use App\Room;
 use App\UnitPrice;
 use App\Miscellaneous;
+use App\FacultySubjectLoad;
 
 class AdminController extends Controller
 {
@@ -520,7 +521,11 @@ class AdminController extends Controller
                             ->orderBy('lastname', 'asc')
                             ->get();
 
-        return view('admin.faculties', ['faculties' => $faculties]);
+        $sem = Semester::whereActive(1)->first();
+
+        $subjects = Subject::whereSemesterId($sem->id)->get();
+
+        return view('admin.faculties', ['faculties' => $faculties, 'sem' => $sem, 'subjects' => $subjects]);
     }
 
 
@@ -619,6 +624,51 @@ class AdminController extends Controller
 
         // return to deans and add admin with message
         return redirect()->route('admin.faculties')->with('success', 'Faculty Details Updated!');
+    }
+
+
+    // method use to add faculty subject load
+    public function postAddFacultyLoad(Request $request)
+    {
+        $request->validate([
+            'faculty' => 'required',
+            'subject' => 'required'
+        ]);
+
+        $faculty_id = $request['faculty'];
+        $subject_id = $request['subject'];
+
+        $sem = Semester::whereActive(1)->first();
+        $ay = AcademicYear::whereActive(1)->first();
+
+        $faculty = Faculty::findorfail($faculty_id);
+        $subject = Subject::findorfail($subject_id);
+
+        // check if there is duplicate record
+        $duplicate_check = FacultySubjectLoad::whereFacultyId($faculty->id)
+                                    ->whereSubjectId($subject->id)
+                                    ->whereAcademicYearId($ay->id)
+                                    ->whereSemesterId($sem->id)
+                                    ->first();
+        if(count($duplicate_check) > 0) {
+            return redirect()->back()->with('error', 'The Subject is Already Assigned to the Faculty Selected!');
+        }
+
+        // add another check on records
+
+        // add load to the faculty
+        $load = new FacultySubjectLoad();
+        $load->faculty_id = $faculty->id;
+        $load->subject_id = $subject->id;
+        $load->academic_year_id = $ay->id;
+        $load->semester_id = $sem->id;
+        $load->save();
+
+        // add activity log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added Faculty Load');
+
+        // return to the faculties with success message
+        return redirect()->route('admin.faculties')->with('success', 'Faculty Load Added!');
     }
 
 
