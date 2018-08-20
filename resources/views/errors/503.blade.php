@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>503 Error - {{ env('app_name') }}</title>
+  <title>503 Error</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet"  href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue-light.min.css') }}">
@@ -18,13 +18,12 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="javascript:void(0)"><b>503</b> Erorr</a>
-  </div>
   <div class="login-box-body">
+    <div class="login-logo">
+      <a href="javascript:void(0)"><b>503</b> Erorr</a>
+    </div>
     <p class="login-box-msg">{{ env('app_name') }}</p>
 	<p class="text-center">Site is in Maintenance Mode!</p>
-	<p class="text-center"><a href="{{ route('landing.page') }}">return to home</a></p>
   </div>
 </div>
 <script src="{{ asset('js/app.js') }}"></script>
