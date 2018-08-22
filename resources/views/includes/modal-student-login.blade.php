@@ -9,12 +9,6 @@
       </div>
       <div class="modal-body">
 
-<div class="login-page">
-  <div class="login-box">
-    <div class="login-box-body">
-      <div class="login-logo">
-        {{--<a href="javascript:void(0)"><b>Student</b> Login</a>--}}
-      </div>
       <p class="login-box-msg text-center">Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</p>
       @include('includes.all')
       <form action="{{ route('student.login.post') }}" method="post" autocomplete="off">
@@ -51,9 +45,6 @@
         </div>
       </form>
       <a href="{{ route('registration') }}">Click here to register</a>
-    </div>
-  </div>
-</div>
 
       </div>
       <div class="modal-footer">

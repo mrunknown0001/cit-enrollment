@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="{{ asset('css/app.css') }}" />
   <link type="text/css" rel="stylesheet" href="{{ asset('landing/css/style.css') }}" />
+  <link type="text/css" rel="stylesheet" href="{{ asset('css/app.css') }}" />
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
