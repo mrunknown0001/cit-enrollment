@@ -77,6 +77,15 @@ class LoginController extends Controller
         // attempt to login admin
         if(Auth::attempt(['student_number' => $sn, 'password' => $password], $remember)) {
 
+            // check if the session id is not null
+            if(Auth::user()->session_id != null) {
+                Auth::logout();
+                return redirect()->route('login')->with('error', 'Account has active session!!!');
+            }
+
+            Auth::user()->session_id = Session::getId();
+            Auth::user()->save();
+
             GeneralController::activity_log(Auth::user()->id, 6, 'Student Login');
 
             return redirect()->route('student.dashboard');
@@ -148,6 +157,15 @@ class LoginController extends Controller
         // attempt to login dean
         if(Auth::guard('cashier')->attempt(['username' => $username, 'password' => $password], $remember)) {
 
+            // check if the session id is not null
+            if(Auth::guard('cashier')->user()->session_id != null) {
+                Auth::guard('cashier')->logout();
+                return redirect()->back()->with('error', 'Cashier is currently logged in!!!');
+            }
+
+            Auth::guard('cashier')->user()->session_id = Session::getId();
+            Auth::guard('cashier')->user()->save();
+
             GeneralController::activity_log(Auth::guard('cashier')->user()->id, 4, 'Cashier Login');
 
             return redirect()->route('cashier.dashboard');
@@ -179,6 +197,15 @@ class LoginController extends Controller
         // attempt to login registrar
         if(Auth::guard('registrar')->attempt(['username' => $username, 'password' => $password], $remember)) {
 
+            // check if the session id is not null
+            if(Auth::guard('registrar')->user()->session_id != null) {
+                Auth::guard('registrar')->logout();
+                return redirect()->back()->with('error', 'Registrar is currently logged in!!!');
+            }
+
+            Auth::guard('registrar')->user()->session_id = Session::getId();
+            Auth::guard('registrar')->user()->save();
+
             GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Registrar Login');
 
             return redirect()->route('registrar.dashboard');
@@ -209,6 +236,15 @@ class LoginController extends Controller
 
         // attempt to login registrar
         if(Auth::guard('faculty')->attempt(['username' => $username, 'password' => $password], $remember)) {
+
+            // check if the session id is not null
+            if(Auth::guard('faculty')->user()->session_id != null) {
+                Auth::guard('faculty')->logout();
+                return redirect()->back()->with('error', 'Faculty is currently logged in!!!');
+            }
+
+            Auth::guard('faculty')->user()->session_id = Session::getId();
+            Auth::guard('faculty')->user()->save();
 
             GeneralController::activity_log(Auth::guard('faculty')->user()->id, 5, 'Faculty Login');
 

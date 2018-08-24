@@ -32,24 +32,36 @@ class GeneralController extends Controller
     {
         // check if there is authenticted user
         if(Auth::check()) {
+            Auth::user()->session_id = null;
+            Auth::user()->save();
+
             // add activity log
             GeneralController::activity_log(Auth::user()->id, 6, 'Student Logout');
 
             Auth::logout();
         }
         elseif (Auth::guard('faculty')->check()) {
+            Auth::guard('faculty')->user()->session_id = null;
+            Auth::guard('faculty')->user()->save();
+
             // add activity log
             GeneralController::activity_log(Auth::guard('faculty')->user()->id, 5, 'Faculty Logout');
 
             Auth::guard('faculty')->logout();
         }
         elseif(Auth::guard('cashier')->check()) {
+            Auth::guard('cashier')->user()->session_id = null;
+            Auth::guard('cashier')->user()->save();
+
             // add activity log
             GeneralController::activity_log(Auth::guard('cashier')->user()->id, 4, 'Cashier Logout');
 
             Auth::guard('cashier')->logout();
         }
         elseif(Auth::guard('registrar')->check()) {
+            Auth::guard('registrar')->user()->session_id = null;
+            Auth::guard('registrar')->user()->save();
+
             // add activity log
             GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Registrar Logout');
 
