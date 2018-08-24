@@ -53,6 +53,16 @@
 										</span>
 										@endif
 									</div>
+
+									<div class="form-group{{ $errors->has('lab_units') ? ' has-error' : '' }}">
+										<label for="lab_units">Subject Laboratory Units</label>
+										<input id="lab_units" type="number" class="form-control" name="lab_units" value="{{ old('lab_units') }}" placeholder="Enter Subject Laboratory Units" required>
+										@if ($errors->has('lab_units'))
+										<span class="help-block">
+											<strong>{{ $errors->first('lab_units') }}</strong>
+										</span>
+										@endif
+									</div>
 									<div class="form-group{{ $errors->has('prerequisite') ? ' has-error' : '' }}">
 										<label for="prerequisite">Subject Prerequisite</label>
 										<select class="form-control" id="prerequisite" name="prerequisite">

@@ -54,6 +54,15 @@
 										</span>
 										@endif
 									</div>
+									<div class="form-group{{ $errors->has('lab_units') ? ' has-error' : '' }}">
+										<label for="lab_units">Subject Laboratory Units</label>
+										<input id="lab_units" type="number" class="form-control" name="lab_units" value="{{ $subject->lab_units }}" placeholder="Enter Subject Laboratory Units" required>
+										@if ($errors->has('lab_units'))
+										<span class="help-block">
+											<strong>{{ $errors->first('lab_units') }}</strong>
+										</span>
+										@endif
+									</div>
 									<div class="form-group{{ $errors->has('prerequisite') ? ' has-error' : '' }}">
 										<label for="prerequisite">Subject Prerequisite</label>
 										<select class="form-control" id="prerequisite" name="prerequisite">
@@ -82,7 +91,7 @@
 											<option value="">Select Course</option>
 											@if(count($courses) > 0)
 												@foreach($courses as $c)
-													<option value="{{ $c->id }}" {{ $subject->id == $c->id ? 'selected' : '' }}>{{ $c->code }}</option>
+													<option value="{{ $c->id }}" {{ $subject->course_id == $c->id ? 'selected' : '' }}>{{ $c->code }}</option>
 												@endforeach
 											@else
 											<option value="">No Available Course</option>
@@ -142,7 +151,7 @@
 											<option value="">Select Semester</option>
 											@if(count($sem) > 0)
 												@foreach($sem as $s)
-												<option value="{{ $s->id }}" {{ $subject->id == $s->id ? 'selected' : '' }}>{{ $s->name }}</option>
+												<option value="{{ $s->id }}" {{ $subject->semester_id == $s->id ? 'selected' : '' }}>{{ $s->name }}</option>
 												@endforeach
 											@else
 											<option value="">No Available Semester</option>

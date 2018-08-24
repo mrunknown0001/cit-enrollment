@@ -18,6 +18,7 @@ class CreateSubjectsTable extends Migration
             $table->string('code');
             $table->string('description')->nullable();
             $table->integer('units');
+            $table->integer('lab_units')->nullable();
             $table->integer('prerequisite')->nullable(); // subject id of prerequisite subject
             $table->integer('course_id')->unsigned();
             $table->foreign('course_id')->references('id')->on('courses');

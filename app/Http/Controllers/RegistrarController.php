@@ -526,6 +526,7 @@ class RegistrarController extends Controller
         $code = $request['code'];
         $description = $request['description'];
         $units = $request['units'];
+        $lab_units = $request['lab_units'];
         $course_id = $request['course'];
         $major_id = $request['major'];
         $year_level_id = $request['year_level'];
@@ -541,6 +542,7 @@ class RegistrarController extends Controller
         $sub->code = $code;
         $sub->description = $description;
         $sub->units = $units;
+        $sub->lab_units = $lab_units;
         $sub->course_id = $course->id;
         if(count($major) > 0) {
             $sub->major_id = $major->id;
@@ -591,6 +593,7 @@ class RegistrarController extends Controller
         $code = $request['code'];
         $description = $request['description'];
         $units = $request['units'];
+        $lab_units = $request['lab_units'];
         $course_id = $request['course'];
         $major_id = $request['major'];
         $year_level_id = $request['year_level'];
@@ -612,6 +615,7 @@ class RegistrarController extends Controller
         $sub->code = $code;
         $sub->description = $description;
         $sub->units = $units;
+        $sub->lab_units = $lab_units;
         $sub->course_id = $course->id;
         if(count($major) > 0) {
             $sub->major_id = $major->id;
