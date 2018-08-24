@@ -4,7 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Session;
 use App\Http\Controllers\GeneralController;
+use App\Admin;
+use App\Dean;
+use App\Registrar;
+use App\Cashier;
+use App\Faculty;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -29,6 +36,15 @@ class LoginController extends Controller
 
         // attempt to login admin
         if(Auth::guard('admin')->attempt(['username' => $username, 'password' => $password], $remember)) {
+
+            // check if the session id is not null
+            if(Auth::guard('admin')->user()->session_id != null) {
+                Auth::guard('admin')->logout();
+                return redirect()->back()->with('error', 'Admin is currently logged in!!!');
+            }
+
+            Auth::guard('admin')->user()->session_id = Session::getId();
+            Auth::guard('admin')->user()->save();
 
             GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Login');
 
@@ -91,6 +107,15 @@ class LoginController extends Controller
 
         // attempt to login dean
         if(Auth::guard('dean')->attempt(['username' => $username, 'password' => $password], $remember)) {
+
+            // check if the session id is not null
+            if(Auth::guard('dean')->user()->session_id != null) {
+                Auth::guard('dean')->logout();
+                return redirect()->back()->with('error', 'Dean is currently logged in!!!');
+            }
+
+            Auth::guard('dean')->user()->session_id = Session::getId();
+            Auth::guard('dean')->user()->save();
 
             GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Login');
 

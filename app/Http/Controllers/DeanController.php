@@ -25,7 +25,6 @@ class DeanController extends Controller
     // method use to view dashboard
     public function dashboard()
     {
-        
     	return view('dean.dashboard');
     }
 

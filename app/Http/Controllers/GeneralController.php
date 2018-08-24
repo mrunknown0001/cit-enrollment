@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Session;
 
 use App\ActivityLog;
 use App\User;
@@ -55,12 +56,18 @@ class GeneralController extends Controller
             Auth::guard('registrar')->logout();
         }
         elseif(Auth::guard('dean')->check()) {
+            Auth::guard('dean')->user()->session_id = null;
+            Auth::guard('dean')->user()->save();
+            
             // add activity log
             GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Logout');
 
             Auth::guard('dean')->logout();
         }
         elseif(Auth::guard('admin')->check()) {
+            Auth::guard('admin')->user()->session_id = null;
+            Auth::guard('admin')->user()->save();
+
             // add activity log
             GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Logout');
 
