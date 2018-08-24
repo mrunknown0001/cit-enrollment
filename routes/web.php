@@ -297,33 +297,33 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to save update on year level
 	Route::post('/year/level/update', 'AdminController@postUpdateYearLevel')->name('admin.update.year.level.post');
 
-	// route to view subjects
-	Route::get('/subjects', 'AdminController@subjects')->name('admin.subjects');
+	// // route to get course major on selected course
+	// Route::get('/course/{id}/majors/get', 'AdminController@getCourseMajors')->name('admin.get.course.majors');
 
-	// route to add subject
-	Route::get('/subject/add', 'AdminController@addSubject')->name('admin.add.subject');
+	// // route to get course curriculum on selected course
+	// Route::get('/course/{id}/curriculum/get', 'AdminController@getCourseCurriculum')->name('admin.get.course.curriculum');
 
-	// route to get course major on selected course
-	Route::get('/course/{id}/majors/get', 'AdminController@getCourseMajors')->name('admin.get.course.majors');
+	// // route to get curriculum based on major
+	// Route::get('/major/{id}/curriculum/get', 'AdminController@getMajorCurriculum')->name('admin.get.major.curriculum');
 
-	// route to get course curriculum on selected course
-	Route::get('/course/{id}/curriculum/get', 'AdminController@getCourseCurriculum')->name('admin.get.course.curriculum');
+	// // route to view subjects
+	// Route::get('/subjects', 'AdminController@subjects')->name('admin.subjects');
 
-	// route to get curriculum based on major
-	Route::get('/major/{id}/curriculum/get', 'AdminController@getMajorCurriculum')->name('admin.get.major.curriculum');
+	// // route to add subject
+	// Route::get('/subject/add', 'AdminController@addSubject')->name('admin.add.subject');
 
-	// route to save new subject
-	Route::post('/subject/add', 'AdminController@postAddSubject')->name('admin.add.subject.post');
+	// // route to save new subject
+	// Route::post('/subject/add', 'AdminController@postAddSubject')->name('admin.add.subject.post');
 
-	// route to update subject
-	Route::get('/subject/{id}/update', 'AdminController@updateSubject')->name('admin.update.subject');
+	// // route to update subject
+	// Route::get('/subject/{id}/update', 'AdminController@updateSubject')->name('admin.update.subject');
 
-	// route to save update on subject
-	Route::post('/subject/update', 'AdminController@postUpdateSubject')->name('admin.update.subject.post');
+	// // route to save update on subject
+	// Route::post('/subject/update', 'AdminController@postUpdateSubject')->name('admin.update.subject.post');
 
-	Route::get('/subject/update', function () {
-		return redirect()->route('admin.subjects');
-	});
+	// Route::get('/subject/update', function () {
+	// 	return redirect()->route('admin.subjects');
+	// });
 
 	// route to show miscellaneous fee and unit price
 	Route::get('/price-and-miscellaneous', 'AdminController@unitPriceMisc')->name('admin.unit.price.misc');
@@ -485,6 +485,34 @@ Route::group(['prefix' => 'registrar'], function () {
 
 	// route to get enrolled student in current semester of the current ay
 	Route::get('/student/enrolled/semester/current', 'RegistrarController@getCurrentEnrolledStudents')->name('registrar.get.current.enrolled.students');
+
+	// route to view subjects
+	Route::get('/subjects', 'RegistrarController@subjects')->name('registrar.subjects');
+
+	// route to add subject
+	Route::get('/subject/add', 'RegistrarController@addSubject')->name('registrar.add.subject');
+
+	// route to save new subject
+	Route::post('/subject/add', 'RegistrarController@postAddSubject')->name('registrar.add.subject.post');
+
+	// route to update subject
+	Route::get('/subject/{id}/update', 'RegistrarController@updateSubject')->name('registrar.update.subject');
+
+	// route to save update on subject
+	Route::post('/subject/update', 'RegistrarController@postUpdateSubject')->name('registrar.update.subject.post');
+
+	Route::get('/subject/update', function () {
+		return redirect()->route('registrar.subjects');
+	});
+
+	// route to get course major on selected course
+	Route::get('/course/{id}/majors/get', 'RegistrarController@getCourseMajors')->name('admin.get.course.majors');
+
+	// route to get course curriculum on selected course
+	Route::get('/course/{id}/curriculum/get', 'RegistrarController@getCourseCurriculum')->name('admin.get.course.curriculum');
+
+	// route to get curriculum based on major
+	Route::get('/major/{id}/curriculum/get', 'RegistrarController@getMajorCurriculum')->name('admin.get.major.curriculum');
 
 });
 

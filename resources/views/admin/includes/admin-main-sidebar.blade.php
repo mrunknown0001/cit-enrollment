@@ -51,11 +51,6 @@
           <i class="fa fa-bars"></i> <span>Year Level</span>
         </a>
       </li>
-      <li class="{{ route('admin.subjects') == url()->current() ? 'active' : '' }}">
-        <a href="{{ route('admin.subjects') }}">
-          <i class="fa fa-book"></i> <span>Subjects</span>
-        </a>
-      </li>
       <li class="{{ route('admin.unit.price.misc') == url()->current() ? 'active' : '' }}">
         <a href="{{ route('admin.unit.price.misc') }}">
           <i class="fa fa-rub"></i> <span>Price &amp; Misc</span>

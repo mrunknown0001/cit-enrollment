@@ -23,6 +23,12 @@
           <li><a href="{{ asset('/uploads/Students_Import_Sheet.xlsx') }}" target="_blank"><i class="fa fa-download"></i> Import Form</a></li>
         </ul>
       </li>
+
+      <li class="{{ route('registrar.subjects') == url()->current() ? 'active' : '' }}">
+        <a href="{{ route('registrar.subjects') }}">
+          <i class="fa fa-book"></i> <span>Subjects</span>
+        </a>
+      </li>
     </ul>
   </section>
 </aside>

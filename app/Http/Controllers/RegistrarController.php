@@ -21,6 +21,7 @@ use App\YearLevel;
 use App\AcademicYear;
 use App\Semester;
 use App\EnrolledStudent;
+use App\Subject;
 
 class RegistrarController extends Controller
 {
@@ -307,14 +308,14 @@ class RegistrarController extends Controller
 
 
     // method use to get curriculum of cousre
-    public function getCourseCurriculum($id = null)
-    {
-        $cu = Curriculum::where('course_id', $id)
-                        ->where('active', 1)
-                        ->get();
+    // public function getCourseCurriculum($id = null)
+    // {
+    //     $cu = Curriculum::where('course_id', $id)
+    //                     ->where('active', 1)
+    //                     ->get();
 
-        return $cu;
-    }
+    //     return $cu;
+    // }
 
 
     // method use to import students
@@ -482,6 +483,216 @@ class RegistrarController extends Controller
             });
        })->export('xls');
 
+    }
+
+
+
+
+    // method use to view subjects
+    public function subjects()
+    {
+        $subjects = Subject::orderBy('code', 'asc')
+                        ->paginate(15);
+
+        return view('registrar.subjects', ['subjects' => $subjects]);
+    }
+
+
+    // method use to add subject
+    public function addSubject()
+    {
+        $courses = Course::where('active', 1)->get();
+        $subjects = Subject::where('active', 1)->get(['id', 'code']);
+        $yl = YearLevel::get();
+        $sem = Semester::get();
+
+        return view('registrar.subject-add', ['courses' => $courses, 'subjects' => $subjects, 'yl' => $yl, 'sem' => $sem]);
+    }
+
+
+    // method use to save new subject
+    public function postAddSubject(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|unique:subjects',
+            'description' => 'required',
+            'units' => 'required|numeric',
+            'course' => 'required',
+            'year_level' => 'required',
+            'semester' => 'required',
+            'curriculum' => 'required'
+        ]);
+
+        $code = $request['code'];
+        $description = $request['description'];
+        $units = $request['units'];
+        $course_id = $request['course'];
+        $major_id = $request['major'];
+        $year_level_id = $request['year_level'];
+        $semester_id = $request['semester'];
+        $curriculum_id = $request['curriculum'];
+        $prerequisite = $request['prerequisite'];
+
+        $course = Course::findorfail($course_id);
+        $major = CourseMajor::find($major_id);
+
+        // save new subject
+        $sub = new Subject();
+        $sub->code = $code;
+        $sub->description = $description;
+        $sub->units = $units;
+        $sub->course_id = $course->id;
+        if(count($major) > 0) {
+            $sub->major_id = $major->id;
+        }
+        else {
+            $sub->major_id = null;
+        }
+        $sub->prerequisite = $prerequisite;
+        $sub->curriculum_id = $curriculum_id;
+        $sub->year_level_id = $year_level_id;
+        $sub->semester_id = $semester_id;
+        $sub->save();
+
+        GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Registrar Added New Subject');
+
+        return redirect()->back()->with('success', 'Subject Added!');
+
+    }
+
+
+    // method use to update subject
+    public function updateSubject($id = null)
+    {
+        $subject = Subject::findorfail($id);
+        $subjects = Subject::where('active', 1)->get(['id', 'code']);
+        $courses = Course::orderBy('title', 'asc')->get();
+        $yl = YearLevel::get();
+        $sem = Semester::get();
+
+        return view('registrar.subject-update', ['subject' => $subject, 'subjects' => $subjects, 'courses' => $courses, 'yl' => $yl, 'sem' => $sem]);
+    }
+
+
+    // method use to save update on subject
+    public function postUpdateSubject(Request $request)
+    {
+        $request->validate([
+            'code' => 'required',
+            'description' => 'required',
+            'units' => 'required|numeric',
+            'course' => 'required',
+            'year_level' => 'required',
+            'semester' => 'required',
+            'curriculum' => 'required'
+        ]);
+
+        $subject_id = $request['subject_id'];
+        $code = $request['code'];
+        $description = $request['description'];
+        $units = $request['units'];
+        $course_id = $request['course'];
+        $major_id = $request['major'];
+        $year_level_id = $request['year_level'];
+        $semester_id = $request['semester'];
+        $curriculum_id = $request['curriculum'];
+
+        $course = Course::findorfail($course_id);
+        $major = CourseMajor::find($major_id);
+
+        $sub = Subject::findorfail($subject_id);
+
+        // check if code exists
+        $check_code = Subject::where('code', $code)->first();
+
+        if(count($check_code) > 0 && $sub->code != $code) {
+            return redirect()->back()->with('error', 'Subject Code Exists. Please Check your input');
+        }
+
+        $sub->code = $code;
+        $sub->description = $description;
+        $sub->units = $units;
+        $sub->course_id = $course->id;
+        if(count($major) > 0) {
+            $sub->major_id = $major->id;
+        }
+        else {
+            $sub->major_id = null;
+        }
+        $sub->curriculum_id = $curriculum_id;
+        $sub->year_level_id = $year_level_id;
+        $sub->semester_id = $semester_id;
+        $sub->save();
+
+        GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Admin Updated Subject');
+
+        return redirect()->route('registrar.subjects')->with('success', 'Subject Updated!');
+    }
+
+
+    // method use to get course major to use in form add/update subject
+    public function getCourseMajors($id = null)
+    {
+        $majors = CourseMajor::where('course_id', $id)->where('active', 1)->get();
+
+        $course_majors = null;
+
+        if(count($majors) < 1) {
+            return null;
+        }
+
+        foreach($majors as $m) {
+            $course_majors[] = [
+                        'id' => $m->id,
+                        'name' => $m->name
+                    ];
+        }
+
+        return $course_majors;
+    }
+
+
+    // method use to get course curriculum to use in form add/update subject
+    public function getCourseCurriculum($id = null)
+    {
+        $curriculum = Curriculum::where('course_id', $id)->where('active', 1)->get();
+
+        $course_cu = null;
+
+        if(count($curriculum) < 1) {
+            return null;
+        }
+
+        foreach($curriculum as $c) {
+            $course_cu[] = [
+                        'id' => $c->id,
+                        'name' => $c->name
+                    ];
+        }
+
+        return $course_cu;
+    }
+
+
+    // method use to get major per curriculum in form add/update
+    public function getMajorCurriculum($id = null)
+    {
+        $curriculum = Curriculum::where('major_id', $id)->where('active', 1)->get();
+
+        $course_cu = null;
+
+        if(count($curriculum) < 1) {
+            return null;
+        }
+
+        foreach($curriculum as $c) {
+            $course_cu[] = [
+                        'id' => $c->id,
+                        'name' => $c->name
+                    ];
+        }
+
+        return $course_cu;
     }
 
 }
