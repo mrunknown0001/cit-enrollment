@@ -61,11 +61,6 @@
           <i class="fa fa-rub"></i> <span>Price &amp; Misc</span>
         </a>
       </li>
-      <li class="{{ route('admin.rooms') == url()->current() ? 'active' : '' }}">
-        <a href="{{ route('admin.rooms') }}">
-          <i class="fa fa-building"></i> <span>Rooms</span>
-        </a>
-      </li>
       <li class="{{ route('admin.activity.logs') == url()->current() ? 'active' : '' }}">
         <a href="{{ route('admin.activity.logs') }}">
           <i class="fa fa-history"></i> <span>Activity Logs</span>

@@ -1518,77 +1518,77 @@ class AdminController extends Controller
     }
 
 
-    // method use to view room management
-    public function rooms()
-    {
-        $rooms = Room::orderBy('name', 'asc')->paginate(15);
+    // // method use to view room management
+    // public function rooms()
+    // {
+    //     $rooms = Room::orderBy('name', 'asc')->paginate(15);
 
-        return view('admin.rooms', ['rooms' => $rooms]);
-    }
-
-
-    // method use to add room
-    public function addRoom()
-    {
-        return view('admin.room-add');
-    }
+    //     return view('admin.rooms', ['rooms' => $rooms]);
+    // }
 
 
-    // method use to save new room
-    public function postAddRoom(Request $request)
-    {
-        $request->validate([
-            'room_name' => 'required',
-            'room_number' => 'required'
-        ]);
-
-        $name = $request['room_name'];
-        $number = $request['room_number'];
-
-        // add new room in \
-        $r = new Room();
-        $r->name = $name;
-        $r->number = $number;
-        $r->save();
-
-        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added New Room');
-
-        return redirect()->route('admin.rooms')->with('success', 'New Room Added!');
-    }
+    // // method use to add room
+    // public function addRoom()
+    // {
+    //     return view('admin.room-add');
+    // }
 
 
-    // method use to update room
-    public function updateRoom($id = null)
-    {
-        $room = Room::findorfail($id);
+    // // method use to save new room
+    // public function postAddRoom(Request $request)
+    // {
+    //     $request->validate([
+    //         'room_name' => 'required',
+    //         'room_number' => 'required'
+    //     ]);
 
-        return view('admin.room-update', ['room' => $room]);
-    }
+    //     $name = $request['room_name'];
+    //     $number = $request['room_number'];
+
+    //     // add new room in \
+    //     $r = new Room();
+    //     $r->name = $name;
+    //     $r->number = $number;
+    //     $r->save();
+
+    //     GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added New Room');
+
+    //     return redirect()->route('admin.rooms')->with('success', 'New Room Added!');
+    // }
 
 
-    // method use to save room changes
-    public function postUpdateRoom(Request $request)
-    {
-        $request->validate([
-            'room_name' => 'required',
-            'room_number' => 'required'
-        ]);
+    // // method use to update room
+    // public function updateRoom($id = null)
+    // {
+    //     $room = Room::findorfail($id);
 
-        $name = $request['room_name'];
-        $number = $request['room_number'];
-        $room_id = $request['room_id'];
+    //     return view('admin.room-update', ['room' => $room]);
+    // }
 
-        $room = Room::findorfail($room_id);
 
-        // save update here
-        $room->name = $name;
-        $room->number = $number;
-        $room->save();
+    // // method use to save room changes
+    // public function postUpdateRoom(Request $request)
+    // {
+    //     $request->validate([
+    //         'room_name' => 'required',
+    //         'room_number' => 'required'
+    //     ]);
 
-        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Room Details');
+    //     $name = $request['room_name'];
+    //     $number = $request['room_number'];
+    //     $room_id = $request['room_id'];
 
-        return redirect()->route('admin.rooms')->with('success', 'Room Updated!');
-    }
+    //     $room = Room::findorfail($room_id);
+
+    //     // save update here
+    //     $room->name = $name;
+    //     $room->number = $number;
+    //     $room->save();
+
+    //     GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Room Details');
+
+    //     return redirect()->route('admin.rooms')->with('success', 'Room Updated!');
+    // }
 
 
     // route to view activity logs

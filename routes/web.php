@@ -350,24 +350,24 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to save update in unit price
 	Route::post('/unit/price/update', 'AdminController@postUpdateUnitPrice')->name('admin.update.unit.price.post');
 
-	// route to show rooms management
-	Route::get('/rooms', 'AdminController@rooms')->name('admin.rooms');
+	// // route to show rooms management
+	// Route::get('/rooms', 'AdminController@rooms')->name('admin.rooms');
 
-	// route to add room
-	Route::get('/room/add', 'AdminController@addRoom')->name('admin.add.room');
+	// // route to add room
+	// Route::get('/room/add', 'AdminController@addRoom')->name('admin.add.room');
 
-	// route to save room
-	Route::post('/room/add', 'AdminController@postAddRoom')->name('admin.add.room.post');
+	// // route to save room
+	// Route::post('/room/add', 'AdminController@postAddRoom')->name('admin.add.room.post');
 
-	// route to update room
-	Route::get('/room/{id}/update', 'AdminController@updateRoom')->name('admin.update.room');
+	// // route to update room
+	// Route::get('/room/{id}/update', 'AdminController@updateRoom')->name('admin.update.room');
 
-	// route to save room changes
-	Route::post('/room/update', 'AdminController@postUpdateRoom')->name('admin.update.room.post');
+	// // route to save room changes
+	// Route::post('/room/update', 'AdminController@postUpdateRoom')->name('admin.update.room.post');
 
-	Route::get('/room/update', function () {
-		return redirect()->route('admin.rooms');
-	});
+	// Route::get('/room/update', function () {
+	// 	return redirect()->route('admin.rooms');
+	// });
 
 	// route to view activity logs
 	Route::get('/activity-logs', 'AdminController@activityLogs')->name('admin.activity.logs');
@@ -405,6 +405,25 @@ Route::group(['prefix' => 'dean'], function () {
 
 	// route to save new schedule
 	Route::post('/schedule/add', 'DeanController@postAddSchedule')->name('dean.add.schedule.post');
+
+	// route to show rooms management
+	Route::get('/rooms', 'DeanController@rooms')->name('dean.rooms');
+
+	// route to add room
+	Route::get('/room/add', 'DeanController@addRoom')->name('dean.add.room');
+
+	// route to save room
+	Route::post('/room/add', 'DeanController@postAddRoom')->name('dean.add.room.post');
+
+	// route to update room
+	Route::get('/room/{id}/update', 'DeanController@updateRoom')->name('dean.update.room');
+
+	// route to save room changes
+	Route::post('/room/update', 'DeanController@postUpdateRoom')->name('dean.update.room.post');
+
+	Route::get('/room/update', function () {
+		return redirect()->route('dean.rooms');
+	});
 
 });
 

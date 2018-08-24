@@ -115,7 +115,7 @@ class DeanController extends Controller
         // add activty log
         GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Change Password');
 
-        // return to deans and add admin with message
+        // return to deans and add dean with message
         return redirect()->route('dean.dashboard')->with('success', 'Password Changed!');
     }
 
@@ -228,8 +228,92 @@ class DeanController extends Controller
         // add activty log
         GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Added New Schedule');
 
-        // return to deans and add admin with message
+        // return to deans and add dean with message
         return redirect()->back()->with('success', 'Schedule Added!');
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // method use to view room management
+    public function rooms()
+    {
+        $rooms = Room::orderBy('name', 'asc')->paginate(15);
+
+        return view('dean.rooms', ['rooms' => $rooms]);
+    }
+
+
+    // method use to add room
+    public function addRoom()
+    {
+        return view('dean.room-add');
+    }
+
+
+    // method use to save new room
+    public function postAddRoom(Request $request)
+    {
+        $request->validate([
+            'room_name' => 'required'
+        ]);
+
+        $name = $request['room_name'];
+
+        // add new room in \
+        $r = new Room();
+        $r->name = $name;
+        $r->save();
+
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Admin Added New Room');
+
+        return redirect()->route('dean.rooms')->with('success', 'New Room Added!');
+    }
+
+
+    // method use to update room
+    public function updateRoom($id = null)
+    {
+        $room = Room::findorfail($id);
+
+        return view('dean.room-update', ['room' => $room]);
+    }
+
+    // method use to save room changes
+    public function postUpdateRoom(Request $request)
+    {
+        $request->validate([
+            'room_name' => 'required'
+        ]);
+
+        $name = $request['room_name'];
+        $room_id = $request['room_id'];
+
+        $room = Room::findorfail($room_id);
+
+        // save update here
+        $room->name = $name;
+        $room->save();
+
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Admin Updated Room Details');
+
+        return redirect()->route('dean.rooms')->with('success', 'Room Updated!');
+    }
+
+
+
+
 
 }
