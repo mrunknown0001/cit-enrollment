@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Controllers\GeneralController;
+use Session;
 
 use App\Dean;
 use App\Schedule;
@@ -24,6 +25,7 @@ class DeanController extends Controller
     // method use to view dashboard
     public function dashboard()
     {
+        
     	return view('dean.dashboard');
     }
 
@@ -91,7 +93,7 @@ class DeanController extends Controller
     {
         $request->validate([
             'old_password' => 'required',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed|min:6|max:32'
         ]);
 
         $old_password = $request['old_password'];

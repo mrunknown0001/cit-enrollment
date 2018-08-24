@@ -133,7 +133,7 @@ class StudentController extends Controller
     {
         $request->validate([
             'old_password' => 'required',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed|min:6|max:32'
         ]);
 
         $old = $request['old_password'];

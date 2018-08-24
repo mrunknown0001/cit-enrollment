@@ -94,7 +94,7 @@ class CashierController extends Controller
     {
         $request->validate([
             'old_password' => 'required',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed|min:6|max:32'
         ]);
 
         $old_password = $request['old_password'];
