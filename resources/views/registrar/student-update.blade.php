@@ -5,7 +5,7 @@
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Add Student</h1>
+		<h1>Update Student</h1>
 		<ol class="breadcrumb">
 			<li><a href="javascript:void(0)"><i class="fa fa-graduation-cap"></i> Home</a></li>
 			<li class="active">Students</li>

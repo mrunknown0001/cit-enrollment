@@ -471,6 +471,12 @@ Route::group(['prefix' => 'registrar'], function () {
 	// route to save update student
 	Route::post('/student/update', 'RegistrarController@postUpdateStudent')->name('registrar.update.student.post');
 
+	// route to view student info personal
+	Route::get('/student/{id}/info/perosnal', 'RegistrarController@studentPersonalInfo')->name('registrar.student.personal.info');
+
+	// route to view student educational info
+	Route::get('/student/{id}/info/educational', 'RegistrarController@studentEducationalInfo')->name('registrar.student.educational.info');
+
 	// route to get major to be use in add student form
 	Route::get('/course/{id}/majors/get', 'RegistrarController@getCourseMajor')->name('registrar.get.course.major');
 
@@ -610,17 +616,17 @@ Route::group(['prefix' => 'student'], function () {
 	Route::get('/dashboard', 'StudentController@dashboard')->name('student.dashboard');
 
 	// route to view profile
-	Route::get('/profile', 'StudentController@profile')->name('student.profile');
+	// Route::get('/profile', 'StudentController@profile')->name('student.profile');
 
-	// route to update profile
-	Route::get('/profile/{id}/update', 'StudentController@updateProfile')->name('student.update.profile');
+	// // route to update profile
+	// Route::get('/profile/{id}/update', 'StudentController@updateProfile')->name('student.update.profile');
 
-	// route to save proifle update
-	Route::post('/profile/update', 'StudentController@postUpdateProfile')->name('student.update.profile.post');
+	// // route to save proifle update
+	// Route::post('/profile/update', 'StudentController@postUpdateProfile')->name('student.update.profile.post');
 
-	Route::get('/profile/update', function () {
-		return redirect()->route('student.dashboard');
-	});
+	// Route::get('/profile/update', function () {
+	// 	return redirect()->route('student.dashboard');
+	// });
 
 	// route to change password of student
 	Route::get('/password/change', 'StudentController@changePassword')->name('student.change.password');

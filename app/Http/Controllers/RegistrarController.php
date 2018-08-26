@@ -486,6 +486,24 @@ class RegistrarController extends Controller
     }
 
 
+    // method use to view personal info of students
+    public function studentPersonalInfo($id = null)
+    {
+        $student = User::findorfail($id);
+
+        return view('registrar.student-personal-info', ['student' => $student]);
+    }
+
+
+    // method use to view education info of students
+    public function studentEducationalInfo($id = null)
+    {
+        $student = User::findorfail($id);
+
+        return view('registrar.student-education-info', ['student' => $student]);
+    }
+
+
 
 
     // method use to view subjects
