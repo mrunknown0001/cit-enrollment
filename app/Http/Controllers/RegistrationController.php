@@ -45,7 +45,7 @@ class RegistrationController extends Controller
     public function postRegisterStudent(Request $request)
     {
     	$request->validate([
-    		'password' => 'required'
+    		'password' => 'required|min:6|max:32'
     	]);
 
     	$student_id = $request['student_id'];
