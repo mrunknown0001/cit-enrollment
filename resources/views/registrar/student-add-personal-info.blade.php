@@ -22,7 +22,7 @@
 					</div>
 					<div class="box-body">
 						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
-						<form action="{{ route('registrar.update.student.educational.info') }}" method="GET" autocomplete="off" role="form">
+						<form action="#" method="GET" autocomplete="off" role="form">
 							{{ csrf_field() }}
 							<input type="hidden" name="student_id" value="{{ $student_id }}">
 							<input type="hidden" name="sn" value="{{ $sn }}">
