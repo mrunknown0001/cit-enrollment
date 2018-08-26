@@ -22,6 +22,7 @@ use App\AcademicYear;
 use App\Semester;
 use App\EnrolledStudent;
 use App\Subject;
+use App\StudentPreviousSchool;
 
 class RegistrarController extends Controller
 {
@@ -210,6 +211,11 @@ class RegistrarController extends Controller
         $info->year_level_id = $year_level->id;
         $info->save();
 
+        // add new previous school of student
+        $prev = new StudentPreviousSchool();
+        $prev->student_id = $student->id;
+        $prev->save();
+
     	// add activitly log
         GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Registrar Added Student');
 
@@ -241,18 +247,9 @@ class RegistrarController extends Controller
     }
 
 
-    // method use to save student update
-    public function postUpdateStudent(Request $request)
+    // method use to continue update: personal info
+    public function updateStudentPersonalInfo(Request $request)
     {
-        $request->validate([
-            'student_number' => 'required',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'course' => 'required',
-            'curriculum' => 'required',
-            'year_level' => 'required'
-        ]);
-
         $student_id = $request['student_id'];
         $sn = $request['student_number'];
         $firstname = $request['firstname'];
@@ -263,6 +260,124 @@ class RegistrarController extends Controller
         $major_id = $request['major'];
         $curriculum_id = $request['curriculum'];
         $yl_id = $request['year_level'];
+
+        $student = User::findorfail($student_id);
+
+        return view('registrar.student-update-personal-info', [
+            'student' => $student,
+            'student_id' => $student->id,
+            'sn' => $sn, // student number
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'middlename' => $middlename,
+            'suffix' => $suffix,
+            'course_id' => $course_id,
+            'major_id' => $major_id,
+            'curriculum_id' => $curriculum_id,
+            'yl_id' => $yl_id
+        ]);
+    }
+
+
+    // method use to update student education information
+    public function updateStudentEducationalInfo(Request $request)
+    {
+
+        $student_id = $request['student_id'];
+        $sn = $request['sn'];
+        $firstname = $request['firstname'];
+        $lastname = $request['lastname'];
+        $middlename = $request['middlename'];
+        $suffix = $request['suffix'];
+        $course_id = $request['course_id'];
+        $major_id = $request['major_id'];
+        $curriculum_id = $request['curriculum_id'];
+        $yl_id = $request['yl_id'];
+
+        $student = User::findorfail($student_id);
+
+        $sex = $request['sex'];
+        $civil_status = $request['civil_status'];
+        $mobile_number = $request['mobile_number'];
+        $email = $request['email'];
+        $address = $request['address'];
+        $nationality = $request['nationality'];
+        $pob = $request['place_of_birth'];
+        $dob = $request['date_of_birth'];
+        $religion = $request['religion'];
+        $father = $request['fathers_name'];
+        $mother = $request['mothers_name'];
+        $guardian = $request['guardians_name'];
+        $guardians_address = $request['guardians_address'];
+
+        return view('registrar.student-update-educational-info', [ 
+            'student' => $student,
+            'student_id' => $student->id,
+            'sn' => $sn, // student number
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'middlename' => $middlename,
+            'suffix' => $suffix,
+            'course_id' => $course_id,
+            'major_id' => $major_id,
+            'curriculum_id' => $curriculum_id,
+            'yl_id' => $yl_id,
+
+            'sex' => $sex,
+            'civil_status' => $civil_status,
+            'mobile_number' => $mobile_number,
+            'email' => $email,
+            'address' => $address,
+            'nationality' => $nationality,
+            'pob' => $pob,
+            'dob' => $dob,
+            'religion' => $religion,
+            'father' => $father,
+            'mother' => $mother,
+            'guardian' => $guardian,
+            'guardians_address' => $guardians_address
+        ]);
+    }
+
+
+    // method use to save student update
+    public function postUpdateStudent(Request $request)
+    {
+        $student_id = $request['student_id'];
+        $sn = $request['sn'];
+        $firstname = $request['firstname'];
+        $lastname = $request['lastname'];
+        $middlename = $request['middlename'];
+        $suffix = $request['suffix'];
+
+        $course_id = $request['course_id'];
+        $major_id = $request['major_id'];
+        $curriculum_id = $request['curriculum_id'];
+        $yl_id = $request['yl_id'];
+
+        $sex = $request['sex'];
+        $civil_status = $request['civil_status'];
+        $mobile_number = $request['mobile_number'];
+        $email = $request['email'];
+        $address = $request['address'];
+        $nationality = $request['nationality'];
+        $pob = $request['pob'];
+        $dob = $request['dob'];
+        $religion = $request['religion'];
+        $father = $request['father'];
+        $mother = $request['mother'];
+        $guardian = $request['guardian'];
+        $guardians_address = $request['guardians_address'];
+
+        $elem = $request['elementary_school'];
+        $elem_year_graduated = $request['elementary_year_graduated'];
+        $hs = $request['high_school'];
+        $hs_year_graduated = $request['high_school_year_graduated'];
+        $college = $request['college'];
+        $college_year_graduated = $request['college_year_graduated'];
+        $school_last_attended = $request['school_last_attended'];
+        $school_address = $request['school_address'];
+        $year_graduated = $request['year_graduated'];
 
         $student = User::findorfail($student_id);
 
@@ -286,18 +401,41 @@ class RegistrarController extends Controller
         $student->save();
 
         // save to course enrolled
-        $ce = new CourseEnrolled();
-        $ce->student_id = $student->id;
+        $ce = CourseEnrolled::whereStudentId($student->id)->first();
         $ce->course_id = $course->id;
         $ce->major_id = $major_id;
         $ce->curriculum_id = $curriculum->id;
         $ce->save();
 
         // save to student info record
-        $info = new StudentInfo();
-        $info->student_id = $student->id;
+        $info = StudentInfo::whereStudentId($student->id)->first();
         $info->year_level_id = $year_level->id;
+        $info->sex = $sex;
+        $info->mobile_number = $mobile_number;
+        $info->email = $email;
+        $info->home_address = $address;
+        $info->nationality = $nationality;
+        $info->civil_status = $civil_status;
+        $info->date_of_birth = date('Y-m-d', strtotime($dob));
+        $info->place_of_birth = $pob;
+        $info->religion = $religion;
+        $info->fathers_name = $father;
+        $info->mothers_name = $mother;
+        $info->guardians_name = $guardian;
+        $info->guardians_address = $guardians_address;
         $info->save();
+
+        $prev = StudentPreviousSchool::whereStudentId($student->id)->first();
+        $prev->elementary_school = $elem;
+        $prev->elementary_year_graduated = $elem_year_graduated;
+        $prev->high_school = $hs;
+        $prev->high_school_year_graduated = $hs_year_graduated;
+        $prev->college_school = $college;
+        $prev->college_year_graduated = $college_year_graduated;
+        $prev->school_last_attended = $school_last_attended;
+        $prev->school_address = $school_address;
+        $prev->year_graduated = $year_graduated;
+        $prev->save();
 
         // add activitly log
         GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Registrar Updated Student');

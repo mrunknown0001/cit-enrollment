@@ -43,6 +43,12 @@ class User extends Authenticatable
     }
 
 
+    public function prev()
+    {
+        return $this->hasOne('App\StudentPreviousSchool', 'student_id');
+    }
+
+
     public function avatar()
     {
         return $this->hasOne('App\Avatar', 'student_id');

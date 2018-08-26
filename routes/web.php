@@ -468,6 +468,12 @@ Route::group(['prefix' => 'registrar'], function () {
 	// route to update student
 	Route::get('/student/{id}/update', 'RegistrarController@updateStudent')->name('registrar.update.student');
 
+	// route next step in update personal info
+	Route::get('/student/update/perosnal/info', 'RegistrarController@updateStudentPersonalInfo')->name('registrar.update.student.personal.info');
+
+	// route next step update in school information
+	Route::get('/student/update/educational/info', 'RegistrarController@updateStudentEducationalInfo')->name('registrar.update.student.educational.info');
+
 	// route to save update student
 	Route::post('/student/update', 'RegistrarController@postUpdateStudent')->name('registrar.update.student.post');
 

@@ -22,7 +22,7 @@
 					</div>
 					<div class="box-body">
 						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
-						<form action="{{ route('registrar.update.student.post') }}" method="POST" role="form" autocomplete="off">
+						<form action="{{ route('registrar.update.student.personal.info') }}" method="GET" role="form" autocomplete="off">
 							{{ csrf_field() }}
 							<input type="hidden" name="student_id" value="{{ $student->id }}">
 							<div class="row">
@@ -155,7 +155,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Update Student Info</button>
+								<button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i> Continue</button>
 							</div>
 						</form>
 					</div>
