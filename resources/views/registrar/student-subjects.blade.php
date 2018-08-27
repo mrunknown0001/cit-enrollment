@@ -20,11 +20,32 @@
 				@include('includes.all')
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<strong>Student Subjects</strong>
+						<strong>Student Subjects for {{ ucwords($student->firstname . ' ' . $student->lastname) }}-{{ $student->student_number }}</strong>
 					</div>
 					<div class="box-body">
 
-						
+						@if(count($subjects) > 0)
+						<table class="table table-hover table-bordered table-striped">
+							<thead>
+								<tr>
+									<th class="text-center">Code</th>
+									<th class="text-center">Description</th>
+									<th class="text-center">Unit[Lec|Lab]</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($subjects as $s)
+								<tr>
+									<td class="text-center">{{ $s->code }}</td>
+									<td class="text-center">{{ $s->description }}</td>
+									<td class="text-center">{{ $s->units }}{{ $s->lab_units ? '|' . $s->lab_units : '' }}</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+						@else
+						<p class="text-center">No Subject Found!</p>
+						@endif
 
 					</div>
 					<div class="box-footer">

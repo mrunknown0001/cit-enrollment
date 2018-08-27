@@ -790,9 +790,17 @@ class RegistrarController extends Controller
 
         if(count($ay) < 1 || count($sem) < 1) {
             return redirect()->back()->with('error', 'No Active AcademicYear or Semester. Contact Admin!');
-        } 
+        }
 
-        
+        $curriculum_id = $student->enrolled->curriculum_id;
+        $yl_id = $student->info->year_level_id;
+
+        $subjects = Subject::whereCurriculumId($curriculum_id)
+                        ->whereYearLevelId($yl_id)
+                        ->whereSemesterId($sem->id)
+                        ->get();
+
+        return view('registrar.student-subjects', ['subjects' => $subjects, 'student' => $student]);
     }
 
 
