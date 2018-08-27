@@ -489,6 +489,9 @@ Route::group(['prefix' => 'registrar'], function () {
 	// route to view student educational info
 	Route::get('/student/{id}/info/educational', 'RegistrarController@studentEducationalInfo')->name('registrar.student.educational.info');
 
+	// route to view subjects of students in current semester
+	Route::get('/student/{id}/subjects/current', 'RegistrarController@studentCurrentSubjects')->name('registrar.current.subjects');
+
 	// route to get major to be use in add student form
 	Route::get('/course/{id}/majors/get', 'RegistrarController@getCourseMajor')->name('registrar.get.course.major');
 
