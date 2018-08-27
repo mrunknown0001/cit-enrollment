@@ -462,6 +462,12 @@ Route::group(['prefix' => 'registrar'], function () {
 	// route to add student
 	Route::get('/student/add', 'RegistrarController@addStudent')->name('registrar.add.student');
 
+	// route to add personal info of the student
+	Route::get('/student/add/personal/info', 'RegistrarController@addStudentPersonalInfo')->name('registrar.add.student.personal.info');
+
+	// route to add education info of the student
+	Route::get('/student/add/educational/info', 'RegistrarController@addStudentEducationInfo')->name('registrar.add.student.educational.info');
+
 	// route to save new student
 	Route::post('/student/add', 'RegistrarController@postAddStudent')->name('registrar.add.student.post');
 
@@ -469,7 +475,7 @@ Route::group(['prefix' => 'registrar'], function () {
 	Route::get('/student/{id}/update', 'RegistrarController@updateStudent')->name('registrar.update.student');
 
 	// route next step in update personal info
-	Route::get('/student/update/perosnal/info', 'RegistrarController@updateStudentPersonalInfo')->name('registrar.update.student.personal.info');
+	Route::get('/student/update/personal/info', 'RegistrarController@updateStudentPersonalInfo')->name('registrar.update.student.personal.info');
 
 	// route next step update in school information
 	Route::get('/student/update/educational/info', 'RegistrarController@updateStudentEducationalInfo')->name('registrar.update.student.educational.info');

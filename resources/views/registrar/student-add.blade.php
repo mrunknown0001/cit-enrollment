@@ -22,7 +22,7 @@
 					</div>
 					<div class="box-body">
 						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
-						<form action="{{ route('registrar.add.student.post') }}" method="POST" role="form" autocomplete="off">
+						<form action="{{ route('registrar.add.student.personal.info') }}" method="GET" role="form" autocomplete="off">
 							{{ csrf_field() }}
 							<div class="row">
 								<div class="col-md-6">
@@ -154,7 +154,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add Student</button>
+								<button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i> Continue</button>
 							</div>
 						</form>
 					</div>

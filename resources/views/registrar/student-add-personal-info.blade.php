@@ -18,13 +18,12 @@
 				@include('includes.all')
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-graduation-cap"></i> Update Student: {{ ucwords($firstname . ' ' . $lastname) }} - {{ $sn }}</strong>
+						<strong><i class="fa fa-graduation-cap"></i> Add Student: {{ ucwords($firstname . ' ' . $lastname) }} - {{ $sn }}</strong>
 					</div>
 					<div class="box-body">
 						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
-						<form action="#" method="GET" autocomplete="off" role="form">
+						<form action="{{ route('registrar.add.student.educational.info') }}" method="GET" autocomplete="off" role="form">
 							{{ csrf_field() }}
-							<input type="hidden" name="student_id" value="{{ $student_id }}">
 							<input type="hidden" name="sn" value="{{ $sn }}">
 							<input type="hidden" name="firstname" value="{{ $firstname }}">
 							<input type="hidden" name="lastname" value="{{ $lastname }}">
