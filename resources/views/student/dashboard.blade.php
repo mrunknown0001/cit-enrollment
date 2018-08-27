@@ -26,13 +26,52 @@
 
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-graduation-cap"></i> Educational Profile</strong>
+						<strong><i class="fa fa-graduation-cap"></i> Student Profile</strong>
 					</div>
 					<div class="box-body">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-12">
+								<p><strong>{{ ucwords(Auth::user()->firstname . ' ' . Auth::user()->lastname) }} - {{ Auth::user()->student_number }}</strong></p>
 								<p>Course: <strong>{{ Auth::user()->enrolled->course->title }}</strong></p>
 								<p>Year Level: <strong>{{ Auth::user()->info->year_level->name }}</strong></p>
+								<div class="row">
+									<div class="col-md-6">
+										<p>Address: <strong>{{ ucwords(Auth::user()->info->home_address) }}</strong></p>
+									</div>
+									<div class="col-md-3">
+										<p>Nationality: <strong>{{ ucwords(Auth::user()->info->nationality) }}</strong></p>
+									</div>
+									<div class="col-md-3">
+										<p>Civil Status: <strong>{{ ucwords(Auth::user()->info->civil_status) }}</strong></p>
+									</div>
+									<div class="col-md-4">
+										<p>Date of Birth: <strong>{{ date('m/d/Y', strtotime(Auth::user()->info->date_of_birth)) }}</strong></p>
+									</div>
+									<div class="col-md-4">
+										<p>Age: <strong>{{ date('Y') - date('Y', strtotime(Auth::user()->info->date_of_birth)) }}</strong></p>
+									</div>
+									<div class="col-md-4">
+										<p>Place of Birth: <strong>{{ ucwords(Auth::user()->info->place_of_birth) }}</strong></p>
+									</div>
+
+									<div class="col-md-12">
+										<p>Religious Afflication: <strong>{{ ucwords(Auth::user()->info->religion) }}</strong></p>
+									</div>
+
+									<div class="col-md-6">
+										<p>Father: <strong>{{ ucwords(Auth::user()->info->fathers_name) }}</strong></p>
+									</div>
+									<div class="col-md-6">
+										<p>Mother: <strong>{{ ucwords(Auth::user()->info->mothers_name) }}</strong></p>
+									</div>
+
+									<div class="col-md-6">
+										<p>Guardian's Name: <strong>{{ ucwords(Auth::user()->info->guardians_name) }}</strong>
+									</div>
+									<div class="col-md-6">
+										<p>Guardian's Address: <strong>{{ ucwords(Auth::user()->info->guardians_address) }}</strong>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

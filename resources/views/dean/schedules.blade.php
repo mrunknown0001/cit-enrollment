@@ -15,80 +15,15 @@
 		<div class="row">
 			<div class="col-md-12">
 				{{-- <a href="{{ route('dean.add.schedule') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Schedule</a> --}}
-
-				<p><button class="btn btn-primary" data-toggle="modal" data-target="#addSchedule"><i class="fa fa-plus"></i> Add Schedule</button></p>
-				@include('dean.includes.modal-schedule-add')
-
-				@include('includes.all')
-				@if(count($schedules) > 0)
-					<hr>
-					<div style="font-size: 12px; font-family: Times New Roman">
-						<table class="table table-hover">
-							<tr>
-								<td>Monday</td>
-								@foreach($monday as $sch)
-									<td class="text-center">
-									{{ $sch->subject->code }}
-									{{ \App\Http\Controllers\GeneralController::get_time($sch->start_time) }}-
-									{{ \App\Http\Controllers\GeneralController::get_time($sch->end_time) }}
-									</td>
-								@endforeach
-							</tr>					
-							<tr>
-								<td>Tuesday</td>
-								@foreach($tuesday as $sch)
-									<td class="text-center">
-									{{ $sch->subject->code }}
-									{{ \App\Http\Controllers\GeneralController::get_time($sch->start_time) }}-
-									{{ \App\Http\Controllers\GeneralController::get_time($sch->end_time) }}
-									</td>
-								@endforeach
-							</tr>					
-							<tr>
-								<td>Wednesday</td>
-								@foreach($wednesday as $sch)
-									<td class="text-center">
-									{{ $sch->subject->code }}
-									{{ \App\Http\Controllers\GeneralController::get_time($sch->start_time) }}-
-									{{ \App\Http\Controllers\GeneralController::get_time($sch->end_time) }}
-									</td>
-								@endforeach
-							</tr>					
-							<tr>
-								<td>Thursday</td>
-								@foreach($thursday as $sch)
-									<td class="text-center">
-									{{ $sch->subject->code }}
-									{{ \App\Http\Controllers\GeneralController::get_time($sch->start_time) }}-
-									{{ \App\Http\Controllers\GeneralController::get_time($sch->end_time) }}
-									</td>
-								@endforeach
-							</tr>					
-							<tr>
-								<td>Friday</td>
-								@foreach($friday as $sch)
-									<td class="text-center">
-									{{ $sch->subject->code }}
-									{{ \App\Http\Controllers\GeneralController::get_time($sch->start_time) }}-
-									{{ \App\Http\Controllers\GeneralController::get_time($sch->end_time) }}
-									</td>
-								@endforeach
-							</tr>					
-							<tr>
-								<td>Saturday</td>
-								@foreach($saturday as $sch)
-									<td class="text-center">
-									{{ $sch->subject->code }}
-									{{ \App\Http\Controllers\GeneralController::get_time($sch->start_time) }}-
-									{{ \App\Http\Controllers\GeneralController::get_time($sch->end_time) }}
-									</td>
-								@endforeach
-							</tr>					
-						</table>
-					</div>
-				@else
-					<p class="text-center">No Schedules Available!</p>
-				@endif
+				<p></p><p></p><p></p>
+				<p class="text-center">
+					<a href="{{ route('dean.monday.schedule') }}" class="btn btn-primary">Monday</a>
+					<a href="{{ route('dean.tuesday.schedule') }}" class="btn btn-primary">Tuesday</a>
+					<a href="{{ route('dean.wednesday.schedule') }}" class="btn btn-primary">Wednesday</a>
+					<a href="{{ route('dean.thursday.schedule') }}" class="btn btn-primary">Thursday</a>
+					<a href="{{ route('dean.friday.schedule') }}" class="btn btn-primary">Friday</a>
+					<a href="{{ route('dean.saturday.schedule') }}" class="btn btn-primary">Saturday</a>
+				</p>
 			</div>
 		</div>
 	</section>

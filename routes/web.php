@@ -406,6 +406,26 @@ Route::group(['prefix' => 'dean'], function () {
 	// route to save new schedule
 	Route::post('/schedule/add', 'DeanController@postAddSchedule')->name('dean.add.schedule.post');
 
+	// route to update
+
+	// route to view schedule per room in monday
+	Route::get('/schedules/monday/get', 'DeanController@mondaySchedule')->name('dean.monday.schedule');
+
+	// route to view schedule per room in tuesday
+	Route::get('/schedules/tuesday/get', 'DeanController@tuesdaySchedule')->name('dean.tuesday.schedule');
+
+	// route to view schedule per room in wednesday
+	Route::get('/schedules/wednesday/get', 'DeanController@wednesdaySchedule')->name('dean.wednesday.schedule');
+
+	// route to view schedule per room in thursday
+	Route::get('/schedules/thursday/get', 'DeanController@thursdaySchedule')->name('dean.thursday.schedule');
+
+	// route to view schedule per room in friday
+	Route::get('/schedules/friday/get', 'DeanController@fridaySchedule')->name('dean.friday.schedule');
+
+	// route to view schedule per room in saturday
+	Route::get('/schedules/saturday/get', 'DeanController@saturdaySchedule')->name('dean.saturday.schedule');
+
 	// route to show rooms management
 	Route::get('/rooms', 'DeanController@rooms')->name('dean.rooms');
 
