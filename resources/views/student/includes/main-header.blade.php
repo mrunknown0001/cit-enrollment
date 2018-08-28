@@ -25,18 +25,15 @@
               <li class="user-body">
                 <div class="row">
                   <div class="col-md-12">
-                    <a href="{{ route('student.change.password') }}" class="btn btn-link"><i class="fa fa-key"></i> Password Change</a>
+                    <a href="{{ route('student.change.password') }}" class="btn btn-default btn-sm btn-block"><i class="fa fa-key"></i> Password Change</a>
                   </div>
                   <div class="col-md-12">
-                    <a href="{{ route('logout') }}" class="btn btn-link"><i class="fa fa-sign-out"></i> Logout</a>
+                    
                   </div>
                 </div>
               </li>
               <li class="user-footer">
-                <div class="pull-left">
-                </div>
-                <div class="pull-right">
-                </div>
+                <a href="{{ route('logout') }}" class="btn btn-default btn-sm btn-block"><i class="fa fa-sign-out"></i> Logout</a>
               </li>
             </ul>
           </li>

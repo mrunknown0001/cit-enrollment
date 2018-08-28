@@ -24,20 +24,17 @@
               </li>
               <li class="user-body">
                 <div class="row">
-                  <div class="col-md-4">
-                    <a href="{{ route('registrar.profile') }}" class="btn btn-default btn-sm"><i class="fa fa-user"></i> Profile</a>
+                  <div class="col-md-12">
+                    <a href="{{ route('registrar.profile') }}" class="btn btn-default btn-sm btn-block"><i class="fa fa-user"></i> Profile</a>
                   </div>
-                  <div class="col-md-8">
-                    <a href="{{ route('registrar.change.password') }}" class="btn btn-default btn-sm"><i class="fa fa-key"></i> Password Change</a>
+                  <div class="col-md-12"></div>
+                  <div class="col-md-12">
+                    <a href="{{ route('registrar.change.password') }}" class="btn btn-default btn-sm btn-block"><i class="fa fa-key"></i> Password Change</a>
                   </div>
                 </div>
               </li>
               <li class="user-footer">
-                <div class="pull-left">
-                </div>
-                <div class="pull-right">
-                  <a href="{{ route('logout') }}" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> Logout</a>
-                </div>
+                  <a href="{{ route('logout') }}" class="btn btn-default btn-flat btn-sm btn-block"><i class="fa fa-sign-out"></i> Logout</a>
               </li>
             </ul>
           </li>

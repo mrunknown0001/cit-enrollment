@@ -21,24 +21,25 @@
 					<div style="font-size: 12px; font-family: Times New Roman">
 						
 						@if(count($rooms) > 0)
-						<table class="table table-hover">
+						<table class="table table-bordered table-striped">
 							@foreach($rooms as $r)
 							<tr>
-								<td>{{ strtoupper($r->name) }}</td>
-								<td>
-									@if(count($schedules) > 0)
-										@foreach($schedules as $sch)
-											@if($sch->room_id == $r->id)
-												{{ $sch->subject->code }}
-												{{ \App\Http\Controllers\GeneralController::get_time($sch->start_time) }}-
-												{{ \App\Http\Controllers\GeneralController::get_time($sch->end_time) }}
-												<a href="#" class="btn btn-link btn-xs">Update</a>
-											@else
-											No Schedule for the day
-											@endif
-										@endforeach
-									@endif
-								</td>
+								<td class="text-center">{{ strtoupper($r->name) }}</td>
+								@if(count($schedules) > 0)
+									@foreach($schedules as $sch)
+										<td class="text-center">
+										@if($sch->room_id == $r->id)
+											{{ $sch->subject->code }}
+											{{ \App\Http\Controllers\GeneralController::get_time($sch->start_time) }}-
+											{{ \App\Http\Controllers\GeneralController::get_time($sch->end_time) }}
+											<a href="{{ route('dean.update.schedule', ['id' => $sch->id]) }}" class="">Update</a>
+											<a href="{{ route('dean.delete.schedule', ['id' => $sch->id]) }}" class="text-color-red">Delete</a>
+										@else
+											
+										@endif
+										</td>
+									@endforeach
+								@endif
 							</tr>
 							@endforeach
 						</table>

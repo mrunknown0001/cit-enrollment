@@ -406,7 +406,18 @@ Route::group(['prefix' => 'dean'], function () {
 	// route to save new schedule
 	Route::post('/schedule/add', 'DeanController@postAddSchedule')->name('dean.add.schedule.post');
 
-	// route to update
+	// route to update schedule
+	Route::get('/schedule/{id}/update', 'DeanController@updateSchedule')->name('dean.update.schedule');
+
+	// route to save update on schedule
+	Route::post('/schedule/update', 'DeanController@postUpdateSchedule')->name('dean.update.schedule.post');
+
+	Route::get('/schedule/update', function () {
+		return redirect()->route('dean.schedules');
+	});
+
+	// route to delete schedule
+	Route::get('/schedule/{id}/delete', 'DeanController@deleteSchedule')->name('dean.delete.schedule');
 
 	// route to view schedule per room in monday
 	Route::get('/schedules/monday/get', 'DeanController@mondaySchedule')->name('dean.monday.schedule');

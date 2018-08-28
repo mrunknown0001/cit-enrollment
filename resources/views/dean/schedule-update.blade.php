@@ -5,7 +5,7 @@
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Add Schedule</h1>
+		<h1>Update Schedule</h1>
 		<ol class="breadcrumb">
 			<li><a href="javascript:void(0)"><i class="fa fa-calendar-check-o"></i> Home</a></li>
 			<li class="active">Schedules</li>
@@ -24,18 +24,19 @@
 						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
 					<div class="row">
 						<div class="col-md-6">
-							<form action="{{ route('dean.add.schedule.post') }}" method="POST" autocomplete="off">
+							<form action="{{ route('dean.update.schedule.post') }}" method="POST" autocomplete="off">
 								{{ csrf_field() }}
+								<input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
 								<div class="form-group">
 									<label for="day">Select Day</label><label class="label-required">*</label>
 									<select name="day" id="day" class="form-control underlined" required="">
 										<option value="">Select Day</option>
-										<option value="1">Monday</option>
-										<option value="2">Tuesday</option>
-										<option value="3">Wednesday</option>
-										<option value="4">Thursday</option>
-										<option value="5">Friday</option>
-										<option value="6">Saturday</option>
+										<option value="1" {{ $schedule->day == 1 ? 'selected' : ''  }}>Monday</option>
+										<option value="2" {{ $schedule->day == 2 ? 'selected' : ''  }}>Tuesday</option>
+										<option value="3" {{ $schedule->day == 3 ? 'selected' : ''  }}>Wednesday</option>
+										<option value="4" {{ $schedule->day == 4 ? 'selected' : ''  }}>Thursday</option>
+										<option value="5" {{ $schedule->day == 5 ? 'selected' : ''  }}>Friday</option>
+										<option value="6" {{ $schedule->day == 6 ? 'selected' : ''  }}>Saturday</option>
 										<option value="7">Sunday</option>
 									</select>
 								</div>
@@ -43,10 +44,9 @@
 									<label for="room">Select Room</label><label class="label-required">*</label>
 									<select name="room" id="room" class="form-control underlined" required="">
 										<option value="">Select Room</option>
-										
 										@if(count($rooms) > 0)
 											@foreach($rooms as $r)
-											<option value="{{ $r->id }}">{{ ucwords($r->name) }}</option>
+											<option value="{{ $r->id }}" {{ $schedule->room_id == $r->id ? 'selected' : '' }}>{{ ucwords($r->name) }}</option>
 											@endforeach
 										@else
 										<option value="">No Room Available</option>
@@ -58,7 +58,7 @@
 									<select name="subject" id="subject" class="form-control underlined" required="">
 										<option value="">Select Subject</option>
 										@foreach($subjects as $s)
-										<option value="{{ $s->id }}">{{ strtoupper($s->code) }}</option>
+										<option value="{{ $s->id }}" {{ $schedule->subject_id == $s->id ? 'selected' : '' }}>{{ strtoupper($s->code) }}</option>
 										@endforeach
 										@if(count($subjects) > 0)
 
@@ -152,7 +152,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save Schedule</button>
+									<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Update Schedule</button>
 								</div>
 							</form>
 						</div>

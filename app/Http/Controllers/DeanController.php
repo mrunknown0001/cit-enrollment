@@ -127,16 +127,7 @@ class DeanController extends Controller
         $rooms = Room::orderBy('name', 'asc')->get();
         $subjects = Subject::where('active', 1)->orderBy('code', 'asc')->get();
 
-        $schedules = Schedule::where('active', 1)->get();
-        $mon = Schedule::where('active', 1)->where('day', 1)->orderBy('start_time', 'asc')->get();
-        $tue = Schedule::where('active', 1)->where('day', 2)->orderBy('start_time', 'asc')->get();
-        $wed = Schedule::where('active', 1)->where('day', 3)->orderBy('start_time', 'asc')->get();
-        $thu = Schedule::where('active', 1)->where('day', 4)->orderBy('start_time', 'asc')->get();
-        $fri = Schedule::where('active', 1)->where('day', 5)->orderBy('start_time', 'asc')->get();
-        $sat = Schedule::where('active', 1)->where('day', 6)->orderBy('start_time', 'asc')->get();
-        $sun = Schedule::where('active', 1)->where('day', 7)->orderBy('start_time', 'asc')->get();
-
-        return view('dean.schedules', ['schedules' => $schedules, 'monday' => $mon, 'tuesday' => $tue, 'wednesday' => $wed, 'thursday' => $thu, 'friday' => $fri, 'saturday' => $sat, 'sunday' => $sun, 'rooms' => $rooms, 'subjects' => $subjects]);
+        return view('dean.schedules', ['rooms' => $rooms, 'subjects' => $subjects]);
 
     }
 
@@ -253,9 +244,15 @@ class DeanController extends Controller
         $subject = Subject::findorfail($subject_id);
         $room = Room::findorfail($room_id);
 
+        // the start time is later than the end time
         if($st > $et) {
             return redirect()->back()->with('error', 'Invalid End Time. End Time must later than STart Time');
         }
+
+        if($st == $et) {
+            return redirect()->back()->with('error', 'Start and End Time must not Equal');
+        }
+
 
         //////////////////////////////////////////////////////
         // check if there is dupplicate or confict schedule //
@@ -282,14 +279,21 @@ class DeanController extends Controller
             return redirect()->back()->with('error', 'Time Slot Filled Up!');
         }
 
+
         // ckeck for start time conflict on the day
         $schedules = Schedule::where('active', 1)
                         ->where('room_id', $room_id)
                         ->where('day', $day)
                         ->get();
 
+
         foreach($schedules as $sch) {
-            if(($sch->end_time > $st && $sch->end_time < $et) || ($sch->start_time > $st && $sch->start_time < $et) || $sch->start_time == $st || $sch->end_time == $et) {
+            if(($sch->end_time > $st && $sch->end_time < $et) || 
+                ($sch->start_time > $st && $sch->start_time < $et) || 
+                $sch->start_time == $st || 
+                $sch->end_time == $et || 
+                ($sch->start_time < $st && $sch->end_time > $et) || 
+                ($sch->start_time > $st && $sch->end_time < $et)) {
                 return redirect()->back()->with('error', 'Time conflict on ' . GeneralController::get_day($sch->day) . ' ' . GeneralController::get_time($sch->start_time) . '-' . GeneralController::get_time($sch->end_time));
             }
         }
@@ -309,6 +313,131 @@ class DeanController extends Controller
 
         // return to deans and add dean with message
         return redirect()->back()->with('success', 'Schedule Added!');
+    }
+
+
+    // method use to delete schedule
+    public function deleteSchedule($id = null)
+    {
+        $sched = Schedule::findorfail($id);
+        $sched->delete();
+
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Deleted Schedule');
+
+        return redirect()->back()->with('success', 'Schedule Deleted!');
+    }
+
+
+    // method use to update schedule
+    public function updateSchedule($id = null)
+    {
+        $schedule = Schedule::findorfail($id);
+
+        // room, subjects, time, days
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $subjects = Subject::where('active', 1)->orderBy('code', 'asc')->get();
+
+        return view('dean.schedule-update', ['rooms' => $rooms, 'subjects' => $subjects, 'schedule' => $schedule]);
+
+    }
+
+
+    // method use to save update on schedule
+    public function postUpdateSchedule(Request $request)
+    {
+        $request->validate([
+            'room' => 'required',
+            'subject' => 'required',
+            'day' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required'
+        ]);
+
+        $room_id = $request['room'];
+        $subject_id = $request['subject'];
+        $day = $request['day'];
+        $st = $request['start_time'];
+        $et = $request['end_time'];
+        $schedule_id = $request['schedule_id'];
+
+        $sched = Schedule::findorfail($schedule_id);
+
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        $subject = Subject::findorfail($subject_id);
+        $room = Room::findorfail($room_id);
+
+
+        // start condition in updating schedule
+        // the start time is later than the end time
+        if($st > $et) {
+            return redirect()->back()->with('error', 'Invalid End Time. End Time must later than STart Time');
+        }
+
+        if($st == $et) {
+            return redirect()->back()->with('error', 'Start and End Time must not Equal');
+        }
+
+
+        //////////////////////////////////////////////////////
+        // check if there is dupplicate or confict schedule //
+        //////////////////////////////////////////////////////
+        // check for duplicate
+        $schedule = Schedule::where('active', 1)
+                        ->where('room_id', $room_id)
+                        ->where('subject_id', $subject->id)
+                        ->where('day', $day)
+                        ->where('start_time', $st)
+                        ->where('end_time', $et)
+                        ->first();
+        if(count($schedule) > 0) {
+            return redirect()->back()->with('error', 'Duplicate Schedule Found!');
+        }
+
+        $schedule = Schedule::where('active', 1)
+                        ->where('room_id', $room_id)
+                        ->where('day', $day)
+                        ->where('start_time', $st)
+                        ->where('end_time', $et)
+                        ->first();
+        if(count($schedule) > 0) {
+            return redirect()->back()->with('error', 'Time Slot Filled Up!');
+        }
+
+
+        // ckeck for start time conflict on the day
+        $schedules = Schedule::where('active', 1)
+                        ->where('room_id', $room_id)
+                        ->where('day', $day)
+                        ->get();
+
+
+        foreach($schedules as $sch) {
+            if(($sch->end_time > $st && $sch->end_time < $et) || 
+                ($sch->start_time > $st && $sch->start_time < $et) || 
+                $sch->start_time == $st || 
+                $sch->end_time == $et || 
+                ($sch->start_time < $st && $sch->end_time > $et) || 
+                ($sch->start_time > $st && $sch->end_time < $et)) {
+                return redirect()->back()->with('error', 'Time conflict on ' . GeneralController::get_day($sch->day) . ' ' . GeneralController::get_time($sch->start_time) . '-' . GeneralController::get_time($sch->end_time));
+            }
+        }
+
+
+        // update schedule
+        $sched->room_id = $room->id;
+        $sched->subject_id = $subject->id;
+        $sched->day = $day;
+        $sched->start_time = $st;
+        $sched->end_time = $et;
+        $sched->save();
+
+        // add activty log
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Updated Schedule');
+
+        // return to deans and add dean with message
+        return redirect()->back()->with('success', 'Schedule Updated!');
     }
 
 

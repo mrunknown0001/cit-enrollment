@@ -17,3 +17,15 @@ a:active {
 .label-required {
   color:red;
 }
+
+.text-color-red {
+	color: #a94442;
+}
+
+a.text-color-red {
+	color: #a94442;
+}
+
+a:hover.text-color-red {
+	color: #a94442 !important;
+}
