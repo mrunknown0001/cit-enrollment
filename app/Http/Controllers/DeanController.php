@@ -178,7 +178,7 @@ class DeanController extends Controller
                     ->orderBy('start_time', 'asc')
                     ->get();
 
-        return view('dean.schedules-wedneday', ['rooms' => $rooms, 'schedules' => $schedules]);
+        return view('dean.schedules-wednesday', ['rooms' => $rooms, 'schedules' => $schedules]);
     }
     
 
@@ -251,6 +251,11 @@ class DeanController extends Controller
 
         if($st == $et) {
             return redirect()->back()->with('error', 'Start and End Time must not Equal');
+        }
+
+
+        if(($et - $st) > 6) {
+            return redirect()->back()->with('error', 'Max of 3 hours per class');
         }
 
 
@@ -379,6 +384,10 @@ class DeanController extends Controller
             return redirect()->back()->with('error', 'Start and End Time must not Equal');
         }
 
+        if(($et - $st) > 6) {
+            return redirect()->back()->with('error', 'Max of 3 hours per class');
+        }
+
 
         //////////////////////////////////////////////////////
         // check if there is dupplicate or confict schedule //
@@ -391,7 +400,7 @@ class DeanController extends Controller
                         ->where('start_time', $st)
                         ->where('end_time', $et)
                         ->first();
-        if(count($schedule) > 0) {
+        if(count($schedule) > 0 && $schedule->id != $sched->id) {
             return redirect()->back()->with('error', 'Duplicate Schedule Found!');
         }
 
@@ -401,7 +410,7 @@ class DeanController extends Controller
                         ->where('start_time', $st)
                         ->where('end_time', $et)
                         ->first();
-        if(count($schedule) > 0) {
+        if(count($schedule) > 0 && $schedule->id != $sched->id) {
             return redirect()->back()->with('error', 'Time Slot Filled Up!');
         }
 
@@ -414,13 +423,15 @@ class DeanController extends Controller
 
 
         foreach($schedules as $sch) {
-            if(($sch->end_time > $st && $sch->end_time < $et) || 
-                ($sch->start_time > $st && $sch->start_time < $et) || 
-                $sch->start_time == $st || 
-                $sch->end_time == $et || 
-                ($sch->start_time < $st && $sch->end_time > $et) || 
-                ($sch->start_time > $st && $sch->end_time < $et)) {
-                return redirect()->back()->with('error', 'Time conflict on ' . GeneralController::get_day($sch->day) . ' ' . GeneralController::get_time($sch->start_time) . '-' . GeneralController::get_time($sch->end_time));
+            if($sch->id != $sched->id) {
+                if(($sch->end_time > $st && $sch->end_time < $et) || 
+                    ($sch->start_time > $st && $sch->start_time < $et) || 
+                    $sch->start_time == $st || 
+                    $sch->end_time == $et || 
+                    ($sch->start_time < $st && $sch->end_time > $et) || 
+                    ($sch->start_time > $st && $sch->end_time < $et)) {
+                    return redirect()->back()->with('error', 'Time conflict on ' . GeneralController::get_day($sch->day) . ' ' . GeneralController::get_time($sch->start_time) . '-' . GeneralController::get_time($sch->end_time));
+                }
             }
         }
 
@@ -485,7 +496,7 @@ class DeanController extends Controller
         $r->name = $name;
         $r->save();
 
-        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Admin Added New Room');
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Added New Room');
 
         return redirect()->route('dean.rooms')->with('success', 'New Room Added!');
     }
@@ -515,12 +526,22 @@ class DeanController extends Controller
         $room->name = $name;
         $room->save();
 
-        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Admin Updated Room Details');
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Updated Room Details');
 
         return redirect()->route('dean.rooms')->with('success', 'Room Updated!');
     }
 
 
+    // method use to delete room
+    public function deleteRoom($id = null)
+    {
+        $room = Room::findorfail($id);
+        $room->delete();
+
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Deleted Room');
+
+        return redirect()->route('dean.rooms')->with('success', 'Room Deleted!');
+    }
 
 
 

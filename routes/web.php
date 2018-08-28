@@ -456,6 +456,9 @@ Route::group(['prefix' => 'dean'], function () {
 		return redirect()->route('dean.rooms');
 	});
 
+	// route to delete room
+	Route::get('/room/{id}/delete', 'DeanController@deleteRoom')->name('dean.delete.room');
+
 });
 
 

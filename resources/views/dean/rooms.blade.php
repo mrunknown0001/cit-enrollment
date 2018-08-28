@@ -41,6 +41,7 @@
 									<td class="text-center">
 										{{-- <a href="{{ route('dean.update.room', ['id' => $r->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a> --}}
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#updateRoom-{{ $r->id }}"><i class="fa fa-pencil"></i> Update</button>
+										<a href="{{ route('dean.delete.room', ['id' => $r->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
 									</td>
 								</tr>
 								@include('dean.includes.modal-room-update')

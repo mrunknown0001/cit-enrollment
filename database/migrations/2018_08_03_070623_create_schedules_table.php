@@ -17,7 +17,7 @@ class CreateSchedulesTable extends Migration
             $table->increments('id');
             $table->integer('day');
             $table->integer('room_id')->unsigned();
-            $table->foreign('room_id')->references('id')->on('rooms');
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->integer('subject_id')->unsigned();
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->integer('start_time');
