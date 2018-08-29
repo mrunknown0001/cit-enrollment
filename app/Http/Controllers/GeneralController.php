@@ -8,6 +8,11 @@ use Session;
 
 use App\ActivityLog;
 use App\User;
+use App\Faculty;
+use App\Cashier;
+use App\Registrar;
+use App\Dean;
+use App\Admin;
 use App\Payment;
 
 class GeneralController extends Controller
@@ -356,4 +361,66 @@ class GeneralController extends Controller
     }
 
 
+    public function clearStudentSession($sn = null)
+    {
+        $student = User::whereStudentNumber($sn)->first();
+
+        if(count($student) < 1) {
+            return abort(404);
+        }
+
+        $student->session_id = null;
+        $student->save();
+
+        return redirect()->route('login');
+    }
+
+    public function clearFacultySession($un = null)
+    {
+        $faculty = Faculty::whereUsername($un)->first();
+
+        if(count($faculty) < 1)
+            return abort(404);
+
+        return redirect()->route('login');
+    }
+
+    public function clearCashierSession($un = null)
+    {
+        $cashier = Cashier::whereUsername($un)->first();
+
+        if(count($cashier) < 1)
+            return abort(404);
+
+        return redirect()->route('login');
+    }
+
+    public function clearRegistrarSession($un = null)
+    {
+        $registrar = Registrar::whereUsername($un)->first();
+
+        if(count($registrar) < 1)
+            return abort(404);
+
+        return redirect()->route('login');
+    }
+
+    public function clearDeanSession($un = null)
+    {
+        $dean = Dean::whereUsername($un)->first();
+
+        if(count($dean) < 1)
+            return abort(404);
+
+        return redirect()->route('login');
+    }
+
+    public function clearAdminSession($id = null)
+    {
+        $admin = Admin::findorfail($id);
+        $admin->session_id = null;
+        $admin->save();
+
+        return redirect()->route('login');
+    }
 }
