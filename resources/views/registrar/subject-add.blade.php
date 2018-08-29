@@ -45,7 +45,7 @@
 										@endif
 									</div>
 									<div class="form-group{{ $errors->has('units') ? ' has-error' : '' }}">
-										<label for="units">Subject Units</label><label class="label-required">*</label>
+										<label for="units">Subject Lecture Units</label><label class="label-required">*</label>
 										<input id="units" type="number" class="form-control" name="units" value="{{ old('units') }}" placeholder="Enter Subject Units" required>
 										@if ($errors->has('units'))
 										<span class="help-block">

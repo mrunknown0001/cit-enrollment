@@ -523,6 +523,10 @@ class AdminController extends Controller
 
         $sem = Semester::whereActive(1)->first();
 
+        if(count($sem) < 1) {
+            return redirect()->back()->with('error', 'Please Set Semester!');
+        }
+
         $subjects = Subject::whereSemesterId($sem->id)->get();
 
         return view('admin.faculties', ['faculties' => $faculties, 'sem' => $sem, 'subjects' => $subjects]);
