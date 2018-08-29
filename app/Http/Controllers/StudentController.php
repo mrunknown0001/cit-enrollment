@@ -392,7 +392,7 @@ class StudentController extends Controller
                                     ->first();
 
         if(count($unfinished_payment) > 0) {
-            return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            return redirect()->route('student.dashboard')->with('info', 'Please Try Paying Again Later.');
         }
         
         // redirect back if regitration payment is paid
@@ -416,7 +416,7 @@ class StudentController extends Controller
                                     ->first();
 
         if(count($unfinished_payment) > 0) {
-            return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            return redirect()->route('student.dashboard')->with('info', 'Please Try Paying Again Later.');
         }
 
         $amount = $request['amount'];

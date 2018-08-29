@@ -70,6 +70,11 @@ Route::get('/logout', 'GeneralController@logout')->name('logout');
  * route protected guard in controller 
  */
 Route::group(['prefix' => 'admin'], function () {
+	// clear session to student, faculty, cashier, registrar, dean
+
+	// clear unfinished(active == 0)
+	Route::get('/payment/unfinished/clear', 'GeneralController@clearUnfinishedPayments');
+
 	// route to admin dashboard
 	Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 

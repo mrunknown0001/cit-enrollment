@@ -150,7 +150,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Update Student Information</button>
+								<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save Student Information</button>
 							</div>
 						</form>
 					</div>

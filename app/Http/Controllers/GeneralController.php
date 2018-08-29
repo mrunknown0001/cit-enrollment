@@ -8,6 +8,7 @@ use Session;
 
 use App\ActivityLog;
 use App\User;
+use App\Payment;
 
 class GeneralController extends Controller
 {
@@ -343,6 +344,15 @@ class GeneralController extends Controller
         }
 
         return $t;
+    }
+
+
+    // clear unfinished payment
+    public function clearUnfinishedPayments()
+    {
+        Payment::whereActive(0)->delete();
+
+        return redirect()->route('login');
     }
 
 
