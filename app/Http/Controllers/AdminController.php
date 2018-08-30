@@ -729,6 +729,24 @@ class AdminController extends Controller
     }
 
 
+    // method use to view personal info of student
+    public function studentPersonalInfo($id = null)
+    {
+        $student = User::findorfail($id);
+
+        return view('admin.student-personal-info', ['student' => $student]);
+    }
+
+
+    // method use to view education info of student
+    public function studentEducationalInfo($id = null)
+    {
+        $student = User::findorfail($id);
+
+        return view('admin.student-education-info', ['student' => $student]);
+    }
+
+
     // method use to view courses
     public function courses()
     {

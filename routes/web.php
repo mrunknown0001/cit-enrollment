@@ -217,6 +217,12 @@ Route::group(['prefix' => 'admin'], function () {
 		return abort(404);
 	});
 
+	// route to view student details - personal details
+	Route::get('/student/{id}/info/perosnal', 'AdminController@studentPersonalInfo')->name('admin.student.personal.info');
+
+	// route to view student details - educational details
+	Route::get('/student/{id}/info/educational', 'AdminController@studentEducationalInfo')->name('admin.student.educational.info');
+
 	// route to view courses
 	Route::get('/courses', 'AdminController@courses')->name('admin.courses');
 

@@ -45,7 +45,7 @@
 								<tr>
 									<th class="text-center">Name</th>
 									<th class="text-center">Student Number</th>
-									<td class="text-center">Registered</td>
+									<th class="text-center">Registered</th>
 									<th class="text-center">Action</th>
 								</tr>
 							</thead>
@@ -53,8 +53,8 @@
 								@foreach($students as $s)
 									<tr>
 										<td>{{ ucwords($s->lastname . ', ' . $s->firstname) }}</td>
-										<td>{{ $s->student_number }}</td>
-										<td>
+										<td class="text-center">{{ $s->student_number }}</td>
+										<td class="text-center">
 											@if($s->registered == 1)
 												YES
 											@else
@@ -62,7 +62,8 @@
 											@endif
 										</td>
 										<td class="text-center">
-											<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#studentProfile-{{ $s->id }}"><i class="fa fa-eye"></i> View</button>
+											{{-- <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#studentProfile-{{ $s->id }}"><i class="fa fa-eye"></i> View</button> --}}
+											<a href="{{ route('admin.student.personal.info', ['id' => $s->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-eye"></i> View</a>
 											<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#studentResetPass-{{ $s->id }}"><i class="fa fa-key"></i> Reset Password</button>
 										</td>
 									</tr>
