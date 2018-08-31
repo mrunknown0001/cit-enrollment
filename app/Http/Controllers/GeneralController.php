@@ -382,6 +382,9 @@ class GeneralController extends Controller
         if(count($faculty) < 1)
             return abort(404);
 
+        $faculty->session_id = null;
+        $faculty->save();
+
         return redirect()->route('login');
     }
 
@@ -391,6 +394,9 @@ class GeneralController extends Controller
 
         if(count($cashier) < 1)
             return abort(404);
+
+        $cashier->session_id = null;
+        $cashier->save();
 
         return redirect()->route('login');
     }
@@ -402,6 +408,9 @@ class GeneralController extends Controller
         if(count($registrar) < 1)
             return abort(404);
 
+        $registrar->session_id = null;
+        $registrar->save();
+
         return redirect()->route('login');
     }
 
@@ -411,6 +420,9 @@ class GeneralController extends Controller
 
         if(count($dean) < 1)
             return abort(404);
+
+        $dean->session_id = null;
+        $dean->save();
 
         return redirect()->route('login');
     }
