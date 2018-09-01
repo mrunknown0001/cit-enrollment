@@ -16,7 +16,7 @@ $(document).ready(function () {
 function timerIncrement() {
     idleTime = idleTime + 1;
     if (idleTime > 1) { // 20 minutes
-        // alert('logout');
+        alert('Inactivity Logout!');
         // window.location.reload();
         window.location.href = '/logout';
     }

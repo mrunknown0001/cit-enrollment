@@ -73,13 +73,13 @@ Route::group(['prefix' => 'admin'], function () {
 	// clear session to student
 	Route::get('/session/clear/student/{sn}', 'GeneralController@clearStudentSession');
 	// clear session to faculty
-	Route::get('/session/clear/student/{un}', 'GeneralController@clearFacultySession');
+	Route::get('/session/clear/faculty/{un}', 'GeneralController@clearFacultySession');
 	// clear session to cashier
 	Route::get('/session/clear/cashier/{un}', 'GeneralController@clearCashierSession');
 	// clear session to registrar
 	Route::get('/session/clear/registrar/{un}', 'GeneralController@clearRegistrarSession');
 	// clear session to dean
-	Route::get('/session/clear/dean/{in}', 'GeneralController@clearRegistrarSession');
+	Route::get('/session/clear/dean/{un}', 'GeneralController@clearRegistrarSession');
 	// clear session to admin
 	Route::get('/session/clear/admin/{id}', 'GeneralController@clearAdminSession');
 
