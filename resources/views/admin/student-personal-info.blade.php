@@ -24,30 +24,30 @@
 					</div>
 					<div class="box-body">
 						<div class="row">
-							<div class="col-md-10">
+							<div class="col-md-6">
 								<p>Name: <strong>{{ ucwords($student->firstname) }} {{ $student->middle_name ? substr($student->middle_name, 0, 1) . '.' : '' }} {{ ucwords($student->lastname) }} {{ $student->suffix_name ? $student->suffix_name : '' }}</strong></p>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-6">
 								<p>Sex: <strong>{{ ucwords($student->info->sex) }}</strong></p>
 							</div>
 
-							<div class="col-md-8">
+							<div class="col-md-6">
 								<p>Address: <strong>{{ ucwords($student->info->home_address) }}</strong></p>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-6">
 								<p>Nationality: <strong>{{ ucwords($student->info->nationality) }}</strong></p>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-6">
 								<p>Status: <strong>{{ ucwords($student->info->civil_status) }}</strong></p>
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<p>Date of Birth: <strong>{{ date('m/d/Y', strtotime($student->info->date_of_birth)) }}</strong></p>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<p>Age: <strong>{{ date('Y') - date('Y', strtotime($student->info->date_of_birth)) }}</strong></p>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<p>Place of Birth: <strong>{{ ucwords($student->info->place_of_birth) }}</strong></p>
 							</div>
 
