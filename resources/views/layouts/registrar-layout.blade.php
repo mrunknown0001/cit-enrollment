@@ -20,5 +20,6 @@
   @include('includes.footer')
 </div>
 <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
+@include('includes.timeout') 
 </body>
 </html>

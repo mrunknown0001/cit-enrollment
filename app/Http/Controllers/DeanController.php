@@ -486,14 +486,14 @@ class DeanController extends Controller
     public function postAddRoom(Request $request)
     {
         $request->validate([
-            'room_name' => 'required'
+            'room_name' => 'required|unique:rooms,name'
         ]);
 
         $name = $request['room_name'];
 
         // add new room in \
         $r = new Room();
-        $r->name = $name;
+        $r->name = strtolower($name);
         $r->save();
 
         GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Added New Room');
@@ -522,8 +522,14 @@ class DeanController extends Controller
 
         $room = Room::findorfail($room_id);
 
+        $check_room = Room::where('name', strtolower($name))->first();
+
+        if(count($check_room) > 0 && $check_room->id != $room->id) {
+            return redirect()->back()->with('error', 'Room Already Exist!');
+        }
+
         // save update here
-        $room->name = $name;
+        $room->name = strtolower($name);
         $room->save();
 
         GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Updated Room Details');
