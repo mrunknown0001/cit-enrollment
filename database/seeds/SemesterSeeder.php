@@ -17,7 +17,10 @@ class SemesterSeeder extends Seeder
         	],
         	[
         		'name' => 'Second Semester'
-        	]
+        	],
+            [
+                'name' => 'Summer'
+            ]
         ]);
     }
 }

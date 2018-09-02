@@ -27,7 +27,8 @@
 								<tr>
 									<th class="text-center">Code</th>
 									<th class="text-center">Description</th>
-									<th class="text-center">Units (Lec|Lab)</th>
+									<th class="text-center">Lecture Units</th>
+									<th class="text-center">Lab Units</th>
 									<th class="text-center">Action</th>
 								</tr>
 							</thead>
@@ -36,7 +37,9 @@
 								<tr>
 									<td class="text-center">{{ strtoupper($s->code) }}</td>
 									<td>{{ ucwords($s->description) }}</td>
-									<td class="text-center">{{ $s->units }}{{ $s->lab_units ? '|' . $s->lab_units : '' }}</td>
+									<td class="text-center">{{ $s->units }}
+									</td>
+									<td class="text-center">{{ $s->lab_units ? '|' . $s->lab_units : 'N/A' }}</td>
 									<td class="text-center">
 										<a href="{{ route('registrar.update.subject', ['id' => $s->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a>
 									</td>
