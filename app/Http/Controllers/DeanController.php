@@ -13,6 +13,11 @@ use App\Room;
 use App\Subject;
 use App\AcademicYear;
 use App\Semester;
+use App\Section;
+use App\Course;
+use App\YearLevel;
+use App\CourseMajor;
+use App\Curriculum;
 
 class DeanController extends Controller
 {
@@ -132,92 +137,89 @@ class DeanController extends Controller
     }
 
 
-    // method use to add schedule
-    public function addSchedule()
+    // method use to get major oncourses
+    public function getCourseMajor($id = null)
     {
+        $majors = CourseMajor::where('course_id', $id)
+                            ->where('active', 1)
+                            ->get();
+
+        return $majors;
+
+    }
+
+
+    // method use to get course curriculum to use in form add/update subject
+    public function getCourseCurriculum($id = null)
+    {
+        $curriculum = Curriculum::where('course_id', $id)->where('active', 1)->get();
+
+        $course_cu = null;
+
+        if(count($curriculum) < 1) {
+            return null;
+        }
+
+        foreach($curriculum as $c) {
+            $course_cu[] = [
+                        'id' => $c->id,
+                        'name' => $c->name
+                    ];
+        }
+
+        return $course_cu;
+    }
+
+
+    // method use to select course, year level and section
+    public function addScheduleSelect()
+    {
+        $courses = Course::orderBy('code', 'asc')->get();
+        $yl = YearLevel::get(['id', 'name']);
+        $sections = Section::orderBy('name', 'asc')->get(['id', 'name']);
+
+        return view('dean.schedule-add-select', ['courses' => $courses, 'yl' => $yl, 'sections' => $sections]);
+    }
+
+
+    // method use to add schedule
+    public function addSchedule(Request $request)
+    {
+        $request->validate([
+            'course' => 'required',
+            'year_level' => 'required',
+            'curriculum' => 'required',
+            'section' => 'required' 
+        ]);
+
+        $course_id = $request['course'];
+        $major_id = $request['major'];
+        $yl_id = $request['year_level'];
+        $section_id = $request['section'];
+        $curriculum_id = $request['curriculum'];
+
+        $course = Course::findorfail($course_id);
+        $yl = YearLevel::findorfail($yl_id);
+        $section = Section::findorfail($section_id);
+        $major = CourseMajor::find($major_id);
+        $curriculum = Curriculum::findorfail($curriculum_id);
+
+        $sem = Semester::whereActive(1)->first();
+
+        if(count($sem) < 1) {
+            return redirect()->route('dean.schedules')->with('error', 'Semester Not Selected! Please report to admin');
+        }
+
         // room, subjects, time, days
         $rooms = Room::orderBy('name', 'asc')->get();
-        $subjects = Subject::where('active', 1)->orderBy('code', 'asc')->get();
-
-        return view('dean.schedule-add', ['rooms' => $rooms, 'subjects' => $subjects]);
-    }
-
-
-    // method use to view sched in monday
-    public function mondaySchedule()
-    {
-        $rooms = Room::orderBy('name', 'asc')->get();
-        $schedules = Schedule::whereActive(1)
-                    ->where('day',1)
-                    ->orderBy('start_time', 'asc')
+        $subjects = Subject::where('active', 1)
+                    ->where('curriculum_id', $curriculum->id)
+                    ->where('semester_id', $sem->id)
+                    ->where('year_level_id', $yl->id)
+                    ->orderBy('code', 'asc')
                     ->get();
 
-        return view('dean.schedules-monday', ['rooms' => $rooms, 'schedules' => $schedules]);
-    }
-
-    
-    // method use to view sched in tuesday
-    public function tuesdaySchedule()
-    {
-        $rooms = Room::orderBy('name', 'asc')->get();
-        $schedules = Schedule::whereActive(1)
-                    ->where('day',2)
-                    ->orderBy('start_time', 'asc')
-                    ->get();
-
-        return view('dean.schedules-tuesday', ['rooms' => $rooms, 'schedules' => $schedules]);
-    }
-    
-    
-    // method use to view sched in wednesday
-    public function wednesdaySchedule()
-    {
-        $rooms = Room::orderBy('name', 'asc')->get();
-        $schedules = Schedule::whereActive(1)
-                    ->where('day',3)
-                    ->orderBy('start_time', 'asc')
-                    ->get();
-
-        return view('dean.schedules-wednesday', ['rooms' => $rooms, 'schedules' => $schedules]);
-    }
-    
-
-    // method use to view sched in thursday
-    public function thursdaySchedule()
-    {
-        $rooms = Room::orderBy('name', 'asc')->get();
-        $schedules = Schedule::whereActive(1)
-                    ->where('day',4)
-                    ->orderBy('start_time', 'asc')
-                    ->get();
-
-        return view('dean.schedules-thursday', ['rooms' => $rooms, 'schedules' => $schedules]);
-    }
-    
-
-    // method use to view sched in friday
-    public function fridaySchedule()
-    {
-        $rooms = Room::orderBy('name', 'asc')->get();
-        $schedules = Schedule::whereActive(1)
-                    ->where('day',5)
-                    ->orderBy('start_time', 'asc')
-                    ->get();
-
-        return view('dean.schedules-friday', ['rooms' => $rooms, 'schedules' => $schedules]);
-    }
-    
-
-    // method use to view sched in saturday
-    public function saturdaySchedule()
-    {
-        $rooms = Room::orderBy('name', 'asc')->get();
-        $schedules = Schedule::whereActive(1)
-                    ->where('day',6)
-                    ->orderBy('start_time', 'asc')
-                    ->get();
-
-        return view('dean.schedules-saturday', ['rooms' => $rooms, 'schedules' => $schedules]);
+        return view('dean.schedule-add', ['rooms' => $rooms, 'subjects' => $subjects, 'course' => $course, 'yl' => $yl, 'sem' => $sem, 'section' => $section, 'major' => $major, 'curriculum' => $curriculum]);
     }
 
 
@@ -231,6 +233,18 @@ class DeanController extends Controller
             'start_time' => 'required',
             'end_time' => 'required'
         ]);
+
+        $course_id = $request['course'];
+        $major_id = $request['major'];
+        $yl_id = $request['year_level'];
+        $section_id = $request['section'];
+        $curriculum_id = $request['curriculum'];
+
+        $course = Course::findorfail($course_id);
+        $yl = YearLevel::findorfail($yl_id);
+        $section = Section::findorfail($section_id);
+        $major = CourseMajor::findorfail($major_id);
+        $curriculum = Curriculum::findorfail($curriculum_id);
 
         $room_id = $request['room'];
         $subject_id = $request['subject'];
@@ -311,6 +325,10 @@ class DeanController extends Controller
         $sched->day = $day;
         $sched->start_time = $st;
         $sched->end_time = $et;
+        $sched->section_id = $section->id;
+        $sched->year_level_id = $yl->id;
+        $sched->course_id = $course->id;
+        $sched->curriculum_id = $curriculum->id;
         $sched->save();
 
         // add activty log
@@ -318,6 +336,84 @@ class DeanController extends Controller
 
         // return to deans and add dean with message
         return redirect()->back()->with('success', 'Schedule Added!');
+    }
+
+
+    // method use to view sched in monday
+    public function mondaySchedule()
+    {
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $schedules = Schedule::whereActive(1)
+                    ->where('day',1)
+                    ->orderBy('start_time', 'asc')
+                    ->get();
+
+        return view('dean.schedules-monday', ['rooms' => $rooms, 'schedules' => $schedules]);
+    }
+
+    
+    // method use to view sched in tuesday
+    public function tuesdaySchedule()
+    {
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $schedules = Schedule::whereActive(1)
+                    ->where('day',2)
+                    ->orderBy('start_time', 'asc')
+                    ->get();
+
+        return view('dean.schedules-tuesday', ['rooms' => $rooms, 'schedules' => $schedules]);
+    }
+    
+    
+    // method use to view sched in wednesday
+    public function wednesdaySchedule()
+    {
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $schedules = Schedule::whereActive(1)
+                    ->where('day',3)
+                    ->orderBy('start_time', 'asc')
+                    ->get();
+
+        return view('dean.schedules-wednesday', ['rooms' => $rooms, 'schedules' => $schedules]);
+    }
+    
+
+    // method use to view sched in thursday
+    public function thursdaySchedule()
+    {
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $schedules = Schedule::whereActive(1)
+                    ->where('day',4)
+                    ->orderBy('start_time', 'asc')
+                    ->get();
+
+        return view('dean.schedules-thursday', ['rooms' => $rooms, 'schedules' => $schedules]);
+    }
+    
+
+    // method use to view sched in friday
+    public function fridaySchedule()
+    {
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $schedules = Schedule::whereActive(1)
+                    ->where('day',5)
+                    ->orderBy('start_time', 'asc')
+                    ->get();
+
+        return view('dean.schedules-friday', ['rooms' => $rooms, 'schedules' => $schedules]);
+    }
+    
+
+    // method use to view sched in saturday
+    public function saturdaySchedule()
+    {
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $schedules = Schedule::whereActive(1)
+                    ->where('day',6)
+                    ->orderBy('start_time', 'asc')
+                    ->get();
+
+        return view('dean.schedules-saturday', ['rooms' => $rooms, 'schedules' => $schedules]);
     }
 
 
@@ -549,6 +645,65 @@ class DeanController extends Controller
         return redirect()->route('dean.rooms')->with('success', 'Room Deleted!');
     }
 
+
+
+
+
+
+    // method use to view sections
+    public function sections()
+    {
+        $sections = Section::get(['id', 'name']);
+
+        return view('dean.sections', ['sections' => $sections]);
+    }
+
+
+    // method use to save new section
+    public function postAddSection(Request $request)
+    {
+        $request->validate([
+            'section_name' => 'required|unique:sections,name'
+        ]);
+
+        $name = $request['section_name'];
+
+        $section = new Section();
+        $section->name = $name;
+        $section->save();
+
+        //
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Added New Section');
+
+        return redirect()->route('dean.sections')->with('success', 'Section Added!');        
+    }
+
+
+    // method use to update section
+    public function postUpdateSection(Request $request)
+    {
+        $request->validate([
+            'section_name' => 'required'
+        ]);
+
+        $id = $request['section_id'];
+        $name = $request['section_name'];
+
+        $section = Section::findorfail($id);
+
+        $check_name = Section::where('name', $name)->first();
+
+        if(count($check_name) > 0 && $check_name->id != $section->id) {
+            return redirect()->back()->with('error', 'Section Name was already taken!');
+        }
+
+        $section->name = $name;
+        $section->save();
+
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Updated Section');
+
+        return redirect()->route('dean.sections')->with('success', 'Section Updated!');   
+    }
 
 
 }

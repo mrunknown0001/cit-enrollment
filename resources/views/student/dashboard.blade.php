@@ -16,13 +16,15 @@
 			<div class="col-md-12">
 				@include('includes.all')
 				
+				{{-- shwo if the assessment is already available --}}
+
 				{{-- check if student is regular or irregular --}}
 				{{-- show only if the student is regular and enrollment is active --}}
-				@if($es->active == 1)
+				{{-- @if($es->active == 1)
 					@if(count($rp) < 1) 
 						@include('student.includes.registration-payment')
 					@endif
-				@endif
+				@endif --}}
 
 				<div class="box box-primary">
 					<div class="box-header with-border">

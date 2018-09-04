@@ -26,8 +26,8 @@
 							<tr>
 								<td class="text-center">{{ strtoupper($r->name) }}</td>
 								@if(count($schedules) > 0)
+									<td class="text-center">
 									@foreach($schedules as $sch)
-										<td class="text-center">
 										@if($sch->room_id == $r->id)
 											{{ $sch->subject->code }}
 											{{ \App\Http\Controllers\GeneralController::get_time($sch->start_time) }}-
@@ -37,8 +37,8 @@
 										@else
 											
 										@endif
-										</td>
 									@endforeach
+									</td>
 								@endif
 							</tr>
 							@endforeach

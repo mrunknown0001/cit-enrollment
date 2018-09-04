@@ -203,6 +203,13 @@ class StudentController extends Controller
     }
 
 
+    // method use to assessment
+    public function assessment()
+    {
+        return view('student.assessment');
+    }
+
+
     // method use to show enrollment page to student
     public function enrollment()
     {

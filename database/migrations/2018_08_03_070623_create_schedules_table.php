@@ -22,6 +22,11 @@ class CreateSchedulesTable extends Migration
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->integer('start_time');
             $table->integer('end_time');
+            $table->integer('section_id')->unsigned()->nullable();
+            $table->integer('year_level_id')->unsigned()->nullable();
+            $table->integer('course_id')->unsigned()->nullable();
+            $table->integer('curriculum_id')->unsigned()->nullable();
+            $table->integer('major_id')->unsigned()->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
         });

@@ -419,8 +419,17 @@ Route::group(['prefix' => 'dean'], function () {
 	// route to save new password of the dean
 	Route::post('/password/change', 'DeanController@postChangePassword')->name('dean.change.password.post');
 
+	// route to get major to be use in add student form
+	Route::get('/course/{id}/majors/get', 'DeanController@getCourseMajor')->name('dean.get.course.major');
+
+	// route to get curriculum to use in add student form
+	Route::get('/course/{id}/curriculum/get', 'DeanController@getCourseCurriculum')->name('dean.get.course.curriculum');
+
 	// route to view schedule management
 	Route::get('/schedules', 'DeanController@schedules')->name('dean.schedules');
+
+	// route to select course year level and section in adding schedule
+	Route::get('/schedule/add/select', 'DeanController@addScheduleSelect')->name('dean.add.schedule.select');
 
 	// route to add schedule
 	Route::get('/schedule/add', 'DeanController@addSchedule')->name('dean.add.schedule');
@@ -480,6 +489,15 @@ Route::group(['prefix' => 'dean'], function () {
 
 	// route to delete room
 	Route::get('/room/{id}/delete', 'DeanController@deleteRoom')->name('dean.delete.room');
+
+	// route to sections
+	Route::get('/sections', 'DeanController@sections')->name('dean.sections');
+
+	// route to add section
+	Route::post('/section/add', 'DeanController@postAddSection')->name('dean.add.section.post');
+
+	// route to update section
+	Route::post('/section/update', 'DeanController@postUpdateSection')->name('dean.update.section.post');
 
 });
 
@@ -710,6 +728,9 @@ Route::group(['prefix' => 'student'], function () {
 
 	// route to save new profile image
 	Route::post('/profile/image/upload', 'StudentController@postUploadProfileImage')->name('student.upload.profile.image.post');
+
+	// route to assessment
+	Route::get('/assessment', 'StudentController@assessment')->name('student.assessment');
 
 	// route to show enrollment page
 	Route::get('/enrollment', 'StudentController@enrollment')->name('student.enrollment');

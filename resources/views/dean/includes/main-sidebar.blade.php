@@ -14,6 +14,11 @@
           <i class="fa fa-building"></i> <span>Rooms</span>
         </a>
       </li>
+      <li class="{{ route('dean.sections') == url()->current() ? 'active' : '' }}">
+        <a href="{{ route('dean.sections') }}">
+          <i class="fa fa-users"></i> <span>Sections</span>
+        </a>
+      </li>
       <li class="{{ route('dean.schedules') == url()->current() ? 'active' : '' }}">
         <a href="{{ route('dean.schedules') }}">
           <i class="fa fa-calendar-check-o"></i> <span>Schedules</span>

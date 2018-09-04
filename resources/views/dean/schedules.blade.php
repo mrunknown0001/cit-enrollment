@@ -14,7 +14,10 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p><button class="btn btn-primary" data-toggle="modal" data-target="#addSchedule"><i class="fa fa-plus"></i> Add Schedule</button></p>
+				{{--<p><button class="btn btn-primary" data-toggle="modal" data-target="#addSchedule"><i class="fa fa-plus"></i> Add Schedule</button></p>--}}
+				<p>
+					<a href="{{ route('dean.add.schedule.select') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Schedule</a>
+				</p>
 				@include('dean.includes.modal-schedule-add')
 				@include('includes.all')
 			</div>

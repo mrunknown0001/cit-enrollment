@@ -18,14 +18,33 @@
 				@include('includes.all')
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-user"></i> Add Schedule</strong>
+						<strong><i class="fa fa-calendar-check-o"></i> Add Schedule</strong>
 					</div>
 					<div class="box-body">
-						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
+						
 					<div class="row">
 						<div class="col-md-6">
+							<p>Course: <strong>{{ ucwords($course->title) }}</strong></p>
+							<p>Curriculum: <strong>{{ strtoupper($curriculum->name) }}</strong></p>
+							<p>Section: <strong>{{ strtoupper($section->name) }}</strong></p>
+						</div>
+						<div class="col-md-6">
+							<p>Major: <strong>{{ count($major) > 0 ? ucwords($major->name) : 'N/A' }}</strong></p>
+							<p>Year Level: <strong>{{ ucwords($yl->name) }}</strong></p>
+							<p>Semester: <strong>{{ ucwords($sem->name) }}</strong></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
 							<form action="{{ route('dean.add.schedule.post') }}" method="POST" autocomplete="off">
 								{{ csrf_field() }}
+								<input type="hidden" name="course" value="{{ $course->id }}">
+								<input type="hidden" name="major" value="{{ count($major) > 0 ? $major->id : '' }}">
+								<input type="hidden" name="year_level" value="{{ $yl->id }}">
+								<input type="hidden" name="section" value="{{ $section->id }}">
+								<input type="hidden" name="curriculum" value="{{ $curriculum->id }}">
+
 								<div class="form-group">
 									<label for="day">Select Day</label><label class="label-required">*</label>
 									<select name="day" id="day" class="form-control underlined" required="">
