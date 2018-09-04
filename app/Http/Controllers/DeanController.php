@@ -339,84 +339,6 @@ class DeanController extends Controller
     }
 
 
-    // method use to view sched in monday
-    public function mondaySchedule()
-    {
-        $rooms = Room::orderBy('name', 'asc')->get();
-        $schedules = Schedule::whereActive(1)
-                    ->where('day',1)
-                    ->orderBy('start_time', 'asc')
-                    ->get();
-
-        return view('dean.schedules-monday', ['rooms' => $rooms, 'schedules' => $schedules]);
-    }
-
-    
-    // method use to view sched in tuesday
-    public function tuesdaySchedule()
-    {
-        $rooms = Room::orderBy('name', 'asc')->get();
-        $schedules = Schedule::whereActive(1)
-                    ->where('day',2)
-                    ->orderBy('start_time', 'asc')
-                    ->get();
-
-        return view('dean.schedules-tuesday', ['rooms' => $rooms, 'schedules' => $schedules]);
-    }
-    
-    
-    // method use to view sched in wednesday
-    public function wednesdaySchedule()
-    {
-        $rooms = Room::orderBy('name', 'asc')->get();
-        $schedules = Schedule::whereActive(1)
-                    ->where('day',3)
-                    ->orderBy('start_time', 'asc')
-                    ->get();
-
-        return view('dean.schedules-wednesday', ['rooms' => $rooms, 'schedules' => $schedules]);
-    }
-    
-
-    // method use to view sched in thursday
-    public function thursdaySchedule()
-    {
-        $rooms = Room::orderBy('name', 'asc')->get();
-        $schedules = Schedule::whereActive(1)
-                    ->where('day',4)
-                    ->orderBy('start_time', 'asc')
-                    ->get();
-
-        return view('dean.schedules-thursday', ['rooms' => $rooms, 'schedules' => $schedules]);
-    }
-    
-
-    // method use to view sched in friday
-    public function fridaySchedule()
-    {
-        $rooms = Room::orderBy('name', 'asc')->get();
-        $schedules = Schedule::whereActive(1)
-                    ->where('day',5)
-                    ->orderBy('start_time', 'asc')
-                    ->get();
-
-        return view('dean.schedules-friday', ['rooms' => $rooms, 'schedules' => $schedules]);
-    }
-    
-
-    // method use to view sched in saturday
-    public function saturdaySchedule()
-    {
-        $rooms = Room::orderBy('name', 'asc')->get();
-        $schedules = Schedule::whereActive(1)
-                    ->where('day',6)
-                    ->orderBy('start_time', 'asc')
-                    ->get();
-
-        return view('dean.schedules-saturday', ['rooms' => $rooms, 'schedules' => $schedules]);
-    }
-
-
     // method use to delete schedule
     public function deleteSchedule($id = null)
     {
@@ -434,11 +356,26 @@ class DeanController extends Controller
     {
         $schedule = Schedule::findorfail($id);
 
+        $course = Course::findorfail($schedule->course_id);
+        $major = CourseMajor::find($schedule->major_id);
+        $curriculum = Curriculum::findorfail($schedule->curriculum_id);
+        $yl = YearLevel::findorfail($schedule->year_level_id);
+        $section = Section::findorfail($schedule->section_id);
+
+        $sem = Semester::whereActive(1)->first();
+
         // room, subjects, time, days
         $rooms = Room::orderBy('name', 'asc')->get();
-        $subjects = Subject::where('active', 1)->orderBy('code', 'asc')->get();
+        $subjects = Subject::where('active', 1)
+                    ->where('curriculum_id', $schedule->curriculum_id)
+                    ->where('semester_id', $sem->id)
+                    ->where('year_level_id', $schedule->year_level_id)
+                    ->orderBy('code', 'asc')
+                    ->get();
 
-        return view('dean.schedule-update', ['rooms' => $rooms, 'subjects' => $subjects, 'schedule' => $schedule]);
+        // return view('dean.schedule-update', ['rooms' => $rooms, 'subjects' => $subjects, 'schedule' => $schedule]);
+
+        return view('dean.schedule-update', ['rooms' => $rooms, 'subjects' => $subjects, 'course' => $course, 'yl' => $yl, 'sem' => $sem, 'section' => $section, 'major' => $major, 'curriculum' => $curriculum, 'schedule' => $schedule]);
 
     }
 
@@ -545,6 +482,84 @@ class DeanController extends Controller
 
         // return to deans and add dean with message
         return redirect()->back()->with('success', 'Schedule Updated!');
+    }
+
+
+    // method use to view sched in monday
+    public function mondaySchedule()
+    {
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $schedules = Schedule::whereActive(1)
+                    ->where('day',1)
+                    ->orderBy('start_time', 'asc')
+                    ->get();
+
+        return view('dean.schedules-monday', ['rooms' => $rooms, 'schedules' => $schedules]);
+    }
+
+    
+    // method use to view sched in tuesday
+    public function tuesdaySchedule()
+    {
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $schedules = Schedule::whereActive(1)
+                    ->where('day',2)
+                    ->orderBy('start_time', 'asc')
+                    ->get();
+
+        return view('dean.schedules-tuesday', ['rooms' => $rooms, 'schedules' => $schedules]);
+    }
+    
+    
+    // method use to view sched in wednesday
+    public function wednesdaySchedule()
+    {
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $schedules = Schedule::whereActive(1)
+                    ->where('day',3)
+                    ->orderBy('start_time', 'asc')
+                    ->get();
+
+        return view('dean.schedules-wednesday', ['rooms' => $rooms, 'schedules' => $schedules]);
+    }
+    
+
+    // method use to view sched in thursday
+    public function thursdaySchedule()
+    {
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $schedules = Schedule::whereActive(1)
+                    ->where('day',4)
+                    ->orderBy('start_time', 'asc')
+                    ->get();
+
+        return view('dean.schedules-thursday', ['rooms' => $rooms, 'schedules' => $schedules]);
+    }
+    
+
+    // method use to view sched in friday
+    public function fridaySchedule()
+    {
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $schedules = Schedule::whereActive(1)
+                    ->where('day',5)
+                    ->orderBy('start_time', 'asc')
+                    ->get();
+
+        return view('dean.schedules-friday', ['rooms' => $rooms, 'schedules' => $schedules]);
+    }
+    
+
+    // method use to view sched in saturday
+    public function saturdaySchedule()
+    {
+        $rooms = Room::orderBy('name', 'asc')->get();
+        $schedules = Schedule::whereActive(1)
+                    ->where('day',6)
+                    ->orderBy('start_time', 'asc')
+                    ->get();
+
+        return view('dean.schedules-saturday', ['rooms' => $rooms, 'schedules' => $schedules]);
     }
 
 
