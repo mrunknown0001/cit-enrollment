@@ -206,6 +206,20 @@ class StudentController extends Controller
     // method use to assessment
     public function assessment()
     {
+        $es = EnrollmentSetting::find(1);
+
+        if($es->active == 0) {
+            return redirect()->route('student.dashboard')->with('error', 'Enrollment is Inactive!');
+        }
+
+        // add conditions
+
+        // get variables needed
+
+        // get course, curriculum, section, year level >>>> subjects schedules
+
+        // get section subjects
+
         return view('student.assessment');
     }
 

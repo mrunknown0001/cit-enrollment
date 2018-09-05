@@ -40,6 +40,15 @@ class DatabaseSeeder extends Seeder
             'amount' => 200
         ]);
 
+        DB::table('sections')->insert([
+            [
+                'name' => 'A'
+            ],
+            [
+                'name' => 'B'
+            ]
+        ]);
+
 
         $this->call(UsersSeeder::class);
         $this->call(YearLevelSeeder::class);
