@@ -12,10 +12,15 @@
 		</ol>
 	</section>
 	<section class="content">
+		{{-- show schedule --}}
+		{{-- show sections --}}
+		<p>Select/View Sections Schedules</p>
 		<div class="row">
-			<div class="col-md-12">
-				{{-- show schedule --}}
+			@foreach($sections as $s)
+			<div class="col-md-3">
+				<a href="{{ route('student.section.schedules', ['id' => $s->id]) }}" class="btn btn-primary btn-block btn-lg">Section {{ strtoupper($s->name) }}</a>
 			</div>
+			@endforeach
 		</div>
 	</section>
 </div>

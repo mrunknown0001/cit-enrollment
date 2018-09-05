@@ -7,6 +7,7 @@ use Auth;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\EnrollmentController;
+use DB;
 
 use App\User;
 use App\StudentInfo;
@@ -19,11 +20,15 @@ use App\Payment;
 use App\Balance;
 use App\Curriculum;
 use App\Course;
+use App\CourseMajor;
 use App\CourseEnrolled;
 use App\Subject;
 use App\UnitPrice;
 use App\Miscellaneous;
 use App\EnrolledStudent;
+use App\Section;
+use App\Schedule;
+use App\YearLevel;
 
 
 class StudentController extends Controller
@@ -214,13 +219,79 @@ class StudentController extends Controller
 
         // add conditions
 
-        // get variables needed
+        // get information of students that matched the 
+        // course, curriculum, yearl level and what sem is active
+        // to determine the subjects
+        $student = User::find(Auth::user()->id);
+
+        $course_id = $student->enrolled->course_id;
+        $curriculum_id = $student->enrolled->curriculum_id;
+        $major_id = $student->enrolled->major_id;
+        $yl_id = $student->info->year_level_id;
+
+        $ay = AcademicYear::whereActive(1)->first();
+        $sem = Semester::whereActive(1)->first();
+
+        $section_ids = DB::table('schedules')
+                    ->where('active', 1)
+                    ->where('course_id', $course_id)
+                    ->where('curriculum_id', $curriculum_id)
+                    ->where('year_level_id', $yl_id)
+                    ->distinct('section_id')
+                    ->get(['section_id']);
+
+        $sec_ids = array();
+
+        foreach($section_ids as $s) {
+            array_push($sec_ids, $s->section_id);
+        }
+
+        $sections = Section::find($sec_ids);
 
         // get course, curriculum, section, year level >>>> subjects schedules
 
         // get section subjects
 
-        return view('student.assessment');
+        return view('student.assessment', ['sections' => $sections]);
+    }
+
+
+    // method use to show schedules of the section
+    public function sectionSchedules($id = null)
+    {
+        $section = Section::findorfail($id);
+
+        $student = User::find(Auth::user()->id);
+
+        $course_id = $student->enrolled->course_id;
+        $curriculum_id = $student->enrolled->curriculum_id;
+        $major_id = $student->enrolled->major_id;
+        $yl_id = $student->info->year_level_id;
+
+        $course = Course::find($course_id);
+        $curriculum = Curriculum::find($curriculum_id);
+        $major = CourseMajor::find($major_id);
+        $yl = YearLevel::find($yl_id);
+
+        $ay = AcademicYear::whereActive(1)->first();
+        $sem = Semester::whereActive(1)->first();
+
+        // get scheudles
+        $schedules = Schedule::where('course_id', $course_id)
+                        ->where('curriculum_id', $curriculum_id)
+                        ->where('year_level_id', $yl_id)
+                        ->where('section_id', $section->id)
+                        ->get();
+
+        $subjects = Subject::where('course_id', $course_id)
+                        ->where('curriculum_id', $curriculum_id)
+                        ->where('year_level_id', $yl_id)
+                        ->where('semester_id', $sem->id)
+                        ->orderBy('code', 'asc')
+                        ->get();
+
+        // show the scheudle of the subjects in students
+        return view('student.assessment-schedule-show', ['schedules' => $schedules, 'subjects' => $subjects, 'section' => $section, 'course' => $course, 'curriculum' => $curriculum, 'yl' => $yl, 'major' => $major, 'sem' => $sem]);
     }
 
 

@@ -285,9 +285,10 @@ class DeanController extends Controller
                         ->where('end_time', $et)
                         ->first();
         if(count($schedule) > 0) {
-            return redirect()->back()->with('error', 'Duplicate Schedule Found!');
+            return redirect()->back()->with('error', 'Time confict!');
         }
 
+        // slot filled
         $schedule = Schedule::where('active', 1)
                         ->where('room_id', $room_id)
                         ->where('day', $day)
@@ -297,6 +298,25 @@ class DeanController extends Controller
         if(count($schedule) > 0) {
             return redirect()->back()->with('error', 'Time Slot Filled Up!');
         }
+
+        // time conflict
+        $schedule = Schedule::where('active', 1)
+                        ->where('section_id', $section->id)
+                        ->where('day', $day)
+                        ->where('start_time', $st)
+                        ->where('end_time', $et)
+                        ->first();
+        if(count($schedule) > 0) {
+            return redirect()->back()->with('error', 'Time Conflict on Section!');
+        }
+        // $schedule = Schedule::where('active', 1)
+        //                 ->where('day', $day)
+        //                 ->where('start_time', $st)
+        //                 ->where('end_time', $et)
+        //                 ->first();
+        // if(count($schedule) > 0) {
+        //     return redirect()->back()->with('error', 'Time Conflict on Section!');
+        // }
 
 
         // ckeck for start time conflict on the day

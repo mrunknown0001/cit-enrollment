@@ -19,7 +19,11 @@ class CreateAssessmentsTable extends Migration
             $table->foreign('student_id')->references('id')->on('users');
             $table->integer('academic_year_id')->unsigned();
             $table->integer('semester_id')->unsigned();
-            $table->string('subject_ids');
+            $table->integer('year_level_id')->unsigned()->nullable();
+            $table->integer('course_id')->unsigned();
+            $table->integer('curriculum_id')->unsigned();
+            $table->integer('section_id')->unsinged();
+            $table->string('subject_ids')->nullable();
             $table->tinyInteger('paid')->default(0);
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
