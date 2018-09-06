@@ -735,6 +735,9 @@ Route::group(['prefix' => 'student'], function () {
 	// route to view section schedule
 	Route::get('/assessment/section/{id}/schedules', 'StudentController@sectionSchedules')->name('student.section.schedules');
 
+	// route to save assessment
+	Route::post('/assessment/save', 'StudentController@postSaveAssessment')->name('student.save.assessment.post');
+
 	// route to show enrollment page
 	Route::get('/enrollment', 'StudentController@enrollment')->name('student.enrollment');
 

@@ -10,4 +10,9 @@ class Schedule extends Model
     {
     	return $this->belongsTo('App\Subject', 'subject_id');
     }
+
+    public function room()
+    {
+    	return $this->belongsTo('App\Room', 'room_id');
+    }
 }

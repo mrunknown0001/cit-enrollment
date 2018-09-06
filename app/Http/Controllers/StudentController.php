@@ -29,6 +29,7 @@ use App\EnrolledStudent;
 use App\Section;
 use App\Schedule;
 use App\YearLevel;
+use App\Assessment;
 
 
 class StudentController extends Controller
@@ -217,6 +218,14 @@ class StudentController extends Controller
             return redirect()->route('student.dashboard')->with('error', 'Enrollment is Inactive!');
         }
 
+        $assessment = Assessment::where('student_id', Auth::user()->id)
+                                ->whereActive(1)
+                                ->first();
+
+        if(count($assessment) > 0) {
+            return redirect()->route('student.enrollment')->with('info', 'Assessment Already Taken!');
+        }
+
         // add conditions
 
         // get information of students that matched the 
@@ -281,6 +290,8 @@ class StudentController extends Controller
                         ->where('curriculum_id', $curriculum_id)
                         ->where('year_level_id', $yl_id)
                         ->where('section_id', $section->id)
+                        ->orderBy('day', 'asc')
+                        ->orderBy('start_time', 'asc')
                         ->get();
 
         $subjects = Subject::where('course_id', $course_id)
@@ -292,6 +303,83 @@ class StudentController extends Controller
 
         // show the scheudle of the subjects in students
         return view('student.assessment-schedule-show', ['schedules' => $schedules, 'subjects' => $subjects, 'section' => $section, 'course' => $course, 'curriculum' => $curriculum, 'yl' => $yl, 'major' => $major, 'sem' => $sem]);
+    }
+
+
+    // method use to save assessment of the student
+    public function postSaveAssessment(Request $request)
+    {
+        $section_id = $request['section_id'];
+
+        $section = Section::findorfail($section_id);
+
+        $student = User::find(Auth::user()->id);
+
+        $course_id = $student->enrolled->course_id;
+        $curriculum_id = $student->enrolled->curriculum_id;
+        $major_id = $student->enrolled->major_id;
+        $yl_id = $student->info->year_level_id;
+
+        $course = Course::find($course_id);
+        $curriculum = Curriculum::find($curriculum_id);
+        $major = CourseMajor::find($major_id);
+        $yl = YearLevel::find($yl_id);
+
+        $ay = AcademicYear::whereActive(1)->first();
+        $sem = Semester::whereActive(1)->first();
+
+        // get the subject
+        // count the number of lecture units multiplied by the unit price
+        // add the miscellaneous and add 1k if there is lab units to get the total amount of tuition fee
+        $subjects = Subject::where('course_id', $course_id)
+                        ->where('curriculum_id', $curriculum_id)
+                        ->where('year_level_id', $yl_id)
+                        ->where('semester_id', $sem->id)
+                        ->orderBy('code', 'asc')
+                        ->get();
+
+        $total_units = $subjects->sum('units');
+        $lab_units = $subjects->sum('lab_units');
+
+        // get the price and misc
+        $unit_price = UnitPrice::find(1);
+        $misc = Miscellaneous::all();
+
+        $total_misc = $misc->sum('amount');
+
+        // total balance and/or payable of student 
+        // (unit price * total units) + total misc
+        $total_payable = ($total_units * $unit_price->amount) + $total_misc;
+
+        if($lab_units > 0) {
+            $total_payable += 1000;
+        }
+
+        $assessment = new Assessment();
+        $assessment->student_id = $student->id;
+        $assessment->academic_year_id = $ay->id;
+        $assessment->semester_id = $sem->id;
+        $assessment->year_level_id = $yl->id;
+        $assessment->course_id = $course->id;
+        $assessment->curriculum_id = $curriculum->id;
+        $assessment->section_id = $section->id;
+        $assessment->amount = $total_payable;
+        $assessment->save();
+
+        // create balance and deduct amount payment
+        $balance = new Balance();
+        $balance->student_id = $student->id;
+        $balance->academic_year_id = $ay->id;
+        $balance->semester_id = $sem->id;
+        $balance->balance = $total_payable;
+        $balance->total = $total_payable;
+        $balance->save();
+
+        // add activity log
+
+        // return to enrollment
+        return redirect()->route('student.enrollment')->with('success', 'Assessment Saved!');
+
     }
 
 
@@ -313,41 +401,53 @@ class StudentController extends Controller
             return redirect()->back()->with('error', 'Enrollment is Inactive!');
         }
 
+        // check if there is active assessment
+        $assessment = Assessment::where('student_id', Auth::user()->id)
+                            ->where('active', 1)
+                            ->first();
+
+        if(count($assessment) < 1) {
+            return redirect()->route('student.dashboard')->with('error', 'No Assessment!');
+        }
+
+
+        return 'view of enrollment. contains registration payment link. subjects schedules total tuition fee display. tuloy ko mamaya pahinga muna konte';
+
         // check if paid for pre-registration
-        $reg_payment = RegistrationPayment::where('student_id', Auth::user()->id)->where('active', 1)->first();
+        // $reg_payment = RegistrationPayment::where('student_id', Auth::user()->id)->where('active', 1)->first();
 
-        if(count($reg_payment) < 1) {
-            return redirect()->route('student.dashboard')->with('error', 'Registration Payment Not Paid!');
-        } 
+        // if(count($reg_payment) < 1) {
+        //     return redirect()->route('student.dashboard')->with('error', 'Registration Payment Not Paid!');
+        // } 
 
-        // check course/major/curriculum to load subject based on year level and semester
-        $course_enrolled = CourseEnrolled::where('student_id', Auth::user()->id)
-                                ->where('active', 1)
-                                ->first();
+        // // check course/major/curriculum to load subject based on year level and semester
+        // $course_enrolled = CourseEnrolled::where('student_id', Auth::user()->id)
+        //                         ->where('active', 1)
+        //                         ->first();
 
-        $subjects = Subject::where('course_id', $course_enrolled->course_id)
-                        ->where('curriculum_id', $course_enrolled->curriculum_id)
-                        ->where('year_level_id', Auth::user()->info->year_level_id)
-                        ->where('semester_id', $sem->id)
-                        ->get();
+        // $subjects = Subject::where('course_id', $course_enrolled->course_id)
+        //                 ->where('curriculum_id', $course_enrolled->curriculum_id)
+        //                 ->where('year_level_id', Auth::user()->info->year_level_id)
+        //                 ->where('semester_id', $sem->id)
+        //                 ->get();
 
-        $total_units = $subjects->sum('units');
+        // $total_units = $subjects->sum('units');
 
-        // get misc and unit price
-        $unit_price = UnitPrice::find(1);
-        $misc = Miscellaneous::all();
+        // // get misc and unit price
+        // $unit_price = UnitPrice::find(1);
+        // $misc = Miscellaneous::all();
 
-        $total_misc = $misc->sum('amount');
+        // $total_misc = $misc->sum('amount');
 
-        // total balance and/or payable of student 
-        // (unit price * total units) + total misc
-        $total_payable = ($total_units * $unit_price->amount) + $total_misc;
+        // // total balance and/or payable of student 
+        // // (unit price * total units) + total misc
+        // $total_payable = ($total_units * $unit_price->amount) + $total_misc;
 
-        // check if there is active balance in the balances tables
-        // if there is existing, nothing to do
-        // if there is not, create an active record to the database
+        // // check if there is active balance in the balances tables
+        // // if there is existing, nothing to do
+        // // if there is not, create an active record to the database
 
-        return view('student.enrollment', ['es' => $enrollment_status, 'subjects' => $subjects, 'total_units' => $total_units, 'total_misc' => $total_misc, 'total_payable' => $total_payable, 'ay' => $ay, 'sem' => $sem]);
+        // return view('student.enrollment', ['es' => $enrollment_status, 'subjects' => $subjects, 'total_units' => $total_units, 'total_misc' => $total_misc, 'total_payable' => $total_payable, 'ay' => $ay, 'sem' => $sem]);
     }
 
 

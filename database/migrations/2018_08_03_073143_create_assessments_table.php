@@ -24,6 +24,7 @@ class CreateAssessmentsTable extends Migration
             $table->integer('curriculum_id')->unsigned();
             $table->integer('section_id')->unsinged();
             $table->string('subject_ids')->nullable();
+            $table->float('amount', 8, 2)->default(0);
             $table->tinyInteger('paid')->default(0);
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
