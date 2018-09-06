@@ -390,6 +390,9 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
+        $es = EnrollmentSetting::find(1);
+        $rp = RegistrationPayment::where('student_id', Auth::user()->id)->where('active', 1)->first();
+
         if(count($ay) < 1 && count($sem) < 1) {
             return redirect()->route('student.dashboard')->with('error', 'No active Academic Year or Semester!');
         }
@@ -410,8 +413,61 @@ class StudentController extends Controller
             return redirect()->route('student.dashboard')->with('error', 'No Assessment!');
         }
 
+        // get all the data needed to display in the enrollment
+        // active assessment for the student
+        // sections
+        // schedules and rooms
+        $student = User::find(Auth::user()->id);
 
-        return 'view of enrollment. contains registration payment link. subjects schedules total tuition fee display. tuloy ko mamaya pahinga muna konte';
+        $balance = Balance::where('student_id', $student->id)
+                        ->where('academic_year_id', $ay->id)
+                        ->where('semester_id', $sem->id)
+                        ->first();
+
+        $course_id = $student->enrolled->course_id;
+        $curriculum_id = $student->enrolled->curriculum_id;
+        $major_id = $student->enrolled->major_id;
+        $yl_id = $student->info->year_level_id;
+
+        $course = Course::find($course_id);
+        $curriculum = Curriculum::find($curriculum_id);
+        $major = CourseMajor::find($major_id);
+        $yl = YearLevel::find($yl_id);
+        $section = Section::find($assessment->section_id);
+
+
+        $subjects = Subject::where('course_id', $course_id)
+                        ->where('curriculum_id', $curriculum_id)
+                        ->where('year_level_id', $yl_id)
+                        ->where('semester_id', $sem->id)
+                        ->orderBy('code', 'asc')
+                        ->get();
+
+        $schedules = Schedule::where('course_id', $course_id)
+                        ->where('curriculum_id', $curriculum_id)
+                        ->where('year_level_id', $yl_id)
+                        ->where('section_id', $section->id)
+                        ->orderBy('day', 'asc')
+                        ->orderBy('start_time', 'asc')
+                        ->get();
+
+
+
+        return view('student.enrollment', [
+                'assessment' => $assessment,
+                'balance' => $balance,
+                'subjects' => $subjects,
+                'schedules' => $schedules,
+                'es' => $es,
+                'rp' => $rp,
+                'student' => $student,
+                'course' => $course,
+                'curriculum' => $curriculum,
+                'major' => $major,
+                'section' => $section,
+                'yl' => $yl,
+                'sem' => $sem
+            ]);
 
         // check if paid for pre-registration
         // $reg_payment = RegistrationPayment::where('student_id', Auth::user()->id)->where('active', 1)->first();
@@ -707,12 +763,12 @@ class StudentController extends Controller
         $total_payable = ($total_units * $unit_price->amount) + $total_misc;
 
         // create balance and deduct amount payment
-        $balance = new Balance();
-        $balance->student_id = Auth::user()->id;
-        $balance->academic_year_id = $ay->id;
-        $balance->semester_id = $sem->id;
+        $balance = Balance::where('student_id', Auth::user()->id)
+                        ->where('academic_year_id', $ay->id)
+                        ->where('semester_id', $sem->id)
+                        ->first();
+
         $balance->balance = $total_payable - $payment->amount;
-        $balance->total = $total_payable;
         $balance->save();
 
         // add student to enrolled to the current academic year and semester

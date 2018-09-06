@@ -194,10 +194,33 @@ class CashierController extends Controller
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
 
+        if(count($ay) < 1 && count($sem) < 1) {
+            return redirect()->back()->with('error', 'No Active School Year! Please Report to Admin!');
+        }
+
         $balance = Balance::where('student_id', $student->id)
                             ->where('academic_year_id', $ay->id)
                             ->where('semester_id', $sem->id)
                             ->first();
+
+        // add registration payment if there is none
+        // first payment even in over the counter is registration payment
+        $rp = RegistrationPayment::where('student_id', $student->id)
+                        ->where('academic_year_id', $ay->id)
+                        ->where('semester_id', $sem->id)
+                        ->whereActive(1)
+                        ->first();
+
+        if(count($rp) < 1) {
+            $reg_p = new RegistrationPayment();
+            $reg_p->student_id = $student->id;
+            $reg_p->mode_of_payment_id = 3;
+            $reg_p->academic_year_id = $ay->id;
+            $reg_p->semester_id = $sem->id;
+            $reg_p->amount = $amount;
+            $reg_p->save();
+        }
+
 
         // make the deduction of payed amount to the current balance of student
         $payment = new Payment();

@@ -223,40 +223,40 @@ class PaymentController extends Controller
                 $balance->balance -= $s_payment->amount;
                 $balance->save();
             }
-            else {
-                // get total payable for the sem
-                // check course/major/curriculum to load subject based on year level and semester
-                $course_enrolled = CourseEnrolled::where('student_id', Auth::user()->id)
-                                        ->where('active', 1)
-                                        ->first();
+            // else {
+            //     // get total payable for the sem
+            //     // check course/major/curriculum to load subject based on year level and semester
+            //     $course_enrolled = CourseEnrolled::where('student_id', Auth::user()->id)
+            //                             ->where('active', 1)
+            //                             ->first();
 
-                $subjects = Subject::where('course_id', $course_enrolled->course_id)
-                                ->where('curriculum_id', $course_enrolled->curriculum_id)
-                                ->where('year_level_id', Auth::user()->info->year_level_id)
-                                ->where('semester_id', $sem->id)
-                                ->get();
+            //     $subjects = Subject::where('course_id', $course_enrolled->course_id)
+            //                     ->where('curriculum_id', $course_enrolled->curriculum_id)
+            //                     ->where('year_level_id', Auth::user()->info->year_level_id)
+            //                     ->where('semester_id', $sem->id)
+            //                     ->get();
 
-                $total_units = $subjects->sum('units');
+            //     $total_units = $subjects->sum('units');
 
-                // get misc and unit price
-                $unit_price = UnitPrice::find(1);
-                $misc = Miscellaneous::all();
+            //     // get misc and unit price
+            //     $unit_price = UnitPrice::find(1);
+            //     $misc = Miscellaneous::all();
 
-                $total_misc = $misc->sum('amount');
+            //     $total_misc = $misc->sum('amount');
 
-                // total balance and/or payable of student 
-                // (unit price * total units) + total misc
-                $total_payable = ($total_units * $unit_price->amount) + $total_misc;
+            //     // total balance and/or payable of student 
+            //     // (unit price * total units) + total misc
+            //     $total_payable = ($total_units * $unit_price->amount) + $total_misc;
 
-                // create balance and deduct amount payment
-                $balance = new Balance();
-                $balance->student_id = Auth::user()->id;
-                $balance->academic_year_id = $ay->id;
-                $balance->semester_id = $sem->id;
-                $balance->balance = $total_payable - $s_payment->amount;
-                $balance->total = $total_payable;
-                $balance->save();
-            }
+            //     // create balance and deduct amount payment
+            //     $balance = new Balance();
+            //     $balance->student_id = Auth::user()->id;
+            //     $balance->academic_year_id = $ay->id;
+            //     $balance->semester_id = $sem->id;
+            //     $balance->balance = $total_payable - $s_payment->amount;
+            //     $balance->total = $total_payable;
+            //     $balance->save();
+            // }
 
             GeneralController::activity_log(Auth::user()->id, 6, 'Student Payment using Paypal');
 
