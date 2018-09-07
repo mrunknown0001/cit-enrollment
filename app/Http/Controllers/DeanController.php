@@ -18,6 +18,7 @@ use App\Course;
 use App\YearLevel;
 use App\CourseMajor;
 use App\Curriculum;
+use App\FacultyLoad;
 
 class DeanController extends Controller
 {
@@ -738,6 +739,22 @@ class DeanController extends Controller
         GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Updated Section');
 
         return redirect()->route('dean.sections')->with('success', 'Section Updated!');   
+    }
+
+
+    // method use to view faculty load in dean
+    public function facultyLoad()
+    {
+        $loads = FacultyLoad::whereActive(1)->get();
+
+        return view('dean.faculty-load');
+    }
+
+
+    // method use to add faculty laod 
+    public function addFacultyLoad()
+    {
+        return view('dean.faculty-load-add');
     }
 
 

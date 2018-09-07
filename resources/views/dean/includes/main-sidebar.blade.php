@@ -24,6 +24,11 @@
           <i class="fa fa-calendar-check-o"></i> <span>Schedules</span>
         </a>
       </li>
+      <li class="{{ route('dean.faculty.load') == url()->current() ? 'active' : '' }}">
+        <a href="{{ route('dean.faculty.load') }}">
+          <i class="fa fa-user"></i> <span>Faculty Load</span>
+        </a>
+      </li>
     </ul>
   </section>
 </aside>

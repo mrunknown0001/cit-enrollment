@@ -7,6 +7,9 @@ use Auth;
 use App\Http\Controllers\GeneralController;
 
 use App\Faculty;
+use App\FacultyLoad;
+use App\Grade;
+use App\User;
 
 class FacultyController extends Controller
 {

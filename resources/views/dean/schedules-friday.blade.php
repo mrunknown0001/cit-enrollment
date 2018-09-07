@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				{{-- <a href="{{ route('dean.add.schedule') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Schedule</a> --}}
-				<p></p>
+				<p><a href="{{ route('dean.schedules') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Schedules</a></p>
 				@include('includes.all')
 				@if(count($schedules) > 0)
 					<div style="font-size: 12px; font-family: Times New Roman">

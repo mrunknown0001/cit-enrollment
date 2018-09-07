@@ -9,6 +9,16 @@
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
+      <li class="">
+        <a href="#">
+          <i class="fa fa-book"></i> <span>Subjects</span>
+        </a>
+      </li>
+      <li class="">
+        <a href="#">
+          <i class="fa fa-graduation-cap"></i> <span>Students</span>
+        </a>
+      </li>
     </ul>
   </section>
 </aside>
