@@ -23,9 +23,9 @@
 					</div>
 					<div class="box-body">
 						<button class="btn btn-primary" onclick="window.print()"><i class="fa fa-print"></i></button>
-						<div class="row">
-							<div class="col-md-4">
-								<div id="printArea">
+						<div id="printArea" class="studentPayment">
+							<div class="row">
+								<div class="col-md-4">
 									<h3 class="text-center">CIT COLLEGES</h3>
 									<p class="text-center"><small>Paniqui, Tarlac</small></p>
 									<p></p>

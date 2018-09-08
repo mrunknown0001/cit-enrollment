@@ -29,7 +29,7 @@
 						<strong><i class="fa fa-file-text-o"></i> Enrollment</strong>
 					</div>
 					<div class="box-body">
-						<div id="printableArea">
+						<div id="printArea" class="cor">
 
 						<div class="row">
 							<div class="col-md-6">
