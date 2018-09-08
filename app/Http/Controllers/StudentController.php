@@ -376,6 +376,7 @@ class StudentController extends Controller
         $balance->save();
 
         // add activity log
+        GeneralController::activity_log(Auth::user()->id, 6, 'Student Saved Assessment');
 
         // return to enrollment
         return redirect()->route('student.enrollment')->with('success', 'Assessment Saved!');

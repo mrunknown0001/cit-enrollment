@@ -18,6 +18,10 @@
 				@if($es->active == 1)
 					@if(count($rp) < 1) 
 						@include('student.includes.registration-payment')
+					@else
+					<p>
+						<button class="btn btn-primary" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
+					</p>
 					@endif
 				@endif
 				<div class="box box-primary">
@@ -25,6 +29,8 @@
 						<strong><i class="fa fa-file-text-o"></i> Enrollment</strong>
 					</div>
 					<div class="box-body">
+						<div id="printableArea">
+
 						<div class="row">
 							<div class="col-md-6">
 								<p>Course: <strong>{{ ucwords($course->title) }}</strong></p>
@@ -94,6 +100,8 @@
 									</tbody>
 								</table>
 							</div>
+						</div>
+
 						</div>
 					</div>
 					<div class="box-footer">
