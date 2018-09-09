@@ -19,6 +19,7 @@ use App\YearLevel;
 use App\CourseMajor;
 use App\Curriculum;
 use App\FacultyLoad;
+use App\Faculty;
 
 class DeanController extends Controller
 {
@@ -747,14 +748,51 @@ class DeanController extends Controller
     {
         $loads = FacultyLoad::whereActive(1)->get();
 
-        return view('dean.faculty-load');
+        return view('dean.faculty-load', ['loads' => $loads]);
     }
 
 
     // method use to add faculty laod 
     public function addFacultyLoad()
     {
-        return view('dean.faculty-load-add');
+        $sem = Semester::whereActive(1)->first();
+
+        if(count($sem) < 1) {
+            return redirect()->back()->with('error', 'No Active Semester. Please report to admin.');
+        }
+
+        // get all faculty
+        $faculty = Faculty::orderBy('lastname', 'asc')->get(['id', 'firstname', 'lastname']);
+
+        // get all active subject for the current semester
+        $subjects = Subject::where('semester_id', $sem->id)->orderby('code', 'asc')->get();
+
+        // get schedule, course, year level, subjects
+
+        return view('dean.faculty-load-add', [
+            'faculty' => $faculty
+        ]);
+    }
+
+
+    // method use to save facutly load assignment
+    public function postAddFacultyLoad(Request $request)
+    {
+        $request->validate([
+            'faculty' => 'required'
+        ]);
+
+        $faculty_id = $request['faculty'];
+
+        $faculty = Faculty::findorfail($faculty_id);
+
+        // get the selected subjects 
+
+        // add to database 
+
+        // activity log
+
+        // return with success message
     }
 
 

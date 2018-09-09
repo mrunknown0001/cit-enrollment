@@ -20,10 +20,11 @@ class CreateFacultyLoadsTable extends Migration
             $table->integer('subject_id')->unsigned();
             $table->integer('section_id')->unsigned();
             $table->tinyInteger('active')->default(1);
-            $table->integer('course_id')->unsigned()->nullable();
-            $table->integer('curriculum_id')->unsigned()->nullable();
-            $table->integer('academic_year_id')->unsigned()->nullable();
+            $table->integer('year_level_id')->unsigned()->nullable();
             $table->integer('semester_id')->unsigned()->nullable();
+            $table->integer('curriculum_id')->unsigned()->nullable();
+            $table->integer('course_id')->unsigned()->nullable();
+            $table->integer('academic_year_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

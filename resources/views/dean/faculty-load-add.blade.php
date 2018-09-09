@@ -27,10 +27,18 @@
 					<div class="row">
 						<div class="col-md-6">
 							<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
-							<form action="#" method="POST" autocomplete="off">
+							<form action="{{ route('dean.add.faculty.load.post') }}" method="POST" autocomplete="off">
 								{{ csrf_field() }}
 								<div class="form-group">
-									
+									<label>Select Faculty</label>
+									<select name="faculty" id="faculty" class="form-control">
+										<option value="">Select Faculty</option>
+										@if(count($faculty) > 0)
+											@foreach($faculty as $f)
+											<option value="{{ $f->id }}">{{ ucwords($f->firstname . ' ' . $f->lastname) }}</option>
+											@endforeach
+										@endif
+									</select>
 								</div>
 								<div class="form-group">
 									<button class="btn btn-primary">Assign Load to Faculty</button>

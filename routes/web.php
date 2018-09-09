@@ -505,6 +505,9 @@ Route::group(['prefix' => 'dean'], function () {
 	// route to add/assign faculty load subjec
 	Route::get('/faculty/load/add', 'DeanController@addFacultyLoad')->name('dean.add.faculty.load');
 
+	// route  to save faculty assignment 
+	Route::post('/faculty/load/add', 'DeanController@postAddFacultyLoad')->name('dean.add.faculty.load.post');
+
 });
 
 
