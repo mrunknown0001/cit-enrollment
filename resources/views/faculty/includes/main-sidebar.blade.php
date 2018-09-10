@@ -9,8 +9,8 @@
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
-      <li class="">
-        <a href="#">
+      <li class="{{ route('faculty.subject.loads') == url()->current() ? 'active' : '' }}">
+        <a href="{{ route('faculty.subject.loads') }}">
           <i class="fa fa-book"></i> <span>Subjects</span>
         </a>
       </li>

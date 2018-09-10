@@ -713,6 +713,14 @@ Route::group(['prefix' => 'faculty'], function () {
 
 	// route to save new password
 	Route::post('/password/change', 'FacultyController@postChangePassword')->name('faculty.change.password.post');
+
+	// route to view faculty load in the current semester 
+	Route::get('/subject/loads', 'FacultyController@subjectLoads')->name('faculty.subject.loads');
+
+	// route to view all subjects in the course year level section subject
+	Route::get('/student/course/{course_id}/curriculum/{curriculum_id}/year/{yl_id}/section/{section_id}/subject/{subject_id}/view', 'FacultyController@viewStudentSectionSubject')->name('faculty.student.section.subject');
+
+	
 });
 
 

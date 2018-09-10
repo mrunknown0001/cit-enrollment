@@ -56,7 +56,14 @@
 							<tbody>
 								@foreach($students as $s)
 									<tr>
-										<td>{{ ucwords($s->lastname . ', ' . $s->firstname) }}</td>
+										<td>
+											{{ ucwords($s->lastname . ', ' . $s->firstname) }}
+											@if(count($s->enrolled_now) > 0)
+											<small>[Enrolled]</small>
+											@else
+											<small>[Not Enrolled]</small>
+											@endif
+										</td>
 										<td class="text-center">{{ $s->student_number }}</td>
 										<td class="text-center">
 											@if($s->registered == 1)

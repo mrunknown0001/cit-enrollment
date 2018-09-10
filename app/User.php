@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Balance', 'student_id');
     }
+
+    public function enrolled_now()
+    {
+        return $this->hasOne('App\EnrolledStudent', 'student_id');
+    }
 }

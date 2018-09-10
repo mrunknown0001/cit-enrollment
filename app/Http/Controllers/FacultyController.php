@@ -10,6 +10,14 @@ use App\Faculty;
 use App\FacultyLoad;
 use App\Grade;
 use App\User;
+use App\Subject;
+use App\Course;
+use App\Curriculum;
+use App\YearLevel;
+use App\Section;
+use App\AcademicYear;
+use App\Semester;
+use App\Assessment;
 
 class FacultyController extends Controller
 {
@@ -115,6 +123,60 @@ class FacultyController extends Controller
 
         // return to deans and add admin with message
         return redirect()->route('faculty.dashboard')->with('success', 'Password Changed!');
+    }
+
+
+    // method use to view faculty load
+    public function subjectLoads()
+    {
+        $faculty = Faculty::find(Auth::guard('faculty')->user()->id);
+
+        $loads = FacultyLoad::where('faculty_id', $faculty->id)
+                            ->where('active', 1)
+                            ->get();
+
+
+        return view('faculty.subject-loads', ['loads' => $loads]);
+    }
+
+
+    // method use to view students in the subject
+    public function viewStudentSectionSubject($course_id = null, $curriculum_id = null, $yl_id = null, $section_id = null, $subject_id = null)
+    {
+        $ay = AcademicYear::whereActive(1)->first();
+        $sem = Semester::whereActive(1)->first();
+
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'No Active Academic Year or Semester. Please report to the adminsitrator.');
+        }
+
+        $course = Course::findorfail($course_id);
+        $curriculum = Curriculum::findorfail($curriculum_id);
+        $yl = YearLevel::findorfail($yl_id);
+        $section = Section::findorfail($section_id);
+        $subject = Subject::findorfail($subject_id);
+
+        // get the list of student enrolled in this course year level section
+        $student_ids = Assessment::where('course_id', $course->id)
+                                ->where('curriculum_id', $curriculum->id)
+                                ->where('year_level_id', $yl->id)
+                                ->where('section_id', $section->id)
+                                ->whereActive(1)
+                                ->get(['student_id']);
+
+        $students = User::find($student_ids);
+
+        // you can filter students if enrolled / paid or not
+
+
+        return view('faculty.subject-load-students', [
+            'course' => $course,
+            'curriculum' => $curriculum,
+            'yl' => $yl,
+            'section' => $section,
+            'subject' => $subject,
+            'students' => $students
+        ]);
     }
 
 }
