@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Http\Controllers\GeneralController;
 use Session;
+use DB;
 
 use App\Dean;
 use App\Schedule;
@@ -752,6 +753,47 @@ class DeanController extends Controller
     }
 
 
+    // method use to select course year level section available in schedules
+    public function addFacultySelection()
+    {
+        // get all distinct course year level and section
+        // where to select subjects
+        $sections = Schedule::where('active', 1)
+                    ->distinct(['course_id', 'curriculum_id', 'year_level_id', 'section_id'])
+                    ->orderBy('course_id', 'year_level_id', 'section_id')
+                    ->get();
+
+
+        return view('dean.faculty-load-select', ['sections' => $sections]);
+    }
+
+
+    // method use to select subject load of the faculty
+    public function selectFacultyLoad(Request $request)
+    {
+        $request->validate([
+            'section' => 'required'
+        ]);
+
+        $section_sched = $request['section'];
+
+        $schedule = Schedule::findorfail($section_sched);
+
+        // get all subjects in the schedule having same course, curriculum, yearl level and section
+        $subject_ids = Schedule::whereActive(1)
+                    ->distinct(['course_id', 'curriculum_id', 'year_level_id', 'section_id'])
+                    ->get(['subject_id']);
+
+        $subjects = Subject::find($subject_ids);
+
+        // get all active faculty
+        $faculty = Faculty::orderBy('lastname', 'asc')->get();
+
+
+        return view('dean.faculty-load-add', ['schedule' => $schedule, 'faculty' => $faculty, 'subjects' => $subjects]);
+    }
+
+
     // method use to add faculty laod 
     public function addFacultyLoad()
     {
@@ -775,24 +817,62 @@ class DeanController extends Controller
     }
 
 
-    // method use to save facutly load assignment
+    // method use to save faculty load assignment
     public function postAddFacultyLoad(Request $request)
     {
         $request->validate([
-            'faculty' => 'required'
+            'faculty' => 'required',
+            'subject' => 'required'
         ]);
 
+        $schedule_id = $request['schedule_id'];
         $faculty_id = $request['faculty'];
+        $subject_id = $request['subject'];
+
+        $schedule = Schedule::findorfail($schedule_id);
 
         $faculty = Faculty::findorfail($faculty_id);
+        $subject = Subject::findorfail($subject_id);
 
-        // get the selected subjects 
+        $ay = AcademicYear::whereActive(1)->first();
+        $sem = Semester::whereActive(1)->first();
+
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'No Active Academic Year or Semester. Please contact the administrator.');
+        }
+
+        // check duplicate subject Assignment
+        $check_conflict = FacultyLoad::where('course_id', $schedule->course->id)
+                                    ->where('curriculum_id', $schedule->curriculum->id)
+                                    ->where('year_level_id', $schedule->year_level->id)
+                                    ->where('academic_year_id', $ay->id)
+                                    ->where('semester_id', $sem->id)
+                                    ->where('section_id', $schedule->section->id)
+                                    ->where('subject_id', $subject->id)
+                                    ->whereActive(1)
+                                    ->first();
+
+        if(count($check_conflict) > 0) {
+            return redirect()->back()->with('error', 'Subject in this Course Year Level and Section has been already Assigned!');
+        }
 
         // add to database 
+        $assign = new FacultyLoad();
+        $assign->faculty_id = $faculty->id;
+        $assign->course_id = $schedule->course->id;
+        $assign->curriculum_id = $schedule->curriculum->id;
+        $assign->year_level_id = $schedule->year_level->id;
+        $assign->academic_year_id = $ay->id;
+        $assign->semester_id = $sem->id;
+        $assign->section_id = $schedule->section->id;
+        $assign->subject_id = $subject->id;
+        $assign->save();
 
         // activity log
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Added Faculty Subject Load');
 
         // return with success message
+        return redirect()->back()->with('success', 'Subject Assigned to Faculty');
     }
 
 

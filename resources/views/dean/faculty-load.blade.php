@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<p>
-					<a href="{{ route('dean.add.faculty.load') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Assign Subject to Faculty</a>
+					<a href="{{ route('dean.selection.faculty.load') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Assign Subject to Faculty</a>
 				</p>
 				@include('includes.all')
 				@if(count($loads) > 0) 
@@ -30,8 +30,12 @@
 						<tbody>
 							@foreach($loads as $l)
 							<tr>
-								<td class="text-center"></td>
-								<td class="text-center"></td>
+								<td class="text-center">
+									{{ ucwords($l->faculty->firstname . ' ' . $l->faculty->lastname) }}
+								</td>
+								<td class="text-center">
+									{{ strtoupper($l->course->code) . ' ' . ucwords($l->year_level->name) . ' ' . strtoupper($l->section->name) . ' - ' . strtoupper($l->subject->code) }}
+								</td>
 								<td class="text-center">
 									<a href="#" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a>
 								</td>

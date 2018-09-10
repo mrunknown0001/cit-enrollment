@@ -505,8 +505,18 @@ Route::group(['prefix' => 'dean'], function () {
 	// route to add/assign faculty load subjec
 	Route::get('/faculty/load/add', 'DeanController@addFacultyLoad')->name('dean.add.faculty.load');
 
+	// route to select course, curriculum, year level, section
+	Route::get('/faculty/load/selection', 'DeanController@addFacultySelection')->name('dean.selection.faculty.load');
+
+	// route to select faculty and subject assignment
+	Route::get('/faculty/select/subject/load', 'DeanController@selectFacultyLoad')->name('dean.select.faculty.load');
+
 	// route  to save faculty assignment 
 	Route::post('/faculty/load/add', 'DeanController@postAddFacultyLoad')->name('dean.add.faculty.load.post');
+
+	Route::get('/faculty/load/add', function () {
+		return abort(404);
+	});
 
 });
 

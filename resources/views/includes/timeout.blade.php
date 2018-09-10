@@ -21,4 +21,6 @@ function timerIncrement() {
         window.location.href = '/logout';
     }
 }
+
+
 </script> 
