@@ -31,6 +31,7 @@ use App\Schedule;
 use App\YearLevel;
 use App\Assessment;
 use App\StudentLimit;
+use App\AssessmentCounter;
 
 
 class StudentController extends Controller
@@ -324,12 +325,6 @@ class StudentController extends Controller
     public function postSaveAssessment(Request $request)
     {
 
-        // get the number of the limit
-
-
-        // check the numer of the students
-
-
         $section_id = $request['section_id'];
 
         $section = Section::findorfail($section_id);
@@ -348,6 +343,50 @@ class StudentController extends Controller
 
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
+
+
+        // get the number of the limit
+        $limit = StudentLimit::find(1);
+
+
+        // check if the there is existing assessment counter for the section
+        $check_counter = AssessmentCounter::where('course_id', $course->id)
+                                    ->where('curriculum_id', $curriculum->id)
+                                    ->where('year_level_id', $yl->id)
+                                    ->where('semester_id', $sem->id)
+                                    ->where('academic_year_id', $ay->id)
+                                    ->where('section_id', $section->id)
+                                    ->first();
+        
+
+        // if not exist, create a new counter
+        // if exists increment by 1
+        if(count($check_counter) > 0) {
+            // check if the number of students assess is less than the limi
+            if($check_counter->student_count < $limit->limit) {
+                // increment counter by 1
+                $check_counter->student_count += 1; 
+
+            }
+            else {
+                return redirect()->back()->with('error', 'The Section is Full! Take another section instead!');
+            }
+        }
+        else {
+            // create counter and the student count of 1
+            $counter = new AssessmentCounter();
+            $counter->course_id = $course->id;
+            $counter->curriculum_id = $curriculum->id;
+            $counter->year_level_id = $yl->id;
+            $counter->semester_id = $sem->id;
+            $counter->academic_year_id = $ay->id;
+            $counter->section_id = $section->id;
+            $counter->student_count = 1;
+            $counter->save();
+        }
+
+
+
 
         // get the subject
         // count the number of lecture units multiplied by the unit price
