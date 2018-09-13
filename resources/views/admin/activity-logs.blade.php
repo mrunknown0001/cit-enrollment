@@ -22,13 +22,13 @@
 							<strong><i class="fa fa-history"></i> Activity Logs</strong>
 						</div>
 						<div class="box-body">
-							<table class="table table-hover">
+							<table class="table table-hover table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>Name</th>
-										<th>User Type</th>
-										<th>Action</th>
-										<th>Date &amp; Time</th>
+										<th class="text-center">Name</th>
+										<th class="text-center">User Type</th>
+										<th class="text-center">Action</th>
+										<th class="text-center">Date &amp; Time</th>
 									</tr>
 								</thead>
 								<tbody>

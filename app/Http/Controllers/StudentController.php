@@ -30,6 +30,7 @@ use App\Section;
 use App\Schedule;
 use App\YearLevel;
 use App\Assessment;
+use App\StudentLimit;
 
 
 class StudentController extends Controller
@@ -218,6 +219,16 @@ class StudentController extends Controller
             return redirect()->route('student.dashboard')->with('error', 'Enrollment is Inactive!');
         }
 
+        $ay = AcademicYear::whereActive(1)->first();
+        $sem = Semester::whereActive(1)->first();
+
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->route('student.dashboard')->with('error', 'Academic Year or Semester Not Set!');
+        }
+
+
+
+
         $assessment = Assessment::where('student_id', Auth::user()->id)
                                 ->whereActive(1)
                                 ->first();
@@ -233,13 +244,16 @@ class StudentController extends Controller
         // to determine the subjects
         $student = User::find(Auth::user()->id);
 
+        // check student if first year and if the semester is first they can't take assessment
+        if($student->info->year_level_id == 1 && $sem->id == 1) {
+            return redirect()->route('student.dashboard')->with('info', 'Unable to take assessment. You can take next Semester! Study harder! God Bless!');
+        }
+
         $course_id = $student->enrolled->course_id;
         $curriculum_id = $student->enrolled->curriculum_id;
         $major_id = $student->enrolled->major_id;
         $yl_id = $student->info->year_level_id;
 
-        $ay = AcademicYear::whereActive(1)->first();
-        $sem = Semester::whereActive(1)->first();
 
         $section_ids = DB::table('schedules')
                     ->where('active', 1)
@@ -309,6 +323,13 @@ class StudentController extends Controller
     // method use to save assessment of the student
     public function postSaveAssessment(Request $request)
     {
+
+        // get the number of the limit
+
+
+        // check the numer of the students
+
+
         $section_id = $request['section_id'];
 
         $section = Section::findorfail($section_id);

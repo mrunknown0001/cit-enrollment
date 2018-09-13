@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        DB::table('student_limis')->insert([
+        DB::table('student_limits')->insert([
             'limit' => 10
         ]);
 

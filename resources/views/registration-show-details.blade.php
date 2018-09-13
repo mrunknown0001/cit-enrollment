@@ -31,7 +31,15 @@
       {{ csrf_field() }}
       <input type="hidden" name="student_id" value="{{ $student->id }}">
       <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-        <input id="password" type="password" class="form-control" name="password" value="{{ old('student_number') }}" placeholder="Enter Password" required="">
+        <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password" required="">
+        @if ($errors->has('password'))
+            <span class="help-block">
+                <strong>{{ $errors->first('password') }}</strong>
+            </span>
+        @endif
+      </div>
+      <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+        <input id="password" type="password" class="form-control" name="password_confirmation"  placeholder="Confirm Password" required="">
         @if ($errors->has('password'))
             <span class="help-block">
                 <strong>{{ $errors->first('password') }}</strong>

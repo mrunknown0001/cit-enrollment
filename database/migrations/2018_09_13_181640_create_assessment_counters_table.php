@@ -20,6 +20,7 @@ class CreateAssessmentCountersTable extends Migration
             $table->integer('curriculum_id')->unsigned();
             $table->integer('year_level_id')->unsigned();
             $table->integer('semester_id')->unsigned();
+            $table->integer('academic_year_id')->unsigned();
             $table->integer('section_id')->unsigned();
             $table->integer('student_count');
             $table->timestamps();
