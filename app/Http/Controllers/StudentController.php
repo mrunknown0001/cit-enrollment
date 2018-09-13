@@ -366,6 +366,7 @@ class StudentController extends Controller
             if($check_counter->student_count < $limit->limit) {
                 // increment counter by 1
                 $check_counter->student_count += 1; 
+                $check_counter->save();
 
             }
             else {
