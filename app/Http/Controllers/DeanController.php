@@ -876,4 +876,16 @@ class DeanController extends Controller
     }
 
 
+    // method use to delete faculty load
+    public function deleteFacultyLoad($id = null)
+    {
+        $load = FacultyLoad::findorfail($id);
+        $load->delete();
+
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Deleted Faculty Load.');
+
+        return redirect()->route('dean.faculty.load')->with('success', 'Load Deleted!');
+    }
+
+
 }

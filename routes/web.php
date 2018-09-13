@@ -518,6 +518,9 @@ Route::group(['prefix' => 'dean'], function () {
 		return abort(404);
 	});
 
+	// route to delete faculty load
+	Route::get('/faculty/load/{id}/delete', 'DeanController@deleteFacultyLoad')->name('dean.delete.faculty.load');
+
 });
 
 

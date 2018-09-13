@@ -19,7 +19,7 @@
 
 				<p>
 					<button class="btn btn-primary" data-toggle="modal" data-target="#addFaculty"><i class="fa fa-plus"></i> Add Faculty</button>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#addFacultyLoad"><i class="fa"></i> Faculty Subject Load</button>
+					{{--<button class="btn btn-primary" data-toggle="modal" data-target="#addFacultyLoad"><i class="fa"></i> Faculty Subject Load</button>--}}
 				</p>
 				@include('admin.includes.modal-faculty-add')
 
@@ -48,7 +48,7 @@
 									<td class="text-center">
 										{{-- <a href="{{ route('admin.update.faculty', ['id' => $f->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a> --}}
 										
-										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewFacultyLoad-{{ $f->id }}"><i class="fa fa-eye"></i> View Load</button>
+										{{--<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewFacultyLoad-{{ $f->id }}"><i class="fa fa-eye"></i> View Load</button>--}}
 										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#updateFaculty-{{ $f->id }}"><i class="fa fa-pencil"></i> Update</button>
 
 									</td>
