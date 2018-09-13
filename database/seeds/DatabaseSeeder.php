@@ -49,6 +49,10 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        DB::table('student_limis')->insert([
+            'limit' => 10
+        ]);
+
 
         $this->call(UsersSeeder::class);
         $this->call(YearLevelSeeder::class);

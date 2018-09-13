@@ -223,6 +223,9 @@ Route::group(['prefix' => 'admin'], function () {
 	// route to view student details - educational details
 	Route::get('/student/{id}/info/educational', 'AdminController@studentEducationalInfo')->name('admin.student.educational.info');
 
+	// route to upadte limit of student per section
+	Route::post('/student/limit', 'AdminController@postSutdentLimit')->name('admin.student.limit.post');
+
 	// route to view courses
 	Route::get('/courses', 'AdminController@courses')->name('admin.courses');
 

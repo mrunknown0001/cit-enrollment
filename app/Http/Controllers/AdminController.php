@@ -25,6 +25,7 @@ use App\Room;
 use App\UnitPrice;
 use App\Miscellaneous;
 use App\FacultySubjectLoad;
+use App\StudentLimit;
 
 class AdminController extends Controller
 {
@@ -697,7 +698,9 @@ class AdminController extends Controller
                         ->orderBy('created_at', 'desc')
                         ->paginate(15);
 
-        return view('admin.students', ['students' => $students]);
+        $limit = StudentLimit::find(1);
+
+        return view('admin.students', ['students' => $students, 'limit' => $limit]);
     }
 
 
@@ -744,6 +747,26 @@ class AdminController extends Controller
         $student = User::findorfail($id);
 
         return view('admin.student-education-info', ['student' => $student]);
+    }
+
+
+    // method use to update student limit
+    public function postSutdentLimit(Request $request)
+    {   
+        $request->validate([
+            'limit' => 'required|numeric'
+        ]);
+
+        $limit = $request['limit'];
+
+        $sl = StudentLimit::find(1);
+        $sl->limit = $limit;
+        $sl->save();
+
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Student Limit Per Section to ' . $limit);
+
+        return redirect()->back()->with('success', 'Student Limit Updated!');
+
     }
 
 
@@ -1139,7 +1162,7 @@ class AdminController extends Controller
     // method use to close active academic year
     public function postCloseAcademicYear(Request $request)
     {
-         $request->validate([
+        $request->validate([
             'password' => 'required'
         ]);
 

@@ -29,6 +29,10 @@
 							</div>
 						</form>						
 					</div>
+					<div class="col-md-3">
+						<button class="btn btn-primary" data-toggle="modal" data-target="#setLimit">Set Student Limit Per Class</button>
+						@include('admin.includes.modal-student-set-limit')
+					</div>
 				</div>
 				<p></p>
 
