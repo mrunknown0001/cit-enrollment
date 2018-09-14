@@ -636,6 +636,8 @@ class RegistrarController extends Controller
 
         $insert = [];
         $info = [];
+        $enrolled = [];
+        $last_school = [];
 
         // get last student id of student in the student_infos table
         $last_student = StudentInfo::orderBy('id', 'desc')->first(['id']);
@@ -684,7 +686,28 @@ class RegistrarController extends Controller
                                 'date_of_birth' => date('Y-m-d', strtotime($row->birthday)),
                                 'home_address' => $row->address,
                                 'email' => $row->email,
-                                'mobile_number' => $row->number
+                                'mobile_number' => $row->number,
+                                'nationality' => $row->nationality,
+                                'civil_status' => $row->civil_status,
+                                'date_of_birth' => date('Y-m-d', strtotime($row->date_of_birth)),
+                                'place_of_birth' => $row->place_of_birth,
+                                'religion' => $row->religion,
+                                'fathers_name' => $row->father,
+                                'mothers_name' => $row->mother
+                            ];
+
+                        // for previous schools record
+                        $last_school[] = [
+                                'student_id' => $ref_id,
+                                'elementary_school' => $row->elementary_school,
+                                'elementary_year_graduated' => $row->elem_year_graduated,
+                                'high_school' => $row->high_school,
+                                'high_school_year_graduated' => $row->hs_year_graduated,
+                                'college_school' => $row->college_degree,
+                                'college_year_graduated' => $row->college_year_graduated,
+                                'school_last_attended' => $row->school_last_attended,
+                                'school_address' => $row->school_address,
+                                'year_graduated' => $row->year_graduated
                             ];
 
                     }
@@ -706,6 +729,9 @@ class RegistrarController extends Controller
 
             // insert to course_enrolled
             DB::table('course_enrolleds')->insert($enrolled);
+
+            // insert to student_previous_schools
+            DB::table('student_previous_schools')->insert($last_school);
         }
 
         // add activtiy log
