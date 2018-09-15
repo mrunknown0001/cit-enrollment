@@ -44,13 +44,18 @@
 							<tbody>
 								<form action="{{ route('faculty.student.encode.grade.post') }}" method="POST" autocomplete="off">
 									{{ csrf_field() }}
+									<input type="hidden" name="course_id" value="{{ $course->id }}">
+									<input type="hidden" name="curriculum_id" value="{{ $curriculum->id }}">
+									<input type="hidden" name="yl_id" value="{{ $yl->id }}">
+									<input type="hidden" name="section_id" value="{{ $section->id }}">
+									<input type="hidden" name="subject_id" value="{{ $subject->id }}">
 								@foreach($students as $s)
 								<tr>
 									<td>
 										{{ ucwords($s->firstname . ' ' . $s->lastname) }} - {{ $s->student_number }}
 									</td>
 									<td class="text-center">
-										<input type="number" name="{{ $s->student_number }}" class="form-control" min="1" max="5" required>
+										<input type="number" name="{{ $s->student_number }}" class="form-control" min="1.00" max="5.00" step="0.25" required>
 									</td>
 								</tr>
 								@endforeach

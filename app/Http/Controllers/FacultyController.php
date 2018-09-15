@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Controllers\GeneralController;
+use DB;
 
 use App\Faculty;
 use App\FacultyLoad;
@@ -167,6 +168,16 @@ class FacultyController extends Controller
 
         $students = User::find($student_ids);
 
+        // check if subject is encoded
+        $encoded = EncodedGrade::where('course_id', $course->id)
+                        ->where('curriculum_id', $curriculum->id)
+                        ->where('year_level_id', $yl->id)
+                        ->where('semester_id', $sem->id)
+                        ->where('academic_year_id', $ay->id)
+                        ->where('section_id', $section->id)
+                        ->where('subject_id', $subject->id)
+                        ->first();
+
         // you can filter students if enrolled / paid or not
 
 
@@ -176,7 +187,8 @@ class FacultyController extends Controller
             'yl' => $yl,
             'section' => $section,
             'subject' => $subject,
-            'students' => $students
+            'students' => $students,
+            'encoded' => $encoded
         ]);
     }
 
@@ -223,23 +235,80 @@ class FacultyController extends Controller
     // method use to save grades of students
     public function postStudentEncodeGrade(Request $request)
     {
-        return $request;
+        $ay = AcademicYear::whereActive(1)->first();
+        $sem = Semester::whereActive(1)->first();
+
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'No Active Academic Year or Semester. Please report to the adminsitrator.');
+        }
 
         // get all hidden important values course, curriculum, year level, section, subject
+        $course_id = $request['course_id'];
+        $curriculum_id = $request['curriculum_id'];
+        $yl_id = $request['yl_id'];
+        $section_id = $request['section_id'];
+        $subject_id = $request['subject_id'];
+
+        $course = Course::findorfail($course_id);
+        $curriculum = Curriculum::findorfail($curriculum_id);
+        $yl = YearLevel::findorfail($yl_id);
+        $section = Section::findorfail($section_id);
+        $subject = Subject::findorfail($subject_id);
 
         // get all students
+        // get the list of student enrolled in this course year level section
+        $student_ids = Assessment::where('course_id', $course->id)
+                                ->where('curriculum_id', $curriculum->id)
+                                ->where('year_level_id', $yl->id)
+                                ->where('section_id', $section->id)
+                                ->whereActive(1)
+                                ->get(['student_id']);
+
+        $students = User::find($student_ids);
+
         
         // get all grades
+        $grades = [];
+
+        foreach($students as $s) {
+            $grades[] = [
+                'student_id' => $s->id,
+                'academic_year_id' => $ay->id,
+                'semester_id' => $sem->id,
+                'subject_id' => $subject->id,
+                'grade' => $request[$s->student_number]
+            ];
+        }
+
 
         // additional validation
+        // check if the subject assigns to the teacher/faculty, if not, redirect to home
 
-        // save
+        // save to grades/insert user DB::seeder
+        DB::table('grades')->insert($grades);
         
         // add to record of encoded grades
+        $enc = new EncodedGrade();
+        $enc->course_id = $course->id;
+        $enc->curriculum_id = $curriculum->id;
+        $enc->year_level_id = $yl->id;
+        $enc->semester_id = $sem->id;
+        $enc->academic_year_id = $ay->id;
+        $enc->section_id = $section->id;
+        $enc->subject_id = $subject->id;
+        $enc->save();
 
         // add to activity log
+        GeneralController::activity_log(Auth::guard('faculty')->user()->id, 5, 'Faculty Encoded Grade');
 
         // return
+        return redirect()->route('faculty.student.section.subject', [
+                                'course_id' => $course->id,
+                                'curriculum_id' => $curriculum->id,
+                                'yl_id' => $yl->id,
+                                'section_id' => $section->id,
+                                'subject_id' => $subject->id 
+                            ])->with('success', 'Grades Encoded!');
 
 
     }

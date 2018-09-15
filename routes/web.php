@@ -732,6 +732,10 @@ Route::group(['prefix' => 'faculty'], function () {
 	// route to save grade 
 	Route::post('/student/encode/grade', 'FacultyController@postStudentEncodeGrade')->name('faculty.student.encode.grade.post');
 
+	Route::get('/student/encode/grade', function () {
+		return redirect()->route('faculty.dashboard');
+	});
+
 	
 });
 

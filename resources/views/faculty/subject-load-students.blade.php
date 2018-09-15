@@ -31,7 +31,7 @@
 				</div>
 				<p><strong>Students:</strong></p>
 				@if(count($students) > 0)
-				
+					@if(count($encoded) < 1)
 					<p>
 						<a href="{{ route('faculty.encode.student.subject.grade', [
 								'course_id' => $course->id,
@@ -41,6 +41,11 @@
 								'subject_id' => $subject->id 
 							]) }}" class="btn btn-primary btn-sm"><i class="fa fa"></i> Encode Grades</a>
 					</p>
+					@else
+					<p>
+						<a href="#" class="btn btn-primary btn-sm"><i class="fa fa"></i> View Grades</a>
+					</p>
+					@endif
 					
 					<ol type="1">
 					@foreach($students as $s)
