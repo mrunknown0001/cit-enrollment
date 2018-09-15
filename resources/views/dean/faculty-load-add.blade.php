@@ -27,11 +27,10 @@
 					<div class="row">
 						<div class="col-md-6">
 							<p>Course: <strong>{{ ucwords($schedule->course->title) }}</strong></p>
-							<p>Curriculum: <strong>{{ strtoupper($schedule->curriculum->name) }}</strong></p>
 							<p>Section: <strong>{{ strtoupper($schedule->section->name) }}</strong></p>
 						</div>
 						<div class="col-md-6">
-							<p>Major: <strong>{{ $schedule->major_id ? ucwords($schedule->major->title) : 'N/A' }}</strong></p>
+							<p>Curriculum: <strong>{{ strtoupper($schedule->curriculum->name) }}</strong></p>
 							<p>Year Level: <strong>{{ ucwords($schedule->year_level->name) }}</strong></p>
 						</div>
 					</div>
@@ -55,7 +54,7 @@
 								<div class="form-group">
 									<label>Select Subject</label><label class="label-required">*</label>
 									<select name="subject" id="subject" class="form-control" required>
-										<option value="">Select Faculty</option>
+										<option value="">Select Subject</option>
 										@if(count($subjects) > 0)
 											@foreach($subjects as $s)
 												<option value="{{ $s->id }}">{{ strtoupper($s->code) }}</option>
