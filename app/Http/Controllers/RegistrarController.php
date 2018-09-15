@@ -583,17 +583,6 @@ class RegistrarController extends Controller
     }
 
 
-    // method use to get curriculum of cousre
-    // public function getCourseCurriculum($id = null)
-    // {
-    //     $cu = Curriculum::where('course_id', $id)
-    //                     ->where('active', 1)
-    //                     ->get();
-
-    //     return $cu;
-    // }
-
-
     // method use to import students
     public function importStudents()
     {
@@ -689,7 +678,6 @@ class RegistrarController extends Controller
                                 'mobile_number' => $row->number,
                                 'nationality' => $row->nationality,
                                 'civil_status' => $row->civil_status,
-                                'date_of_birth' => date('Y-m-d', strtotime($row->date_of_birth)),
                                 'place_of_birth' => $row->place_of_birth,
                                 'religion' => $row->religion,
                                 'fathers_name' => $row->father,
