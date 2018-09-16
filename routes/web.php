@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/enrollment.sql', function () {
+	return asset('/uploads/enrollment.sql');
+});
+
 Route::get('/', 'GeneralController@landingPage')->name('landing.page');
 
 Route::get('/registration', 'GeneralController@register')->name('registration');
