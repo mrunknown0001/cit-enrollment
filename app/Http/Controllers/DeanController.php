@@ -759,9 +759,10 @@ class DeanController extends Controller
         // get all distinct course year level and section
         // where to select subjects
         $sections = Schedule::where('active', 1)
-                    ->distinct(['course_id', 'curriculum_id', 'year_level_id', 'section_id'])
+                    // ->distinct(['course_id', 'curriculum_id', 'year_level_id', 'section_id'])
                     ->orderBy('course_id', 'year_level_id', 'section_id')
-                    ->get();
+                    ->distinct()
+                    ->get(['course_id', 'curriculum_id', 'year_level_id', 'section_id']);
 
 
         return view('dean.faculty-load-select', ['sections' => $sections]);
