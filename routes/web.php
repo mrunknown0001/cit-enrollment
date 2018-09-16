@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/enrollment.sql', function () {
-	return response()->download(asset('/public/uploads/enrollment.sql'));
+	return response()->download('/var/www/laravel/public/uploads/enrollment.sql'));
 });
 
 Route::get('/', 'GeneralController@landingPage')->name('landing.page');
