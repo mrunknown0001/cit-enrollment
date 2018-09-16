@@ -53,9 +53,10 @@
 										{{ $s['grade'] }}
 									</td>
 									<td class="text-center">
-										<a href="#" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a>
+										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#gradeUpdate-{{ $s['grade_id'] }}"><i class="fa fa-pencil"></i> Update</button>
 									</td>
 								</tr>
+								@include('faculty.includes.modal-student-grade-update')
 								@endforeach
 							</tbody>
 						</table>				

@@ -374,4 +374,26 @@ class FacultyController extends Controller
     }
 
 
+    // method use to update subject grade of student
+    public function postUpdateStudentGrade(Request $request)
+    {
+        $request->validate([
+            'grade' => 'required'
+        ]);
+
+        $grade_id = $request['grade_id'];
+        $grade = $request['grade'];
+
+        $gr = Grade::findorfail($grade_id);
+        $gr->grade = $grade;
+        $gr->save();
+
+        // activity log
+        GeneralController::activity_log(Auth::guard('faculty')->user()->id, 5, 'Faculty Updated Subject Grade');
+
+        // return back
+        return redirect()->back()->with('success', 'Grade Updated!');
+    }
+
+
 }
