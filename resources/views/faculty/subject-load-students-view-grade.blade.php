@@ -22,6 +22,7 @@
 						<p>Course: <strong>{{ ucwords($course->title) }}</strong></p>
 						<p>Section: <strong>{{ strtoupper($section->name) }}</strong></p>
 						<p>Subject: <strong>{{ strtoupper($subject->code) }}</strong></p>
+						<p>Semester: <strong>{{ ucwords($sem->name) }}</strong></p>
 					</div>
 					<div class="col-md-6">
 						<p>Curriculum: <strong>{{ strtoupper($curriculum->name) }}</strong></p>
@@ -29,35 +30,38 @@
 						<p>Subject Description: <strong>{{ ucwords($subject->description) }}</strong></p>
 					</div>
 				</div>
-				<p><strong>Students:</strong></p>
-				@if(count($students) > 0)
-					@if(count($encoded) < 1)
-					<p>
-						<a href="{{ route('faculty.encode.student.subject.grade', [
-								'course_id' => $course->id,
-								'curriculum_id' => $curriculum->id,
-								'yl_id' => $yl->id,
-								'section_id' => $section->id,
-								'subject_id' => $subject->id 
-							]) }}" class="btn btn-primary btn-sm"><i class="fa fa"></i> Encode Grades</a>
-					</p>
-					@else
-					<p>
-						<a href="{{ route('faculty.view.student.subject.grade', [
-								'course_id' => $course->id,
-								'curriculum_id' => $curriculum->id,
-								'yl_id' => $yl->id,
-								'section_id' => $section->id,
-								'subject_id' => $subject->id 
-							]) }}" class="btn btn-primary btn-sm"><i class="fa fa"></i> View Grades</a>
-					</p>
-					@endif
-					
-					<ol type="1">
-					@foreach($students as $s)
-					<li>{{ ucwords($s->firstname . ' ' . $s->lastname) }}</li>
-					@endforeach
-					</ol>
+				@if(count($grades) > 0)
+				
+				<div class="row">
+					<div class="col-md-6">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th class="text-center">Name</th>
+									<th class="text-center">Grade</th>
+									<th class="text-center">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								@foreach($grades as $s)
+								<tr>
+									<td>
+										{{ ucwords($s['firstname'] . ' ' . $s['lastname']) }} - {{ $s['student_number'] }}
+									</td>
+									<td class="text-center">
+										{{ $s['grade'] }}
+									</td>
+									<td class="text-center">
+										<a href="#" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>				
+					</div>
+
+				</div>
 
 				@else
 					<p class="text-center">No Students Enrolled!</p>
