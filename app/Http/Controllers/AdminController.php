@@ -1116,6 +1116,7 @@ class AdminController extends Controller
         $ay = new AcademicYear();
         $ay->from = $sy;
         $ay->to = $ey;
+        $ay->active = 1;
         $ay->save();
 
         // activate first semester
