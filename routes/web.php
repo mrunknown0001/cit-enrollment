@@ -794,6 +794,9 @@ Route::group(['prefix' => 'student'], function () {
 	// route to show enrollment page
 	Route::get('/enrollment', 'StudentController@enrollment')->name('student.enrollment');
 
+	// route to view grades
+	Route::get('/grades', 'StudentController@grades')->name('student.grades');
+
 	// route to show balance
 	Route::get('/balance', 'StudentController@balance')->name('student.balance');
 

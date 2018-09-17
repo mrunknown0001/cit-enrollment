@@ -32,6 +32,7 @@ use App\YearLevel;
 use App\Assessment;
 use App\StudentLimit;
 use App\AssessmentCounter;
+use App\Grade;
 
 
 class StudentController extends Controller
@@ -566,6 +567,19 @@ class StudentController extends Controller
         // // if there is not, create an active record to the database
 
         // return view('student.enrollment', ['es' => $enrollment_status, 'subjects' => $subjects, 'total_units' => $total_units, 'total_misc' => $total_misc, 'total_payable' => $total_payable, 'ay' => $ay, 'sem' => $sem]);
+    }
+
+
+    // method use to view grades
+    public function grades()
+    {
+        $student = Auth::user();
+
+        $semesters = Grade::where('student_id', $student->id)
+                        ->distinct()
+                        ->get(['academic_year_id', 'semester_id']);
+
+        return view('student.grades', ['semesters' => $semesters]);
     }
 
 

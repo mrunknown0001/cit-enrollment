@@ -28,6 +28,11 @@
           <i class="fa fa-file-text-o"></i> <span>Enrollment</span>
         </a>
       </li>
+      <li class="{{ route('student.grades') == url()->current() ? 'active' : '' }}">
+        <a href="{{ route('student.grades') }}">
+          <i class="fa fa-file-o"></i>  <span>My Grade</span>
+        </a>
+      </li>
       <li class="{{ route('student.balance') == url()->current() ? 'active' : '' }}">
         <a href="{{ route('student.balance') }}">
           <i class="fa fa-rub"></i> <span>Balance</span>
