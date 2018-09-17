@@ -207,7 +207,7 @@ class DeanController extends Controller
         $major = CourseMajor::find($major_id);
         $curriculum = Curriculum::findorfail($curriculum_id);
 
-        $sem = Semester::whereActive(1)->first();
+        $sem = Semester::where('active', 1)->first();
 
         if(count($sem) < 1) {
             return redirect()->route('dean.schedules')->with('error', 'Semester Not Selected! Please report to admin');
