@@ -33,6 +33,8 @@
 									<p>Semester: <strong>{{ $sem->name }}</strong></p>
 									@if($sem->id == 1)
 									@include('admin.includes.select-second-semester')
+									@elseif($sem->id == 2)
+									@include('admin.includes.select-summer')
 									@else
 									@include('admin.includes.close-academic-year')
 									@endif
@@ -46,6 +48,27 @@
 						
 					</div>
 				</div>
+			</div>
+			<div class="col-md-6">
+				@if(count($ays) > 0)
+				<table class="table table-bordered table-hover table-striped">
+					<thead>
+						<tr>
+							<th class="text-center">From</th>
+							<th class="text-center">To</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($ays as $a)
+						<tr>
+							<td class="text-center">{{ $a->from }}</td>
+							<td class="text-center">{{ $a->to }}</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+				<p>{{ $ays->links() }}</p>
+				@endif
 			</div>
 		</div>
 	</section>

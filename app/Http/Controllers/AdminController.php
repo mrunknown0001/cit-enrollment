@@ -1078,7 +1078,11 @@ class AdminController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
-        return view('admin.academic-year', ['ay' => $ay, 'sem' => $sem]);
+        $ays = AcademicYear::where('active', 0)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(3);
+
+        return view('admin.academic-year', ['ay' => $ay, 'sem' => $sem, 'ays' => $ays]);
     }
 
 
@@ -1159,6 +1163,38 @@ class AdminController extends Controller
     }
 
 
+    // method use to select summer
+    public function postSelectSummer(Request $request)
+    {
+        $request->validate([
+            'password' => 'required'
+        ]);
+
+        $password = $request['password'];
+
+        if(!password_verify($password, Auth::guard('admin')->user()->password)) {
+            return redirect()->back()->with('error', 'Invalid Password!');
+        }
+
+        $second = Semester::findorfail(2);
+        $second->active = 0;
+        $second->save();
+
+        $sem = Semester::findorfail(3);
+        $sem->active = 1;
+        $sem->save();
+
+        // add operations in this part closing and saving other data needed
+        // reset all settings needed to start a new sem
+
+
+        // add activity log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Activated Summer');
+
+        return redirect()->route('admin.academic.year')->with('success', 'Summer Selected!');
+    }
+
+
     // method use to close active academic year
     public function postCloseAcademicYear(Request $request)
     {
@@ -1172,12 +1208,20 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Invalid Password!');
         }
 
-        // close academic year
-        // operations goes here
+        /////////////////////////
+        // close academic year //
+        /////////////////////////
+        //////////////////////////
+        // operations goes here //
+        //////////////////////////
 
         $ay = AcademicYear::where('active', 1)->first();
         $ay->active = 0;
         $ay->save();
+
+        $sem = Semester::whereActive(1)->first();
+        $sem->active = 0;
+        $sem->save();
 
         GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Closed Academic Year');
 

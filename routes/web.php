@@ -304,6 +304,9 @@ Route::group(['prefix' => 'admin'], function () {
 		return redirect()->route('admin.academic.year');
 	});
 
+	// route to select summer 
+	Route::post('/semester/select/summer', 'AdminController@postSelectSummer')->name('admin.select.summer.post');
+
 	// route to close academic year
 	Route::post('/academic/year/close', 'AdminController@postCloseAcademicYear')->name('admin.close.academic.year.post');
 
