@@ -65,5 +65,14 @@
   @include('includes.modal-student-login')
   <script src="{{ asset('js/app.js') }}"></script>
   <script type="text/javascript" src="{{ asset('landing/js/main.js') }}"></script>
+
+<script>
+  !function() {
+  var t; if (t = window.botsify = window.botsify = window.botsify || [], !t.init) return t.invoked ? void (window.console && console.error && console.error("Botsify snippet included twice.")) : (
+  t.load =function(e){  var o,n;  o=document.createElement("script"); e.type="text/javscript"; o.async=!0; o.crossorigin="anonymous";
+  o.src="https://botsify.com/web-bot/script/"+e+"/botsify.js";  n=document.getElementsByTagName("script")[0]; n.parentNode.insertBefore(o,n); });
+  }(); botsify.load('ExDDLufwrOb1sAYjuBgweb7gymoUiOG5WGL23tOY');
+</script>
+              
 </body>
 </html>
