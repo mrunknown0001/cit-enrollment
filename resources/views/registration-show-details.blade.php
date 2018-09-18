@@ -48,8 +48,8 @@
       </div>
 
       <div class="row">
-        <div class="col-xs-8">
-
+        <div class="col-xs-12">
+          <label for="terms"><input type="checkbox" name="terms" id="terms" required checked> By registering to this website, you Agree to <a href="{{ route('terms.and.condition') }}" target="_blank">Terms and Conditon</a> of the the website.</label>
         </div>
         <div class="col-xs-4">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Continue</button>
@@ -60,6 +60,7 @@
     <p>Already have an account? <a href="{{ route('login') }}">Click here to Login</a></p>
   </div>
 </div>
+@include('includes.modal-terms-and-condition')
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

@@ -64,6 +64,15 @@ Route::get('/student', function () {
 	return redirect()->route('login');
 });
 
+Route::get('/terms-and-condition', function () {
+	return view('terms-and-condition');
+})->name('terms.and.condition');
+
+Route::get('/privacy-policy', function () {
+	return view('privacy-policy');
+})->name('privacy.policy');
+
+
 // Route::get('/student/registration', 'RegistrationController@index')->name('student.registration');
 
 Route::get('/logout', 'GeneralController@logout')->name('logout');
