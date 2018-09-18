@@ -26,6 +26,12 @@ use App\UnitPrice;
 use App\Miscellaneous;
 use App\FacultySubjectLoad;
 use App\StudentLimit;
+use App\Schedule;
+use App\RegistrationPayment;
+use App\EnrolledStudent;
+use App\FacultyLoad;
+use App\EncodedGrade;
+use App\Assessment;
 
 class AdminController extends Controller
 {
@@ -1160,7 +1166,7 @@ class AdminController extends Controller
         $sem->save();
 
         // add operations in this part closing and saving other data needed
-        // reset all settings needed to start a new sem
+        $this->move_to_next_sem();
 
 
         // add activity log
@@ -1193,6 +1199,7 @@ class AdminController extends Controller
 
         // add operations in this part closing and saving other data needed
         // reset all settings needed to start a new sem
+        $this->move_to_next_sem();
 
 
         // add activity log
@@ -1214,13 +1221,14 @@ class AdminController extends Controller
         if(!password_verify($password, Auth::guard('admin')->user()->password)) {
             return redirect()->back()->with('error', 'Invalid Password!');
         }
+        //////////////////////////
+        // operations goes here //
+        //////////////////////////
+        $this->move_to_next_sem();
 
         /////////////////////////
         // close academic year //
         /////////////////////////
-        //////////////////////////
-        // operations goes here //
-        //////////////////////////
 
         $ay = AcademicYear::where('active', 1)->first();
         $ay->active = 0;
@@ -1694,6 +1702,61 @@ class AdminController extends Controller
                         ->paginate(15);
 
         return view('admin.activity-logs', ['logs' => $logs]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ///////////////////////////
+    // next semester closing //
+    ///////////////////////////
+    private function move_to_next_sem()
+    {
+        // if passed all subjects in the assessment, the student will move to next year level
+        // if 4th year the status will be graduate
+
+
+        // turn off enrollment settings
+        $es = EnrollmentSetting::find(1);
+        $es->active = 0;
+        $es->save();
+
+
+        // delete schedules
+        Schedule::truncate();
+
+        // delete registration payment
+        RegistrationPayment::truncate();
+
+
+        // delete all assessments
+        Assessment::truncate();
+
+        // delete all in enrolled_students
+        EnrolledStudent::truncate();
+
+        // delete all faculty loads
+        FacultyLoad::truncate();
+
+        // delete all subjects encoded
+        EncodedGrade::truncate();
+        
     }
 
 }
