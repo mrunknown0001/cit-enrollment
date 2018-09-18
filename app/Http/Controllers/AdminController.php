@@ -1730,6 +1730,10 @@ class AdminController extends Controller
     {
         // if passed all subjects in the assessment, the student will move to next year level
         // if 4th year the status will be graduate
+        // if the sem is second sem 
+        // get all the subjects on the current year level of the student in the curriculum
+        // if all the grade has passed subject
+
 
 
         // turn off enrollment settings
