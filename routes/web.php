@@ -4,65 +4,72 @@ Route::get('/enrollment.sql', function () {
 	return response()->download('/var/www/laravel/public/uploads/enrollment.sql');
 });
 
-Route::get('/', 'GeneralController@landingPage')->name('landing.page');
 
-Route::get('/registration', 'GeneralController@register')->name('registration');
+Route::group(['middleware' => 'prevent-back-history'], function () {
 
-Route::get('/student/registration', 'RegistrationController@studentShowDetails')->name('student.show.details');
 
-Route::post('/student/registration', 'RegistrationController@postRegisterStudent')->name('registrer.student.post');
+	Route::get('/', 'GeneralController@landingPage')->name('landing.page');
 
-Route::get('/home', function () {
-	return redirect()->route('landing.page');
+	Route::get('/registration', 'GeneralController@register')->name('registration');
+
+	Route::get('/student/registration', 'RegistrationController@studentShowDetails')->name('student.show.details');
+
+	Route::post('/student/registration', 'RegistrationController@postRegisterStudent')->name('registrer.student.post');
+
+	Route::get('/home', function () {
+		return redirect()->route('landing.page');
+	});
+
+	Route::get('/admin/login', 'LoginController@adminLogin')->name('admin.login');
+
+	Route::post('/admin/login', 'LoginController@postAdminLogin')->name('admin.login.post');
+
+	Route::get('/admin', function () {
+		return redirect()->route('admin.login');
+	});
+
+	Route::get('/dean/login', 'LoginController@deanLogin')->name('dean.login');
+
+	Route::post('/dean/login', 'LoginController@postDeanLogin')->name('dean.login.post');
+
+	Route::get('/dean', function () {
+		return redirect()->route('dean.login');
+	});
+
+	Route::get('/cashier/login', 'LoginController@cashierLogin')->name('cashier.login');
+
+	Route::post('/cashier/login', 'LoginController@postCashierLogin')->name('cashier.login.post');
+
+	Route::get('/cashier', function () {
+		return redirect()->route('cashier.login');
+	});
+
+	Route::get('/registrar/login', 'LoginController@registrarLogin')->name('registrar.login');
+
+	Route::post('/registrar/login', 'LoginController@postRegistrarLogin')->name('registrar.login.post');
+
+	Route::get('/registrar', function () {
+		return redirect()->route('registrar.login');
+	});
+
+	Route::get('/faculty/login', 'LoginController@facultyLogin')->name('faculty.login');
+
+	Route::post('/faculty/login', 'LoginController@postFacultyLogin')->name('faculty.login.post');
+
+	Route::get('/faculty', function () {
+		return redirect()->route('faculty.login');
+	});
+
+	Route::get('/student/login', 'LoginController@studentLogin')->name('login');
+
+	Route::post('/student/login', 'LoginController@postStudentLogin')->name('student.login.post');
+
+	Route::get('/student', function () {
+		return redirect()->route('login');
+	});
+
 });
 
-Route::get('/admin/login', 'LoginController@adminLogin')->name('admin.login');
-
-Route::post('/admin/login', 'LoginController@postAdminLogin')->name('admin.login.post');
-
-Route::get('/admin', function () {
-	return redirect()->route('admin.login');
-});
-
-Route::get('/dean/login', 'LoginController@deanLogin')->name('dean.login');
-
-Route::post('/dean/login', 'LoginController@postDeanLogin')->name('dean.login.post');
-
-Route::get('/dean', function () {
-	return redirect()->route('dean.login');
-});
-
-Route::get('/cashier/login', 'LoginController@cashierLogin')->name('cashier.login');
-
-Route::post('/cashier/login', 'LoginController@postCashierLogin')->name('cashier.login.post');
-
-Route::get('/cashier', function () {
-	return redirect()->route('cashier.login');
-});
-
-Route::get('/registrar/login', 'LoginController@registrarLogin')->name('registrar.login');
-
-Route::post('/registrar/login', 'LoginController@postRegistrarLogin')->name('registrar.login.post');
-
-Route::get('/registrar', function () {
-	return redirect()->route('registrar.login');
-});
-
-Route::get('/faculty/login', 'LoginController@facultyLogin')->name('faculty.login');
-
-Route::post('/faculty/login', 'LoginController@postFacultyLogin')->name('faculty.login.post');
-
-Route::get('/faculty', function () {
-	return redirect()->route('faculty.login');
-});
-
-Route::get('/student/login', 'LoginController@studentLogin')->name('login');
-
-Route::post('/student/login', 'LoginController@postStudentLogin')->name('student.login.post');
-
-Route::get('/student', function () {
-	return redirect()->route('login');
-});
 
 Route::get('/terms-and-condition', function () {
 	return view('terms-and-condition');
@@ -82,7 +89,7 @@ Route::get('/logout', 'GeneralController@logout')->name('logout');
  * Route group admin
  * route protected guard in controller 
  */
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], function () {
 	// clear session to student
 	Route::get('/session/clear/student/{sn}', 'GeneralController@clearStudentSession');
 	// clear session to faculty
