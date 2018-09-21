@@ -125,6 +125,16 @@
 
 		var courseId = $("#course").val();
 
+		$('#major')
+		    .empty()
+		    .append('<option selected="selected" value="">No Course Major</option>')
+		;
+
+		$('#curriculum')
+		    .empty()
+		    .append('<option selected="selected" value="">No Curriculum</option>')
+		;
+
 		$.ajax({url: "/registrar/course/" + courseId + "/majors/get", success: function(result){
 	        Object.keys(result).forEach(function(key) {
 
