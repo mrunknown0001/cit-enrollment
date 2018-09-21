@@ -15,19 +15,19 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('firstname');
-            $table->string('middle_name')->nullable();
-            $table->string('lastname');
-            $table->string('suffix_name')->nullable();
-            $table->string('student_number')->unique();
-            $table->string('password')->nullable();
+            $table->string('firstname', 60);
+            $table->string('middle_name', 60)->nullable();
+            $table->string('lastname', 60);
+            $table->string('suffix_name', 60)->nullable();
+            $table->string('student_number', 14)->unique();
+            $table->string('password',150)->nullable();
             $table->tinyInteger('registered')->default(0);
             $table->tinyInteger('active')->default(0);
             $table->rememberToken();
 
-            $table->string('stripe_id')->nullable();
-            $table->string('card_brand')->nullable();
-            $table->string('card_last_four')->nullable();
+            $table->string('stripe_id', 100)->nullable();
+            $table->string('card_brand', 50)->nullable();
+            $table->string('card_last_four', 4)->nullable();
             $table->timestamp('trial_ends_at')->nullable();
 
             $table->timestamps();
@@ -37,9 +37,9 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('name');
-            $table->string('stripe_id');
-            $table->string('stripe_plan');
+            $table->string('name', 120);
+            $table->string('stripe_id', 100);
+            $table->string('stripe_plan', 50);
             $table->integer('quantity');
             $table->timestamp('trial_ends_at')->nullable();
             $table->timestamp('ends_at')->nullable();

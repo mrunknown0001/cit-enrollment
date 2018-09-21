@@ -17,10 +17,10 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="{{ route('admin.deans') }}"><i class="fa fa-circle-o"></i> Deans</a></li>
-          <li><a href="{{ route('admin.registrars') }}"><i class="fa fa-circle-o"></i> Registrars</a></li>
-          <li><a href="{{ route('admin.cashiers') }}"><i class="fa fa-circle-o"></i> Cashiers</a></li>
-          <li><a href="{{ route('admin.faculties') }}"><i class="fa fa-circle-o"></i> Faculties</a></li>
+          <li><a href="{{ route('admin.deans') }}"><i class="fa fa-arrow-circle-right"></i> Deans</a></li>
+          <li><a href="{{ route('admin.registrars') }}"><i class="fa fa-arrow-circle-right"></i> Registrars</a></li>
+          <li><a href="{{ route('admin.cashiers') }}"><i class="fa fa-arrow-circle-right"></i> Cashiers</a></li>
+          <li><a href="{{ route('admin.faculties') }}"><i class="fa fa-arrow-circle-right"></i> Faculties</a></li>
         </ul>
       </li>
       <li class="{{ route('admin.students') == url()->current() ? 'active' : '' }}">
@@ -36,9 +36,9 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="{{ route('admin.courses') }}"><i class="fa fa-circle-o"></i> View Courses</a></li>
-          <li><a href="{{ route('admin.course.majors') }}"><i class="fa fa-circle-o"></i> View Course Majors</a></li>
-          <li><a href="{{ route('admin.curricula') }}"><i class="fa fa-circle-o"></i> View Course Curricula</a></li>
+          <li><a href="{{ route('admin.courses') }}"><i class="fa fa-arrow-circle-right"></i> View Courses</a></li>
+          <li><a href="{{ route('admin.course.majors') }}"><i class="fa fa-arrow-circle-right"></i> View Course Majors</a></li>
+          <li><a href="{{ route('admin.curricula') }}"><i class="fa fa-arrow-circle-right"></i> View Course Curricula</a></li>
         </ul>
       </li>
       <li class="{{ route('admin.academic.year') == url()->current() ? 'active' : '' }}">

@@ -15,13 +15,13 @@ class CreateDeansTable extends Migration
     {
         Schema::create('deans', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username');
-            $table->string('password');
-            $table->string('firstname');
-            $table->string('middle_name')->nullable();
-            $table->string('lastname');
-            $table->string('suffix_name')->nullable();
-            $table->string('id_number')->nullable();
+            $table->string('username', 32);
+            $table->string('password', 150)->nullable();
+            $table->string('firstname', 60);
+            $table->string('middle_name', 60)->nullable();
+            $table->string('lastname', 60);
+            $table->string('suffix_name', 60)->nullable();
+            $table->string('id_number', 14)->nullable();
             $table->tinyInteger('active')->default(1);
             $table->rememberToken();
             $table->timestamps();
