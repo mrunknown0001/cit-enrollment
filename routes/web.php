@@ -363,8 +363,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	// route to auto increment year level
 	Route::post('/year/level/increment', 'AdminController@postYearLevelIncrement')->name('admin.increment.year.level.post');
 
-	// // route to get course major on selected course
-	// Route::get('/course/{id}/majors/get', 'AdminController@getCourseMajors')->name('admin.get.course.majors');
+	// route to get course major on selected course
+	Route::get('/course/{id}/majors/get', 'AdminController@getCourseMajors')->name('admin.get.course.majors');
 
 	// // route to get course curriculum on selected course
 	// Route::get('/course/{id}/curriculum/get', 'AdminController@getCourseCurriculum')->name('admin.get.course.curriculum');

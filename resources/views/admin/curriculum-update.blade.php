@@ -82,8 +82,8 @@
 	</section>
 </div>
 <script>
-	$(".course").click(function () {
-		var courseId = $(".course").val();
+	$("#course").click(function () {
+		var courseId = $("#course").val();
 
 		if(courseId == '') {
 			$('.major')
@@ -93,25 +93,23 @@
 		}
 	});
 
-	$(".course").change(function () {
+	$("#course").change(function () {
 
-		var courseId = $(".course").val();
+		var courseId = $("#course").val();		
 
-		if(courseId == '') {
-			$('.major')
-			    .empty()
-			    .append('<option selected="selected" value="">No Course Major</option>')
-			;
-		}
-		else {
-			$.ajax({url: "/admin/course/" + courseId + "/majors/get", success: function(result){
-		        Object.keys(result).forEach(function(key) {
+		$('#major')
+		    .empty()
+		    .append('<option selected="selected" value="">No Course Major</option>')
+		;
 
-				  $('.major').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
-				  
-				});
-		    }});
-		}
+		$.ajax({url: "/admin/course/" + courseId + "/majors/get", success: function(result){
+	        Object.keys(result).forEach(function(key) {
+
+			  $('.major').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
+			  
+			});
+	    }});
+		
 	});
 
 	$(document).ready(function () {
