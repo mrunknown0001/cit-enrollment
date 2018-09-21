@@ -157,6 +157,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 		return redirect()->route('admin.deans');
 	});
 
+	// route to reset password in dean
+	Route::post('/dean/password/reset', 'AdminController@postResetDeanPassword')->name('admin.reset.dean.password.post');
+
 	// route to view registrars
 	Route::get('/registrars', 'AdminController@registrars')->name('admin.registrars');
 
@@ -176,6 +179,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 		return redirect()->route('admin.registrars');
 	});
 
+	Route::post('/registrar/password/reset', 'AdminController@postResetRegistrarPassword')->name('admin.reset.registrar.password.post');
+
 	// route to view cashiers
 	Route::get('/cashiers', 'AdminController@cashiers')->name('admin.cashiers');
 
@@ -194,6 +199,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	Route::get('/cashier/update', function () {
 		return redirect()->route('admin.cashiers');
 	});
+
+	Route::post('/cashier/password/reset', 'AdminController@postResetCashierPassword')->name('admin.reset.cashier.password.post');
+
 
 	// route to view faculties
 	Route::get('/faculties', 'AdminController@faculties')->name('admin.faculties');
@@ -223,6 +231,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	Route::get('/faculty/load/add', function () {
 		return redirect()->route('admin.faculties');
 	});
+
+	//route to reset password faculty
+	Route::post('/faculty/password/reset', 'AdminController@postResetFacultyPassword')->name('admin.reset.faculty.password.post');
 
 	// route to view all students
 	Route::get('/students', 'AdminController@students')->name('admin.students');
@@ -349,6 +360,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	// route to save update on year level
 	Route::post('/year/level/update', 'AdminController@postUpdateYearLevel')->name('admin.update.year.level.post');
 
+	// route to auto increment year level
+	Route::post('/year/level/increment', 'AdminController@postYearLevelIncrement')->name('admin.increment.year.level.post');
+
 	// // route to get course major on selected course
 	// Route::get('/course/{id}/majors/get', 'AdminController@getCourseMajors')->name('admin.get.course.majors');
 
@@ -430,7 +444,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 /*
  * Route group dean
  */
-Route::group(['prefix' => 'dean'], function () {
+Route::group(['prefix' => 'dean', 'middleware' => 'prevent-back-history'], function () {
 	// route to dean dashboard
 	Route::get('/dashboard', 'DeanController@dashboard')->name('dean.dashboard');
 
@@ -557,7 +571,7 @@ Route::group(['prefix' => 'dean'], function () {
 /*
  * Route group registrar
  */
-Route::group(['prefix' => 'registrar'], function () {
+Route::group(['prefix' => 'registrar', 'middleware' => 'prevent-back-history'], function () {
 	// route to registrar dashboard
 	Route::get('/dashboard', 'RegistrarController@dashboard')->name('registrar.dashboard');
 
@@ -667,7 +681,7 @@ Route::group(['prefix' => 'registrar'], function () {
 /*
  * Route group cashier
  */
-Route::group(['prefix' => 'cahier'], function () {
+Route::group(['prefix' => 'cahier', 'middleware' => 'prevent-back-history'], function () {
 	// route to cashier dashboard
 	Route::get('/dashboard', 'CashierController@dashboard')->name('cashier.dashboard');
 
@@ -704,7 +718,7 @@ Route::group(['prefix' => 'cahier'], function () {
 	// route to finalize payment
 	Route::post('/payment/student/make', 'CashierController@postMakePayment')->name('cashier.make.payment.post');
 
-	Route::get('//payment/student/make', function () {
+	Route::get('/payment/student/make', function () {
 		return abort(404);
 	});
 
@@ -728,7 +742,7 @@ Route::group(['prefix' => 'cahier'], function () {
 /*
  * Route group faculty
  */
-Route::group(['prefix' => 'faculty'], function () {
+Route::group(['prefix' => 'faculty', 'middleware' => 'prevent-back-history'], function () {
 	// route to faculty dashboard
 	Route::get('/dashboard', 'FacultyController@dashboard')->name('faculty.dashboard');
 
@@ -776,7 +790,7 @@ Route::group(['prefix' => 'faculty'], function () {
 /*
  * Route group student
  */
-Route::group(['prefix' => 'student'], function () {
+Route::group(['prefix' => 'student', 'middleware' => 'prevent-back-history'], function () {
 	// route to student dashboard
 	Route::get('/dashboard', 'StudentController@dashboard')->name('student.dashboard');
 

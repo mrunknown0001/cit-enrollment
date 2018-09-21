@@ -18,7 +18,7 @@
 			<div class="col-md-4">
 				<form action="{{ route('cashier.search.student') }}" method="get" class="" autocomplete="off">
 					<div class="input-group">
-						<input type="text" name="q" class="form-control" placeholder="Search Student">
+						<input type="text" name="q" class="form-control" placeholder="Search Student Name or Student ID">
 						<span class="input-group-btn">
 							<button type="submit" id="search-btn" class="btn btn-flat btn-primary"><i class="fa fa-search"></i>
 						</button>

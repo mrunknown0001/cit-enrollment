@@ -49,10 +49,14 @@
 										{{-- <a href="{{ route('admin.update.faculty', ['id' => $f->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a> --}}
 										
 										{{--<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewFacultyLoad-{{ $f->id }}"><i class="fa fa-eye"></i> View Load</button>--}}
+
+										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#facultyResetPass-{{ $f->id }}"><i class="fa fa-pencil"></i> Reset Password</button>
+
 										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#updateFaculty-{{ $f->id }}"><i class="fa fa-pencil"></i> Update</button>
 
 									</td>
 								</tr>
+								@include('admin.includes.modal-faculty-reset-password')
 								@include('admin.includes.modal-faculty-view-load')
 								@include('admin.includes.modal-faculty-update')
 								@endforeach

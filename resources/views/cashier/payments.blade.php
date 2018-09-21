@@ -31,7 +31,7 @@
 									<thead>
 										<tr>
 											<th class="text-center">Student</th>
-											<th class="text-center">MOP</th>
+											<th class="text-center">Mode of Payment</th>
 											<th class="text-center">Amount</th>
 											<th class="text-center">Description</th>
 											<th class="text-center">Date &amp; Time</th>

@@ -44,9 +44,13 @@
 									</td>
 									<td class="text-center">
 										{{-- <a href="{{ route('admin.update.cashier', ['id' => $c->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a> --}}
+										
+										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#cashierResetPass-{{ $c->id }}"><i class="fa fa-key"></i> Reset Password</button>
+
 										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#updateCashier-{{ $c->id }}"><i class="fa fa-pencil"></i> Update</button>
 									</td>
 								</tr>
+								@include('admin.includes.modal-cashier-reset-password')
 								@include('admin.includes.modal-cashier-update')
 								@endforeach
 							</tbody>

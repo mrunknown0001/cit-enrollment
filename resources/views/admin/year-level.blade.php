@@ -16,8 +16,14 @@
 			<div class="col-md-12">
 				{{-- <p><a href="{{ route('admin.add.year.level') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Year Level</a></p> --}}
 
-				<p><button class="btn btn-primary" data-toggle="modal" data-target="#addYearLevel"><i class="fa fa-plus"></i> Add Year Level</button></p>
-				@include('admin.includes.modal-year-level-add')
+				{{-- <p><button class="btn btn-primary" data-toggle="modal" data-target="#addYearLevel"><i class="fa fa-plus"></i> Add Year Level</button></p>
+				@include('admin.includes.modal-year-level-add')  --}}
+
+				<p>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#incrementYearLevel">
+						<i class="fa fa-plus"></i> Add Year Level
+					</button>
+				</p>
 
 				@include('includes.all')
 				
@@ -63,4 +69,5 @@
 		</div>
 	</section>
 </div>
+@include('admin.includes.modal-year-level-increment')
 @endsection

@@ -22,7 +22,7 @@
 					<table class="table table-hover table-bordered table-striped">
 						<thead>
 							<tr>
-								<th class="text-center">Faculty</th>
+								<th class="text-center">Faculty Name</th>
 								<th class="text-center">Subject Loads</th>
 								<th class="text-center">Action</th>
 							</tr>

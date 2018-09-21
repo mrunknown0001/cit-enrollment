@@ -303,6 +303,26 @@ class AdminController extends Controller
     }
 
 
+    // method use to reset password of dean
+    public function postResetDeanPassword(Request $request)
+    {
+        $dean_id = $request['dean_id'];
+
+        $dean = Dean::findorfail($dean_id);
+        $dean->password = bcrypt('password');
+        $dean->save();
+
+        // activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Reset Password of Dean');
+
+        // return response
+        return redirect()->back()->with('success', 'Password of Dean has Successfully Reset!');
+
+    }
+
+
+
+
     // method use to view registrars
     public function registrars()
     {
@@ -409,6 +429,22 @@ class AdminController extends Controller
 
         // return to deans and add admin with message
         return redirect()->route('admin.registrars')->with('success', 'Registrar Details Updated!');
+    }
+
+    // Reset password of Registrar
+    public function postResetRegistrarPassword(Request $request)
+    {
+        $registrar_id = $request['registrar_id'];
+
+        $registrar = Registrar::findorfail($registrar_id);
+        $registrar->password = bcrypt('password');
+        $registrar->save();
+
+        // activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Reset Password of Registrar');
+
+        // return response
+        return redirect()->back()->with('success', 'Password of Registrar has Successfully Reset!');
     }
 
 
@@ -518,6 +554,22 @@ class AdminController extends Controller
 
         // return to deans and add admin with message
         return redirect()->route('admin.cashiers')->with('success', 'Cashier Details Updated!');
+    }
+
+    //method used to reset password of Cashier
+      public function postResetCashierPassword(Request $request)
+    {
+        $cashier_id = $request['cashier_id'];
+
+        $cashier = Cashier::findorfail($cashier_id);
+        $cashier->password = bcrypt('password');
+        $cashier->save();
+
+        // activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Reset Password of Registrar');
+
+        // return response
+        return redirect()->back()->with('success', 'Password of Registrar has Successfully Reset!');
     }
 
 
@@ -694,6 +746,21 @@ class AdminController extends Controller
 
         // return to deans and add admin with message
         return redirect()->route('admin.faculties')->with('success', 'Faculty Load Removed!');
+    }
+
+     public function postResetFacultyPassword(Request $request)
+    {
+        $faculty_id = $request['faculty_id'];
+
+        $faculty = Faculty::findorfail($faculty_id);
+        $faculty->password = bcrypt('password');
+        $faculty->save();
+
+        // activty log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Reset Password of Faculty');
+
+        // return response
+        return redirect()->back()->with('success', 'Password of Faculty has Successfully Reset!');
     }
 
 
@@ -1307,6 +1374,50 @@ class AdminController extends Controller
         GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Yearl Level');
 
         return redirect()->route('admin.year.level')->with('success', 'Year Level Updated!');
+    }
+
+
+    // method use to add increment year level
+    public function postYearLevelIncrement(Request $request)
+    {
+        // get the last id/number of the year level
+        $last = YearLevel::orderBy('id', 'desc')->first();
+
+        if(count($last) < 1) {
+            $yl = new YearLevel();
+            $yl->name = 'First Year';
+            $yl->save();
+        }
+        else {
+            if($last->id == 1) {
+                $name = 'Second Year';
+            }
+            else if($last->id == 2) {
+                $name = 'Third Year';
+            }
+            else if($last->id == 3) {
+                $name = 'Fourth Year';
+            }
+            else if($last->id == 4) {
+                $name = 'Fifth Year';
+            }
+            else {
+                return redirect()->back()->with('error', 'Maximum Year Level Reached!');
+            }
+
+            $yl = new YearLevel();
+            $yl->name = $name;
+            $yl->save();
+
+        }
+
+        // add activity log
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added Year Level Increment');
+
+        // return response
+        return redirect()->back()->with('success', 'Year Level Added!');
+
+
     }
 
 
