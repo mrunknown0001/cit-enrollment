@@ -79,7 +79,7 @@
 
       </div>
       <div class="modal-footer">
-        Update Cashier Form
+        
       </div>
     </div>
   </div>

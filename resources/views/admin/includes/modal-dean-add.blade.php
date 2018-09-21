@@ -78,7 +78,7 @@
 
       </div>
       <div class="modal-footer">
-        Add Dean Form
+        
       </div>
     </div>
   </div>

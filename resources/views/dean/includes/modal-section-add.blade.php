@@ -29,7 +29,7 @@
 
       </div>
       <div class="modal-footer">
-        Add Section Form
+        
       </div>
     </div>
   </div>

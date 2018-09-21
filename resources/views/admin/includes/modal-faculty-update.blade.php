@@ -78,7 +78,7 @@
 
       </div>
       <div class="modal-footer">
-        Update Faculty Form
+        
       </div>
     </div>
   </div>

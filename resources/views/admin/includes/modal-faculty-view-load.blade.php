@@ -22,7 +22,7 @@
 
       </div>
       <div class="modal-footer">
-        View Faculty Load
+        
       </div>
     </div>
   </div>

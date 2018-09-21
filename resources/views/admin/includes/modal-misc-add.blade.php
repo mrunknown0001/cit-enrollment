@@ -37,7 +37,7 @@
 
       </div>
       <div class="modal-footer">
-        Add Miscellaneous Fee Form
+        
       </div>
     </div>
   </div>

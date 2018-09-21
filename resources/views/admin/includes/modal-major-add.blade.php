@@ -48,7 +48,7 @@
 
       </div>
       <div class="modal-footer">
-        Add Course Major Form
+        
       </div>
     </div>
   </div>

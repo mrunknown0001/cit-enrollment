@@ -16,7 +16,7 @@
 
       </div>
       <div class="modal-footer">
-        Student Info
+        
       </div>
     </div>
   </div>

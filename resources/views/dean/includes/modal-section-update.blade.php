@@ -30,7 +30,7 @@
 
       </div>
       <div class="modal-footer">
-        Update Section Form
+        
       </div>
     </div>
   </div>

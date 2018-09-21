@@ -79,7 +79,7 @@
 
       </div>
       <div class="modal-footer">
-        Update Registrar Form
+        
       </div>
     </div>
   </div>

@@ -25,7 +25,7 @@
 
       </div>
       <div class="modal-footer">
-        Student Limit
+        
       </div>
     </div>
   </div>

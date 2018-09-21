@@ -49,7 +49,7 @@
 
       </div>
       <div class="modal-footer">
-        Update Major Form
+        
       </div>
     </div>
   </div>

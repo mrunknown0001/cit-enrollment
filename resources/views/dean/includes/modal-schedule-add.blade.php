@@ -147,7 +147,7 @@
 
       </div>
       <div class="modal-footer">
-        Add Schedule Form
+        
       </div>
     </div>
   </div>

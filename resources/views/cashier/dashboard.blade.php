@@ -14,7 +14,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p><a href="{{ route('cashier.student.counter.payment') }}" class="btn btn-primary"><i class="fa fa-money"></i> Make Payment</a></p>
+				<p><a href="{{ route('cashier.student.counter.payment') }}" class="btn btn-primary btn-lg"><i class="fa fa-money"></i> Make Payment</a></p>
 				@include('includes.all')
 
 			</div>

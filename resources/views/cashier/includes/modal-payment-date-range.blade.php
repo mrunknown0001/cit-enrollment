@@ -25,7 +25,7 @@
 
       </div>
       <div class="modal-footer">
-        Payment Report
+        
       </div>
     </div>
   </div>

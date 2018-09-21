@@ -57,7 +57,7 @@
         @endif
       </div>
       <div class="modal-footer">
-        Add Faculty Load Form
+        
       </div>
     </div>
   </div>

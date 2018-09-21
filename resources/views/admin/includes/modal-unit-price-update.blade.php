@@ -29,7 +29,7 @@
 
       </div>
       <div class="modal-footer">
-        Update Unit Price Form
+        
       </div>
     </div>
   </div>

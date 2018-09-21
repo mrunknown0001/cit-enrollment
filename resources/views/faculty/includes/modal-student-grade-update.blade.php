@@ -26,7 +26,7 @@
 
       </div>
       <div class="modal-footer">
-        Grade Update
+        
       </div>
     </div>
   </div>

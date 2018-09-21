@@ -78,7 +78,7 @@
 
       </div>
       <div class="modal-footer">
-        Add Registrar Form
+        
       </div>
     </div>
   </div>

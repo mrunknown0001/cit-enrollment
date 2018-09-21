@@ -39,7 +39,7 @@
 
       </div>
       <div class="modal-footer">
-        Update Miscellaneous Fee Form
+        
       </div>
     </div>
   </div>

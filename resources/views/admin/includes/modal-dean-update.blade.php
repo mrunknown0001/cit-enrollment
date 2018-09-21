@@ -78,7 +78,7 @@
 
       </div>
       <div class="modal-footer">
-        Update Dean Form
+        
       </div>
     </div>
   </div>

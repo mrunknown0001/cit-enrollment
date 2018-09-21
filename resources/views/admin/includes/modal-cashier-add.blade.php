@@ -78,7 +78,7 @@
 
       </div>
       <div class="modal-footer">
-        Add Cashier Form
+        
       </div>
     </div>
   </div>

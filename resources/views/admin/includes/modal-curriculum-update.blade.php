@@ -67,7 +67,7 @@
 
       </div>
       <div class="modal-footer">
-        Update Course Curriculum Form
+        
       </div>
     </div>
   </div>

@@ -18,7 +18,7 @@
 
       </div>
       <div class="modal-footer">
-        Student Balance
+        
       </div>
     </div>
   </div>

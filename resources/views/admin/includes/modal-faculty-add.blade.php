@@ -77,7 +77,7 @@
 
       </div>
       <div class="modal-footer">
-        Add Faculty Form
+        
       </div>
     </div>
   </div>
