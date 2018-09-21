@@ -31,7 +31,7 @@
       {{ csrf_field() }}
       <input type="hidden" name="student_id" value="{{ $student->id }}">
       <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-        <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password" required="">
+        <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password ( Atleast 6 Characters )" required="">
         @if ($errors->has('password'))
             <span class="help-block">
                 <strong>{{ $errors->first('password') }}</strong>
