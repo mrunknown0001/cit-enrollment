@@ -21,7 +21,7 @@ class CreateBalancesTable extends Migration
             $table->integer('semester_id')->unsigned();
             $table->float('balance', 8, 2);
             $table->float('total', 8, 2);
-            $table->string('description')->nullable();
+            $table->string('description', 150)->nullable();
             $table->timestamps();
         });
     }

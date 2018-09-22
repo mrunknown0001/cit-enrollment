@@ -17,7 +17,7 @@ class CreateCourseMajorsTable extends Migration
             $table->increments('id');
             $table->integer('course_id')->unsigned();
             $table->foreign('course_id')->references('id')->on('courses');
-            $table->string('name');
+            $table->string('name', 100);
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
         });

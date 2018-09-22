@@ -22,7 +22,7 @@ class CreateGradesTable extends Migration
             $table->integer('subject_id')->unsigned();
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->float('grade', 8,2);
-            $table->string('remark')->nullable(); // passed or failed
+            $table->string('remark', 50)->nullable(); // passed or failed
             $table->timestamps();
         });
     }

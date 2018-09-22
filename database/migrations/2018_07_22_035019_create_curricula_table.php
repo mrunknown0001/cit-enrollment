@@ -19,7 +19,7 @@ class CreateCurriculaTable extends Migration
             $table->integer('course_id')->unsigned();
             $table->foreign('course_id')->references('id')->on('courses');
             $table->integer('major_id')->nullable();
-            $table->string('revision')->nullable();
+            $table->string('revision', 20)->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
         });

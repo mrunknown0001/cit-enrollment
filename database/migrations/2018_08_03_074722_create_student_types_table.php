@@ -15,7 +15,7 @@ class CreateStudentTypesTable extends Migration
     {
         Schema::create('student_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name'); // regular and irregular
+            $table->string('name', 15); // regular and irregular
             $table->timestamps();
         });
     }
