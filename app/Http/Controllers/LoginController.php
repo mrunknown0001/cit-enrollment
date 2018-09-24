@@ -34,6 +34,8 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
+        return \Request::ip();
+
         $username = $request['username'];
         $password = $request['password'];
         $remember = $request['remember_me'];
