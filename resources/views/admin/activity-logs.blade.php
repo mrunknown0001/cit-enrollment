@@ -28,6 +28,7 @@
 										<th class="text-center">Name</th>
 										<th class="text-center">User Type</th>
 										<th class="text-center">Action</th>
+										<th class="text-center">Client IP</th>
 										<th class="text-center">Date &amp; Time</th>
 									</tr>
 								</thead>
@@ -70,6 +71,9 @@
 										</td>
 										<td>
 											{{ ucwords($log->action) }}
+										</td>
+										<td class="text-center">
+											{{ $log->ip_address }}
 										</td>
 										<td>
 											{{ date('l, F j, Y g:i:s a', strtotime($log->created_at)) }}

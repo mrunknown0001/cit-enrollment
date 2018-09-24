@@ -106,7 +106,7 @@ class GeneralController extends Controller
         $log->user_id = $id;
         $log->user_type = $user_type;
         $log->action = $action;
-        $log->ip_address = $this->get_ip_add();
+        $log->ip_address = self::get_ip_add();
         $log->save();
     }
 
