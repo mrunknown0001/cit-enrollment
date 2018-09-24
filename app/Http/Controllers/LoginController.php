@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
 use Session;
 use App\Http\Controllers\GeneralController;
@@ -15,6 +16,9 @@ use App\User;
 
 class LoginController extends Controller
 {
+
+    use AuthenticatesUsers;
+
     // method use to show login form for admin
     public function adminLogin()
     {
@@ -253,4 +257,14 @@ class LoginController extends Controller
 
         return redirect()->back()->with('error', 'Authentication Error!');   
     }
+
+
+    protected function hasTooManyLoginAttempts(Request $request)
+    {
+        return $this->limiter()->tooManyAttempts(
+            $this->throttleKey($request), 3, 5
+        );
+    }
+
+
 }

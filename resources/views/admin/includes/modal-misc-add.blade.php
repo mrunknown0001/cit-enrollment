@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <strong>Add Miscellaneous Fee</strong>
+        <strong>Add Other Fee</strong>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -31,7 +31,7 @@
                         @endif
                       </div>
                       <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save Miscellaneous Fee</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save </button>
                       </div>
                 </form>
 

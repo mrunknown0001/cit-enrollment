@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <strong>Update Miscellaneous Fee</strong>
+        <strong>Update Fee Details</strong>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -32,7 +32,7 @@
                         @endif
                       </div>
                       <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Update Miscellaneous Fee</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Update</button>
                       </div>
                 </form>
 

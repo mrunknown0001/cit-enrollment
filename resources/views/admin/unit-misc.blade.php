@@ -22,7 +22,7 @@
 					<div class="box-body">
 						{{-- <p><a href="{{ route('admin.add.misc.fee') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Miscellaneous Fee</a></p> --}}
 						
-						<p><button class="btn btn-primary" data-toggle="modal" data-target="#addMisc"><i class="fa fa-plus"></i> Add Miscellaneous Fee</button></p>
+						<p><button class="btn btn-primary" data-toggle="modal" data-target="#addMisc"><i class="fa fa-plus"></i> Add Other Fee</button></p>
 						@include('admin.includes.modal-misc-add')
 
 						<div class="row">
