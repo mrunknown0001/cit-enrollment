@@ -106,6 +106,7 @@ class GeneralController extends Controller
         $log->user_id = $id;
         $log->user_type = $user_type;
         $log->action = $action;
+        $log->ip_address = $this->get_ip_add();
         $log->save();
     }
 
@@ -434,5 +435,11 @@ class GeneralController extends Controller
         $admin->save();
 
         return redirect()->route('login');
+    }
+
+
+    public static function get_ip_add()
+    {
+        return \Request::ip();
     }
 }

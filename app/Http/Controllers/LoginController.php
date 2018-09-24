@@ -34,8 +34,6 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        return \Request::ip();
-
         $username = $request['username'];
         $password = $request['password'];
         $remember = $request['remember_me'];
@@ -267,6 +265,7 @@ class LoginController extends Controller
             $this->throttleKey($request), 3, 5
         );
     }
+
 
 
 }
