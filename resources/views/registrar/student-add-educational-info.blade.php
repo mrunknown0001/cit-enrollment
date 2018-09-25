@@ -153,6 +153,53 @@
 								<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save Student Information</button>
 							</div>
 						</form>
+						<div class="row">
+							<div class="col-md-3"></div>
+							<div class="col-md-3">
+								<form action="{{ route('registrar.add.student') }}" method="GET">
+									{{ csrf_field() }}
+									<input type="hidden" name="sn" value="{{ $sn }}">
+									<input type="hidden" name="firstname" value="{{ $firstname }}">
+									<input type="hidden" name="lastname" value="{{ $lastname }}">
+									<input type="hidden" name="middlename" value="{{ $middlename }}">
+									<input type="hidden" name="suffix_name" value="{{ $suffix }}">
+									<input type="hidden" name="course_id" value="{{ $course_id }}">
+									<input type="hidden" name="major_id" value="{{ $major_id }}">
+									<input type="hidden" name="curriculum_id" value="{{ $curriculum_id }}">
+									<input type="hidden" name="yl_id" value="{{ $yl_id }}">
+									<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-arrow-left"></i> Back to Basic Information</button>
+								</form>
+							</div>
+							<div class="col-md-3">
+								<form action="{{ route('registrar.add.student.personal.info') }}" method="GET">
+									<input type="hidden" name="sn" value="{{ $sn }}">
+									<input type="hidden" name="firstname" value="{{ $firstname }}">
+									<input type="hidden" name="lastname" value="{{ $lastname }}">
+									<input type="hidden" name="middlename" value="{{ $middlename }}">
+									<input type="hidden" name="suffix_name" value="{{ $suffix }}">
+									<input type="hidden" name="course_id" value="{{ $course_id }}">
+									<input type="hidden" name="major_id" value="{{ $major_id }}">
+									<input type="hidden" name="curriculum_id" value="{{ $curriculum_id }}">
+									<input type="hidden" name="yl_id" value="{{ $yl_id }}">
+
+									<input type="hidden" name="sex" value="{{ $sex }}">
+									<input type="hidden" name="civil_status" value="{{ $civil_status }}">
+									<input type="hidden" name="mobile_number" value="{{ $mobile_number }}">
+									<input type="hidden" name="email" value="{{ $email }}">
+									<input type="hidden" name="address" value="{{ $address }}">
+									<input type="hidden" name="nationality" value="{{ $nationality }}">
+									<input type="hidden" name="pob" value="{{ $pob }}">
+									<input type="hidden" name="dob" value="{{ $dob }}">
+									<input type="hidden" name="religion" value="{{ $religion }}">
+									<input type="hidden" name="father" value="{{ $father }}">
+									<input type="hidden" name="mother" value="{{ $mother }}">
+									<input type="hidden" name="guardian" value="{{ $guardian }}">
+									<input type="hidden" name="guardians_address" value="{{ $guardians_address }}">
+									<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-arrow-left"></i> Back to Personal Information</button>
+								</form>
+							</div>
+							<div class="col-md-3"></div>
+						</div>
 					</div>
 					<div class="box-footer">
 						

@@ -762,7 +762,7 @@ class DeanController extends Controller
                     // ->distinct(['course_id', 'curriculum_id', 'year_level_id', 'section_id'])
                     ->orderBy('course_id', 'year_level_id', 'section_id')
                     ->distinct()
-                    ->get(['course_id', 'curriculum_id', 'year_level_id', 'section_id']);
+                    ->get(['id', 'course_id', 'curriculum_id', 'year_level_id', 'section_id']);
 
 
         return view('dean.faculty-load-select', ['sections' => $sections]);
