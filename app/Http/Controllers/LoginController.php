@@ -287,13 +287,13 @@ class LoginController extends Controller
 
         $student = User::where('student_number', $sn)->first();
 
+        if(count($student) < 1) {
+            return redirect()->back()->with('error', 'Student Number Not Found!');
+        }
+
         // check if registered
         if($student->registered == 0) {
             return redirect()->back()->with('info', 'Student Not Registered!');
-        }
-
-        if(count($student) < 1) {
-            return redirect()->back()->with('error', 'Student Number Not Found!');
         }
         
         // send code
