@@ -28,7 +28,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
 							      	<label for="firstname">Firstname</label><label class="label-required">*</label>
-							        <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" placeholder="Enter Firstname" autofocus required="">
+							        <input id="firstname" type="text" class="form-control" name="firstname" value="{{ $firstname }}" placeholder="Enter Firstname" autofocus required="">
 							        @if ($errors->has('firstname'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('firstname') }}</strong>
@@ -39,7 +39,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('middlename') ? ' has-error' : '' }}">
 							      	<label for="middlename">Middlename</label>
-							        <input id="middlename" type="text" class="form-control" name="middlename" value="{{ old('middlename') }}" placeholder="Enter Middlename" >
+							        <input id="middlename" type="text" class="form-control" name="middlename" value="{{ $middlename }}" placeholder="Enter Middlename" >
 							        @if ($errors->has('middlename'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('middlename') }}</strong>
@@ -50,7 +50,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
 							      	<label for="lastname">Lastname</label><label class="label-required">*</label>
-							        <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" placeholder="Enter Lastname" required>
+							        <input id="lastname" type="text" class="form-control" name="lastname" value="{{ $lastname }}" placeholder="Enter Lastname" required>
 							        @if ($errors->has('lastname'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('lastname') }}</strong>
@@ -61,7 +61,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('suffix_name') ? ' has-error' : '' }}">
 							      	<label for="suffix_name">Suffix</label>
-							        <input id="suffix_name" type="text" class="form-control" name="suffix_name" value="{{ old('suffix_name') }}" placeholder="Enter Suffix Name" >
+							        <input id="suffix_name" type="text" class="form-control" name="suffix_name" value="{{ $suffix }}" placeholder="Enter Suffix Name" >
 							        @if ($errors->has('suffix_name'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('suffix_name') }}</strong>
@@ -74,7 +74,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
 							      	<label for="student_number">Student Number</label><label class="label-required">*</label>
-							        <input id="student_number" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" placeholder="Enter Student Number" required>
+							        <input id="student_number" type="text" class="form-control" name="student_number" value="{{ $sn }}" placeholder="Enter Student Number" required>
 							        @if ($errors->has('student_number'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('student_number') }}</strong>
@@ -125,7 +125,7 @@
 							        	<option value="">Select Year Level</option>
 							        	@if(count($yl) > 0)
 											@foreach($yl as $y)
-												<option value="{{ $y->id }}">{{ ucwords($y->name) }}</option>
+												<option value="{{ $y->id }}" {{ $yl_id == $y->id ? 'selected' : '' }}>{{ ucwords($y->name) }}</option>
 											@endforeach
 							        	@else
 										
@@ -154,7 +154,14 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i> Continue</button>
+								<div class="row">
+									<div class="col-md-2">
+										<button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i> Continue</button>
+									</div>
+									<div class="col-md-5"></div>
+									<div class="col-md-5 text-center">
+									</div>
+								</div>
 							</div>
 						</form>
 					</div>

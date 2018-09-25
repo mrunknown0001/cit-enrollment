@@ -192,9 +192,30 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i> Continue</button>
+								<div class="row">
+									<div class="col-md-2">
+										<button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i> Continue</button>
+									</div>
+							</form>
+									<div class="col-md-5"></div>
+									<div class="col-md-5 text-center">
+										<form action="{{ route('registrar.add.student') }}">
+											{{ csrf_field() }}
+											<input type="hidden" name="sn" value="{{ $sn }}">
+											<input type="hidden" name="firstname" value="{{ $firstname }}">
+											<input type="hidden" name="lastname" value="{{ $lastname }}">
+											<input type="hidden" name="middlename" value="{{ $middlename }}">
+											<input type="hidden" name="suffix_name" value="{{ $suffix }}">
+											<input type="hidden" name="course_id" value="{{ $course_id }}">
+											<input type="hidden" name="major_id" value="{{ $major_id }}">
+											<input type="hidden" name="curriculum_id" value="{{ $curriculum_id }}">
+											<input type="hidden" name="yl_id" value="{{ $yl_id }}">
+											<button type="submit" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Basic Information</button>
+										</form>
+									</div>
+								</div>
 							</div>
-						</form>
+						
 					</div>
 					<div class="box-footer">
 						

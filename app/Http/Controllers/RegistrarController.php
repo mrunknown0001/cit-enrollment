@@ -153,12 +153,34 @@ class RegistrarController extends Controller
 
 
     // method use to add student
-    public function addStudent()
+    public function addStudent(Request $request)
     {
         $courses = Course::where('active', 1)->orderBy('title', 'asc')->get();
         $yl = YearLevel::get();
 
-    	return view('registrar.student-add', ['courses' => $courses, 'yl' => $yl]);
+        $sn = $request['sn'];
+        $firstname = $request['firstname'];
+        $lastname = $request['lastname'];
+        $middlename = $request['middlename'];
+        $suffix = $request['suffix_name'];
+        $course_id = $request['course_id'];
+        $major_id = $request['major'];
+        $curriculum_id = $request['curriculum'];
+        $yl_id = $request['yl_id'];
+
+    	return view('registrar.student-add', [
+            'courses' => $courses,
+            'yl' => $yl,
+            'sn' => $sn, // student number
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'middlename' => $middlename,
+            'suffix' => $suffix,
+            'course_id' => $course_id,
+            'major_id' => $major_id,
+            'curriculum_id' => $curriculum_id,
+            'yl_id' => $yl_id
+        ]);
     }
 
 

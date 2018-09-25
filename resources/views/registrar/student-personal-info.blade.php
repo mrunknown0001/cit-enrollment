@@ -77,6 +77,7 @@
 					</div>
 				</div>
 				<p><a href="{{ route('registrar.student.educational.info', ['id' => $student->id]) }}" class="btn btn-primary"><i class="fa fa-arrow-right"></i> View Educational Information</a></p>
+
 			</div>
 		</div>
 	</section>
