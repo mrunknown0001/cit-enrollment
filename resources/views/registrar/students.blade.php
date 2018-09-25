@@ -73,6 +73,7 @@
 											@endif
 										</td>
 										<td class="text-center">
+											<a href="{{ route('registrar.stuent.view.data.print', ['id' => $s->id]) }}" class="btn btn-default btn-xs" target="_blank"><i class="fa fa-print"></i>Print</a>
 											<a href="{{ route('registrar.current.subjects', ['id' => $s->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-book"></i> Subjects</a>
 											<a href="{{ route('registrar.student.personal.info', ['id' => $s->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-eye"></i> View Info</a>
 											<a href="{{ route('registrar.update.student', ['id' => $s->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a>

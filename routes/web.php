@@ -644,6 +644,9 @@ Route::group(['prefix' => 'registrar', 'middleware' => 'prevent-back-history'], 
 	// route to view subjects of students in current semester
 	Route::get('/student/{id}/subjects/current', 'RegistrarController@studentCurrentSubjects')->name('registrar.current.subjects');
 
+	// rotue to view/print student data 
+	Route::get('/student/{id}/view/data/print', 'RegistrarController@studentViewDataPrint')->name('registrar.stuent.view.data.print');
+
 	// route to get major to be use in add student form
 	Route::get('/course/{id}/majors/get', 'RegistrarController@getCourseMajor')->name('registrar.get.course.major');
 

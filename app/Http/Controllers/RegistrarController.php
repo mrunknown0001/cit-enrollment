@@ -868,6 +868,15 @@ class RegistrarController extends Controller
     }
 
 
+    // method use to view/print student data
+    public function studentViewDataPrint($id = null)
+    {
+        $student = User::findorfail($id);
+
+        // view print
+        return view('registrar.student-print-data', ['student' => $student]);
+    }
+
 
 
     // method use to view subjects
