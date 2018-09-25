@@ -39,8 +39,8 @@
 							      	<label for="sex">Select Sex</label>
 									<select class="form-control" name="sex" id="sex">
 										<option value="">Select One</option>
-										<option value="Male">Male</option>
-										<option value="Female">Female</option>
+										<option value="Male" {{ $sex == 'Male' ? 'selected' : '' }}>Male</option>
+										<option value="Female" {{ $sex == 'Female' ? 'selected' : '' }}>Female</option>
 									</select>
 							        @if ($errors->has('sex'))
 							            <span class="help-block">
@@ -54,11 +54,11 @@
 							      	<label for="civil_status">Select Civil Status</label>
 									<select class="form-control" name="civil_status" id="civil_status">
 										<option value="">Select One</option>
-										<option value="Single">Single</option>
-										<option value="Married">Married</option>
-										<option value="Widowed">Widowed</option>
-										<option value="Annulled">Annulled</option>
-										<option value="Divorced">Divorced</option>
+										<option value="Single" {{ $civil_status == 'Single' ? 'selected' : '' }}>Single</option>
+										<option value="Married" {{ $civil_status == 'Married' ? 'selected' : '' }}>Married</option>
+										<option value="Widowed" {{ $civil_status == 'Widowed' ? 'selected' : '' }}>Widowed</option>
+										<option value="Annulled" {{ $civil_status == 'Annulled' ? 'selected' : '' }}>Annulled</option>
+										<option value="Divorced" {{ $civil_status == 'Divorced' ? 'selected' : '' }}>Divorced</option>
 									</select>
 							        @if ($errors->has('civil_status'))
 							            <span class="help-block">
@@ -70,7 +70,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('mobile_number') ? ' has-error' : '' }}">
 							      	<label for="mobile_number">Enter Mobile Number</label>
-							      	<input type="text" name="mobile_number" id="mobile_number" class="form-control" placeholder="Enter Mobile Number">
+							      	<input type="text" name="mobile_number" id="mobile_number" class="form-control" value="{{ $mobile_number }}" placeholder="Enter Mobile Number">
 							        @if ($errors->has('mobile_number'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('mobile_number') }}</strong>
@@ -81,7 +81,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
 							      	<label for="email">Enter Email</label>
-							      	<input type="email" name="email" id="email" class="form-control" placeholder="Enter Email">
+							      	<input type="email" name="email" id="email" class="form-control" value="{{ $email }}" placeholder="Enter Email">
 							        @if ($errors->has('email'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('email') }}</strong>
@@ -92,7 +92,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
 							      	<label for="address">Enter Address</label>
-							      	<input type="text" name="address" id="address" class="form-control" placeholder="Enter Address">
+							      	<input type="text" name="address" id="address" class="form-control" value="{{ $address }}" placeholder="Enter Address">
 							        @if ($errors->has('address'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('address') }}</strong>
@@ -103,7 +103,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
 							      	<label for="nationality">Enter Nationality</label>
-							      	<input type="text" name="nationality" id="nationality" class="form-control" placeholder="Enter Nationality">
+							      	<input type="text" name="nationality" id="nationality" class="form-control" value="{{ $nationality }}" placeholder="Enter Nationality">
 							        @if ($errors->has('nationality'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('nationality') }}</strong>
@@ -114,7 +114,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('place_of_birth') ? ' has-error' : '' }}">
 							      	<label for="place_of_birth">Enter Place of Birth</label>
-							      	<input type="text" name="place_of_birth" id="place_of_birth" class="form-control" placeholder="Enter Place of Birth">
+							      	<input type="text" name="place_of_birth" id="place_of_birth" class="form-control" value="{{ $pob }}" placeholder="Enter Place of Birth">
 							        @if ($errors->has('place_of_birth'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('place_of_birth') }}</strong>
@@ -125,7 +125,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
 							      	<label for="date_of_birth">Enter Date of Birth</label>
-							      	<input type="date" name="date_of_birth" id="date_of_birth" class="form-control" placeholder="mm/dd/yyyy">
+							      	<input type="date" name="date_of_birth" id="date_of_birth" class="form-control" value="{{ $dob }}" placeholder="mm/dd/yyyy">
 							        @if ($errors->has('date_of_birth'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('date_of_birth') }}</strong>
@@ -136,7 +136,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('religion') ? ' has-error' : '' }}">
 							      	<label for="religion">Enter Religion</label>
-							      	<input type="text" name="religion" id="religion" class="form-control" placeholder="Enter Religion">
+							      	<input type="text" name="religion" id="religion" class="form-control" value="{{ $religion }}" placeholder="Enter Religion">
 							        @if ($errors->has('religion'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('religion') }}</strong>
@@ -149,7 +149,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('fathers_name') ? ' has-error' : '' }}">
 							      	<label for="fathers_name">Enter Father's Name</label>
-							      	<input type="text" name="fathers_name" id="fathers_name" class="form-control" placeholder="Enter Father's Name">
+							      	<input type="text" name="fathers_name" id="fathers_name" class="form-control" value="{{ $father }}" placeholder="Enter Father's Name">
 							        @if ($errors->has('fathers_name'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('fathers_name') }}</strong>
@@ -160,7 +160,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('mothers_name') ? ' has-error' : '' }}">
 							      	<label for="mothers_name">Enter Mother's Name</label>
-							      	<input type="text" name="mothers_name" id="mothers_name" class="form-control" placeholder="Enter Mother's Name">
+							      	<input type="text" name="mothers_name" id="mothers_name" class="form-control" value="{{ $mother }}" placeholder="Enter Mother's Name">
 							        @if ($errors->has('mothers_name'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('mothers_name') }}</strong>
@@ -171,7 +171,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('guardians_name') ? ' has-error' : '' }}">
 							      	<label for="guardians_name">Enter Guardian's Name</label>
-							      	<input type="text" name="guardians_name" id="guardians_name" class="form-control" placeholder="Enter Guardian's Name">
+							      	<input type="text" name="guardians_name" id="guardians_name" class="form-control" value="{{ $guardian }}" placeholder="Enter Guardian's Name">
 							        @if ($errors->has('guardians_name'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('guardians_name') }}</strong>
@@ -182,7 +182,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('guardians_address') ? ' has-error' : '' }}">
 							      	<label for="guardians_address">Enter Guardian's Address</label>
-							      	<input type="text" name="guardians_address" id="guardians_address" class="form-control" placeholder="Enter Guardian's Address">
+							      	<input type="text" name="guardians_address" id="guardians_address" class="form-control" value="{{ $guardians_address }}" placeholder="Enter Guardian's Address">
 							        @if ($errors->has('guardians_address'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('guardians_address') }}</strong>
