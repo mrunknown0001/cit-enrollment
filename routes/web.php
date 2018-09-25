@@ -64,6 +64,18 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 	Route::post('/student/login', 'LoginController@postStudentLogin')->name('student.login.post');
 
+	// student forgot password
+	Route::get('/forgot-password', 'LoginController@forgotPassword')->name('forgot.password');
+
+	Route::post('/forgot-password', 'LoginController@postForgotPassword')->name('forgot.password.post');
+
+	// route to enter reset code
+	Route::get('/forgot-password/code', 'LoginController@enterResetCode')->name('enter.reset.code');
+
+	Route::post('/forgot-password/code', 'LoginController@postEnterResetCode')->name('enter.reset.code.post');
+
+	Route::post('/reset-password', 'LoginController@postResetPassword')->name('reset.password.post');
+
 	Route::get('/student', function () {
 		return redirect()->route('login');
 	});

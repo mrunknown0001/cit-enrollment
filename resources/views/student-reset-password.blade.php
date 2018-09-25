@@ -24,17 +24,11 @@
     </div>
     <p class="login-box-msg">Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</p>
     @include('includes.all')
-    <form action="{{ route('student.login.post') }}" method="post" autocomplete="off">
-      {{ csrf_field() }}
-      <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
-        <input id="student_number" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" placeholder="Enter Student Number" required autofocus>
-        @if ($errors->has('student_number'))
-            <span class="help-block">
-                <strong>{{ $errors->first('student_number') }}</strong>
-            </span>
-        @endif
-      </div>
 
+
+    <form action="{{ route('reset.password.post') }}" method="post" autocomplete="off">
+      {{ csrf_field() }}
+      <input type="hidden" name="student_id" value="{{ $student->id }}">
       <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
         <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password" required>
         @if ($errors->has('password'))
@@ -44,16 +38,22 @@
         @endif
       </div>
 
+      <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+        <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" placeholder="Re-Enter Password" required>
+        @if ($errors->has('password'))
+            <span class="help-block">
+                <strong>{{ $errors->first('password') }}</strong>
+            </span>
+        @endif
+      </div>
+
       <div class="row">
-        <div class="col-xs-8">
+        <div class="col-xs-6">
           <div class="checkbox icheck">
-            <label>
-              <input type="checkbox" name="remember_me" id="remember_me" checked=""> Remember Me
-            </label>
           </div>
         </div>
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+        <div class="col-xs-6">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Reset Password</button>
         </div>
       </div>
     </form>

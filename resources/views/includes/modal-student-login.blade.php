@@ -45,6 +45,8 @@
         </div>
       </form>
       <a href="{{ route('registration') }}">Click here to register</a>
+      &nbsp;
+      <a href="{{ route('forgot.password') }}">Forgot Password?</a>
 
       </div>
       <div class="modal-footer">

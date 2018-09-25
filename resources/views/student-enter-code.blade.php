@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Student Registration - Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</title>
+  <title>Student Login - Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet"  href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue-light.min.css') }}">
@@ -20,32 +20,37 @@
 <div class="login-box">
   <div class="login-box-body">
     <div class="login-logo">
-      <a href="javascript:void(0)"><b>Student</b> Registration</a>
+      <a href="javascript:void(0)"><b>Student</b><br>Forgot Password</a>
     </div>
     <p class="login-box-msg">Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</p>
     @include('includes.all')
-    <form action="{{ route('student.show.details') }}" method="get" autocomplete="off">
+    <p><em>Enter code sent to your Mobile Number!</em></p>
+    <form action="{{ route('enter.reset.code.post') }}" method="post" autocomplete="off">
       {{ csrf_field() }}
-      <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
-        <input id="username" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" placeholder="Enter Student Number" autofocus>
-        @if ($errors->has('student_number'))
+      <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
+        <label>Enter Reset Code</label>
+        <input id="code" type="text" class="form-control" name="code" placeholder="Enter Reset Code" required autofocus>
+        @if ($errors->has('code'))
             <span class="help-block">
-                <strong>{{ $errors->first('student_number') }}</strong>
+                <strong>{{ $errors->first('code') }}</strong>
             </span>
         @endif
       </div>
 
       <div class="row">
-        <div class="col-xs-12">
-          <label for="terms"><input type="checkbox" name="terms" id="terms" required checked> By registering to this website, you Agree to <a href="{{ route('terms.and.condition') }}" target="_blank">Terms and Conditon</a> of the the website.</label>
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+
+          </div>
         </div>
         <div class="col-xs-4">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Continue</button>
         </div>
       </div>
     </form>
-
-    <p><a href="{{ route('login') }}">Click here to Login</a>&nbsp;<a href="{{ route('landing.page') }}">Go to Landing Page</a></p>
+    <p><a href="{{ route('registration') }}">Click here to register</a>
+    &nbsp;
+    <a href="{{ route('landing.page') }}">Go to Landing Page</a></p>
   </div>
 </div>
 <script src="{{ asset('js/app.js') }}"></script>
