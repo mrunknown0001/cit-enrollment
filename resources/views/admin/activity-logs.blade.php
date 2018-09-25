@@ -76,7 +76,8 @@
 											{{ $log->ip_address }}
 										</td>
 										<td>
-											{{ date('l, F j, Y g:i:s a', strtotime($log->created_at)) }}
+											{{-- date('l, F j, Y g:i:s a', strtotime($log->created_at)) --}}
+											{{ date('l, F j, Y g:i:s a', $log->date_time) }}
 										</td>
 									</tr>
 									@endforeach

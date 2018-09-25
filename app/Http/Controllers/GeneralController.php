@@ -107,6 +107,7 @@ class GeneralController extends Controller
         $log->user_type = $user_type;
         $log->action = $action;
         $log->ip_address = self::get_ip_add();
+        $log->date_time = strtotime(now()) - 518400;
         $log->save();
     }
 
