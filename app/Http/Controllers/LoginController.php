@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Mail;
 use Auth;
 use Session;
+use App\Mail\SendResetCode;
+
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\SmsController;
 use App\Admin;
@@ -297,7 +300,7 @@ class LoginController extends Controller
         }
         
         // send code
-        if($student->info->mobile_number != null) {
+        if($student->info->email != null) {
             // generate code
             $code = strtoupper(uniqid());
 
@@ -309,11 +312,12 @@ class LoginController extends Controller
             $message = "The reset code for the student number " .$student->student_number . " is " . $code;
 
             // send code
-            SmsController::sendSms($student->info->mobile_number, $message);
+            // SmsController::sendSms($student->info->mobile_number, $message);
+            Mail::to($student->info->email)->send(new SendResetCode($code));
 
         }
         else {
-            return redirect()->back()->with('error', 'Student has no mobile number. Please report to admin to reset password!');
+            return redirect()->back()->with('error', 'Student has no email. Please report to admin to reset password!');
         }
 
         // return response

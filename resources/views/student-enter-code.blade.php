@@ -24,7 +24,7 @@
     </div>
     <p class="login-box-msg">Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</p>
     @include('includes.all')
-    <p><em>Enter code sent to your Mobile Number!</em></p>
+    <p><em>Enter code sent to your email!</em></p>
     <form action="{{ route('enter.reset.code.post') }}" method="post" autocomplete="off">
       {{ csrf_field() }}
       <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
