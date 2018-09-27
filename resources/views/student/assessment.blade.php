@@ -14,6 +14,7 @@
 	<section class="content">
 		{{-- show schedule --}}
 		{{-- show sections --}}
+		@if(count($sections) > 0)
 		<p>Select/View Sections Schedules</p>
 		<div class="row">
 			@foreach($sections as $s)
@@ -22,6 +23,11 @@
 			</div>
 			@endforeach
 		</div>
+		@else
+		<p class="text-center">No Section Found!</p>
+		@endif
+
+
 	</section>
 </div>
 @endsection
