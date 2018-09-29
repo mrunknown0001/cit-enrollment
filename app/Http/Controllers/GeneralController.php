@@ -106,7 +106,13 @@ class GeneralController extends Controller
         $log->user_id = $id;
         $log->user_type = $user_type;
         $log->action = $action;
-        $log->ip_address = self::get_ip_add();
+        if(!Auth::guard('web')->user()) {
+            $log->ip_address = self::get_ip_add();
+        }
+        else {
+            $log->ip_address = 'N/A';
+        }
+
         $log->date_time = strtotime(now()) - 518400;
         $log->save();
     }

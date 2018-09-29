@@ -663,8 +663,11 @@ class StudentController extends Controller
                                     ->where('active', 0)
                                     ->first();
 
+        
+
         if(count($unfinished_payment) > 0) {
-            return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            $unfinished_payment->delete();
         }
 
         if(count($rp) < 1) {
@@ -715,8 +718,11 @@ class StudentController extends Controller
                                     ->where('active', 0)
                                     ->first();
 
+        
+
         if(count($unfinished_payment) > 0) {
-            return redirect()->route('student.dashboard')->with('info', 'Please Try Paying Again Later.');
+            // return redirect()->route('student.dashboard')->with('info', 'Please Try Paying Again Later.');
+            $unfinished_payment->delete();
         }
         
         // redirect back if regitration payment is paid
@@ -739,8 +745,11 @@ class StudentController extends Controller
                                     ->where('active', 0)
                                     ->first();
 
+
+
         if(count($unfinished_payment) > 0) {
-            return redirect()->route('student.dashboard')->with('info', 'Please Try Paying Again Later.');
+            // return redirect()->route('student.dashboard')->with('info', 'Please Try Paying Again Later.');
+            $unfinished_payment->delete();
         }
 
         $amount = $request['amount'];
@@ -770,8 +779,10 @@ class StudentController extends Controller
                                     ->where('active', 0)
                                     ->first();
 
+
         if(count($unfinished_payment) > 0) {
-            return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            $unfinished_payment->delete();
         }
 
 
@@ -877,8 +888,10 @@ class StudentController extends Controller
                                     ->where('active', 0)
                                     ->first();
 
+
         if(count($unfinished_payment) > 0) {
-            return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            $unfinished_payment->delete();
         }
 
         $balance = Balance::where('student_id', Auth::user()->id)
@@ -912,8 +925,10 @@ class StudentController extends Controller
                                     ->where('active', 0)
                                     ->first();
 
+
         if(count($unfinished_payment) > 0) {
-            return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            $unfinished_payment->delete();
         }
 
         $payment = new Payment();
@@ -949,8 +964,10 @@ class StudentController extends Controller
                                     ->where('active', 0)
                                     ->first();
 
+
         if(count($unfinished_payment) > 0) {
-            return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            $unfinished_payment->delete();
         }
 
         $balance = Balance::where('student_id', Auth::user()->id)
@@ -995,8 +1012,10 @@ class StudentController extends Controller
                                     ->where('active', 0)
                                     ->first();
 
+
         if(count($unfinished_payment) > 0) {
-            return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            $unfinished_payment->delete();
         }
 
         // \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));

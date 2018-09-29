@@ -14,6 +14,7 @@ use App\RegistrationPayment;
 use App\User;
 use App\AcademicYear;
 use App\Semester;
+use App\EnrolledStudent;
 
 
 class CashierController extends Controller
@@ -219,6 +220,13 @@ class CashierController extends Controller
             $reg_p->semester_id = $sem->id;
             $reg_p->amount = $amount;
             $reg_p->save();
+
+            // enrolled students
+            $enrolled = new EnrolledStudent();
+            $enrolled->student_id = $student->id;
+            $enrolled->academic_year_id = $ay->id;
+            $enrolled->semester_id = $sem->id;
+            $enrolled->save();
         }
 
 
