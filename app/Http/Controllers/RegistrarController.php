@@ -1042,6 +1042,17 @@ class RegistrarController extends Controller
     }
 
 
+    // method use to show subjects in a course
+    public function courseSubjects($id = null)
+    {
+        $subjects = Subject::where('course_id', $id)
+                        ->orderBy('code', 'asc')
+                        ->get();
+
+        return $subjects;
+    }
+
+
     // method use to get course major to use in form add/update subject
     public function getCourseMajors($id = null)
     {
@@ -1106,5 +1117,6 @@ class RegistrarController extends Controller
 
         return $course_cu;
     }
+
 
 }

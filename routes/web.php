@@ -674,6 +674,9 @@ Route::group(['prefix' => 'registrar', 'middleware' => 'prevent-back-history'], 
 	// route to save new subject
 	Route::post('/subject/add', 'RegistrarController@postAddSubject')->name('registrar.add.subject.post');
 
+	// route to show subjects on a course
+	Route::get('/subjects/course/{id}/get', 'RegistrarController@courseSubjects')->name('registrar.course.subjects');
+
 	// route to update subject
 	Route::get('/subject/{id}/update', 'RegistrarController@updateSubject')->name('registrar.update.subject');
 

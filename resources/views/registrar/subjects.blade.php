@@ -41,7 +41,7 @@
 									<td class="text-center">{{ $s->course->code }}</td>
 									<td class="text-center">{{ $s->units }}
 									</td>
-									<td class="text-center">{{ $s->lab_units ? '|' . $s->lab_units : 'N/A' }}</td>
+									<td class="text-center">{{ $s->lab_units ? $s->lab_units : 'N/A' }}</td>
 									<td class="text-center">
 										<a href="{{ route('registrar.update.subject', ['id' => $s->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a>
 									</td>

@@ -67,13 +67,14 @@
 										<label for="prerequisite">Subject Prerequisite</label>
 										<select class="form-control" id="prerequisite" name="prerequisite">
 											<option value="">No Prerequisite</option>
-											@if(count($subjects) > 0)
+
+											{{--@if(count($subjects) > 0)
 												@foreach($subjects as $s)
 													<option value="{{ $s->id }}">{{ $s->code }}</option>
 												@endforeach
 											@else
 												<option value="">No Subjects Found</option>
-											@endif
+											@endif--}}
 										</select>
 										@if ($errors->has('prerequisite'))
 										<span class="help-block">
@@ -193,6 +194,11 @@
 		    .append('<option selected="selected" value="">No Curriculum</option>')
 		;
 
+		$('#prerequisite')
+			.empty()
+		    .append('<option selected="selected" value="">No Prerequisite</option>')
+		;
+
 		$.ajax({url: "/registrar/course/" + courseId + "/majors/get", success: function(result){
 	        Object.keys(result).forEach(function(key) {
 
@@ -205,6 +211,14 @@
 	        Object.keys(result).forEach(function(key) {
 
 			  $('#curriculum').append('<option value="' + result[key].id + '">' + result[key].name + '</option>');
+			  
+			});
+	    }});
+
+	    $.ajax({url: "/registrar/subjects/course/" + courseId + "/get", success: function(result){
+	        Object.keys(result).forEach(function(key) {
+
+			  $('#prerequisite').append('<option value="' + result[key].id + '">' + result[key].code + '</option>');
 			  
 			});
 	    }});
