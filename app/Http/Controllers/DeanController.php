@@ -215,7 +215,7 @@ class DeanController extends Controller
 
         // room, subjects, time, days
         $rooms = Room::orderBy('name', 'asc')->get();
-        $subjects = Subject::where('active', 1)
+        return $subjects = Subject::where('active', 1)
                     ->where('curriculum_id', $curriculum->id)
                     ->where('semester_id', $sem->id)
                     ->where('year_level_id', $yl->id)
