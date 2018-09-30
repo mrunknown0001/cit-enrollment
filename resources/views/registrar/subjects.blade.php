@@ -28,6 +28,7 @@
 									<th class="text-center">Code</th>
 									<th class="text-center">Description</th>
 									<th class="text-center">Course</th>
+									<th class="text-center">Curriculum</th>
 									<th class="text-center">Lecture Units</th>
 									<th class="text-center">Lab Units</th>
 									<th class="text-center">Action</th>
@@ -39,6 +40,7 @@
 									<td class="text-center">{{ strtoupper($s->code) }}</td>
 									<td>{{ ucwords($s->description) }}</td>
 									<td class="text-center">{{ $s->course->code }}</td>
+									<td>{{ $s->major_id ? $s->major->name : 'N/A' }}</td>
 									<td class="text-center">{{ $s->units }}
 									</td>
 									<td class="text-center">{{ $s->lab_units ? $s->lab_units : 'N/A' }}</td>

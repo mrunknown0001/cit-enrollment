@@ -10,4 +10,9 @@ class Subject extends Model
     {
     	return $this->belongsTo('App\Course', 'course_id');
     }
+
+    public function major()
+    {
+    	return $this->belongsTo('App\CourseMajor', 'major_id');
+    }
 }
