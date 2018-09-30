@@ -1305,8 +1305,11 @@ class AdminController extends Controller
         // move to next year level if all subject enrolled for the first and second sem
         // of the year level taken is all passed
         // get all students
+        $students = EnrolledStudent::all();
 
-
+        foreach($students as $s) {
+            $this->check_move_to_next_yl($s->student_id);
+        }
 
 
 
@@ -1904,12 +1907,17 @@ class AdminController extends Controller
 
         // get all subjects for current year level enrolled 
 
+
         // check if all the subject is taken and passed
 
         // if passed, the student will go to next year level
         // if the student is 4th year. the status will be graduate
 
         // operation only no return values or response
+        if($student->info->year_level_id != 4) {
+            $student->info->year_level_id += 1;
+            $student->info->save();
+        }
     }
 
 }
