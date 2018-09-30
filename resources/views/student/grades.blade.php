@@ -16,8 +16,9 @@
 			<div class="col-md-12">
 				@include('includes.all')
 
-				@if(count($semesters) > 0)
-					<form>
+				@if(count($grades) > 0)
+					<p><i>Available Grade for the Current Semester.</i></p>
+					{{--<form>
 						<div class="form-group">
 							<select id="semester">
 								<option value="">Select Semesters Taken</option>
@@ -26,7 +27,34 @@
 								@endforeach
 							</select>
 						</div>
-					</form>
+					</form>--}}
+					
+					<div class="row">
+						<div class="col-md-6">
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th class="text-center">Subject Code</th>
+										<th class="text-center">Grades</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach($grades as $g)
+										<tr>
+											<td class="text-center">
+												{{ $g->subject->code }}
+											</td>
+											<td class="text-center">{{ $g->grade }}</td>
+										</tr>
+									@endforeach
+								</tbody>
+							</table>							
+						</div>
+					</div>
+
+
+
+
 				@else
 					<p class="text-center">No Grades Found!</p>
 				@endif

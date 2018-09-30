@@ -575,11 +575,19 @@ class StudentController extends Controller
     {
         $student = Auth::user();
 
-        $semesters = Grade::where('student_id', $student->id)
-                        ->distinct()
-                        ->get(['academic_year_id', 'semester_id']);
+        $ay = AcademicYear::whereActive(1)->first();
+        $sem = Semester::whereActive(1)->first();
 
-        return view('student.grades', ['semesters' => $semesters]);
+        if(count($ay) < 1 && count($sem) < 1) {
+            return redirect()->route('student.dashboard')->with('error', 'No Active Academic Year');
+        }
+
+        $grades = Grade::where('student_id', $student->id)
+                        ->where('academic_year_id', $ay->id)
+                        ->where('semester_id', $sem->id)
+                        ->get();
+
+        return view('student.grades', ['grades' => $grades]);
     }
 
 
