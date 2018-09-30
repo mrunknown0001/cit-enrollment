@@ -801,7 +801,11 @@ Route::group(['prefix' => 'faculty', 'middleware' => 'prevent-back-history'], fu
 	// route to update grade of student
 	Route::post('/student/grade/update', 'FacultyController@postUpdateStudentGrade')->name('faculty.update.studet.grade.post');
 
-	
+	Route::get('/student/grade/update', function () {
+		return redirect()->route('faculty.subject.loads');
+	});
+
+
 });
 
 

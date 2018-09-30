@@ -14,11 +14,11 @@
           <i class="fa fa-book"></i> <span>Subjects</span>
         </a>
       </li>
-      <li class="">
+<!--       <li class="">
         <a href="#">
           <i class="fa fa-graduation-cap"></i> <span>Students</span>
         </a>
-      </li>
+      </li> -->
     </ul>
   </section>
 </aside>

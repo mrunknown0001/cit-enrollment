@@ -14,7 +14,8 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p><a href="{{ route('faculty.subject.loads') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Subject Loads</a></p>
+				<p class="hideOnPrint"><a href="{{ route('faculty.subject.loads') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Subject Loads</a> <button class="btn btn-primary" onclick="window.print()"><i class="fa fa-print"></i> Print</button></p>
+				
 				@include('includes.all')
 				
 				<div class="row">
@@ -39,7 +40,7 @@
 								<tr>
 									<th class="text-center">Name</th>
 									<th class="text-center">Grade</th>
-									<th class="text-center">Action</th>
+									<th class="text-center hideOnPrint">Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -52,7 +53,7 @@
 									<td class="text-center">
 										{{ $s['grade'] }}
 									</td>
-									<td class="text-center">
+									<td class="text-center hideOnPrint">
 										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#gradeUpdate-{{ $s['grade_id'] }}"><i class="fa fa-pencil"></i> Update</button>
 									</td>
 								</tr>
