@@ -758,10 +758,20 @@ class DeanController extends Controller
     {
         // get all distinct course year level and section
         // where to select subjects
-        $sections = Schedule::where('active', 1)
-                    ->select('id', 'course_id', 'year_level_id', 'section_id')
-                    ->distinct()
-                    ->get(['id', 'course_id', 'year_level_id', 'section_id']);
+        // $sections = Schedule::where('active', 1)
+        //             ->select('id', 'course_id', 'year_level_id', 'section_id')
+        //             ->distinct()
+        //             ->get(['id', 'course_id', 'year_level_id', 'section_id']);
+
+        $sections = DB::table('schedules')
+                ->join('courses', 'courses.id', '=', 'schedules.course_id')
+                ->join('year_levels', 'year_levels.id', '=', 'schedules.year_level_id')
+                ->join('sections', 'sections.id', '=', 'schedules.section_id')
+                ->select('schedules.id', 'courses.code', 'year_levels.name',\DB::raw('sections.name as section_name'))
+                // ->join('year_levels', 'schedules.year_level_id', '=', 'year_levels.id')
+                // ->join('sections', 'schedules.section', '=', 'sections.id')
+                ->groupBy('course_id', 'year_level_id', 'section_id')
+                ->get();
 
 
 

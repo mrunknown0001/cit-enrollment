@@ -35,7 +35,7 @@
 										<option value="">Please Select One</option>
 										@if(count($sections) > 0)
 											@foreach($sections as $s)
-											<option value="{{ $s->id }}">{{ strtoupper($s->course->code) . ' - ' . ucwords($s->year_level->name) . ' - Section ' . strtoupper($s->section->name) }}</option>
+											<option value="{{ $s->id }}">{{ strtoupper($s->code) . ' - ' . ucwords($s->name) . ' - Section ' . strtoupper($s->section_name) }}</option>
 											@endforeach
 										@else
 
