@@ -59,21 +59,27 @@
 							</td>
 							<td class="text-center">Lec: {{ $s->units }} {{ $s->lab_units ? '| Lab: ' . $s->lab_units : '' }}</td>
 							<td class="text-center">
+								{{ $room_id = '' }}
 								@foreach($schedules as $sched)
-									@if($sched->subject_id == $s->id)
+									@if($sched->subject_id == $s->id && $room_id != $sched->room_id)
 										{{-- course id, curriculum id, section id, subject id --}}
 										{{-- to get the distinct room --}}
 										{{ ucwords($sched->room->name) }}
 									@endif
+									<?php  $room_id = $sched->room_id ?>
 								@endforeach
 							</td>
 							<td class="text-center">
+								{{ $start_time = '' }}
+								{{ $end_time = '' }}
 								@foreach($schedules as $sched)
-									@if($sched->subject_id == $s->id)
+									@if($sched->subject_id == $s->id && $start_time != $sched->start_time && $end_time != $sched->end_time)
 										{{ \App\Http\Controllers\GeneralController::get_time($sched->start_time) }}-{{
 										\App\Http\Controllers\GeneralController::get_time($sched->end_time) 
 										}}
 									@endif
+									<?php $start_time = $sched->start_time;
+									      $end_time = $sched->end_time; ?>
 								@endforeach
 							</td>
 						</tr>
