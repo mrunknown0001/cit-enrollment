@@ -918,10 +918,14 @@ class RegistrarController extends Controller
     public function postAddSubject(Request $request)
     {
         $request->validate([
-            'code' => 'required|unique:subjects',
+            // 'code' => 'required|unique:subjects',
+
+            'code' => 'required|unique:subjects,code,NULL,NULL,course_id, ' . $request['course'],
+            'course' => 'required|unique:subjects,course_id,NULL,NULL,code, ' . $request['code'],
+
             'description' => 'required',
             'units' => 'required|numeric',
-            'course' => 'required',
+            // 'course' => 'required',
             'year_level' => 'required',
             'semester' => 'required',
             'curriculum' => 'required'
