@@ -1296,6 +1296,10 @@ class AdminController extends Controller
         /////////////////////////
         // close academic year //
         /////////////////////////
+        // move to next year level if all subject enrolled for the first and second sem
+        // of the year level taken is all passed
+
+
 
         $ay = AcademicYear::where('active', 1)->first();
         $ay->active = 0;
@@ -1881,6 +1885,13 @@ class AdminController extends Controller
         // delete all subjects encoded
         EncodedGrade::truncate();
         
+    }
+
+
+    // determine if all enrolled subject of the student is passed, first semester and second semester
+    private function check_move_to_next_yl($id = null)
+    {
+
     }
 
 }
