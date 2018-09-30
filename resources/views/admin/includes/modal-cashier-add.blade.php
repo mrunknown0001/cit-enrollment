@@ -11,7 +11,7 @@
 
 
         <p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
-        <form action="{{ route('admin.add.dean.post') }}" method="POST" role="form" autocomplete="off">
+        <form action="{{ route('admin.add.cashier.post') }}" method="POST" role="form" autocomplete="off">
           {{ csrf_field() }}
           <div class="row">
             <div class="col-md-6">
