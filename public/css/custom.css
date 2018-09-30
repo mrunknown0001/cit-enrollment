@@ -29,3 +29,17 @@ a.text-color-red {
 a:hover.text-color-red {
 	color: #a94442 !important;
 }
+
+.hiddenElement {
+	display: none;
+}
+
+@media print {
+	.hideOnPrint {
+	    display: none;
+	}
+
+	.hiddenElement {
+		display: block;
+	}
+}

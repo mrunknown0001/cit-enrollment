@@ -15,10 +15,11 @@
 		<div class="row">
 			<div class="col-md-12">
 				{{-- <a href="{{ route('dean.add.schedule') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Schedule</a> --}}
-				<p><a href="{{ route('dean.schedules') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Schedules</a></p>
+				<p class="hideOnPrint"><a href="{{ route('dean.schedules') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Schedules</a> <button class="btn btn-primary" onclick="window.print()"><i class="fa fa-print"></i> Print</button></p>
+				<h3 class="hiddenElement">Monday Schedule</h3>
 				@include('includes.all')
 				@if(count($schedules) > 0)
-					<div style="font-size: 12px; font-family: Times New Roman">
+					<div style="font-size: 12px;">
 						
 						@if(count($rooms) > 0)
 						<table class="table table-bordered table-striped">
@@ -32,8 +33,11 @@
 											{{ $sch->subject->code }}
 											{{ \App\Http\Controllers\GeneralController::get_time($sch->start_time) }}-
 											{{ \App\Http\Controllers\GeneralController::get_time($sch->end_time) }}
-											<a href="{{ route('dean.update.schedule', ['id' => $sch->id]) }}" class="btn btn-default btn btn-xs">Update</a>
-											<a href="{{ route('dean.delete.schedule', ['id' => $sch->id]) }}" class="btn btn-danger btn-xs">Delete</a>
+											<br>
+											<div class="hideOnPrint">
+												<a href="{{ route('dean.update.schedule', ['id' => $sch->id]) }}" class="btn btn-default btn btn-xs">Update</a>
+												<a href="{{ route('dean.delete.schedule', ['id' => $sch->id]) }}" class="btn btn-danger btn-xs">Delete</a>
+											</div>
 										@else
 											
 										@endif

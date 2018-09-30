@@ -18,7 +18,7 @@
 				<p><a href="{{ route('dean.schedules') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Schedules</a></p>
 				@include('includes.all')
 				@if(count($schedules) > 0)
-					<div style="font-size: 12px; font-family: Times New Roman">
+					<div style="font-size: 12px;">
 						
 						@if(count($rooms) > 0)
 						<table class="table table-bordered table-striped">
@@ -26,19 +26,22 @@
 							<tr>
 								<td class="text-center">{{ strtoupper($r->name) }}</td>
 								@if(count($schedules) > 0)
+									<td class="text-center">
 									@foreach($schedules as $sch)
-										<td class="text-center">
 										@if($sch->room_id == $r->id)
 											{{ $sch->subject->code }}
 											{{ \App\Http\Controllers\GeneralController::get_time($sch->start_time) }}-
 											{{ \App\Http\Controllers\GeneralController::get_time($sch->end_time) }}
-											<a href="{{ route('dean.update.schedule', ['id' => $sch->id]) }}" class="btn btn-default btn btn-xs">Update</a>
-											<a href="{{ route('dean.delete.schedule', ['id' => $sch->id]) }}" class="btn btn-danger btn-xs">Delete</a>
+											<br>
+											<div class="hideOnPrint">
+												<a href="{{ route('dean.update.schedule', ['id' => $sch->id]) }}" class="btn btn-default btn btn-xs">Update</a>
+												<a href="{{ route('dean.delete.schedule', ['id' => $sch->id]) }}" class="btn btn-danger btn-xs">Delete</a>
+											</div>
 										@else
 											
 										@endif
-										</td>
 									@endforeach
+									</td>
 								@endif
 							</tr>
 							@endforeach
