@@ -764,13 +764,11 @@ class DeanController extends Controller
         //             ->get(['id', 'course_id', 'year_level_id', 'section_id']);
 
         $sections = DB::table('schedules')
+                ->groupBy('course_id', 'year_level_id', 'section_id')
                 ->join('courses', 'courses.id', '=', 'schedules.course_id')
                 ->join('year_levels', 'year_levels.id', '=', 'schedules.year_level_id')
                 ->join('sections', 'sections.id', '=', 'schedules.section_id')
                 ->select('schedules.id', 'courses.code', 'year_levels.name',\DB::raw('sections.name as section_name'))
-                // ->join('year_levels', 'schedules.year_level_id', '=', 'year_levels.id')
-                // ->join('sections', 'schedules.section', '=', 'sections.id')
-                ->groupBy('course_id', 'year_level_id', 'section_id')
                 ->get();
 
 
