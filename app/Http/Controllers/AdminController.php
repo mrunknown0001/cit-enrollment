@@ -1806,13 +1806,22 @@ class AdminController extends Controller
     // }
 
 
-    // route to view activity logs
+    // method to view activity logs
     public function activityLogs()
     {
         $logs = ActivityLog::orderBy('created_at', 'desc')
                         ->paginate(15);
 
         return view('admin.activity-logs', ['logs' => $logs]);
+    }
+
+
+    // method to print activity logs
+    public function printActivityLogs()
+    {
+        $logs = ActivityLog::orderBy('created_at', 'desc')->get(['user_id', 'user_type', 'action', 'ip_address', 'date_time']);
+
+        return view('admin.activity-logs-print', ['logs' => $logs]);
     }
 
 

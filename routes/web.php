@@ -450,6 +450,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	// route to view activity logs
 	Route::get('/activity-logs', 'AdminController@activityLogs')->name('admin.activity.logs');
 
+	// route to print activity logs
+	Route::get('/activity-logs/print', 'AdminController@printActivityLogs')->name('admin.activity.logs.print');
+
 });
 
 
