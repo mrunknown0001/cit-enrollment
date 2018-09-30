@@ -246,7 +246,7 @@ class DeanController extends Controller
         $course = Course::findorfail($course_id);
         $yl = YearLevel::findorfail($yl_id);
         $section = Section::findorfail($section_id);
-        $major = CourseMajor::findorfail($major_id);
+        $major = CourseMajor::find($major_id);
         $curriculum = Curriculum::findorfail($curriculum_id);
 
         $room_id = $request['room'];
@@ -764,6 +764,7 @@ class DeanController extends Controller
                     ->get(['id', 'course_id', 'year_level_id', 'section_id']);
 
 
+
         return view('dean.faculty-load-select', ['sections' => $sections]);
     }
 
@@ -779,8 +780,10 @@ class DeanController extends Controller
 
         $schedule = Schedule::findorfail($section_sched);
 
+
         // get all subjects in the schedule having same course, curriculum, yearl level and section
         $subject_ids = Schedule::whereActive(1)
+                    ->where('course_id', $schedule->course_id)
                     ->distinct()
                     ->get(['subject_id']);
 
