@@ -895,7 +895,8 @@ class RegistrarController extends Controller
     // method use to view subjects
     public function subjects()
     {
-        $subjects = Subject::orderBy('code', 'asc')
+        $subjects = Subject::orderBy('course_id', 'asc')
+                        ->orderBy('code', 'asc')
                         ->paginate(15);
 
         return view('registrar.subjects', ['subjects' => $subjects]);
