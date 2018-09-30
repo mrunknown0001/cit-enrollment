@@ -46,7 +46,13 @@ class AdminController extends Controller
     {
         $es = EnrollmentSetting::find(1);
 
-    	return view('admin.dashboard', ['es' => $es]);
+        // total number of students
+        $students = User::count();
+
+        // total number of courses
+        $courses = Course::count();
+
+    	return view('admin.dashboard', ['es' => $es, 'students' => $students, 'courses' => $courses]);
     }
 
 
@@ -1298,6 +1304,9 @@ class AdminController extends Controller
         /////////////////////////
         // move to next year level if all subject enrolled for the first and second sem
         // of the year level taken is all passed
+        // get all students
+
+
 
 
 
@@ -1891,7 +1900,16 @@ class AdminController extends Controller
     // determine if all enrolled subject of the student is passed, first semester and second semester
     private function check_move_to_next_yl($id = null)
     {
+        $student = User::find($id);
 
+        // get all subjects for current year level enrolled 
+
+        // check if all the subject is taken and passed
+
+        // if passed, the student will go to next year level
+        // if the student is 4th year. the status will be graduate
+
+        // operation only no return values or response
     }
 
 }
