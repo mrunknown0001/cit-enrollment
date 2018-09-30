@@ -16,7 +16,7 @@
 			<div class="col-md-12">
 				{{-- <a href="{{ route('dean.add.schedule') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Schedule</a> --}}
 				<p class="hideOnPrint"><a href="{{ route('dean.schedules') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Schedules</a> <button class="btn btn-primary" onclick="window.print()"><i class="fa fa-print"></i> Print</button></p>
-				<h3 class="hiddenElement">Monday Schedule</h3>
+				<h3 class="hiddenElement">Tuesday Schedule</h3>
 				@include('includes.all')
 				@if(count($schedules) > 0)
 					<div style="font-size: 12px;">
