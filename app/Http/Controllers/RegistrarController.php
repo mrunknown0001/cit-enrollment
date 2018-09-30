@@ -155,6 +155,10 @@ class RegistrarController extends Controller
     // method use to add student
     public function addStudent(Request $request)
     {
+        $request->validate([
+            'sn' => 'unique:users,student_number'
+        ]);
+
         $courses = Course::where('active', 1)->orderBy('title', 'asc')->get();
         $yl = YearLevel::get();
 
@@ -187,14 +191,15 @@ class RegistrarController extends Controller
     // method use to add personal info of the student
     public function addStudentPersonalInfo(Request $request)
     {
-        // $request->validate([
-        //     'student_number' => 'required|unique:users',
-        //     'firstname' => 'required',
-        //     'lastname' => 'required',
-        //     'course' => 'required',
-        //     'curriculum' => 'required',
-        //     'year_level' => 'required'
-        // ]);
+        $request->validate([
+            'student_number' => 'required|unique:users',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'course' => 'required',
+            'curriculum' => 'required',
+            'year_level' => 'required'
+        ]);
+
 
         $sn = $request['student_number'];
         $firstname = $request['firstname'];
@@ -251,6 +256,10 @@ class RegistrarController extends Controller
     // method to add educational info of the student
     public function addStudentEducationInfo(Request $request)
     {
+        $request->validate([
+            'sn' => 'unique:users,student_number'
+        ]);
+
         $sn = $request['sn'];
         $firstname = $request['firstname'];
         $lastname = $request['lastname'];
@@ -306,6 +315,10 @@ class RegistrarController extends Controller
     // method use to save new student
     public function postAddStudent(Request $request)
     {
+        $request->validate([
+            'sn' => 'unique:users,student_number'
+        ]);
+        
         $sn = $request['sn'];
         $firstname = $request['firstname'];
         $lastname = $request['lastname'];
