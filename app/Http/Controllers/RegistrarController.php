@@ -1007,11 +1007,18 @@ class RegistrarController extends Controller
         $year_level_id = $request['year_level'];
         $semester_id = $request['semester'];
         $curriculum_id = $request['curriculum'];
+        $prerequisite = $request['prerequisite'];
+
+
 
         $course = Course::findorfail($course_id);
         $major = CourseMajor::find($major_id);
 
         $sub = Subject::findorfail($subject_id);
+
+        if($sub->id == $prerequisite) {
+            return redirect()->back()->with('error', 'Error in Prerequisite!');
+        }
 
         // check if code exists
         $check_code = Subject::where('code', $code)->first();
@@ -1031,6 +1038,7 @@ class RegistrarController extends Controller
         else {
             $sub->major_id = null;
         }
+        $sub->prerequisite = $prerequisite;
         $sub->curriculum_id = $curriculum_id;
         $sub->year_level_id = $year_level_id;
         $sub->semester_id = $semester_id;
