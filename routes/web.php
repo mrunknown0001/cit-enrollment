@@ -12,7 +12,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 	Route::get('/registration', 'GeneralController@register')->name('registration');
 
-	Route::get('/student/registration', 'RegistrationController@studentShowDetails')->name('student.show.details');
+	Route::post('/student/registration/details', 'RegistrationController@studentShowDetails')->name('student.show.details.post');
 
 	Route::post('/student/registration', 'RegistrationController@postRegisterStudent')->name('registrer.student.post');
 
@@ -83,7 +83,7 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 });
 
 
-Route::get('/terms-and-condition', function () {
+Route::get('/privacy-statement', function () {
 	return view('terms-and-condition');
 })->name('terms.and.condition');
 

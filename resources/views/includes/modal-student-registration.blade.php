@@ -11,7 +11,7 @@
 
     <p class="login-box-msg text-center">Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</p>
     @include('includes.all')
-    <form action="{{ route('student.show.details') }}" method="get" autocomplete="off">
+    <form action="{{ route('student.show.details.post') }}" method="POST" autocomplete="off">
       {{ csrf_field() }}
       <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
         <input id="username" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" placeholder="Enter Student Number">
@@ -24,7 +24,7 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <label for="terms"><input type="checkbox" name="terms" id="terms" required checked> By registering to this website, you Agree to <a href="{{ route('terms.and.condition') }}" target="_blank">Terms and Conditon</a> of the the website.</label>
+          <label for="terms"><input type="checkbox" name="terms" id="terms" required checked> By registering to this website, you Agree to <a href="{{ route('terms.and.condition') }}" target="_blank"> Privacy Statement</a> of the the website.</label>
         </div>
         <div class="col-xs-4">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Continue</button>

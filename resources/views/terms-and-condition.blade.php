@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Terms and Conditions in Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</title>
+  <title>Privacy Statement in Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet"  href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue-light.min.css') }}">
@@ -27,9 +27,9 @@
   <div class="row">
     <div class="col-md-12">
 
-      <h3>Terms and Conditions ("Terms")</h3>
+      <h3>Privacy Statement</h3>
       <p class="italized">Last updated: September 29, 2018</p>
-      <p>Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the https://cit-paniqui.com/ website (the "Service") operated by Online Enrollment for CIT Colleges of Paniqui, inc. ("us", "we", or "our").</p>
+      <p>Please read the Privacy Statement carefully before using the https://cit-paniqui.com/ website (the "Service") operated by Online Enrollment for CIT Colleges of Paniqui, inc. ("us", "we", or "our").</p>
       <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.</p>
       <p>By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service. This Terms and Conditions agreement for Online Enrollment for CIT Colleges of Paniqui, inc. is managed by TermsFeed Terms and Conditions Generator.</p>
       <h4>Accounts</h4>
