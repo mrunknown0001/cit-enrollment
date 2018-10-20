@@ -13,7 +13,7 @@
         <p>Name: <strong>{{  $s->firstname . ' ' . $s->lastname }}</strong></p>
         <p>Student Number: <strong>{{ $s->student_number }}</strong></p>
 
-        <p>Current Balance: <strong>&#8369; {{ $s->balance->balance }}</strong></p>
+        <p>Current Balance: <strong>{{ $s->balance && $s->balance->balance > 0 ? "&#8369; " . $s->balance->balance : 'No Balance' }}</strong></p>
 
 
       </div>

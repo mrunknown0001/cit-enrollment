@@ -33,7 +33,7 @@
 								<div class="col-md-4">
 									<div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
 										<label for="amount">Enter Amount</label><label class="label-required">*</label>
-										<input id="amount" type="number" class="form-control" name="amount" min="500" max="{{ $student->balance->balance }}" placeholder="Enter Amount" autofocus required="">
+										<input id="amount" type="number" class="form-control" name="amount" min="{{ $student->balance->balance < 500 ? $student->balance->balance : '500' }}" max="{{ $student->balance->balance }}" placeholder="Enter Amount" autofocus required="">
 										@if ($errors->has('amount'))
 											<span class="help-block">
 												<strong>{{ $errors->first('amount') }}</strong>
