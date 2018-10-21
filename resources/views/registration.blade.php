@@ -24,7 +24,7 @@
     </div>
     <p class="login-box-msg">Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</p>
     @include('includes.all')
-    <form action="{{ route('student.show.details.post') }}" method="get" autocomplete="off">
+    <form action="{{ route('student.show.details.post') }}" method="POST" autocomplete="off">
       {{ csrf_field() }}
       <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
         <input id="username" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" placeholder="Enter Student Number" autofocus>
