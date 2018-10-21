@@ -224,6 +224,7 @@ class AdminController extends Controller
     	$request->validate([
             'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
             'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'middlename' => 'nullable|regex:/^[\pL\s\-]+$/u',
     		'username' => 'required'
     	]);
 
@@ -274,6 +275,7 @@ class AdminController extends Controller
     	$request->validate([
             'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
             'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'middlename' => 'nullable|regex:/^[\pL\s\-]+$/u',
     		'username' => 'required'
     	]);
 
@@ -353,6 +355,7 @@ class AdminController extends Controller
         $request->validate([
             'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
             'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'middlename' => 'nullable|regex:/^[\pL\s\-]+$/u',
             'username' => 'required'
         ]);
 
@@ -402,6 +405,7 @@ class AdminController extends Controller
         $request->validate([
             'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
             'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'middlename' => 'nullable|regex:/^[\pL\s\-]+$/u',
             'username' => 'required'
         ]);
 
@@ -478,6 +482,7 @@ class AdminController extends Controller
         $request->validate([
             'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
             'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'middlename' => 'nullable|regex:/^[\pL\s\-]+$/u',
             'username' => 'required'
         ]);
 
@@ -527,6 +532,7 @@ class AdminController extends Controller
         $request->validate([
             'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
             'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'middlename' => 'nullable|regex:/^[\pL\s\-]+$/u',
             'username' => 'required'
         ]);
 
@@ -611,6 +617,7 @@ class AdminController extends Controller
         $request->validate([
             'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
             'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'middlename' => 'nullable|regex:/^[\pL\s\-]+$/u',
             'username' => 'required'
         ]);
 
@@ -660,6 +667,7 @@ class AdminController extends Controller
         $request->validate([
             'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
             'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'middlename' => 'nullable|regex:/^[\pL\s\-]+$/u',
             'username' => 'required'
         ]);
 

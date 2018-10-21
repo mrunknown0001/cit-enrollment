@@ -195,6 +195,7 @@ class RegistrarController extends Controller
             'student_number' => 'required|unique:users',
             'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
             'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'middlename' => 'nullable|regex:/^[\pL\s\-]+$/u',
             'course' => 'required',
             'curriculum' => 'required',
             'year_level' => 'required'
