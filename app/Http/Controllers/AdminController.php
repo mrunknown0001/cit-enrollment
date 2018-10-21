@@ -222,8 +222,8 @@ class AdminController extends Controller
     public function postAddDean(Request $request)
     {
     	$request->validate([
-    		'firstname' => 'required',
-    		'lastname' => 'required',
+            'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
     		'username' => 'required'
     	]);
 
@@ -272,8 +272,8 @@ class AdminController extends Controller
     public function postUpdateDean(Request $request)
     {
     	$request->validate([
-    		'firstname' => 'required',
-    		'lastname' => 'required',
+            'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
     		'username' => 'required'
     	]);
 
@@ -351,8 +351,8 @@ class AdminController extends Controller
     public function postAddRegistrar(Request $request)
     {
         $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
             'username' => 'required'
         ]);
 
@@ -400,8 +400,8 @@ class AdminController extends Controller
     public function postUpdateRegistrar(Request $request)
     {
         $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
             'username' => 'required'
         ]);
 
@@ -476,8 +476,8 @@ class AdminController extends Controller
     public function postAddCashier(Request $request)
     {
         $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
             'username' => 'required'
         ]);
 
@@ -525,8 +525,8 @@ class AdminController extends Controller
     public function postUpdateCashier(Request $request)
     {
         $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
             'username' => 'required'
         ]);
 
@@ -609,8 +609,8 @@ class AdminController extends Controller
     public function postAddFaculty(Request $request)
     {
         $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
             'username' => 'required'
         ]);
 
@@ -658,8 +658,8 @@ class AdminController extends Controller
     public function postUpdateFaculty(Request $request)
     {
         $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
             'username' => 'required'
         ]);
 

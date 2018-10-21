@@ -193,8 +193,8 @@ class RegistrarController extends Controller
     {
         $request->validate([
             'student_number' => 'required|unique:users',
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
             'course' => 'required',
             'curriculum' => 'required',
             'year_level' => 'required'
