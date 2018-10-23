@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d1192b724758ce47d49cc0b48bfce37",
+    "content-hash": "91b17d588e882fdaaa3a292e0613b918",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1404,6 +1404,56 @@
                 "random"
             ],
             "time": "2018-07-02T15:55:56+00:00"
+        },
+        {
+            "name": "paymaya/paymaya-sdk",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PayMaya/PayMaya-PHP-SDK.git",
+                "reference": "a2e276bdd3372249a4e6a4dea9c81b6d230833b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PayMaya/PayMaya-PHP-SDK/zipball/a2e276bdd3372249a4e6a4dea9c81b6d230833b9",
+                "reference": "a2e276bdd3372249a4e6a4dea9c81b6d230833b9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3.0",
+                "psr/log": "1.0.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PayMaya": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PayMaya Engineering",
+                    "email": "paymayadevs@voyager.ph",
+                    "homepage": "https://developers.paymaya.com/"
+                }
+            ],
+            "description": "PHP SDK for PayMaya APIs. Accept credit and debit card payments on your web app.",
+            "homepage": "https://github.com/PayMaya/PayMaya-PHP-SDK",
+            "keywords": [
+                "paymaya",
+                "payments",
+                "rest",
+                "sdk"
+            ],
+            "time": "2017-06-14T09:07:19+00:00"
         },
         {
             "name": "paypal/rest-api-sdk-php",

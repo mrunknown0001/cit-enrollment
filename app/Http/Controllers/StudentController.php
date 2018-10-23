@@ -8,6 +8,7 @@ use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\EnrollmentController;
 use DB;
+use App\Http\Controllers\PaymayaController;
 
 use App\User;
 use App\StudentInfo;
