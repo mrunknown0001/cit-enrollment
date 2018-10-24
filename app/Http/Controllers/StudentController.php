@@ -592,6 +592,15 @@ class StudentController extends Controller
     }
 
 
+    // method use to view all grades
+    public function allGrades()
+    {
+        $grades = Grade::where('student_id', Auth::user()->id)->get();
+
+        return view('student.grades-all', ['grades' => $grades]);
+    }
+
+
     // method use to show balance for the current semester
     public function balance()
     {

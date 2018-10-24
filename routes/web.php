@@ -859,6 +859,9 @@ Route::group(['prefix' => 'student', 'middleware' => 'prevent-back-history'], fu
 	// route to view grades
 	Route::get('/grades', 'StudentController@grades')->name('student.grades');
 
+	// route to get all grades
+	Route::get('/grades/all', 'StudentController@allGrades')->name('student.all.grades');
+
 	// route to show balance
 	Route::get('/balance', 'StudentController@balance')->name('student.balance');
 

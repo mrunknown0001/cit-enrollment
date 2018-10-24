@@ -14,10 +14,13 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
+				<p>
+					<a href="{{ route('student.grades') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Current Grades</a>
+				</p>
 				@include('includes.all')
 
 				@if(count($grades) > 0)
-					<p><i>Available Grade for the Current Semester.</i></p>
+					<p><i>All Available Grades.</i></p>
 					{{--<form>
 						<div class="form-group">
 							<select id="semester">
@@ -59,9 +62,6 @@
 					<p class="text-center">No Grades Found!</p>
 				@endif
 
-				<p>
-					<a href="{{ route('student.all.grades') }}">View All Grades</a>
-				</p>
 
 			</div>
 		</div>
