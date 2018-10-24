@@ -902,4 +902,11 @@ Route::group(['prefix' => 'student', 'middleware' => 'prevent-back-history'], fu
 	// route to pay tuition using card
 	Route::post('/payment/tuition-fee/card', 'StudentController@postTuitionFeeCardPayment')->name('student.tuition.fee.card.payment.post');
 
+	// route to pay tuition using paymaya payment method
+	Route::get('/payment/tuition-fee/paymaya', 'StudentController@tuitionFeePaymaya')->name('student.tuition.fee.paymaya');
+
+
+	// route use to pay using paymaya
+	Route::post('/payment/tuition-fee/paymaya', 'StudentController@postTuitionFeePaymaya')->name('student.tuition.fee.paymaya.post');
+
 });

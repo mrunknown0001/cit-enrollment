@@ -1074,4 +1074,100 @@ class StudentController extends Controller
         return redirect()->route('student.payments')->with('success', 'Payment using Card is Successful!');
 
     }
+
+
+    // method use to pay tuiton using paymaya
+    public function tuitionFeePaymaya()
+    {
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+        }
+
+        // check if there is pending payment subject for finishing
+        $unfinished_payment = Payment::where('student_id', Auth::user()->id)
+                                    ->where('academic_year_id', $ay->id)
+                                    ->where('semester_id', $sem->id)
+                                    ->where('active', 0)
+                                    ->first();
+
+
+        if(count($unfinished_payment) > 0) {
+            // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            $unfinished_payment->delete();
+        }
+
+        $balance = Balance::where('student_id', Auth::user()->id)
+                            ->where('academic_year_id', $ay->id)
+                            ->where('semester_id', $sem->id)
+                            ->first();
+
+        if(ceil($balance->balance) < 1) {
+            return redirect()->route('student.balance')->with('info', 'You have zero balance in Tuition fee.');
+        }
+
+        return view('student.payment-paymaya', ['balance' => $balance]);
+    }
+
+
+    // method use to make payment using paymaya
+    public function postTuitionFeePaymaya(Request $request)
+    {
+        $request->validate([
+            'card_number' => 'required|numeric|digits:16',
+            'amount' => 'required|numeric'
+        ]);
+
+        $amount = $request['amount'];
+
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+        }
+
+        // check if there is pending payment subject for finishing
+        $unfinished_payment = Payment::where('student_id', Auth::user()->id)
+                                    ->where('academic_year_id', $ay->id)
+                                    ->where('semester_id', $sem->id)
+                                    ->where('active', 0)
+                                    ->first();
+
+
+        if(count($unfinished_payment) > 0) {
+            // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            $unfinished_payment->delete();
+        }
+
+
+
+        // add to payment and what type of payment 
+        // to deduct to the total payable of the student to the current semester of the academic year
+        $payment = new Payment();
+        $payment->student_id = Auth::user()->id;
+        $payment->academic_year_id = $ay->id;
+        $payment->semester_id = $sem->id;
+        $payment->mode_of_payment_id = 4;
+        $payment->amount = $amount;
+        $payment->description = 'Tuition Fee Payment using Paymaya';
+        $payment->save();
+
+        // deduct in balance
+        $balance = Balance::where('student_id', Auth::user()->id)
+                        ->where('academic_year_id', $ay->id)
+                        ->where('semester_id', $sem->id)
+                        ->first();
+
+        $balance->balance -= $payment->amount;
+        $balance->save();
+
+        // add activity log
+        GeneralController::activity_log(Auth::user()->id, 6, 'Student Payment using Paymaya');
+
+        // return with success message
+        return redirect()->route('student.payments')->with('success', 'Payment using Paymaya is Successful!');
+    }
 }

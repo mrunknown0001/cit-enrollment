@@ -33,6 +33,9 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Over the Counter via Cashier'
+            ],
+            [
+                'name' => 'Paymaya Payment'
             ]
         ]);
 

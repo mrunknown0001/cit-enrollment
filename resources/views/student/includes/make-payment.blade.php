@@ -30,8 +30,8 @@
             </div>
             <div class="col-md-4">
               <p class="text-center">
-                <a href="#">
-                  <img src="{{ asset('/uploads/paymaya.png') }}" class="img-responsive" width="88px" style="margin-top: -12px; margin-left: 45px; padding-bottom: -55px !important">
+                <a href="{{ route('student.tuition.fee.paymaya') }}">
+                  <img src="{{ asset('/uploads/paymaya.png') }}" class="img-responsive" width="85px" style="margin-top: -12px; margin-left: 45px; padding-bottom: -55px !important">
                     <p class="text-center" style="margin-top: -8px">Paymaya</p>
                 </a>
               </p>
