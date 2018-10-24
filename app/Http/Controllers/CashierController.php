@@ -243,6 +243,10 @@ class CashierController extends Controller
         $balance->balance -= $payment->amount;
         $balance->save();
 
+
+        $payment->current_balance = $balance->balance;
+        $payment->save();
+
         // add to activity log
         GeneralController::activity_log(Auth::guard('cashier')->user()->id, 4, 'Cashier Student Payment with Student No.: ' . $student->student_number);
 

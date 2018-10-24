@@ -12,17 +12,25 @@
         <div class="modal-body">
           <p class="text-center">Choose Mode of Payment:</p>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <p class="text-center">
                 <a href="{{ route('student.paypal.registration.payment') }}">
                   <i class="fa fa-paypal fa-4x"></i><br>Paypal
                 </a>
               </p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <p class="text-center">
                 <a href="{{ route('student.card.registration.payment') }}">
                   <i class="fa fa-credit-card fa-4x"></i><br>Card Payment
+                </a>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <p class="text-center">
+                <a href="{{ route('student.paymaya.registration.payment') }}">
+                  <img src="{{ asset('/uploads/paymaya.png') }}" class="img-responsive" width="70px" style="margin-top: -12px; margin-left: 45px; padding-bottom: -55px !important">
+                    <p class="text-center" style="margin-top: -8px">Paymaya</p>
                 </a>
               </p>
             </div>

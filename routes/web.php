@@ -890,6 +890,12 @@ Route::group(['prefix' => 'student', 'middleware' => 'prevent-back-history'], fu
 	// route to pay with card
 	Route::post('/payment/registration/card', 'StudentController@postCardRegistrationPayment')->name('student.card.registration.payment.post');
 
+	// route to pay registration using paymaya
+	Route::get('/payment/registration/paymaya', 'StudentController@paymayaRegistrationPayment')->name('student.paymaya.registration.payment');
+
+	// route to save paymaya registration payment
+	Route::post('/payment/registration/paymaya', 'StudentController@postPaymayaRegistrationPayment')->name('student.paymaya.registration.payment.post');
+
 	// route to make tuition fee payment using paypal
 	Route::get('/payment/tuition-fee/paypal', 'StudentController@tuitionFeePaypalPayment')->name('student.tuition.fee.paypal.payment');
 

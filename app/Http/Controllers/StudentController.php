@@ -643,7 +643,9 @@ class StudentController extends Controller
     {
         $payment = Payment::findorfail($id);
 
-        return view('student.payment-details', ['payment' => $payment]);
+        $assessment = Assessment::orderBy('created_at', 'desc')->first();
+
+        return view('student.payment-details', ['payment' => $payment, 'assessment' => $assessment]);
     }
 
 
@@ -876,6 +878,9 @@ class StudentController extends Controller
         $balance->balance = $total_payable - $payment->amount;
         $balance->save();
 
+        $payment->current_balance = $balance->balance;
+        $payment->save();
+
         // add student to enrolled to the current academic year and semester
         EnrollmentController::enroll_student(Auth::user()->id);
 
@@ -884,6 +889,133 @@ class StudentController extends Controller
 
         // return message
         return redirect()->route('student.payments')->with('success', 'Payment using Card is Successful!');
+
+    }
+
+
+    // method use to pay registration
+    public function paymayaRegistrationPayment()
+    {
+        // add to registration payment
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+        }
+
+        // check if there is pending payment subject for finishing
+        $unfinished_payment = Payment::where('student_id', Auth::user()->id)
+                                    ->where('academic_year_id', $ay->id)
+                                    ->where('semester_id', $sem->id)
+                                    ->where('active', 0)
+                                    ->first();
+
+        
+
+        if(count($unfinished_payment) > 0) {
+            // return redirect()->route('student.dashboard')->with('info', 'Please Try Paying Again Later.');
+            $unfinished_payment->delete();
+        }
+        
+        // redirect back if regitration payment is paid
+        
+        return view('student.payment-registration-paymaya');
+    }
+
+
+    // method use to pay registration payment using paymaya
+    // method use to process payment registration using card payment
+    public function postPaymayaRegistrationPayment(Request $request)
+    {
+        // add to registration payment
+        $ay = AcademicYear::where('active', 1)->first();
+        $sem = Semester::where('active', 1)->first();
+
+        if(count($ay) < 1 || count($sem) < 1) {
+            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+        }
+
+        $amount = $request['amount'];
+        $description = $request['description'];
+
+        // check if there is pending payment subject for finishing
+        $unfinished_payment = Payment::where('student_id', Auth::user()->id)
+                                    ->where('academic_year_id', $ay->id)
+                                    ->where('semester_id', $sem->id)
+                                    ->where('active', 0)
+                                    ->first();
+
+
+        if(count($unfinished_payment) > 0) {
+            // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
+            $unfinished_payment->delete();
+        }
+
+
+        $reg_payment = new RegistrationPayment();
+        $reg_payment->student_id = Auth::user()->id;
+        $reg_payment->mode_of_payment_id = 4;
+        $reg_payment->academic_year_id = $ay->id;
+        $reg_payment->semester_id = $sem->id;
+        $reg_payment->amount = substr($amount, 0, -2);
+        $reg_payment->active = 1;
+        $reg_payment->save();
+
+        // add to payment and what type of payment 
+        // to deduct to the total payable of the student to the current semester of the academic year
+        $payment = new Payment();
+        $payment->student_id = Auth::user()->id;
+        $payment->academic_year_id = $ay->id;
+        $payment->semester_id = $sem->id;
+        $payment->mode_of_payment_id = 4;
+        $payment->amount = $amount;
+        $payment->description = 'Registration Payment using Paymaya';
+        $payment->save();
+
+        // check course/major/curriculum to load subject based on year level and semester
+        $course_enrolled = CourseEnrolled::where('student_id', Auth::user()->id)
+                                ->where('active', 1)
+                                ->first();
+
+        $subjects = Subject::where('course_id', $course_enrolled->course_id)
+                        ->where('curriculum_id', $course_enrolled->curriculum_id)
+                        ->where('year_level_id', Auth::user()->info->year_level_id)
+                        ->where('semester_id', $sem->id)
+                        ->get();
+
+        $total_units = $subjects->sum('units');
+
+        // get misc and unit price
+        $unit_price = UnitPrice::find(1);
+        $misc = Miscellaneous::all();
+
+        $total_misc = $misc->sum('amount');
+
+        // total balance and/or payable of student 
+        // (unit price * total units) + total misc
+        $total_payable = ($total_units * $unit_price->amount) + $total_misc;
+
+        // create balance and deduct amount payment
+        $balance = Balance::where('student_id', Auth::user()->id)
+                        ->where('academic_year_id', $ay->id)
+                        ->where('semester_id', $sem->id)
+                        ->first();
+
+        $balance->balance = $total_payable - $payment->amount;
+        $balance->save();
+
+        $payment->current_balance = $balance->balance;
+        $payment->save();
+
+        // add student to enrolled to the current academic year and semester
+        EnrollmentController::enroll_student(Auth::user()->id);
+
+        // add to activity log
+        GeneralController::activity_log(Auth::user()->id, 6, 'Student Payment using Paymaya');
+
+        // return message
+        return redirect()->route('student.payments')->with('success', 'Payment using Paymaya is Successful!');
 
     }
 
@@ -1076,6 +1208,9 @@ class StudentController extends Controller
         $balance->balance -= $payment->amount;
         $balance->save();
 
+        $payment->current_balance = $balance->balance;
+        $payment->save();
+
         // add activity log
         GeneralController::activity_log(Auth::user()->id, 6, 'Student Payment using card');
 
@@ -1172,6 +1307,10 @@ class StudentController extends Controller
 
         $balance->balance -= $payment->amount;
         $balance->save();
+
+
+        $payment->current_balance = $balance->balance;
+        $payment->save();
 
         // add activity log
         GeneralController::activity_log(Auth::user()->id, 6, 'Student Payment using Paymaya');

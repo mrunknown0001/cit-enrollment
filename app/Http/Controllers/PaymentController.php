@@ -222,6 +222,9 @@ class PaymentController extends Controller
                 // deduct payment
                 $balance->balance -= $s_payment->amount;
                 $balance->save();
+
+                $s_payment->current_balance = $balance->balance;
+                $s_payment->save();
             }
             // else {
             //     // get total payable for the sem
