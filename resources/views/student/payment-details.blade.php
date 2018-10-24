@@ -22,7 +22,8 @@
 						<strong><i class="fa fa-money"></i> Payment Details</strong>
 					</div>
 					<div class="box-body">
-						<button class="btn btn-primary" onclick="window.print()"><i class="fa fa-print"></i></button>
+						<!-- <button class="btn btn-primary" onclick="window.print()"><i class="fa fa-print"></i></button> -->
+						<button class="btn btn-primary" onclick="PrintElem('printArea')"><i class="fa fa-print"></i></button>
 						<div id="printArea" class="studentPayment">
 							<!-- <div class="row">
 								<div class="col-md-4"> -->
@@ -92,4 +93,24 @@
 		</div>
 	</section>
 </div>
+<script>
+	function PrintElem(elem)
+	{
+	    var mywindow = window.open('', 'PRINT', 'height=900,width=800');
+
+	    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+	    mywindow.document.write('</head><body >');
+	    mywindow.document.write('<h1>' + document.title  + '</h1>');
+	    mywindow.document.write(document.getElementById(elem).innerHTML);
+	    mywindow.document.write('</body></html>');
+
+	    mywindow.document.close(); // necessary for IE >= 10
+	    mywindow.focus(); // necessary for IE >= 10*/
+
+	    mywindow.print();
+	    mywindow.close();
+
+	    return true;
+	}
+</script>
 @endsection
