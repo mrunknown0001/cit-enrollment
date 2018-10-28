@@ -347,6 +347,32 @@ class StudentController extends Controller
         $sem = Semester::whereActive(1)->first();
 
 
+        // get the subject
+        // count the number of lecture units multiplied by the unit price
+        // add the miscellaneous and add 1k if there is lab units to get the total amount of tuition fee
+        $subjects = Subject::where('course_id', $course_id)
+                        ->where('curriculum_id', $curriculum_id)
+                        ->where('year_level_id', $yl_id)
+                        ->where('semester_id', $sem->id)
+                        ->orderBy('code', 'asc')
+                        ->get();
+
+
+        // get the subject ids
+        $subject_ids = Subject::where('course_id', $course_id)
+                        ->where('curriculum_id', $curriculum_id)
+                        ->where('year_level_id', $yl_id)
+                        ->where('semester_id', $sem->id)
+                        ->orderBy('code', 'asc')
+                        ->get(['id']);
+
+
+
+        // determine if the student has prerequisite subject that has failed
+
+
+
+
         // get the number of the limit
         $limit = StudentLimit::find(1);
 
@@ -391,15 +417,7 @@ class StudentController extends Controller
 
 
 
-        // get the subject
-        // count the number of lecture units multiplied by the unit price
-        // add the miscellaneous and add 1k if there is lab units to get the total amount of tuition fee
-        $subjects = Subject::where('course_id', $course_id)
-                        ->where('curriculum_id', $curriculum_id)
-                        ->where('year_level_id', $yl_id)
-                        ->where('semester_id', $sem->id)
-                        ->orderBy('code', 'asc')
-                        ->get();
+
 
         $total_units = $subjects->sum('units');
         $lab_units = $subjects->sum('lab_units');
@@ -583,10 +601,35 @@ class StudentController extends Controller
             return redirect()->route('student.dashboard')->with('error', 'No Active Academic Year');
         }
 
-        $grades = Grade::where('student_id', $student->id)
-                        ->where('academic_year_id', $ay->id)
-                        ->where('semester_id', $sem->id)
-                        ->get();
+        $prev_sem_id = 2;
+        $prev_ay_id = null;
+
+        if($sem->id == 2) {
+            $prev_sem_id = 1;
+        }
+        else {
+            $prev_ay_id = $ay->id - 1;
+        }
+
+        // $grades = Grade::where('student_id', $student->id)
+        //                 ->where('academic_year_id', $ay->id)
+        //                 ->where('semester_id', $sem->id)
+        //                 ->get();
+        
+
+        $prev_ay = AcademicYear::find($prev_ay_id);
+
+        if(count($prev_ay) > 0) {
+            $grades = Grade::where('student_id', $student->id)
+                    ->where('academic_year_id', $prev_ay->id)
+                    ->where('semester_id', $prev_sem_id)
+                    ->get();
+        }
+        else {
+            $grades = null;
+        }
+
+        
 
         return view('student.grades', ['grades' => $grades, 'sem' => $sem]);
     }

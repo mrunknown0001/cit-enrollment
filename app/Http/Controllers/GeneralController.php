@@ -14,6 +14,7 @@ use App\Registrar;
 use App\Dean;
 use App\Admin;
 use App\Payment;
+use App\Grade;
 
 class GeneralController extends Controller
 {
@@ -449,4 +450,7 @@ class GeneralController extends Controller
     {
         return \Request::ip();
     }
+
+
+
 }
