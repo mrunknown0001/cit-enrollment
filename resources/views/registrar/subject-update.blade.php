@@ -67,7 +67,7 @@
 										<label for="prerequisite">Subject Prerequisite</label>
 										<select class="form-control" id="prerequisite" name="prerequisite">
 											<option value="">No Prerequisite</option>
-											{{--@if(count($subjects) > 0)
+											@if(count($subjects) > 0)
 												@foreach($subjects as $s)
 													@if($s->id != $subject->id)
 														<option value="{{ $s->id }}" {{ $s->id == $subject->id ? 'selected' : '' }}>{{ $s->code }}</option>
@@ -75,7 +75,7 @@
 												@endforeach
 											@else
 												<option value="">No Subjects Found</option>
-											@endif--}}
+											@endif
 										</select>
 										@if ($errors->has('prerequisite'))
 										<span class="help-block">
