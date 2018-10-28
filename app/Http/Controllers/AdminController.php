@@ -1269,7 +1269,7 @@ class AdminController extends Controller
                             ->get();
 
             foreach($grades as $g) {
-                if(floor($g->grade) > 3) {
+                if($g->grade > 3) {
                     // mark student as irreg
                     $student = User::find($s_id->student);
 
@@ -1338,7 +1338,7 @@ class AdminController extends Controller
                             ->get();
 
             foreach($grades as $g) {
-                if(floor($g->grade) > 3) {
+                if($g->grade > 3) {
                     // mark student as irreg
                     $student = User::find($s_id->student_id);
 
