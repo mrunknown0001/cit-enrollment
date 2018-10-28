@@ -32,6 +32,7 @@ use App\EnrolledStudent;
 use App\FacultyLoad;
 use App\EncodedGrade;
 use App\Assessment;
+use App\Payment;
 
 class AdminController extends Controller
 {
