@@ -156,7 +156,11 @@ class RegistrarController extends Controller
     public function addStudent(Request $request)
     {
         $request->validate([
-            'sn' => 'unique:users,student_number'
+            'sn' => 'nullable|numeric|unique:users,student_number',
+            'firstname' => 'nullable|regex:/^[\pL\s\-]+$/u',
+            'lastname' => 'nullable|regex:/^[\pL\s\-]+$/u',
+            'middlename' => 'nullable|regex:/^[\pL\s\-]+$/u',
+            'student_number' => 'nullable|numeric'
         ]);
 
         $courses = Course::where('active', 1)->orderBy('title', 'asc')->get();
@@ -193,12 +197,13 @@ class RegistrarController extends Controller
     {
         $request->validate([
             'student_number' => 'required|unique:users',
-            'firstname' => 'required|regex:/^[\pL\s\-]+$/u',
-            'lastname' => 'required|regex:/^[\pL\s\-]+$/u',
+            'firstname' => 'nullable|regex:/^[\pL\s\-]+$/u',
+            'lastname' => 'nullable|regex:/^[\pL\s\-]+$/u',
             'middlename' => 'nullable|regex:/^[\pL\s\-]+$/u',
             'course' => 'required',
             'curriculum' => 'required',
-            'year_level' => 'required'
+            'year_level' => 'required',
+            'student_number' => 'nullable|numeric'
         ]);
 
 
@@ -258,7 +263,8 @@ class RegistrarController extends Controller
     public function addStudentEducationInfo(Request $request)
     {
         $request->validate([
-            'sn' => 'unique:users,student_number'
+            'sn' => 'unique:users,student_number',
+            'mobile_number' => 'nullable|digits:11'
         ]);
 
         $sn = $request['sn'];

@@ -58,10 +58,13 @@
 				@else
 					<p class="text-center">No Grades Found!</p>
 				@endif
+				
+				@if(Auth::user()->info->year_level_id == 4 && $sem->id == 2)
+					<p>
+						<a href="{{ route('student.all.grades') }}">View All Grades</a>
+					</p>
+				@endif
 
-				<p>
-					<a href="{{ route('student.all.grades') }}">View All Grades</a>
-				</p>
 
 			</div>
 		</div>

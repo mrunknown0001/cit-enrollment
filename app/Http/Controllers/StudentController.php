@@ -588,7 +588,7 @@ class StudentController extends Controller
                         ->where('semester_id', $sem->id)
                         ->get();
 
-        return view('student.grades', ['grades' => $grades]);
+        return view('student.grades', ['grades' => $grades, 'sem' => $sem]);
     }
 
 

@@ -70,7 +70,7 @@
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('mobile_number') ? ' has-error' : '' }}">
 							      	<label for="mobile_number">Enter Mobile Number</label>
-							      	<input type="text" name="mobile_number" id="mobile_number" class="form-control" value="{{ $mobile_number }}" placeholder="Enter Mobile Number">
+							      	<input type="number" name="mobile_number" id="mobile_number" class="form-control" value="{{ $mobile_number }}" placeholder="Enter Mobile Number">
 							        @if ($errors->has('mobile_number'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('mobile_number') }}</strong>
