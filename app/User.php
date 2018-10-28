@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\EnrolledStudent', 'student_id');
     }
+
+    public function status()
+    {
+        return $this->hasOne('App\StudentStatus', 'student_id');
+    }
 }

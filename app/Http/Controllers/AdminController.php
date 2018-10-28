@@ -33,6 +33,8 @@ use App\FacultyLoad;
 use App\EncodedGrade;
 use App\Assessment;
 use App\Payment;
+use App\StudentStatus;
+use App\Grade;
 
 class AdminController extends Controller
 {
@@ -1239,6 +1241,8 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Invalid Password!');
         }
 
+        $ay = AcademicYear::where('active', 1)->first();
+
         $first = Semester::findorfail(1);
         $first->active = 0;
         $first->save();
@@ -1246,6 +1250,37 @@ class AdminController extends Controller
         $sem = Semester::findorfail(2);
         $sem->active = 1;
         $sem->save();
+
+        // check if there is a subject failed
+        // make the student irregular
+        $students = EnrolledStudent::get(['student_id']);
+
+        foreach($students as $s_id) {
+            // get all grades
+            $grades = Grade::where('student_id', $s_id->student_id)
+                            ->where('academic_year_id', $ay->id)
+                            ->where('semester_id', $first->id)
+                            ->get();
+
+            foreach($grades as $g) {
+                if(floor($g->grade) > 3) {
+                    // mark student as irreg
+                    $student = User::find($s_id->student);
+
+                    if(!$student->status) {
+
+                        $status = new StudentStatus();
+                        $status->student_id = $student->id;
+                        $status->academic_year_id = $ay->id;
+                        $status->semester_id = $first->id;
+                        $status->student_type_id = 2;
+                        $status->save();
+                    }
+
+
+                }
+            }
+        }
 
         // add operations in this part closing and saving other data needed
         $this->move_to_next_sem();
@@ -1271,6 +1306,8 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Invalid Password!');
         }
 
+        $ay = AcademicYear::where('active', 1)->first();
+
         $second = Semester::findorfail(2);
         $second->active = 0;
         $second->save();
@@ -1283,7 +1320,34 @@ class AdminController extends Controller
         // move to next year level if all subject enrolled for the first and second sem
         // of the year level taken is all passed
         // get all students
+        // check if there is a subject failed
+        // make the student irregular
         $students = EnrolledStudent::get(['student_id']);
+
+        foreach($students as $s_id) {
+            // get all grades
+            $grades = Grade::where('student_id', $s_id->student_id)
+                            ->where('academic_year_id', $ay->id)
+                            ->where('semester_id', $second->id)
+                            ->get();
+
+            foreach($grades as $g) {
+                if(floor($g->grade) > 3) {
+                    // mark student as irreg
+                    $student = User::find($s_id->student_id);
+
+                    if(!$student->status) {
+                        $status = new StudentStatus();
+                        $status->student_id = $student->id;
+                        $status->academic_year_id = $ay->id;
+                        $status->semester_id = $second->id;
+                        $status->student_type_id = 2;
+                        $status->save();
+                    }
+
+                }
+            }
+        }
 
         foreach($students as $s) {
             $this->check_move_to_next_yl($s->student_id);
@@ -1900,7 +1964,6 @@ class AdminController extends Controller
         // delete all assessments
         Assessment::truncate();
 
-        $active_sem = Semester::where('active', 1)->first();
 
 
         // delete all in enrolled_students

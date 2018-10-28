@@ -247,6 +247,10 @@ class StudentController extends Controller
         // to determine the subjects
         $student = User::find(Auth::user()->id);
 
+        if(count($student->status) > 0) {
+            return redirect()->back()->with('error', 'Sorry You Cant Enroll!');
+        }
+
         // check student if first year and if the semester is first they can't take assessment
         if($student->info->year_level_id == 1 && $sem->id == 1) {
             return redirect()->route('student.dashboard')->with('info', 'Unable to take assessment. You can take next Semester! Study harder! God Bless!');
@@ -285,9 +289,15 @@ class StudentController extends Controller
     // method use to show schedules of the section
     public function sectionSchedules($id = null)
     {
+
         $section = Section::findorfail($id);
 
         $student = User::find(Auth::user()->id);
+
+
+        if(count($student->status) > 0) {
+            return redirect()->back()->with('error', 'Sorry You Cant Enroll!');
+        }
 
         $course_id = $student->enrolled->course_id;
         $curriculum_id = $student->enrolled->curriculum_id;
