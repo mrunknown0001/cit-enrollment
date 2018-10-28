@@ -47,10 +47,10 @@
 										<p>Civil Status: <strong>{{ ucwords(Auth::user()->info->civil_status) }}</strong></p>
 									</div>
 									<div class="col-md-6">
-										<p>Date of Birth: <strong>{{ date('m/d/Y', strtotime(Auth::user()->info->date_of_birth)) }}</strong></p>
+										<p>Date of Birth: <strong>{{ Auth::user()->info->date_of_birth == '1970-01-01' ? 'N/A' : date('m/d/Y', strtotime(Auth::user()->info->date_of_birth)) }}</strong></p>
 									</div>
 									<div class="col-md-6">
-										<p>Age: <strong>{{ date('Y') - date('Y', strtotime(Auth::user()->info->date_of_birth)) }}</strong></p>
+										<p>Age: <strong>{{ Auth::user()->info->date_of_birth == '1970-01-01' ? 'N/A' : date('Y') - date('Y', strtotime(Auth::user()->info->date_of_birth)) }}</strong></p>
 									</div>
 									<div class="col-md-6">
 										<p>Place of Birth: <strong>{{ ucwords(Auth::user()->info->place_of_birth) }}</strong></p>

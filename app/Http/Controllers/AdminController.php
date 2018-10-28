@@ -1279,6 +1279,16 @@ class AdminController extends Controller
         $sem->active = 1;
         $sem->save();
 
+
+        // move to next year level if all subject enrolled for the first and second sem
+        // of the year level taken is all passed
+        // get all students
+        $students = EnrolledStudent::get(['student_id']);
+
+        foreach($students as $s) {
+            $this->check_move_to_next_yl($s->student_id);
+        }
+
         // add operations in this part closing and saving other data needed
         // reset all settings needed to start a new sem
         $this->move_to_next_sem();
@@ -1303,24 +1313,16 @@ class AdminController extends Controller
         if(!password_verify($password, Auth::guard('admin')->user()->password)) {
             return redirect()->back()->with('error', 'Invalid Password!');
         }
-        //////////////////////////
-        // operations goes here //
-        //////////////////////////
-        $this->move_to_next_sem();
 
         /////////////////////////
         // close academic year //
         /////////////////////////
-        // move to next year level if all subject enrolled for the first and second sem
-        // of the year level taken is all passed
-        // get all students
-        $students = EnrolledStudent::all();
-
-        foreach($students as $s) {
-            $this->check_move_to_next_yl($s->student_id);
-        }
 
 
+        //////////////////////////
+        // operations goes here //
+        //////////////////////////
+        $this->move_to_next_sem();
 
         $ay = AcademicYear::where('active', 1)->first();
         $ay->active = 0;
@@ -1898,8 +1900,12 @@ class AdminController extends Controller
         // delete all assessments
         Assessment::truncate();
 
+        $active_sem = Semester::where('active', 1)->first();
+
+
         // delete all in enrolled_students
         EnrolledStudent::truncate();
+
 
         // delete all faculty loads
         FacultyLoad::truncate();
@@ -1914,7 +1920,7 @@ class AdminController extends Controller
 
 
     // determine if all enrolled subject of the student is passed, first semester and second semester
-    private function check_move_to_next_yl($id = null)
+    private function check_move_to_next_yl($id)
     {
         $student = User::find($id);
 
@@ -1927,8 +1933,16 @@ class AdminController extends Controller
         // if the student is 4th year. the status will be graduate
 
         // operation only no return values or response
-        if($student->info->year_level_id != 4) {
-            $student->info->year_level_id += 1;
+        if($student->info->year_level_id == 1) {
+            $student->info->year_level_id = 2;
+            $student->info->save();
+        }
+        else if($student->info->year_level_id == 2) {
+            $student->info->year_level_id = 3;
+            $student->info->save();
+        }
+        else if($student->info->year_level_id == 3) {
+            $student->info->year_level_id = 4;
             $student->info->save();
         }
     }
