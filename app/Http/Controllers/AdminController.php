@@ -1271,7 +1271,7 @@ class AdminController extends Controller
             foreach($grades as $g) {
                 if($g->grade > 3) {
                     // mark student as irreg
-                    $student = User::find($s_id->student);
+                    $student = User::find($s_id->student_id);
 
                     if(!$student->status) {
 
