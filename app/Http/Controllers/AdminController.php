@@ -1189,7 +1189,13 @@ class AdminController extends Controller
 
         // conditions
         // check if the academic year is not the year
-        if($sy > $ey || $sy == $ey) {
+        if($sy > $ey || $sy == $ey || $ey < $sy) {
+            return redirect()->back()->with('error', 'Please Check Start and End Year!');
+        }
+
+        $diff_year = $ey - $sy;
+
+        if($diff_year > 1) {
             return redirect()->back()->with('error', 'Please Check Start and End Year!');
         }
 
