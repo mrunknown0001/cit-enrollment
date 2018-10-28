@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('lastname', 60);
             $table->string('suffix_name', 60)->nullable();
             $table->string('student_number', 14)->unique();
-            $table->string('password',150)->nullable();
+            $table->string('password', 150)->nullable();
             $table->tinyInteger('registered')->default(0);
             $table->tinyInteger('active')->default(0);
             $table->rememberToken();

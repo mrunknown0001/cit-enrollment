@@ -14,7 +14,15 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 	Route::post('/student/registration/details', 'RegistrationController@studentShowDetails')->name('student.show.details.post');
 
+	Route::get('/student/registration/details', function () {
+		return redirect()->route('registration');
+	});
+
 	Route::post('/student/registration', 'RegistrationController@postRegisterStudent')->name('registrer.student.post');
+
+	Route::get('/student/registration', function () {
+		return redirect()->route('registration');
+	});
 
 	Route::get('/home', function () {
 		return redirect()->route('landing.page');
@@ -75,6 +83,10 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 	Route::post('/forgot-password/code', 'LoginController@postEnterResetCode')->name('enter.reset.code.post');
 
 	Route::post('/reset-password', 'LoginController@postResetPassword')->name('reset.password.post');
+
+	Route::get('/reset-password', function () {
+		return redirect()->route('forgot.password');
+	});
 
 	Route::get('/student', function () {
 		return redirect()->route('login');

@@ -42,6 +42,25 @@ class LoginController extends Controller
         $password = $request['password'];
         $remember = $request['remember_me'];
 
+        if(Auth::check()) {
+            return redirect()->route('student.dashboard');
+        }
+        elseif (Auth::guard('faculty')->check()) {
+            return redirect()->route('faculty.dashboard');
+        }
+        elseif(Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
+        elseif(Auth::guard('cashier')->check()) {
+            return redirect()->route('cashier.dashboard');
+        }
+        elseif(Auth::guard('registrar')->check()) {
+            return redirect()->route('registrar.dashboard');
+        }
+        elseif(Auth::guard('dean')->check()) {
+            return redirect()->route('dean.dashboard');
+        }
+
         // attempt to login admin
         if(Auth::guard('admin')->attempt(['username' => $username, 'password' => $password], $remember)) {
 
@@ -82,7 +101,26 @@ class LoginController extends Controller
         $password = $request['password'];
         $remember = $request['remember_me'];
 
-        // attempt to login admin
+        if(Auth::check()) {
+            return redirect()->route('student.dashboard');
+        }
+        elseif (Auth::guard('faculty')->check()) {
+            return redirect()->route('faculty.dashboard');
+        }
+        elseif(Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
+        elseif(Auth::guard('cashier')->check()) {
+            return redirect()->route('cashier.dashboard');
+        }
+        elseif(Auth::guard('registrar')->check()) {
+            return redirect()->route('registrar.dashboard');
+        }
+        elseif(Auth::guard('dean')->check()) {
+            return redirect()->route('dean.dashboard');
+        }
+
+        // attempt to login student
         if(Auth::attempt(['student_number' => $sn, 'password' => $password], $remember)) {
 
             // check if the session id is not null
@@ -121,6 +159,25 @@ class LoginController extends Controller
         $username = $request['username'];
         $password = $request['password'];
         $remember = $request['remember_me'];
+
+        if(Auth::check()) {
+            return redirect()->route('student.dashboard');
+        }
+        elseif (Auth::guard('faculty')->check()) {
+            return redirect()->route('faculty.dashboard');
+        }
+        elseif(Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
+        elseif(Auth::guard('cashier')->check()) {
+            return redirect()->route('cashier.dashboard');
+        }
+        elseif(Auth::guard('registrar')->check()) {
+            return redirect()->route('registrar.dashboard');
+        }
+        elseif(Auth::guard('dean')->check()) {
+            return redirect()->route('dean.dashboard');
+        }
 
         // attempt to login dean
         if(Auth::guard('dean')->attempt(['username' => $username, 'password' => $password], $remember)) {
@@ -162,6 +219,25 @@ class LoginController extends Controller
         $password = $request['password'];
         $remember = $request['remember_me'];
 
+        if(Auth::check()) {
+            return redirect()->route('student.dashboard');
+        }
+        elseif (Auth::guard('faculty')->check()) {
+            return redirect()->route('faculty.dashboard');
+        }
+        elseif(Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
+        elseif(Auth::guard('cashier')->check()) {
+            return redirect()->route('cashier.dashboard');
+        }
+        elseif(Auth::guard('registrar')->check()) {
+            return redirect()->route('registrar.dashboard');
+        }
+        elseif(Auth::guard('dean')->check()) {
+            return redirect()->route('dean.dashboard');
+        }
+
         // attempt to login dean
         if(Auth::guard('cashier')->attempt(['username' => $username, 'password' => $password], $remember)) {
 
@@ -202,6 +278,25 @@ class LoginController extends Controller
         $password = $request['password'] ;
         $remember = $request['remember_me'];
 
+        if(Auth::check()) {
+            return redirect()->route('student.dashboard');
+        }
+        elseif (Auth::guard('faculty')->check()) {
+            return redirect()->route('faculty.dashboard');
+        }
+        elseif(Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
+        elseif(Auth::guard('cashier')->check()) {
+            return redirect()->route('cashier.dashboard');
+        }
+        elseif(Auth::guard('registrar')->check()) {
+            return redirect()->route('registrar.dashboard');
+        }
+        elseif(Auth::guard('dean')->check()) {
+            return redirect()->route('dean.dashboard');
+        }
+
         // attempt to login registrar
         if(Auth::guard('registrar')->attempt(['username' => $username, 'password' => $password], $remember)) {
 
@@ -241,6 +336,25 @@ class LoginController extends Controller
         $username = $request['username'];
         $password = $request['password'] ;
         $remember = $request['remember_me'];
+
+        if(Auth::check()) {
+            return redirect()->route('student.dashboard');
+        }
+        elseif (Auth::guard('faculty')->check()) {
+            return redirect()->route('faculty.dashboard');
+        }
+        elseif(Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
+        elseif(Auth::guard('cashier')->check()) {
+            return redirect()->route('cashier.dashboard');
+        }
+        elseif(Auth::guard('registrar')->check()) {
+            return redirect()->route('registrar.dashboard');
+        }
+        elseif(Auth::guard('dean')->check()) {
+            return redirect()->route('dean.dashboard');
+        }
 
         // attempt to login registrar
         if(Auth::guard('faculty')->attempt(['username' => $username, 'password' => $password], $remember)) {

@@ -17,15 +17,15 @@ class CreateStudentPreviousSchoolsTable extends Migration
             $table->increments('id');
             $table->integer('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('users');
-            $table->string('elementary_school')->nullable();
-            $table->string('elementary_year_graduated')->nullable();
-            $table->string('high_school')->nullable();
-            $table->string('high_school_year_graduated')->nullable();
-            $table->string('college_school')->nullable();
-            $table->string('college_year_graduated')->nullable();
-            $table->string('school_last_attended')->nullable();
-            $table->string('school_address')->nullable();
-            $table->string('year_graduated')->nullable();
+            $table->string('elementary_school', 120)->nullable();
+            $table->string('elementary_year_graduated', 120)->nullable();
+            $table->string('high_school', 120)->nullable();
+            $table->string('high_school_year_graduated', 120)->nullable();
+            $table->string('college_school', 120)->nullable();
+            $table->string('college_year_graduated', 4)->nullable();
+            $table->string('school_last_attended', 120)->nullable();
+            $table->string('school_address', 120)->nullable();
+            $table->string('year_graduated', 4)->nullable();
             $table->timestamps();
         });
     }
