@@ -1886,6 +1886,7 @@ class AdminController extends Controller
         $es->save();
 
 
+
         // delete schedules
         Schedule::truncate();
 
@@ -1904,6 +1905,9 @@ class AdminController extends Controller
 
         // delete all subjects encoded
         EncodedGrade::truncate();
+
+        // Payment truncate
+        Payment::truncate();
         
     }
 
