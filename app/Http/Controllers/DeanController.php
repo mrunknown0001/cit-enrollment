@@ -209,7 +209,7 @@ class DeanController extends Controller
 
         $sem = Semester::where('active', 1)->first();
 
-        if(count($sem) < 1) {
+        if(!empty($sem)) {
             return redirect()->route('dean.schedules')->with('error', 'Semester Not Selected! Please report to admin');
         }
 

@@ -28,7 +28,7 @@
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-6">
-								@if(count($ay) > 0)
+								@if(!empty($ay))
 									<p>Current Academic Year: <strong>{{ $ay->from . '-' . $ay->to }}</strong></p>
 									<p>Semester: <strong>{{ $sem->name }}</strong></p>
 									@if($sem->id == 1)

@@ -1202,7 +1202,7 @@ class AdminController extends Controller
         // check if there is current active ay
         $check_active_ay = AcademicYear::where('active', 1)->first();
 
-        if(count($check_active_ay) > 0) {
+        if(!empty($check_active_ay)) {
             return redirect()->back()->with('error', 'There is an active Academic Year. Please close first!');
         }
 
@@ -1210,7 +1210,7 @@ class AdminController extends Controller
                                     ->where('to', $ey)
                                     ->first();
 
-        if(count($check_duplicate_ay) > 0) {
+        if(!empty($check_duplicate_ay)) {
             return redirect()->back()->with('error', 'Duplicate Academic Year!');
         }
 
