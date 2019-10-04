@@ -42,7 +42,7 @@
 										<td>{{ ucwords($c->name) }}</td>
 										<td class="text-center">{{ $c->course->code }}</td>
 										<td class="text-center">
-											@if(count($c->major) > 0)
+											@if(!empty($c->major))
 											{{ $c->major->name }}
 											@else
 											N/A

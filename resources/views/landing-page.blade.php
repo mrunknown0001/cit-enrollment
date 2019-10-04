@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</title>
+  <title>Online Enrollment for Mayantoc High School</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="{{ asset('landing/css/style.css') }}" />
   <link type="text/css" rel="stylesheet" href="{{ asset('css/app.css') }}" />
@@ -37,7 +37,7 @@
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
             <div class="home-content">
-              <h1 class="white-text">Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</h1>
+              <h1 class="white-text">Online Enrollment for Mayantoc High School</h1>
               <!-- <p class="white-text">App Description</p> -->
               {{-- <a href="{{ route('registration') }}" class="btn btn-primary btn-lg">Student Registration</a> --}}
               <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#studentRegistration">Student Registration</button>

@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
 
-    <p class="login-box-msg">Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</p>
+    <p class="login-box-msg">Online Enrollment for Mayantoc High School</p>
     @include('includes.all')
     <form action="{{ route('admin.login.post') }}" method="post" autocomplete="off">
       {{ csrf_field() }}

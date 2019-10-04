@@ -597,7 +597,7 @@ class AdminController extends Controller
 
         $sem = Semester::whereActive(1)->first();
 
-        if(count($sem) < 1) {
+        if(empty($sem)) {
             return redirect()->back()->with('error', 'Please Set Semester!');
         }
 

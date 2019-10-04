@@ -7,12 +7,12 @@
   <title>@yield('title') | Cashier</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet"  href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-red.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
   <script src="{{ asset('js/app.js') }}"></script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-red sidebar-mini">
 <div class="wrapper">
   @include('cashier.includes.main-header')
   @include('cashier.includes.main-sidebar')
