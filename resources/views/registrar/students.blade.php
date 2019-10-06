@@ -58,7 +58,7 @@
 									<tr>
 										<td>
 											{{ ucwords($s->lastname . ', ' . $s->firstname) }}
-											@if(!enpty($s->enrolled_now))
+											@if(!empty($s->enrolled_now))
 											<small>[Enrolled]</small>
 											@else
 											<small>[Not Enrolled]</small>
