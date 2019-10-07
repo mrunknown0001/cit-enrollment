@@ -16,7 +16,7 @@
 			<div class="col-md-12">
 				@include('includes.all')
 				
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-credit-card"></i> Registration Fee Paymaya Payment</strong>
 					</div>
@@ -52,7 +52,7 @@
 										@endif
 									</div>
 									<div class="form-group">
-										<button type="submit" class="btn btn-primary">Pay with Paymaya</button>
+										<button type="submit" class="btn btn-danger">Pay with Paymaya</button>
 										&nbsp; &nbsp; &nbsp;
 										<a href="{{ route('student.balance') }}">Cancel</a>
 									</div>

@@ -15,14 +15,14 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-rub">
 						<strong><i class="fa fa-rub"></i> Unit Price and Miscellaneous</strong>
 					</div>
 					<div class="box-body">
-						{{-- <p><a href="{{ route('admin.add.misc.fee') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Miscellaneous Fee</a></p> --}}
+						{{-- <p><a href="{{ route('admin.add.misc.fee') }}" class="btn btn-danger"><i class="fa fa-plus"></i> Add Miscellaneous Fee</a></p> --}}
 						
-						<p><button class="btn btn-primary" data-toggle="modal" data-target="#addMisc"><i class="fa fa-plus"></i> Add Other Fee</button></p>
+						<p><button class="btn btn-danger" data-toggle="modal" data-target="#addMisc"><i class="fa fa-plus"></i> Add Other Fee</button></p>
 						@include('admin.includes.modal-misc-add')
 
 						<div class="row">

@@ -17,7 +17,7 @@
 				@include('includes.all')
 
 				@if(count($payments) > 0)
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-credit-cardcap"></i> Payments</strong>
 					</div>

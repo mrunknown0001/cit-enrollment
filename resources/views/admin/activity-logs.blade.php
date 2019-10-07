@@ -17,8 +17,8 @@
 				@include('includes.all')
 
 				@if(count($logs) > 0)
-					<p><a href="{{ route('admin.activity.logs.print') }}" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print Activity Logs</a></p>
-					<div class="box box-primary">
+					<p><a href="{{ route('admin.activity.logs.print') }}" target="_blank" class="btn btn-danger"><i class="fa fa-print"></i> Print Activity Logs</a></p>
+					<div class="box box-danger">
 						<div class="box-header">
 							<strong><i class="fa fa-history"></i> Activity Logs</strong>
 						</div>

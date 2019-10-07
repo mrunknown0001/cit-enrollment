@@ -28,7 +28,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					@if(count($logs) > 0)
-						<div class="box box-primary">
+						<div class="box box-danger">
 							<div class="box-header">
 								<!-- <strong><i class="fa fa-history"></i> Activity Logs</strong> -->
 								<h3>Activity Logs</h3>

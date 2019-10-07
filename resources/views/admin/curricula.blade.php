@@ -16,13 +16,13 @@
 			<div class="col-md-12">
 				@include('includes.all')
 				
-				{{-- <p><a href="{{ route('admin.add.curriculum') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Course Curriculum</a></p> --}}
+				{{-- <p><a href="{{ route('admin.add.curriculum') }}" class="btn btn-danger"><i class="fa fa-plus"></i> Add Course Curriculum</a></p> --}}
 
-				<p><button class="btn btn-primary" data-toggle="modal" data-target="#addCurriculum"><i class="fa fa-plus"></i> Add Course Curriculum</button></p>
+				<p><button class="btn btn-danger" data-toggle="modal" data-target="#addCurriculum"><i class="fa fa-plus"></i> Add Course Curriculum</button></p>
 				@include('admin.includes.modal-curriculum-add')
 
 				@if(count($curricula) > 0)
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-book"></i> Curricula</strong>
 					</div>

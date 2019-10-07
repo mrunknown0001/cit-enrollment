@@ -14,9 +14,9 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p><a href="{{ route('admin.courses') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Courses</a></p>
+				<p><a href="{{ route('admin.courses') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Courses</a></p>
 				@include('includes.all')
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-book"></i> Add Course</strong>
 					</div>
@@ -47,7 +47,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add Course</button>
+								<button type="submit" class="btn btn-danger"><i class="fa fa-plus"></i> Add Course</button>
 							</div>
 						</form>
 					</div>

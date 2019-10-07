@@ -20,7 +20,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-3 col-xs-6">
-				<div class="small-box bg-primary">
+				<div class="small-box bg-danger">
 					<div class="inner">
 						<h3>{{ $students }}</h3>
 						<p>Students Total</p>
@@ -34,7 +34,7 @@
 
 
 			<div class="col-lg-3 col-xs-6">
-				<div class="small-box bg-primary">
+				<div class="small-box bg-danger">
 					<div class="inner">
 						<h3>{{ $courses }}</h3>
 						<p>Courses</p>

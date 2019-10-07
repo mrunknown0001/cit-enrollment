@@ -14,16 +14,16 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-6">
-				<p><a href="{{ route('student.payments') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Payments</a></p>
+				<p><a href="{{ route('student.payments') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Payments</a></p>
 				@include('includes.all')
 
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-money"></i> Payment Details</strong>
 					</div>
 					<div class="box-body">
-						<!-- <button class="btn btn-primary" onclick="window.print()"><i class="fa fa-print"></i></button> -->
-						<button class="btn btn-primary" onclick="PrintElem('printArea')"><i class="fa fa-print"></i></button>
+						<!-- <button class="btn btn-danger" onclick="window.print()"><i class="fa fa-print"></i></button> -->
+						<button class="btn btn-danger" onclick="PrintElem('printArea')"><i class="fa fa-print"></i></button>
 						<div id="printArea" class="studentPayment">
 							<!-- <div class="row">
 								<div class="col-md-4"> -->

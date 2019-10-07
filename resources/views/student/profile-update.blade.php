@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-user"></i> Update Student Profile</strong>
 					</div>
@@ -259,7 +259,7 @@
 							</div>
 
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Update Student Profile</button>
+								<button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> Update Student Profile</button>
 							</div>
 						</form>
 					</div>

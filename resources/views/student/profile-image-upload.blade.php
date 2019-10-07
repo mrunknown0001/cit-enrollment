@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-key"></i> Change Profile Image</strong>
 					</div>
@@ -30,7 +30,7 @@
 										<input type="file" name="image" id="image" accept="image/x-png,image/gif,image/jpeg" required="">
 									</div>
 									<div class="form-group">
-										<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save Profile Image</button>
+										<button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> Save Profile Image</button>
 									</div>
 								</form>
 							</div>

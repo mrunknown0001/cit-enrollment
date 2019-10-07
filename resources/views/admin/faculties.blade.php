@@ -15,16 +15,16 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				{{-- <p><a href="{{ route('admin.add.faculty') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Faculty</a></p> --}}
+				{{-- <p><a href="{{ route('admin.add.faculty') }}" class="btn btn-danger"><i class="fa fa-plus"></i> Add Faculty</a></p> --}}
 
 				<p>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#addFaculty"><i class="fa fa-plus"></i> Add Faculty</button>
-					{{--<button class="btn btn-primary" data-toggle="modal" data-target="#addFacultyLoad"><i class="fa"></i> Faculty Subject Load</button>--}}
+					<button class="btn btn-danger" data-toggle="modal" data-target="#addFaculty"><i class="fa fa-plus"></i> Add Faculty</button>
+					{{--<button class="btn btn-danger" data-toggle="modal" data-target="#addFacultyLoad"><i class="fa"></i> Faculty Subject Load</button>--}}
 				</p>
 				@include('admin.includes.modal-faculty-add')
 
 				@if(count($faculties) > 0)
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-users"></i> Faculties</strong>
 					</div>

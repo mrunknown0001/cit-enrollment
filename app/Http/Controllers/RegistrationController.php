@@ -29,7 +29,7 @@ class RegistrationController extends Controller
 
     	$student = User::where('student_number', $sn)->first();
 
-    	if(count($student) < 1) {
+    	if(empty($student)) {
     		return redirect()->route('registration')->with('error', 'Student Number not found!');
     	}
 

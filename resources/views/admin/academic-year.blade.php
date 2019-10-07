@@ -21,7 +21,7 @@
 						<b>{{ $errors->first('password') }}</b>
 					</div>
 		        @endif
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-calendar"></i> Academic Year</strong>
 					</div>

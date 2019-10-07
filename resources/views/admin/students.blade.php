@@ -23,14 +23,14 @@
 							<div class="input-group">
 								<input type="text" name="q" class="form-control" placeholder="Search...">
 								<span class="input-group-btn">
-									<button type="submit" id="search-btn" class="btn btn-flat btn-primary"><i class="fa fa-search"></i>
+									<button type="submit" id="search-btn" class="btn btn-flat btn-danger"><i class="fa fa-search"></i>
 								</button>
 								</span>
 							</div>
 						</form>						
 					</div>
 					<div class="col-md-3">
-						<button class="btn btn-primary" data-toggle="modal" data-target="#setLimit">Set Student Limit Per Class</button>
+						<button class="btn btn-danger" data-toggle="modal" data-target="#setLimit">Set Student Limit Per Class</button>
 						@include('admin.includes.modal-student-set-limit')
 					</div>
 				</div>
@@ -39,7 +39,7 @@
 				@if(count($students) > 0)
 
 
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-graduation-cap"></i> Students List</strong>
 					</div>

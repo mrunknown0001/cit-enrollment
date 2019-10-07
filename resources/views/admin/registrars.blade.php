@@ -15,13 +15,13 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				{{-- <p><a href="{{ route('admin.add.registrar') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Registrar</a></p> --}}
+				{{-- <p><a href="{{ route('admin.add.registrar') }}" class="btn btn-danger"><i class="fa fa-plus"></i> Add Registrar</a></p> --}}
 
-				<p><button class="btn btn-primary" data-toggle="modal" data-target="#addRegistrar"><i class="fa fa-plus"></i> Add Registrar</button></p>
+				<p><button class="btn btn-danger" data-toggle="modal" data-target="#addRegistrar"><i class="fa fa-plus"></i> Add Registrar</button></p>
 				@include('admin.includes.modal-registrar-add')
 
 				@if(count($registrars) > 0)
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-users"></i> Registrars</strong>
 					</div>

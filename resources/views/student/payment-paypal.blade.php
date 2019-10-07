@@ -16,7 +16,7 @@
 			<div class="col-md-12">
 				@include('includes.all')
 				
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-paypal"></i> Tuition Fee Paypal Payment</strong>
 					</div>
@@ -42,7 +42,7 @@
 										@endif
 									</div>
 									<div class="form-group">
-										<button type="submit" class="btn btn-primary">Pay with Paypal</button>
+										<button type="submit" class="btn btn-danger">Pay with Paypal</button>
 										&nbsp; &nbsp; &nbsp;
 										<a href="{{ route('student.balance') }}">Cancel</a>
 									</div>

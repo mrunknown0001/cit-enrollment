@@ -16,7 +16,7 @@
 			<div class="col-md-12">
 				@include('includes.all')
 				
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-credit-card"></i> Card Registration Payment</strong>
 					</div>
@@ -41,7 +41,7 @@
 										@endif
 									</div>
 									<div class="form-group">
-										<button type="submit" class="btn btn-primary">Pay with Card</button>
+										<button type="submit" class="btn btn-danger">Pay with Card</button>
 									</div>
 								</form>
 							</div>
