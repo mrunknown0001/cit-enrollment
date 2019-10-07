@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <strong>Add Cashier</strong>
+        <strong>Add Strand</strong>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,67 +11,46 @@
 
 
         <p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
-        <form action="{{ route('admin.add.cashier.post') }}" method="POST" role="form" autocomplete="off">
+        <form action="{{ route('admin.post.add.strand') }}" method="POST" role="form" autocomplete="off">
           {{ csrf_field() }}
           <div class="row">
             <div class="col-md-6">
                 <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
-                  <label for="firstname">Firstname</label><label class="label-required">*</label>
-                  <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" placeholder="Enter Firstname" autofocus>
-                  @if ($errors->has('firstname'))
+                  <label for="strand">Strand</label><label class="label-required">*</label>
+                  <input id="strand" type="text" class="form-control" name="strand" value="{{ old('strand') }}" placeholder="Enter Strand" autofocus required>
+                  @if ($errors->has('strand'))
                       <span class="help-block">
-                          <strong>{{ $errors->first('firstname') }}</strong>
+                          <strong>{{ $errors->first('strand') }}</strong>
                       </span>
                   @endif
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group{{ $errors->has('middlename') ? ' has-error' : '' }}">
-                  <label for="middlename">Middlename</label>
-                  <input id="middlename" type="text" class="form-control" name="middlename" value="{{ old('middlename') }}" placeholder="Enter Middlename" >
-                  @if ($errors->has('middlename'))
+                <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
+                  <label for="code">Strand Code</label><label class="label-required">*</label>
+                  <input id="code" type="text" class="form-control" name="code" value="{{ old('code') }}" placeholder="Enter Strand Code" required>
+                  @if ($errors->has('code'))
                       <span class="help-block">
-                          <strong>{{ $errors->first('middlename') }}</strong>
+                          <strong>{{ $errors->first('code') }}</strong>
                       </span>
                   @endif
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
-                  <label for="lastname">Lastname</label><label class="label-required">*</label>
-                  <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" placeholder="Enter Lastname" >
-                  @if ($errors->has('lastname'))
+            <div class="col-md-12">
+                <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                  <label for="description">Strand Description</label>
+                  <input id="description" type="text" class="form-control" name="description" value="{{ old('description') }}" placeholder="Enter Strand Description" >
+                  @if ($errors->has('description'))
                       <span class="help-block">
-                          <strong>{{ $errors->first('lastname') }}</strong>
+                          <strong>{{ $errors->first('description') }}</strong>
                       </span>
                   @endif
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group{{ $errors->has('suffix_name') ? ' has-error' : '' }}">
-                  <label for="suffix_name">Suffix</label>
-                  <input id="suffix_name" type="text" class="form-control" name="suffix_name" value="{{ old('suffix_name') }}" placeholder="Enter Suffix Name" >
-                  @if ($errors->has('suffix_name'))
-                      <span class="help-block">
-                          <strong>{{ $errors->first('suffix_name') }}</strong>
-                      </span>
-                  @endif
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                  <label for="username">Username</label><label class="label-required">*</label>
-                  <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Enter Username" autofocus>
-                  @if ($errors->has('username'))
-                      <span class="help-block">
-                          <strong>{{ $errors->first('username') }}</strong>
-                      </span>
-                  @endif
-                </div>
-            </div>
+            
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-danger"><i class="fa fa-plus"></i> Add Cashier</button>
+            <button type="submit" class="btn btn-danger"><i class="fa fa-plus"></i> Add Strand</button>
           </div>
         </form>
 

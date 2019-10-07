@@ -13,4 +13,20 @@ class StrandController extends AdminController
 
     	return view('admin.strands', ['strands' => $strands]);
     }
+
+
+
+    public function postAddStrand(Request $request)
+    {
+    	$request->validate([
+    		'strand' => 'requried',
+    		'code' => 'required',
+    		'description' => 'nullable',
+    	]);
+
+
+    	$strand = $request['strand'];
+    	$code = $request['code'];
+    	$description = $request['description'];
+    }
 }

@@ -286,6 +286,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	Route::get('/strands', 'StrandController@strands')->name('admin.strands');
 
 
+	// route to add strand
+	Route::post('/strand/add', 'StrandController@postAddStrand')->name('admin.post.add.strand');
+
+
 
 	// route to view courses
 	Route::get('/courses', 'AdminController@courses')->name('admin.courses');
