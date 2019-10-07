@@ -18,7 +18,7 @@
             <input type="date" name="end_date" id="end_date" class="form-control" placeholder="mm/dd/yyyy" required="">
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">Generate Report</button>
+            <button type="submit" class="btn btn-danger">Generate Report</button>
           </div>
         </form>
 

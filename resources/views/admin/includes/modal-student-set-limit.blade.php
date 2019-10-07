@@ -18,7 +18,7 @@
             <input type="number" name="limit" id="limit" value="{{ $limit->limit }}" class="form-control" placeholder="Enter Student Limit">
           </div>
           <div class="form-group">
-            <button class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save</button>
+            <button class="btn btn-danger"><i class="fa fa-floppy-o"></i> Save</button>
           </div>
         </form>
 

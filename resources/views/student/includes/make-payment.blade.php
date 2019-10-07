@@ -1,4 +1,4 @@
-	<p class=""><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#makePayment">Make Payment</button></p>
+	<p class=""><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#makePayment">Make Payment</button></p>
 
   <div class="modal fade" id="makePayment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

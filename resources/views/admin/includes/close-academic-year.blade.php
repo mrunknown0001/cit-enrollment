@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#closeay">
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#closeay">
   Close Academic Year
 </button>
 
@@ -20,7 +20,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Close Academic Year</button>
+        <button type="submit" class="btn btn-danger">Close Academic Year</button>
       </form>
       </div>
     </div>

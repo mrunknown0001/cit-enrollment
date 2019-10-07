@@ -19,7 +19,7 @@
             <input type="number" name="grade" value="{{ $s['grade'] }}" class="form-control" min="1" max="5" step="0.25" required>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save Grade</button>
+            <button class="btn btn-danger"><i class="fa fa-floppy-o"></i> Save Grade</button>
           </div>
         </form>
 

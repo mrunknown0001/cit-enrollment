@@ -32,7 +32,7 @@
                         @endif
                       </div>
                       <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Update</button>
+                        <button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> Update</button>
                       </div>
                 </form>
 

@@ -281,6 +281,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	// route to upadte limit of student per section
 	Route::post('/student/limit', 'AdminController@postSutdentLimit')->name('admin.student.limit.post');
 
+
+	// route to view strands
+	Route::get('/strands', 'StrandController@strands')->name('admin.strands');
+
+
+
 	// route to view courses
 	Route::get('/courses', 'AdminController@courses')->name('admin.courses');
 

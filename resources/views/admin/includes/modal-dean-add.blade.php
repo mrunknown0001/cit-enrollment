@@ -71,7 +71,7 @@
             </div>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add Dean</button>
+            <button type="submit" class="btn btn-danger"><i class="fa fa-plus"></i> Add Dean</button>
           </div>
         </form>
 

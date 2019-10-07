@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#semesterModal">
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#semesterModal">
   Activate Second Semester
 </button>
 
@@ -20,7 +20,7 @@
         	</div>
       </div>
       <div class="modal-footer">
-			<button type="submit" class="btn btn-primary">Activate Second Semester</button>
+			<button type="submit" class="btn btn-danger">Activate Second Semester</button>
 		</form>
       </div>
     </div>

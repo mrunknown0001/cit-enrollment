@@ -16,7 +16,7 @@
         <form action="{{ route('admin.increment.year.level.post') }}" method="POST">
           {{ csrf_field() }}
           <div class="form-group">
-            <button class="btn btn-primary"><i class="fa fa-plus"></i> Confirm</button>
+            <button class="btn btn-danger"><i class="fa fa-plus"></i> Confirm</button>
           </div>
         </form>
       </div>

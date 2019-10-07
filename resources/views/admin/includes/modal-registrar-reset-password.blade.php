@@ -14,7 +14,7 @@
             <input type="hidden" name="registrar_id" value="{{ $r->id }}">
         </div>
         <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Reset Password</button>
+        <button type="submit" class="btn btn-danger">Reset Password</button>
       </form>
         </div>
       </div>

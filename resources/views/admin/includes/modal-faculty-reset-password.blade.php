@@ -14,7 +14,7 @@
             <input type="hidden" name="faculty_id" value="{{ $f->id }}">
         </div>
         <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Reset Password</button>
+        <button type="submit" class="btn btn-danger">Reset Password</button>
       </form>
         </div>
       </div>

@@ -46,7 +46,7 @@
           	</div>
         </div>
         <div class="modal-footer">
-  			<button type="submit" class="btn btn-primary">Enable Enrollment</button>
+  			<button type="submit" class="btn btn-danger">Enable Enrollment</button>
   		</form>
         </div>
       </div>
