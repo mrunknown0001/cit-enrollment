@@ -24,7 +24,7 @@
 
 				@include('includes.all')
 
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-rub"></i> Balance</strong>
 					</div>

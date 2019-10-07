@@ -19,7 +19,7 @@
 		<div class="row">
 			@foreach($sections as $s)
 			<div class="col-md-3">
-				<a href="{{ route('student.section.schedules', ['id' => $s->id]) }}" class="btn btn-primary btn-block btn-lg">Section {{ strtoupper($s->name) }}</a>
+				<a href="{{ route('student.section.schedules', ['id' => $s->id]) }}" class="btn btn-danger btn-block btn-lg">Section {{ strtoupper($s->name) }}</a>
 			</div>
 			@endforeach
 		</div>

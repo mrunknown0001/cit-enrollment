@@ -92,7 +92,7 @@
 					{{ csrf_field() }}
 					<input type="hidden" name="section_id" value="{{ $section->id }}">
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save Assessment</button>
+						<button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> Save Assessment</button>
 					</div>
 				</form>
 			</div>

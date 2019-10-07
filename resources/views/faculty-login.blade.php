@@ -31,7 +31,7 @@
 </script>
 <div class="row">
   <div class="col-md-4 col-md-offset-4 text-center vertical-center">
-    <button class="btn btn-primary" id="centerButton" data-toggle="modal" data-target="#facultyLogin"><i class="fa fa-key"></i> Faculty Login</button>
+    <button class="btn btn-danger" id="centerButton" data-toggle="modal" data-target="#facultyLogin"><i class="fa fa-key"></i> Faculty Login</button>
     <br>
     <a href="{{ route('landing.page') }}" class="btn btn-link">go to landing page</a>
   </div>
@@ -72,7 +72,7 @@
           </div>
         </div>
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-danger btn-block btn-flat">Sign In</button>
         </div>
       </div>
     </form>

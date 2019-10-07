@@ -14,9 +14,9 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p><a href="{{ route('dean.schedules') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Schedules</a></p>
+				<p><a href="{{ route('dean.schedules') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Schedules</a></p>
 				@include('includes.all')
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-calendar-check-o"></i> Select Course, Year Level &amp; Section</strong>
 					</div>
@@ -95,7 +95,7 @@
 
 
 								<div class="form-group">
-									<button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i> Continue</button>
+									<button type="submit" class="btn btn-danger"><i class="fa fa-arrow-right"></i> Continue</button>
 								</div>
 							</form>
 						</div>

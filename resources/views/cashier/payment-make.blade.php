@@ -14,9 +14,9 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p><a href="{{ route('cashier.payments') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Payments</a></p>
+				<p><a href="{{ route('cashier.payments') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Payments</a></p>
 				@include('includes.all')
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-money"></i> Make Payment</strong>
 					</div>
@@ -48,7 +48,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary">Make Payment</button>
+								<button type="submit" class="btn btn-danger">Make Payment</button>
 							</div>
 				        </form>
 					</div>

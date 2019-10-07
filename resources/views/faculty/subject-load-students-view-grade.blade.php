@@ -14,7 +14,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p class="hideOnPrint"><a href="{{ route('faculty.subject.loads') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Subject Loads</a> <button class="btn btn-primary" onclick="window.print()"><i class="fa fa-print"></i> Print</button></p>
+				<p class="hideOnPrint"><a href="{{ route('faculty.subject.loads') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Subject Loads</a> <button class="btn btn-danger" onclick="window.print()"><i class="fa fa-print"></i> Print</button></p>
 				
 				@include('includes.all')
 				

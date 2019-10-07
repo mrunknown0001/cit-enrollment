@@ -17,10 +17,10 @@
 				@include('includes.all')
 				@if(count($payments) > 0)
 				<p>
-					<a href="{{ route('cashier.student.counter.payment') }}" class="btn btn-primary btn-xs"><i class="fa fa-money"></i> Make Payment</a>
-					<a href="{{ route('cashier.generate.report.payment') }}" class="btn btn-primary btn-xs"><i class="fa fa-bar-chart"></i> Generate Report</a>
+					<a href="{{ route('cashier.student.counter.payment') }}" class="btn btn-danger btn-xs"><i class="fa fa-money"></i> Make Payment</a>
+					<a href="{{ route('cashier.generate.report.payment') }}" class="btn btn-danger btn-xs"><i class="fa fa-bar-chart"></i> Generate Report</a>
 				</p>
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-money"></i> Payments</strong>
 					</div>

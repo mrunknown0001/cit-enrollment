@@ -130,7 +130,7 @@ class CashierController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
         }
 

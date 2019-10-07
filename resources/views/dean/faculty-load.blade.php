@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<p>
-					<a href="{{ route('dean.selection.faculty.load') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Assign Subject to Faculty</a>
+					<a href="{{ route('dean.selection.faculty.load') }}" class="btn btn-danger"><i class="fa fa-plus"></i> Assign Subject to Faculty</a>
 				</p>
 				@include('includes.all')
 				@if(count($loads) > 0) 

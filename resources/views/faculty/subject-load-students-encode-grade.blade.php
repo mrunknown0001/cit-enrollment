@@ -14,7 +14,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p><a href="{{ route('faculty.subject.loads') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Subject Loads</a></p>
+				<p><a href="{{ route('faculty.subject.loads') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Subject Loads</a></p>
 				@include('includes.all')
 				
 				<div class="row">
@@ -61,7 +61,7 @@
 								@endforeach
 							</tbody>
 						</table>	
-									<button type="submit" class="btn btn-primary">Save Grade</button>
+									<button type="submit" class="btn btn-danger">Save Grade</button>
 								</form>					
 					</div>
 

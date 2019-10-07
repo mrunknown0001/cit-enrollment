@@ -16,8 +16,8 @@
 			<div class="col-md-12">
 				@include('includes.all')
 				<p>
-					<a href="{{ route('registrar.add.student') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Student</a>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#generateReport"><i class="fa fa-bar-chart"></i> Generate Report</button>
+					<a href="{{ route('registrar.add.student') }}" class="btn btn-danger"><i class="fa fa-plus"></i> Add Student</a>
+					<button class="btn btn-danger" data-toggle="modal" data-target="#generateReport"><i class="fa fa-bar-chart"></i> Generate Report</button>
 				</p>
 
 				<div class="row">
@@ -26,7 +26,7 @@
 							<div class="input-group">
 								<input type="text" name="q" class="form-control" placeholder="Search...">
 								<span class="input-group-btn">
-									<button type="submit" id="search-btn" class="btn btn-flat btn-primary"><i class="fa fa-search"></i>
+									<button type="submit" id="search-btn" class="btn btn-flat btn-danger"><i class="fa fa-search"></i>
 								</button>
 								</span>
 							</div>
@@ -39,7 +39,7 @@
 				@if(count($students) > 0)
 
 
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-graduation-cap"></i> Students List</strong>
 					</div>

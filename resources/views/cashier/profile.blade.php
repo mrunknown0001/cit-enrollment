@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-user"></i> Cashier Profile</strong>
 					</div>

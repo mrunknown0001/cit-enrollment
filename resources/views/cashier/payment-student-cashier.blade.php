@@ -12,7 +12,7 @@
 		</ol>
 	</section>
 	<section class="content">
-		<p><a href="{{ route('cashier.payments') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Payments</a></p>
+		<p><a href="{{ route('cashier.payments') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Payments</a></p>
 		@include('includes.all')
 		<div class="row">
 			<div class="col-md-4">
@@ -20,7 +20,7 @@
 					<div class="input-group">
 						<input type="text" name="q" class="form-control" placeholder="Search Student Name or Student ID">
 						<span class="input-group-btn">
-							<button type="submit" id="search-btn" class="btn btn-flat btn-primary"><i class="fa fa-search"></i>
+							<button type="submit" id="search-btn" class="btn btn-flat btn-danger"><i class="fa fa-search"></i>
 						</button>
 						</span>
 					</div>

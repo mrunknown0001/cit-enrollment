@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<p>
-					<a href="{{ route('student.grades') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Current Grades</a>
+					<a href="{{ route('student.grades') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Current Grades</a>
 				</p>
 				@include('includes.all')
 

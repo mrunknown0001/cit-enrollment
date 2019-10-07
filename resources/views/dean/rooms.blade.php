@@ -16,13 +16,13 @@
 			<div class="col-md-12">
 				@include('includes.all')
 				
-				{{-- <p><a href="{{ route('dean.add.room') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Room</a></p> --}}
+				{{-- <p><a href="{{ route('dean.add.room') }}" class="btn btn-danger"><i class="fa fa-plus"></i> Add Room</a></p> --}}
 
-				<p><button class="btn btn-primary" data-toggle="modal" data-target="#addRoom"><i class="fa fa-plus"></i> Add Room</button></p>
+				<p><button class="btn btn-danger" data-toggle="modal" data-target="#addRoom"><i class="fa fa-plus"></i> Add Room</button></p>
 				@include('dean.includes.modal-room-add')
 
 				@if(count($rooms) > 0)
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-building"></i> Rooms</strong>
 					</div>
@@ -40,7 +40,7 @@
 									<td class="text-center">{{ ucwords($r->name) }}</td>
 									<td class="text-center">
 										{{-- <a href="{{ route('dean.update.room', ['id' => $r->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a> --}}
-										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#updateRoom-{{ $r->id }}"><i class="fa fa-pencil"></i> Update</button>
+										<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#updateRoom-{{ $r->id }}"><i class="fa fa-pencil"></i> Update</button>
 										<a href="{{ route('dean.delete.room', ['id' => $r->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
 									</td>
 								</tr>

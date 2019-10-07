@@ -14,8 +14,8 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				{{-- <a href="{{ route('dean.add.schedule') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Schedule</a> --}}
-				<p class="hideOnPrint"><a href="{{ route('dean.schedules') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Schedules</a> <button class="btn btn-primary" onclick="window.print()"><i class="fa fa-print"></i> Print</button></p>
+				{{-- <a href="{{ route('dean.add.schedule') }}" class="btn btn-danger"><i class="fa fa-plus"></i> Add Schedule</a> --}}
+				<p class="hideOnPrint"><a href="{{ route('dean.schedules') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Schedules</a> <button class="btn btn-danger" onclick="window.print()"><i class="fa fa-print"></i> Print</button></p>
 				<h3 class="hiddenElement">Tuesday Schedule</h3>
 				@include('includes.all')
 				@if(count($schedules) > 0)

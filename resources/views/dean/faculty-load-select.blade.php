@@ -15,10 +15,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				<p>
-					<a href="{{ route('dean.faculty.load') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Faculty Loads</a>
+					<a href="{{ route('dean.faculty.load') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Faculty Loads</a>
 				</p>
 				@include('includes.all')
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-user"></i> Add Faculty Load</strong>
 					</div>
@@ -43,7 +43,7 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<button class="btn btn-primary"><i class="fa fa-arrow-right"></i> Continue</button>
+									<button class="btn btn-danger"><i class="fa fa-arrow-right"></i> Continue</button>
 								</div>
 							</form>
 						</div>

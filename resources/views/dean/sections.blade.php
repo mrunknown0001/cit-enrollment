@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<p>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#addSection"><i class="fa fa-plus"></i> Add Section</button>
+					<button class="btn btn-danger" data-toggle="modal" data-target="#addSection"><i class="fa fa-plus"></i> Add Section</button>
 					@include('dean.includes.modal-section-add')
 				</p>
 				@include('includes.all')

@@ -27,7 +27,7 @@
 								'yl_id' => $l->year_level->id,
 								'section_id' => $l->section->id,
 								'subject_id' => $l->subject->id 
-							]) }}" class="btn btn-primary btn-block"><i class="fa fa-book"></i> {{ strtoupper($l->course->code) . ' - ' . ucwords($l->year_level->name) . ' ' . strtoupper($l->section->name) . ' ' . strtoupper($l->subject->code) }}</a>
+							]) }}" class="btn btn-danger btn-block"><i class="fa fa-book"></i> {{ strtoupper($l->course->code) . ' - ' . ucwords($l->year_level->name) . ' ' . strtoupper($l->section->name) . ' ' . strtoupper($l->subject->code) }}</a>
 						</p>
 
 					@endforeach

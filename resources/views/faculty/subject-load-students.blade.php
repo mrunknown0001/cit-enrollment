@@ -14,7 +14,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p><a href="{{ route('faculty.subject.loads') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Subject Loads</a></p>
+				<p><a href="{{ route('faculty.subject.loads') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Subject Loads</a></p>
 				@include('includes.all')
 				
 				<div class="row">
@@ -39,7 +39,7 @@
 								'yl_id' => $yl->id,
 								'section_id' => $section->id,
 								'subject_id' => $subject->id 
-							]) }}" class="btn btn-primary btn-sm"><i class="fa fa"></i> Encode Grades</a>
+							]) }}" class="btn btn-danger btn-sm"><i class="fa fa"></i> Encode Grades</a>
 					</p>
 					@else
 					<p>
@@ -49,7 +49,7 @@
 								'yl_id' => $yl->id,
 								'section_id' => $section->id,
 								'subject_id' => $subject->id 
-							]) }}" class="btn btn-primary btn-sm"><i class="fa fa"></i> View Grades</a>
+							]) }}" class="btn btn-danger btn-sm"><i class="fa fa"></i> View Grades</a>
 					</p>
 					@endif
 					
