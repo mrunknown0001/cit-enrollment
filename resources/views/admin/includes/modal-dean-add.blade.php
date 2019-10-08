@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <strong>Add Dean</strong>
+        <strong>Add Principal</strong>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -71,7 +71,7 @@
             </div>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-danger"><i class="fa fa-plus"></i> Add Dean</button>
+            <button type="submit" class="btn btn-danger"><i class="fa fa-plus"></i> Add Principal</button>
           </div>
         </form>
 

@@ -1,24 +1,24 @@
 @extends('layouts.admin-layout')
 
-@section('title') Deans @endsection
+@section('title') Principals @endsection
 
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Add Dean</h1>
+		<h1>Add Principal</h1>
 		<ol class="breadcrumb">
 			<li><a href="javascript:void(0)"><i class="fa fa-users"></i> Home</a></li>
-			<li class="active">Deans</li>
+			<li class="active">Principals</li>
 		</ol>
 	</section>
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p><a href="{{ route('admin.deans') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Deans</a></p>
+				<p><a href="{{ route('admin.deans') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Principals</a></p>
 				@include('includes.all')
 				<div class="box box-danger">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-user"></i> Add Dean</strong>
+						<strong><i class="fa fa-user"></i> Add Principal</strong>
 					</div>
 					<div class="box-body">
 						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
@@ -82,7 +82,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-danger"><i class="fa fa-plus"></i> Add Dean</button>
+								<button type="submit" class="btn btn-danger"><i class="fa fa-plus"></i> Add Principal</button>
 							</div>
 						</form>
 					</div>

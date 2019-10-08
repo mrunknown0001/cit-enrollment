@@ -404,7 +404,7 @@ class LoginController extends Controller
 
         $student = User::where('student_number', $sn)->first();
 
-        if(count($student) < 1) {
+        if(empty($student)) {
             return redirect()->back()->with('error', 'Student Number Not Found!');
         }
 
@@ -457,7 +457,7 @@ class LoginController extends Controller
 
         $student = User::where('reset_code', $code)->first();
 
-        if(count($student) < 1) {
+        if(empty($student)) {
             return redirect()->back()->with('error', 'Code Invalid or Expired!');
         }
 

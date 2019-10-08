@@ -1,29 +1,28 @@
 @extends('layouts.admin-layout')
 
-@section('title') Deans @endsection
+@section('title') Principals @endsection
 
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Deans</h1>
+		<h1>Principal</h1>
 		<ol class="breadcrumb">
 			<li><a href="javascript:void(0)"><i class="fa fa-users"></i> Home</a></li>
-			<li class="active">Deans</li>
+			<li class="active">Principal</li>
 		</ol>
 	</section>
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				{{-- <p><a href="{{ route('admin.add.dean') }}" class="btn btn-danger"><i class="fa fa-plus"></i> Add Dean</a></p> --}}
 
-				<p><button class="btn btn-danger" data-toggle="modal" data-target="#addDean"><i class="fa fa-plus"></i> Add Dean</button></p>
+				<p><button class="btn btn-danger" data-toggle="modal" data-target="#addDean"><i class="fa fa-plus"></i> Add Principal</button></p>
 				@include('admin.includes.modal-dean-add')
 
 				@if(count($deans) > 0)
 				<div class="box box-danger">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-users"></i> Deans</strong>
+						<strong><i class="fa fa-users"></i> Principal</strong>
 					</div>
 					<div class="box-body">
 						<table class="table table-bordered table-hover">
@@ -62,7 +61,7 @@
 				</div>
 
 				@else
-				<p class="text-center">No Deans Available</p>
+				<p class="text-center">No Principal Available</p>
 				@endif
 			</div>
 		</div>

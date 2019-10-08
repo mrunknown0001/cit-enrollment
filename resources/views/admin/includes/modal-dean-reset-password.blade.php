@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <p>Are you sure, you want to Reset Password of Dean?</p>
+      <p>Are you sure, you want to Reset Password of Principal?</p>
       <form action="{{ route('admin.reset.dean.password.post') }}" method="POST">
             {{ csrf_field() }}
             <input type="hidden" name="dean_id" value="{{ $d->id }}">

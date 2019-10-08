@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Dean Login - Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</title>
+  <title>Principal Login - Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet"  href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue-light.min.css') }}">
@@ -33,7 +33,7 @@
 
 <div class="row">
   <div class="col-md-4 col-md-offset-4 text-center vertical-center">
-    <button class="btn btn-danger" id="centerButton" data-toggle="modal" data-target="#deanLogin"><i class="fa fa-key"></i> Dean Login</button>
+    <button class="btn btn-danger" id="centerButton" data-toggle="modal" data-target="#deanLogin"><i class="fa fa-key"></i> Principal Login</button>
     <br>
     <a href="{{ route('landing.page') }}" class="btn btn-link">go to landing page</a>
   </div>

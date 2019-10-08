@@ -374,7 +374,7 @@ class GeneralController extends Controller
     {
         $student = User::whereStudentNumber($sn)->first();
 
-        if(count($student) < 1) {
+        if(empty($student)) {
             return abort(404);
         }
 
@@ -388,7 +388,7 @@ class GeneralController extends Controller
     {
         $faculty = Faculty::whereUsername($un)->first();
 
-        if(count($faculty) < 1)
+        if(empty($faculty))
             return abort(404);
 
         $faculty->session_id = null;
@@ -401,7 +401,7 @@ class GeneralController extends Controller
     {
         $cashier = Cashier::whereUsername($un)->first();
 
-        if(count($cashier) < 1)
+        if(empty($cashier))
             return abort(404);
 
         $cashier->session_id = null;
@@ -414,7 +414,7 @@ class GeneralController extends Controller
     {
         $registrar = Registrar::whereUsername($un)->first();
 
-        if(count($registrar) < 1)
+        if(empty($registrar))
             return abort(404);
 
         $registrar->session_id = null;
@@ -427,7 +427,7 @@ class GeneralController extends Controller
     {
         $dean = Dean::whereUsername($un)->first();
 
-        if(count($dean) < 1)
+        if(empty($dean))
             return abort(404);
 
         $dean->session_id = null;

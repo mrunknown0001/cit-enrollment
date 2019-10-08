@@ -69,7 +69,7 @@ class FacultyController extends Controller
         // check id number existence
         $check_id = Faculty::where('id_number')->first();
 
-        if(count($check_id) > 0 && $faculty->id_number == $id_number && $id_number != null) {
+        if(!empty($check_id) && $faculty->id_number == $id_number && $id_number != null) {
             return redirect()->back()->with('error', 'ID Number Exists!');
         }
 
@@ -148,7 +148,7 @@ class FacultyController extends Controller
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'No Active Academic Year or Semester. Please report to the adminsitrator.');
         }
 
@@ -199,7 +199,7 @@ class FacultyController extends Controller
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'No Active Academic Year or Semester. Please report to the adminsitrator.');
         }
 
@@ -238,7 +238,7 @@ class FacultyController extends Controller
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'No Active Academic Year or Semester. Please report to the adminsitrator.');
         }
 
@@ -320,7 +320,7 @@ class FacultyController extends Controller
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'No Active Academic Year or Semester. Please report to the adminsitrator.');
         }
 

@@ -65,7 +65,7 @@ class CashierController extends Controller
         // check id number existence
         $check_id = Cashier::where('id_number')->first();
 
-        if(count($check_id) > 0 && $cashier->id_number == $id_number && $id_number != null) {
+        if(!empty($check_id) && $cashier->id_number == $id_number && $id_number != null) {
             return redirect()->back()->with('error', 'ID Number Exists!');
         }
 
@@ -195,7 +195,7 @@ class CashierController extends Controller
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
 
-        if(count($ay) < 1 && count($sem) < 1) {
+        if(empty($ay) && empty($sem)) {
             return redirect()->back()->with('error', 'No Active School Year! Please Report to Admin!');
         }
 
@@ -212,7 +212,7 @@ class CashierController extends Controller
                         ->whereActive(1)
                         ->first();
 
-        if(count($rp) < 1) {
+        if(empty($rp)) {
             $reg_p = new RegistrationPayment();
             $reg_p->student_id = $student->id;
             $reg_p->mode_of_payment_id = 3;
@@ -302,7 +302,7 @@ class CashierController extends Controller
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
 
-        if(count($ay) < 1 && count($sem) < 1) {
+        if(empty($ay) && empty($sem)) {
             return redirect()->back()->with('info', 'Please Contact Admin to check for active AY and Semester!');
         }
 

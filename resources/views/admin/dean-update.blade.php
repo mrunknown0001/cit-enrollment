@@ -1,14 +1,14 @@
 @extends('layouts.admin-layout')
 
-@section('title') Deans @endsection
+@section('title') Principals @endsection
 
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Update Dean</h1>
+		<h1>Update Principal</h1>
 		<ol class="breadcrumb">
 			<li><a href="javascript:void(0)"><i class="fa fa-users"></i> Home</a></li>
-			<li class="active">Deans</li>
+			<li class="active">Principals</li>
 		</ol>
 	</section>
 	<section class="content">
@@ -18,7 +18,7 @@
 				@include('includes.all')
 				<div class="box box-danger">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-user"></i> Update Dean</strong>
+						<strong><i class="fa fa-user"></i> Update Principal</strong>
 					</div>
 					<div class="box-body">
 						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>

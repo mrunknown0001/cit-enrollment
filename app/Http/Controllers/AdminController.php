@@ -92,7 +92,7 @@ class AdminController extends Controller
         // check id number existence
         $check_id = Admin::where('id_number')->first();
 
-        if(count($check_id) > 0 && $admin->id_number == $id_number && $id_number != null) {
+        if(!empty($check_id) && $admin->id_number == $id_number && $id_number != null) {
             return redirect()->back()->with('error', 'ID Number Exists!');
         }
 
@@ -240,7 +240,7 @@ class AdminController extends Controller
         // check if the username is already exist
         $check_username = Dean::where('username', $username)->first();
 
-        if(count($check_username) > 0) {
+        if(!empty($check_username)) {
             return redirect()->back()->with('error', 'Username Already Used!');
         }
 
@@ -294,7 +294,7 @@ class AdminController extends Controller
     	// check if the username is already exist
     	$check_username = Dean::where('username', $username)->first();
 
-    	if(count($check_username) > 0 && $username != $dean->username) {
+    	if(!empty($check_username) && $username != $dean->username) {
     		return redirect()->back()->with('error', 'Username Already Used!');
     	}
 
@@ -371,7 +371,7 @@ class AdminController extends Controller
         // check if the username is already exist
         $check_username = Registrar::where('username', $username)->first();
 
-        if(count($check_username) > 0) {
+        if(!empty($check_username)) {
             return redirect()->back()->with('error', 'Username Already Used!');
         }
 
@@ -424,7 +424,7 @@ class AdminController extends Controller
         // check if the username is already exist
         $check_username = Registrar::where('username', $username)->first();
 
-        if(count($check_username) > 0 && $username != $registrar->username) {
+        if(!empty($check_username) && $username != $registrar->username) {
             return redirect()->back()->with('error', 'Username Already Used!');
         }
 
@@ -498,7 +498,7 @@ class AdminController extends Controller
         // check if the username is already exist
         $check_username = Cashier::where('username', $username)->first();
 
-        if(count($check_username) > 0) {
+        if(!empty($check_username)) {
             return redirect()->back()->with('error', 'Username Already Used!');
         }
 
@@ -551,7 +551,7 @@ class AdminController extends Controller
         // check if the username is already exist
         $check_username = Cashier::where('username', $username)->first();
 
-        if(count($check_username) > 0 && $username != $cashier->username) {
+        if(!empty($check_username) && $username != $cashier->username) {
             return redirect()->back()->with('error', 'Username Already Used!');
         }
 
@@ -633,7 +633,7 @@ class AdminController extends Controller
         // check if the username is already exist
         $check_username = Faculty::where('username', $username)->first();
 
-        if(count($check_username) > 0) {
+        if(!empty($check_username)) {
             return redirect()->back()->with('error', 'Username Already Used!');
         }
 
@@ -686,7 +686,7 @@ class AdminController extends Controller
         // check if the username is already exist
         $check_username = Faculty::where('username', $username)->first();
 
-        if(count($check_username) > 0 && $username != $faculty->username) {
+        if(!empty($check_username) && $username != $faculty->username) {
             return redirect()->back()->with('error', 'Username Already Used!');
         }
 
@@ -730,7 +730,7 @@ class AdminController extends Controller
                                     ->whereAcademicYearId($ay->id)
                                     ->whereSemesterId($sem->id)
                                     ->first();
-        if(count($duplicate_check) > 0) {
+        if(!empty($duplicate_check)) {
             return redirect()->back()->with('error', 'The Subject is Already Assigned to the Faculty Selected!');
         }
 
@@ -892,7 +892,7 @@ class AdminController extends Controller
         $check_title = Course::where('title', $title)->first();
         $check_code = Course::where('code', $code)->first();
 
-        if(count($check_title) > 0 || count($check_code) > 0) {
+        if(!empty($check_title) || !empty($check_code)) {
 
             return redirect()->back()->with('error', 'Please check you input!');
         }
@@ -937,7 +937,7 @@ class AdminController extends Controller
         $check_title = Course::where('title', $title)->first();
         $check_code = Course::where('code', $code)->first();
 
-        if((count($check_title) > 0 && $title != $course->title) || (count($check_code) > 0 && $code != $course->code)) {
+        if((!empty($check_title) && $title != $course->title) || (!empty($check_code) && $code != $course->code)) {
 
             return redirect()->back()->with('error', 'Please check you input!');
         }
@@ -995,7 +995,7 @@ class AdminController extends Controller
                                 ->where('name', $name)
                                 ->first();
 
-        if(count($check_duplicate) > 0) {
+        if(!empty($check_duplicate)) {
             return redirect()->back()->with('error', 'Duplicate Record Found!');
         }
 
@@ -1043,7 +1043,7 @@ class AdminController extends Controller
                                 ->where('name', $name)
                                 ->first();
 
-        if(count($check_duplicate) > 0 && $major->name != $name) {
+        if(!empty($check_duplicate) && $major->name != $name) {
             return redirect()->back()->with('error', 'Duplicate Record Found!');
         }
 
@@ -1143,7 +1143,7 @@ class AdminController extends Controller
                         ->where('major_id', $major_id)
                         ->first();
 
-        if(count($check) > 0 && $cu->name != $name) {
+        if(!empty($check) && $cu->name != $name) {
             return redirect()->back()->with('error', 'Duplicate Curriculum Found!');
         }
 
@@ -1480,7 +1480,7 @@ class AdminController extends Controller
         // get the last id/number of the year level
         $last = YearLevel::orderBy('id', 'desc')->first();
 
-        if(count($last) < 1) {
+        if(empty($last)) {
             $yl = new YearLevel();
             $yl->name = 'First Year';
             $yl->save();
@@ -1742,7 +1742,7 @@ class AdminController extends Controller
         $sub->description = $description;
         $sub->units = $units;
         $sub->course_id = $course->id;
-        if(count($major) > 0) {
+        if(!empty($major)) {
             $sub->major_id = $major->id;
         }
         else {
@@ -1805,7 +1805,7 @@ class AdminController extends Controller
         // check if code exists
         $check_code = Subject::where('code', $code)->first();
 
-        if(count($check_code) > 0 && $sub->code != $code) {
+        if(!empty($check_code) && $sub->code != $code) {
             return redirect()->back()->with('error', 'Subject Code Exists. Please Check your input');
         }
 
@@ -1813,7 +1813,7 @@ class AdminController extends Controller
         $sub->description = $description;
         $sub->units = $units;
         $sub->course_id = $course->id;
-        if(count($major) > 0) {
+        if(!empty($major)) {
             $sub->major_id = $major->id;
         }
         else {

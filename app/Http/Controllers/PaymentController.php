@@ -174,7 +174,7 @@ class PaymentController extends Controller
                                     ->orderBy('created_at', 'desc')
                                     ->first();
 
-            if(count($rp) > 0) {
+            if(!empty($rp)) {
                 // add new record for registration payment
                 // make student legible for enrollment
                 
@@ -189,7 +189,7 @@ class PaymentController extends Controller
                                         ->orderBy('created_at', 'desc')
                                         ->first();
 
-                if(count($s_payment) > 0) {
+                if(!empty($s_payment)) {
                     $s_payment->active = 1;
                     $s_payment->save();
                 }
@@ -206,7 +206,7 @@ class PaymentController extends Controller
                                     ->orderBy('created_at', 'desc')
                                     ->first();
 
-                if(count($s_payment) > 0) {
+                if(!empty($s_payment)) {
                     $s_payment->active = 1;
                     $s_payment->save();
                 }
@@ -218,7 +218,7 @@ class PaymentController extends Controller
                             ->where('semester_id', $sem->id)
                             ->first();
 
-            if(count($balance) > 0) {
+            if(!empty($balance)) {
                 // deduct payment
                 $balance->balance -= $s_payment->amount;
                 $balance->save();

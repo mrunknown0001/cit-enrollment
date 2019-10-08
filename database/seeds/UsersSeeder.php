@@ -14,10 +14,10 @@ class UsersSeeder extends Seeder
 
 
         DB::table('deans')->insert([
-            'username' => 'dean',
+            'username' => 'principal',
             'password' => bcrypt('password'),
             'firstname' => 'John',
-            'lastname' => 'Dean'
+            'lastname' => 'Principal'
         ]);
 
         DB::table('registrars')->insert([

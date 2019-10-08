@@ -70,7 +70,7 @@ class DeanController extends Controller
         // check id number existence
         $check_id = Dean::where('id_number')->first();
 
-        if(count($check_id) > 0 && $dean->id_number == $id_number && $id_number != null) {
+        if(!empty($check_id) && $dean->id_number == $id_number && $id_number != null) {
         	return redirect()->back()->with('error', 'ID Number Exists!');
         }
 
@@ -289,7 +289,7 @@ class DeanController extends Controller
                         ->where('start_time', $st)
                         ->where('end_time', $et)
                         ->first();
-        if(count($schedule) > 0) {
+        if(!empty($schedule)) {
             return redirect()->back()->with('error', 'Time confict!');
         }
 
@@ -300,7 +300,7 @@ class DeanController extends Controller
                         ->where('start_time', $st)
                         ->where('end_time', $et)
                         ->first();
-        if(count($schedule) > 0) {
+        if(!empty($schedule)) {
             return redirect()->back()->with('error', 'Time Slot Filled Up!');
         }
 
@@ -311,7 +311,7 @@ class DeanController extends Controller
                         ->where('start_time', $st)
                         ->where('end_time', $et)
                         ->first();
-        if(count($schedule) > 0) {
+        if(!empty($schedule)) {
             return redirect()->back()->with('error', 'Time Conflict on Section!');
         }
         // $schedule = Schedule::where('active', 1)
@@ -458,7 +458,7 @@ class DeanController extends Controller
                         ->where('start_time', $st)
                         ->where('end_time', $et)
                         ->first();
-        if(count($schedule) > 0 && $schedule->id != $sched->id) {
+        if(!empty($schedule) && $schedule->id != $sched->id) {
             return redirect()->back()->with('error', 'Duplicate Schedule Found!');
         }
 
@@ -468,7 +468,7 @@ class DeanController extends Controller
                         ->where('start_time', $st)
                         ->where('end_time', $et)
                         ->first();
-        if(count($schedule) > 0 && $schedule->id != $sched->id) {
+        if(!empty($schedule) && $schedule->id != $sched->id) {
             return redirect()->back()->with('error', 'Time Slot Filled Up!');
         }
 
@@ -660,7 +660,7 @@ class DeanController extends Controller
 
         $check_room = Room::where('name', strtolower($name))->first();
 
-        if(count($check_room) > 0 && $check_room->id != $room->id) {
+        if(!empty($check_room) && $check_room->id != $room->id) {
             return redirect()->back()->with('error', 'Room Already Exist!');
         }
 
@@ -733,7 +733,7 @@ class DeanController extends Controller
 
         $check_name = Section::where('name', $name)->first();
 
-        if(count($check_name) > 0 && $check_name->id != $section->id) {
+        if(!empty($check_name) && $check_name->id != $section->id) {
             return redirect()->back()->with('error', 'Section Name was already taken!');
         }
 
@@ -812,7 +812,7 @@ class DeanController extends Controller
     {
         $sem = Semester::whereActive(1)->first();
 
-        if(count($sem) < 1) {
+        if(!empty($sem)) {
             return redirect()->back()->with('error', 'No Active Semester. Please report to admin.');
         }
 
@@ -850,7 +850,7 @@ class DeanController extends Controller
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'No Active Academic Year or Semester. Please contact the administrator.');
         }
 
@@ -865,7 +865,7 @@ class DeanController extends Controller
                                     ->whereActive(1)
                                     ->first();
 
-        if(count($check_conflict) > 0) {
+        if(!empty($check_conflict) ) {
             return redirect()->back()->with('error', 'Subject in this Course Year Level and Section has been already Assigned!');
         }
 

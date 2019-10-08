@@ -72,7 +72,7 @@ class RegistrarController extends Controller
         // check id number existence
         $check_id = Registrar::where('id_number')->first();
 
-        if(count($check_id) > 0 && $registrar->id_number == $id_number && $id_number != null) {
+        if(!empty($check_id) && $registrar->id_number == $id_number && $id_number != null) {
             return redirect()->back()->with('error', 'ID Number Exists!');
         }
 
@@ -592,7 +592,7 @@ class RegistrarController extends Controller
         // student number existence
         $check_sn = User::where('student_number', $sn)->first();
 
-        if(count($check_sn) > 0 && $student->student_number != $sn) {
+        if(!empty($check_sn) && $student->student_number != $sn) {
             return redirect()->back()->with('error', 'Student Number Already Exist!');
         }
 
@@ -700,7 +700,7 @@ class RegistrarController extends Controller
 
         // get last student id of student in the student_infos table
         $last_student = StudentInfo::orderBy('id', 'desc')->first(['id']);
-        if(count($last_student) > 0) {
+        if(!emtpy($last_student)) {
             $ref_id = $last_student->id + 1;
         }
         else {
@@ -808,7 +808,7 @@ class RegistrarController extends Controller
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('info', 'Please Check AcademicYear and Semester in Admin!');
         }
 
@@ -872,7 +872,7 @@ class RegistrarController extends Controller
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'No Active AcademicYear or Semester. Contact Admin!');
         }
 
@@ -960,7 +960,7 @@ class RegistrarController extends Controller
         $sub->units = $units;
         $sub->lab_units = $lab_units;
         $sub->course_id = $course->id;
-        if(count($major) > 0) {
+        if(!empty($major)) {
             $sub->major_id = $major->id;
         }
         else {
@@ -1031,7 +1031,7 @@ class RegistrarController extends Controller
         // check if code exists
         $check_code = Subject::where('code', $code)->first();
 
-        if(count($check_code) > 0 && $sub->code != $code) {
+        if(!empty($check_code) && $sub->code != $code) {
             return redirect()->back()->with('error', 'Subject Code Exists. Please Check your input');
         }
 
@@ -1040,7 +1040,7 @@ class RegistrarController extends Controller
         $sub->units = $units;
         $sub->lab_units = $lab_units;
         $sub->course_id = $course->id;
-        if(count($major) > 0) {
+        if(!empty($major)) {
             $sub->major_id = $major->id;
         }
         else {

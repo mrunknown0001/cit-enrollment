@@ -194,7 +194,7 @@ class StudentController extends Controller
         $avatar = Avatar::where('student_id', Auth::user()->id)->first();
 
         // save photoname to database
-        if(count($avatar) < 1) {
+        if(empty($avatar)) {
             $avatar = new Avatar();
             $avatar->student_id = Auth::user()->id;
             $avatar->name = $photoname;
@@ -225,7 +225,7 @@ class StudentController extends Controller
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->route('student.dashboard')->with('error', 'Academic Year or Semester Not Set!');
         }
 
@@ -236,7 +236,7 @@ class StudentController extends Controller
                                 ->whereActive(1)
                                 ->first();
 
-        if(count($assessment) > 0) {
+        if(!empty($assessment)) {
             return redirect()->route('student.enrollment')->with('info', 'Assessment Already Taken!');
         }
 
@@ -247,7 +247,7 @@ class StudentController extends Controller
         // to determine the subjects
         $student = User::find(Auth::user()->id);
 
-        if(count($student->status) > 0) {
+        if(!empty($student->status)) {
             return redirect()->back()->with('error', 'Sorry You Cant Enroll!');
         }
 
@@ -295,7 +295,7 @@ class StudentController extends Controller
         $student = User::find(Auth::user()->id);
 
 
-        if(count($student->status) > 0) {
+        if(!empty($student->status)) {
             return redirect()->back()->with('error', 'Sorry You Cant Enroll!');
         }
 
@@ -399,7 +399,7 @@ class StudentController extends Controller
 
         // if not exist, create a new counter
         // if exists increment by 1
-        if(count($check_counter) > 0) {
+        if(!empty($check_counter)) {
             // check if the number of students assess is less than the limi
             if($check_counter->student_count < $limit->limit) {
                 // increment counter by 1
@@ -485,7 +485,7 @@ class StudentController extends Controller
         $es = EnrollmentSetting::find(1);
         $rp = RegistrationPayment::where('student_id', Auth::user()->id)->where('active', 1)->first();
 
-        if(count($ay) < 1 && count($sem) < 1) {
+        if(empty($ay) && empty($sem)) {
             return redirect()->route('student.dashboard')->with('error', 'No active Academic Year or Semester!');
         }
 
@@ -501,7 +501,7 @@ class StudentController extends Controller
                             ->where('active', 1)
                             ->first();
 
-        if(count($assessment) < 1) {
+        if(!empty($assessment)) {
             return redirect()->route('student.dashboard')->with('error', 'No Assessment!');
         }
 
@@ -607,7 +607,7 @@ class StudentController extends Controller
         $ay = AcademicYear::whereActive(1)->first();
         $sem = Semester::whereActive(1)->first();
 
-        if(count($ay) < 1 && count($sem) < 1) {
+        if(empty($ay) && empty($sem)) {
             return redirect()->route('student.dashboard')->with('error', 'No Active Academic Year');
         }
 
@@ -629,7 +629,7 @@ class StudentController extends Controller
 
         $prev_ay = AcademicYear::find($prev_ay_id);
 
-        if(count($prev_ay) > 0) {
+        if(!empty($prev_ay)) {
             $grades = Grade::where('student_id', $student->id)
                     ->where('academic_year_id', $prev_ay->id)
                     ->where('semester_id', $prev_sem_id)
@@ -719,7 +719,7 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
         }
 
@@ -738,12 +738,12 @@ class StudentController extends Controller
 
         
 
-        if(count($unfinished_payment) > 0) {
+        if(!empty($unfinished_payment)) {
             // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
             $unfinished_payment->delete();
         }
 
-        if(count($rp) < 1) {
+        if(empty($rp)) {
             // add new record for registration payment
             // make student legible for enrollment
             $reg_payment = new RegistrationPayment();
@@ -780,7 +780,7 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
         }
 
@@ -793,7 +793,7 @@ class StudentController extends Controller
 
         
 
-        if(count($unfinished_payment) > 0) {
+        if(!empty($unfinished_payment)) {
             // return redirect()->route('student.dashboard')->with('info', 'Please Try Paying Again Later.');
             $unfinished_payment->delete();
         }
@@ -820,7 +820,7 @@ class StudentController extends Controller
 
 
 
-        if(count($unfinished_payment) > 0) {
+        if(!empty($unfinished_payment)) {
             // return redirect()->route('student.dashboard')->with('info', 'Please Try Paying Again Later.');
             $unfinished_payment->delete();
         }
@@ -841,7 +841,7 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
         }
 
@@ -853,7 +853,7 @@ class StudentController extends Controller
                                     ->first();
 
 
-        if(count($unfinished_payment) > 0) {
+        if(!empty($unfinished_payment)) {
             // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
             $unfinished_payment->delete();
         }
@@ -953,7 +953,7 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
         }
 
@@ -966,7 +966,7 @@ class StudentController extends Controller
 
         
 
-        if(count($unfinished_payment) > 0) {
+        if(!empty($unfinished_payment)) {
             // return redirect()->route('student.dashboard')->with('info', 'Please Try Paying Again Later.');
             $unfinished_payment->delete();
         }
@@ -985,7 +985,7 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
         }
 
@@ -1000,7 +1000,7 @@ class StudentController extends Controller
                                     ->first();
 
 
-        if(count($unfinished_payment) > 0) {
+        if(!empty($unfinished_payment)) {
             // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
             $unfinished_payment->delete();
         }
@@ -1080,7 +1080,7 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
         }
 
@@ -1092,7 +1092,7 @@ class StudentController extends Controller
                                     ->first();
 
 
-        if(count($unfinished_payment) > 0) {
+        if(!empty($unfinished_payment)) {
             // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
             $unfinished_payment->delete();
         }
@@ -1117,7 +1117,7 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
         }
 
@@ -1129,7 +1129,7 @@ class StudentController extends Controller
                                     ->first();
 
 
-        if(count($unfinished_payment) > 0) {
+        if(!empty($unfinished_payment)) {
             // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
             $unfinished_payment->delete();
         }
@@ -1156,7 +1156,7 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
         }
 
@@ -1168,7 +1168,7 @@ class StudentController extends Controller
                                     ->first();
 
 
-        if(count($unfinished_payment) > 0) {
+        if(!empty($unfinished_payment) ) {
             // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
             $unfinished_payment->delete();
         }
@@ -1204,7 +1204,7 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
         }
 
@@ -1216,7 +1216,7 @@ class StudentController extends Controller
                                     ->first();
 
 
-        if(count($unfinished_payment) > 0) {
+        if(!empty($unfinished_payment)) {
             // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
             $unfinished_payment->delete();
         }
@@ -1279,7 +1279,7 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
         }
 
@@ -1291,7 +1291,7 @@ class StudentController extends Controller
                                     ->first();
 
 
-        if(count($unfinished_payment) > 0) {
+        if(!empty($unfinished_payment)) {
             // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
             $unfinished_payment->delete();
         }
@@ -1322,7 +1322,7 @@ class StudentController extends Controller
         $ay = AcademicYear::where('active', 1)->first();
         $sem = Semester::where('active', 1)->first();
 
-        if(count($ay) < 1 || count($sem) < 1) {
+        if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
         }
 
@@ -1334,7 +1334,7 @@ class StudentController extends Controller
                                     ->first();
 
 
-        if(count($unfinished_payment) > 0) {
+        if(!empty($unfinished_payment)) {
             // return redirect()->route('student.dashboard')->with('info', 'Please Paying Try Again Later.');
             $unfinished_payment->delete();
         }

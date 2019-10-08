@@ -17,7 +17,7 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          {{-- <li><a href="{{ route('admin.deans') }}"><i class="fa fa-arrow-circle-right"></i> Deans</a></li> --}}
+          <li><a href="{{ route('admin.deans') }}"><i class="fa fa-arrow-circle-right"></i> Principals</a></li>
           <li><a href="{{ route('admin.registrars') }}"><i class="fa fa-arrow-circle-right"></i> Registrars</a></li>
           <li><a href="{{ route('admin.cashiers') }}"><i class="fa fa-arrow-circle-right"></i> Cashiers</a></li>
           <li><a href="{{ route('admin.faculties') }}"><i class="fa fa-arrow-circle-right"></i> Faculties</a></li>

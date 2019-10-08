@@ -36,11 +36,11 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 		return redirect()->route('admin.login');
 	});
 
-	Route::get('/dean/login', 'LoginController@deanLogin')->name('dean.login');
+	Route::get('/principal/login', 'LoginController@deanLogin')->name('dean.login');
 
-	Route::post('/dean/login', 'LoginController@postDeanLogin')->name('dean.login.post');
+	Route::post('/principal/login', 'LoginController@postDeanLogin')->name('dean.login.post');
 
-	Route::get('/dean', function () {
+	Route::get('/principal', function () {
 		return redirect()->route('dean.login');
 	});
 
@@ -481,7 +481,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 /*
  * Route group dean
  */
-Route::group(['prefix' => 'dean', 'middleware' => 'prevent-back-history'], function () {
+Route::group(['prefix' => 'principal', 'middleware' => 'prevent-back-history'], function () {
 	// route to dean dashboard
 	Route::get('/dashboard', 'DeanController@dashboard')->name('dean.dashboard');
 
