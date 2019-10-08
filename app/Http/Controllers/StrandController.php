@@ -19,7 +19,7 @@ class StrandController extends AdminController
     public function postAddStrand(Request $request)
     {
     	$request->validate([
-    		'strand' => 'requried',
+    		'strand' => 'required',
     		'code' => 'required',
     		'description' => 'nullable',
     	]);
@@ -28,5 +28,10 @@ class StrandController extends AdminController
     	$strand = $request['strand'];
     	$code = $request['code'];
     	$description = $request['description'];
+
+        // save strand
+
+        // condition for success and fail
+        
     }
 }

@@ -29,7 +29,7 @@
 
       <h3>Privacy Statement</h3>
       <p class="italized">Last updated: October 7, 2019</p>
-      <p>Please read the Privacy Statement carefully before using the https://cit-paniqui.com/ website (the "Service") operated by Online Enrollment for Mayantoc High School ("us", "we", or "our").</p>
+      <p>Please read the Privacy Statement carefully before using the https://mayantochs.com/ website (the "Service") operated by Online Enrollment for Mayantoc High School ("us", "we", or "our").</p>
       <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.</p>
       <p>By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service. This Terms and Conditions agreement for Online Enrollment for Mayantoc High School is managed by TermsFeed Terms and Conditions Generator.</p>
       <h4>Accounts</h4>
