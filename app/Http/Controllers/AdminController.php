@@ -2016,4 +2016,38 @@ class AdminController extends Controller
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * School Calendar
+     */
+    public function schoolCalendar()
+    {
+        $calendars = \App\SchoolCalendar::where('active', 1)->get();
+
+        return view('admin.school-calendar', ['calendars' => $calendars]);
+    }
+
 }

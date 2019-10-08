@@ -30,8 +30,18 @@ class StrandController extends AdminController
     	$description = $request['description'];
 
         // save strand
+        $new = new Strand();
+        $new->strand = $strand;
+        $new->code = $code;
+        $new->description;
 
         // condition for success and fail
-        
+        if($new->save()) {
+
+            GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added New Strand');
+
+            return redirect()->route('admin.strands')->with('success', 'New Strand Saved!');
+        }
+
     }
 }

@@ -163,21 +163,21 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	});
 
 	// route to view deans
-	Route::get('/deans', 'AdminController@deans')->name('admin.deans');
+	Route::get('/principal', 'AdminController@deans')->name('admin.deans');
 
 	// route to add dean
-	Route::get('/dean/add', 'AdminController@addDean')->name('admin.add.dean');
+	Route::get('/principal/add', 'AdminController@addDean')->name('admin.add.dean');
 
 	// route to save new dean
-	Route::post('/dean/add', 'AdminController@postAddDean')->name('admin.add.dean.post');
+	Route::post('/principal/add', 'AdminController@postAddDean')->name('admin.add.dean.post');
 
 	// route to update dean
-	Route::get('/dean/{id}/update', 'AdminController@updateDean')->name('admin.update.dean');
+	Route::get('/principal/{id}/update', 'AdminController@updateDean')->name('admin.update.dean');
 
 	// route to save update on dean
-	Route::post('/dean/update', 'AdminController@postUpdateDean')->name('admin.update.dean.post');
+	Route::post('/principal/update', 'AdminController@postUpdateDean')->name('admin.update.dean.post');
 
-	Route::get('/dean/update', function () {
+	Route::get('/principal/update', function () {
 		return redirect()->route('admin.deans');
 	});
 
@@ -424,6 +424,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	// Route::get('/subject/update', function () {
 	// 	return redirect()->route('admin.subjects');
 	// });
+	// 
+	// 
+	// 
+	// 
+	// 
+	// 
+	// School Calendar
+	Route::get('/school-calendar', 'AdminController@schoolCalendar')->name('admin.school.calendar');
 
 	// route to show miscellaneous fee and unit price
 	Route::get('/price-and-miscellaneous', 'AdminController@unitPriceMisc')->name('admin.unit.price.misc');

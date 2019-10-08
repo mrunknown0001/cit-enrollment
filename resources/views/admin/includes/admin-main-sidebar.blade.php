@@ -48,12 +48,17 @@
       </li>
       <li class="{{ route('admin.academic.year') == url()->current() ? 'active' : '' }}">
         <a href="{{ route('admin.academic.year') }}">
-          <i class="fa fa-calendar"></i> <span>Academic Year</span>
+          <i class="fa fa-calendar-o"></i> <span>Academic Year</span>
         </a>
       </li>
       <li class="{{ route('admin.year.level') == url()->current() ? 'active' : '' }}">
         <a href="{{ route('admin.year.level') }}">
           <i class="fa fa-bars"></i> <span>Year Level</span>
+        </a>
+      </li>
+      <li class="{{ route('admin.school.calendar') == url()->current() ? 'active' : '' }}">
+        <a href="{{ route('admin.school.calendar') }}">
+          <i class="fa fa-calendar"></i> <span>School Calendar</span>
         </a>
       </li>
       <li class="{{ route('admin.unit.price.misc') == url()->current() ? 'active' : '' }}">
