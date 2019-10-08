@@ -22,7 +22,7 @@
     <div class="login-logo">
       <a href="javascript:void(0)"><b>Student</b> Login</a>
     </div>
-    <p class="login-box-msg">Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</p>
+    <p class="login-box-msg">Online Enrollment for Mayantoc High School</p>
     @include('includes.all')
     <form action="{{ route('student.login.post') }}" method="post" autocomplete="off">
       {{ csrf_field() }}

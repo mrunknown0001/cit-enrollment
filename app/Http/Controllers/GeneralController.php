@@ -25,6 +25,14 @@ class GeneralController extends Controller
     }
 
 
+
+    // school calendar
+    public function schoolCalendar()
+    {
+        return view('school-calendar');
+    }
+
+
     // method use to go to registration page
     public function register()
     {

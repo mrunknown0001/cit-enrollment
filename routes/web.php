@@ -10,6 +10,8 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 	Route::get('/', 'GeneralController@landingPage')->name('landing.page');
 
+	Route::get('/calendar', 'GeneralController@schoolCalendar')->name('school.calendar');
+
 	Route::get('/registration', 'GeneralController@register')->name('registration');
 
 	Route::post('/student/registration/details', 'RegistrationController@studentShowDetails')->name('student.show.details.post');

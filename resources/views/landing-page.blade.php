@@ -43,6 +43,8 @@
               <button class="btn btn-danger btn-lg" data-toggle="modal" data-target="#studentRegistration">Student Registration</button>
               {{-- <a href="{{ route('login') }}" class="btn btn-primary btn-lg">Student Login</a> --}}
               <button class="btn btn-danger btn-lg" data-toggle="modal" data-target="#studentLogin">Student Login</button>
+
+              <button class="btn btn-danger btn-lg" onclick="goToSchoolCalendar()">School Calendar</button>
               
             </div>
             {{-- <p class="text-center"><a href="https://termsfeed.com/cookies-policy/a5544b216c48bcb40df4037e62a59d34" class="white-text">Cookie Policy</a></p> --}}
@@ -66,6 +68,10 @@
   <script src="{{ asset('js/app.js') }}"></script>
   <script type="text/javascript" src="{{ asset('landing/js/main.js') }}"></script>
 
-              
+  <script>
+    function goToSchoolCalendar() {
+      window.location.replace("/calendar");
+    }
+  </script>      
 </body>
 </html>
