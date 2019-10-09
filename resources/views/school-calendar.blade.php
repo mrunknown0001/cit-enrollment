@@ -106,7 +106,7 @@
 </style>
 </head>
 <body>
-
+  <a href="{{ route('landing.page') }}">back to Landing Page</a>
   <div id='calendar'></div>
 
 </body>
