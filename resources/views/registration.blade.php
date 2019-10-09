@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Student Registration - Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</title>
+  <title>Student Registration - Online Enrollment for Mayantoc High School</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet"  href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue-light.min.css') }}">
@@ -22,7 +22,7 @@
     <div class="login-logo">
       <a href="javascript:void(0)"><b>Student</b> Registration</a>
     </div>
-    <p class="login-box-msg">Online Enrollment for CIT Colleges of Paniqui Foundation Inc.</p>
+    <p class="login-box-msg">Online Enrollment for Mayantoc High School</p>
     @include('includes.all')
     <form action="{{ route('student.show.details.post') }}" method="POST" autocomplete="off">
       {{ csrf_field() }}
