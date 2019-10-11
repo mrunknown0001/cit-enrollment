@@ -12,6 +12,9 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
 
 	Route::get('/calendar', 'GeneralController@schoolCalendar')->name('school.calendar');
 
+	// get all active school calendar
+	Route::get('/school-calendar/all', 'GeneralController@activeSchoolCalendar')->name('all.school.calendar');
+
 	Route::get('/registration', 'GeneralController@register')->name('registration');
 
 	Route::post('/student/registration/details', 'RegistrationController@studentShowDetails')->name('student.show.details.post');
@@ -434,6 +437,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	// 
 	// School Calendar
 	Route::get('/school-calendar', 'AdminController@schoolCalendar')->name('admin.school.calendar');
+
+	// add school calendar
+	Route::post('/school-calendar/add', 'AdminController@postAddSchoolCalendar')->name('admin.school.calendar.add.post');
 
 	// route to show miscellaneous fee and unit price
 	Route::get('/price-and-miscellaneous', 'AdminController@unitPriceMisc')->name('admin.unit.price.misc');

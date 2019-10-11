@@ -2050,4 +2050,34 @@ class AdminController extends Controller
         return view('admin.school-calendar', ['calendars' => $calendars]);
     }
 
+
+    /**
+     * add school calendar
+     */
+    public function postAddSchoolCalendar(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'date' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        $title = $request['title'];
+        $date = $request['date'];
+        $description = $request['description'];
+
+        $sc = new \App\SchoolCalendar();
+
+        $sc->title = $title;
+        $sc->date = date('Y-m-d', strtotime($date));
+        $sc->description = $description;
+
+        if($sc->save()) {
+
+            GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added School Calendar');
+            
+            return redirect()->route('admin.school.calendar')->with('success', 'Added School Calendar!');
+        }
+    }
+
 }

@@ -33,6 +33,25 @@ class GeneralController extends Controller
     }
 
 
+    // school calendar get all
+    public function activeSchoolCalendar()
+    {
+        $calendars = \App\SchoolCalendar::where('active', 1)->get();
+        $data = NULL;
+
+        if(count($calendars) > 0) {
+            foreach($calendars as $c) {
+                $data[] = [
+                    'title' => $c->title,
+                    'start' => $c->date,
+                ];
+            }
+        }
+
+        return $data;
+    }
+
+
     // method use to go to registration page
     public function register()
     {

@@ -17,13 +17,13 @@
 				@include('includes.all')
 				
 
-				{{-- <p><button class="btn btn-danger" data-toggle="modal" data-target="#addStrand"><i class="fa fa-plus"></i> Add Strand</button></p>
-				@include('admin.includes.modal-strand-add') --}}
+				<p><button class="btn btn-danger" data-toggle="modal" data-target="#addSchoolCalendar"><i class="fa fa-plus"></i> Add School Calendar</button></p>
+				@include('admin.includes.modal-calendar-add')
 
 				@if(count($calendars) > 0)
 				<div class="box box-danger">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-users"></i> Strands</strong>
+						<strong><i class="fa fa-users"></i> School Calendar</strong>
 					</div>
 					<div class="box-body">
 						<table class="table table-bordered table-hover">
@@ -35,7 +35,15 @@
 								</tr>
 							</thead>
 							<tbody>
-
+								@foreach($calendars as $c)
+									<tr>
+										<td>{{ $c->title }}</td>
+										<td>{{ $c->date }}</td>
+										<td>
+											<button class="btn btn-xs"><i class="fa fa-pencil"></i> Update</button>
+										</td>
+									</tr>
+								@endforeach
 							</tbody>
 							<tfoot>
 							</tfoot>
