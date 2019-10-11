@@ -1,6 +1,6 @@
   <header class="main-header">
     <a href="javascript:void(0)" class="logo">
-      <span class="logo-mini"><b>CIT</b></span>
+      <span class="logo-mini"><b>MHS</b></span>
       <span class="logo-lg"><b>Faculty</b></span>
     </a>
     <nav class="navbar navbar-static-top">
