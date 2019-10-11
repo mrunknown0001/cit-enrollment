@@ -2,7 +2,7 @@
   <section class="sidebar">
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header text-center">
-        Dean Menu
+        Principal Menu
       </li>
       <li class="{{ route('dean.dashboard') == url()->current() ? 'active' : ''}}">
         <a href="{{ route('dean.dashboard') }}">
