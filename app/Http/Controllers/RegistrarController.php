@@ -913,12 +913,13 @@ class RegistrarController extends Controller
     // method use to add subject
     public function addSubject()
     {
-        $courses = Course::where('active', 1)->get();
+        // $courses = Course::where('active', 1)->get();
+        $strands = \App\Strand::where('active', 1)->get();
         $subjects = Subject::where('active', 1)->get(['id', 'code']);
         $yl = YearLevel::get();
         $sem = Semester::get();
 
-        return view('registrar.subject-add', ['courses' => $courses, 'subjects' => $subjects, 'yl' => $yl, 'sem' => $sem]);
+        return view('registrar.subject-add', ['strands' => $strands, 'subjects' => $subjects, 'yl' => $yl, 'sem' => $sem]);
     }
 
 
@@ -928,30 +929,32 @@ class RegistrarController extends Controller
         $request->validate([
             // 'code' => 'required|unique:subjects',
 
-            'code' => 'required|unique:subjects,code,NULL,NULL,course_id, ' . $request['course'],
-            'course' => 'required|unique:subjects,course_id,NULL,NULL,code, ' . $request['code'],
+            // 'code' => 'required|unique:subjects,code,NULL,NULL,course_id, ' . $request['course'],
+            // 'course' => 'required|unique:subjects,course_id,NULL,NULL,code, ' . $request['code'],
 
             'description' => 'required',
             'units' => 'required|numeric',
             // 'course' => 'required',
             'year_level' => 'required',
             'semester' => 'required',
-            'curriculum' => 'required'
+            // 'curriculum' => 'required',
+            'strand' => 'required'
         ]);
 
         $code = $request['code'];
         $description = $request['description'];
         $units = $request['units'];
         $lab_units = $request['lab_units'];
-        $course_id = $request['course'];
-        $major_id = $request['major'];
+        // $course_id = $request['course'];
+        // $major_id = $request['major'];
         $year_level_id = $request['year_level'];
         $semester_id = $request['semester'];
-        $curriculum_id = $request['curriculum'];
-        $prerequisite = $request['prerequisite'];
+        // $curriculum_id = $request['curriculum'];
+        // $prerequisite = $request['prerequisite'];
+        $strand = $request['strand'];
 
-        $course = Course::findorfail($course_id);
-        $major = CourseMajor::find($major_id);
+        // $course = Course::findorfail($course_id);
+        // $major = CourseMajor::find($major_id);
 
         // save new subject
         $sub = new Subject();
@@ -959,15 +962,16 @@ class RegistrarController extends Controller
         $sub->description = $description;
         $sub->units = $units;
         $sub->lab_units = $lab_units;
-        $sub->course_id = $course->id;
-        if(!empty($major)) {
-            $sub->major_id = $major->id;
-        }
-        else {
-            $sub->major_id = null;
-        }
-        $sub->prerequisite = $prerequisite;
-        $sub->curriculum_id = $curriculum_id;
+        // $sub->course_id = $course->id;
+        // if(!empty($major)) {
+        //     $sub->major_id = $major->id;
+        // }
+        // else {
+        //     $sub->major_id = null;
+        // }
+        // $sub->prerequisite = $prerequisite;
+        // $sub->curriculum_id = $curriculum_id;
+        $sub->strand_id = $strand;
         $sub->year_level_id = $year_level_id;
         $sub->semester_id = $semester_id;
         $sub->save();
@@ -984,11 +988,12 @@ class RegistrarController extends Controller
     {
         $subject = Subject::findorfail($id);
         $subjects = Subject::where('active', 1)->get(['id', 'code']);
-        $courses = Course::orderBy('title', 'asc')->get();
+        // $courses = Course::orderBy('title', 'asc')->get();
+        $strands = \App\Strand::where('active', 1)->get();
         $yl = YearLevel::get();
         $sem = Semester::get();
 
-        return view('registrar.subject-update', ['subject' => $subject, 'subjects' => $subjects, 'courses' => $courses, 'yl' => $yl, 'sem' => $sem]);
+        return view('registrar.subject-update', ['subject' => $subject, 'subjects' => $subjects, 'strands' => $strands, 'yl' => $yl, 'sem' => $sem]);
     }
 
 
@@ -999,10 +1004,11 @@ class RegistrarController extends Controller
             'code' => 'required',
             'description' => 'required',
             'units' => 'required|numeric',
-            'course' => 'required',
+            // 'course' => 'required',
             'year_level' => 'required',
             'semester' => 'required',
-            'curriculum' => 'required'
+            // 'curriculum' => 'required',
+            'strand' => 'required',
         ]);
 
         $subject_id = $request['subject_id'];
@@ -1010,23 +1016,25 @@ class RegistrarController extends Controller
         $description = $request['description'];
         $units = $request['units'];
         $lab_units = $request['lab_units'];
-        $course_id = $request['course'];
-        $major_id = $request['major'];
+        // $course_id = $request['course'];
+        // $major_id = $request['major'];
         $year_level_id = $request['year_level'];
         $semester_id = $request['semester'];
-        $curriculum_id = $request['curriculum'];
-        $prerequisite = $request['prerequisite'];
+        // $curriculum_id = $request['curriculum'];
+        // $prerequisite = $request['prerequisite'];
+        $strand = $request['strand'];
 
 
 
-        $course = Course::findorfail($course_id);
-        $major = CourseMajor::find($major_id);
+        // $course = Course::findorfail($course_id);
+        // $major = CourseMajor::find($major_id);
 
         $sub = Subject::findorfail($subject_id);
 
-        if($sub->id == $prerequisite) {
-            return redirect()->back()->with('error', 'Error in Prerequisite!');
-        }
+        // removed pre requisite
+        // if($sub->id == $prerequisite) {
+        //     return redirect()->back()->with('error', 'Error in Prerequisite!');
+        // }
 
         // check if code exists
         $check_code = Subject::where('code', $code)->first();
@@ -1039,15 +1047,16 @@ class RegistrarController extends Controller
         $sub->description = $description;
         $sub->units = $units;
         $sub->lab_units = $lab_units;
-        $sub->course_id = $course->id;
-        if(!empty($major)) {
-            $sub->major_id = $major->id;
-        }
-        else {
-            $sub->major_id = null;
-        }
-        $sub->prerequisite = $prerequisite;
-        $sub->curriculum_id = $curriculum_id;
+        // $sub->course_id = $course->id;
+        // if(!empty($major)) {
+        //     $sub->major_id = $major->id;
+        // }
+        // else {
+        //     $sub->major_id = null;
+        // }
+        // $sub->prerequisite = $prerequisite;
+        // $sub->curriculum_id = $curriculum_id;
+        $sub->strand_id = $strand;
         $sub->year_level_id = $year_level_id;
         $sub->semester_id = $semester_id;
         $sub->save();

@@ -753,6 +753,11 @@ Route::group(['prefix' => 'cahier', 'middleware' => 'prevent-back-history'], fun
 	// route to save new password of cashier
 	Route::post('/password/change', 'CashierController@postChangePassword')->name('cashier.change.password.post');
 
+
+	// route to payment tagging
+	Route::get('/payment/tagging', 'CashierController@paymentTagging')->name('cashier.payment.tagging');
+
+
 	// route to show balances of the students
 	Route::get('/balances', 'CashierController@balances')->name('cashier.balances');
 

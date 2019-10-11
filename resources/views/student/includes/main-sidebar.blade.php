@@ -33,7 +33,7 @@
           <i class="fa fa-file-o"></i>  <span>My Grade</span>
         </a>
       </li>
-      <li class="{{ route('student.balance') == url()->current() ? 'active' : '' }}">
+      {{-- <li class="{{ route('student.balance') == url()->current() ? 'active' : '' }}">
         <a href="{{ route('student.balance') }}">
           <i class="fa fa-rub"></i> <span>Balance</span>
         </a>
@@ -42,7 +42,7 @@
         <a href="{{ route('student.payments') }}">
           <i class="fa fa-money"></i> <span>Payment</span>
         </a>
-      </li>
+      </li> --}}
     </ul>
   </section>
 </aside>

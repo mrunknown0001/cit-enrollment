@@ -124,6 +124,16 @@ class CashierController extends Controller
     }
 
 
+
+    // method use in payment tagging
+    public function paymentTagging()
+    {
+        return view('cashier.tagging');
+    }
+
+
+
+
     // method use to view balances of students
     public function balances()
     {

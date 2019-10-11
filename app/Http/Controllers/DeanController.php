@@ -82,7 +82,7 @@ class DeanController extends Controller
         $dean->save();
 
         // add activity log
-        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Updated Profile');
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Principal Updated Profile');
 
         return redirect()->route('dean.profile')->with('success', 'Profile Updated!');
     }
@@ -122,7 +122,7 @@ class DeanController extends Controller
         $dean->save();
 
         // add activty log
-        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Change Password');
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Principal Change Password');
 
         // return to deans and add dean with message
         return redirect()->route('dean.dashboard')->with('success', 'Password Changed!');
@@ -357,7 +357,7 @@ class DeanController extends Controller
         $sched->save();
 
         // add activty log
-        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Added New Schedule');
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Principal Added New Schedule');
 
         // return to deans and add dean with message
         return redirect()->back()->with('success', 'Schedule Added!');
@@ -370,7 +370,7 @@ class DeanController extends Controller
         $sched = Schedule::findorfail($id);
         $sched->delete();
 
-        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Deleted Schedule');
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Principal Deleted Schedule');
 
         return redirect()->back()->with('success', 'Schedule Deleted!');
     }
@@ -503,7 +503,7 @@ class DeanController extends Controller
         $sched->save();
 
         // add activty log
-        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Dean Updated Schedule');
+        GeneralController::activity_log(Auth::guard('dean')->user()->id, 2, 'Principal Updated Schedule');
 
         // return to deans and add dean with message
         return redirect()->back()->with('success', 'Schedule Updated!');

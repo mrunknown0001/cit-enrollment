@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
-    public function course()
+    public function strand()
     {
-    	return $this->belongsTo('App\Course', 'course_id');
+    	return $this->belongsTo('App\Strand', 'strand_id');
     }
 
-    public function major()
-    {
-    	return $this->belongsTo('App\CourseMajor', 'major_id');
-    }
+    // public function major()
+    // {
+    // 	return $this->belongsTo('App\CourseMajor', 'major_id');
+    // }
 }

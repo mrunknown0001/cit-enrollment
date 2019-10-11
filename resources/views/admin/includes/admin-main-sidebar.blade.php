@@ -33,7 +33,7 @@
           <i class="fa fa-book"></i> <span>Strands</span>
         </a>
       </li>
-      <li class="treeview {{ route('admin.courses') == url()->current() || route('admin.course.majors') == url()->current() || route('admin.curricula') == url()->current() ? 'active' : '' }}">
+      {{-- <li class="treeview {{ route('admin.courses') == url()->current() || route('admin.course.majors') == url()->current() || route('admin.curricula') == url()->current() ? 'active' : '' }}">
         <a href="javascript:void(0)">
           <i class="fa fa-book"></i> <span>Courses</span>
           <span class="pull-right-container">
@@ -45,7 +45,7 @@
           <li><a href="{{ route('admin.course.majors') }}"><i class="fa fa-arrow-circle-right"></i> View Course Majors</a></li>
           <li><a href="{{ route('admin.curricula') }}"><i class="fa fa-arrow-circle-right"></i> View Course Curricula</a></li>
         </ul>
-      </li>
+      </li> --}}
       <li class="{{ route('admin.academic.year') == url()->current() ? 'active' : '' }}">
         <a href="{{ route('admin.academic.year') }}">
           <i class="fa fa-calendar-o"></i> <span>Academic Year</span>

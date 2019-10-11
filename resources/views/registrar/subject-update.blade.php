@@ -85,7 +85,7 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="form-group{{ $errors->has('course') ? ' has-error' : '' }}">
+									{{-- <div class="form-group{{ $errors->has('course') ? ' has-error' : '' }}">
 										<label for="course">Course</label><label class="label-required">*</label>
 										<select name="course" id="course" class="form-control" required="">
 											<option value="">Select Course</option>
@@ -124,6 +124,22 @@
 										@if ($errors->has('curriculum'))
 										<span class="help-block">
 											<strong>{{ $errors->first('curriculum') }}</strong>
+										</span>
+										@endif
+									</div> --}}
+									<div class="form-group{{ $errors->has('strand') ? ' has-error' : '' }}">
+										<label for="strand">Select Strand</label><label class="label-required">*</label>
+										<select name="strand" id="strand" class="form-control">
+											<option value="">Select Strand</option>
+											@if(count($strands) > 0)
+												@foreach($strands as $s)
+													<option value="{{ $s->id }}">{{ $s->code }}</option>
+												@endforeach
+											@endif
+										</select>
+										@if ($errors->has('strand'))
+										<span class="help-block">
+											<strong>{{ $errors->first('strand') }}</strong>
 										</span>
 										@endif
 									</div>

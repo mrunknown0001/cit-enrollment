@@ -60,10 +60,10 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersSeeder::class);
         $this->call(YearLevelSeeder::class);
         $this->call(SemesterSeeder::class);
-        $this->call(CourseSeeder::class);
-        $this->call(MajorSeeder::class);
-        $this->call(CurriculumSeeder::class);
-        $this->call(SubjectSeeder::class);
+        // $this->call(CourseSeeder::class);
+        // $this->call(MajorSeeder::class);
+        // $this->call(CurriculumSeeder::class);
+        // $this->call(SubjectSeeder::class);
         $this->call(StudentTypeTableSeeder::class);
 
     }
