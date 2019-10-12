@@ -29,21 +29,15 @@
           // console.log(json);
           data = json;
 
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          plugins: [ 'interaction', 'dayGrid' ],
+          defaultDate: today,
+          editable: true,
+          eventLimit: true, // allow "more" link when too many events
+          events: data,
+        });
 
-
-
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        plugins: [ 'interaction', 'dayGrid' ],
-        defaultDate: today,
-        editable: true,
-        eventLimit: true, // allow "more" link when too many events
-        events: data,
-      });
-
-      calendar.render();
-
-
-
+        calendar.render();
 
       },
       error: function(e) {
