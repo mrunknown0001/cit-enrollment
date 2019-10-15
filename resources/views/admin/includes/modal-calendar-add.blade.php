@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
                   <label for="title">Title</label><label class="label-required">*</label>
-                  <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Enter Strand" autofocus required>
+                  <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Enter School Calendar" autofocus required>
                   @if ($errors->has('title'))
                       <span class="help-block">
                           <strong>{{ $errors->first('title') }}</strong>
