@@ -73,8 +73,8 @@
 							<div class="row">
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
-							      	<label for="student_number">Student Number</label><label class="label-required">*</label>
-							        <input id="student_number" type="text" class="form-control" name="student_number" value="{{ $sn }}" placeholder="Enter Student Number" required>
+							      	<label for="student_number">LRN</label><label class="label-required">*</label>
+							        <input id="student_number" type="text" class="form-control" name="student_number" value="{{ $sn }}" placeholder="LRN" required>
 							        @if ($errors->has('student_number'))
 							            <span class="help-block">
 							                <strong>{{ $errors->first('student_number') }}</strong>
