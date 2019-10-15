@@ -593,7 +593,7 @@ class RegistrarController extends Controller
         $check_sn = User::where('student_number', $sn)->first();
 
         if(!empty($check_sn) && $student->student_number != $sn) {
-            return redirect()->back()->with('error', 'Student Number Already Exist!');
+            return redirect()->back()->with('error', 'LRN Already Exist!');
         }
 
         $year_level = YearLevel::findorfail($yl_id);
@@ -717,7 +717,7 @@ class RegistrarController extends Controller
 
 
                     if(!empty($check_student_number)) {
-                        return redirect()->back()->with('error', 'Student Exist! Please Remove Student with Student Number: ' . $row->student_number . ' - ' . ucwords($row->firstname . ' ' . $row->lastname));
+                        return redirect()->back()->with('error', 'Student Exist! Please Remove Student with LRN: ' . $row->student_number . ' - ' . ucwords($row->firstname . ' ' . $row->lastname));
                     }
 
                     else {
