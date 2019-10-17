@@ -1,11 +1,11 @@
 @extends('layouts.dean-layout')
 
-@section('title') Dean Profile @endsection
+@section('title') Principal Profile @endsection
 
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Dean Profile</h1>
+		<h1>Principal Profile</h1>
 		<ol class="breadcrumb">
 			<li><a href="javascript:void(0)"><i class="fa fa-user"></i> Home</a></li>
 			<li class="active">Profile</li>
@@ -17,7 +17,7 @@
 				@include('includes.all')
 				<div class="box box-danger">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-user"></i> Dean Profile</strong>
+						<strong><i class="fa fa-user"></i> Principal Profile</strong>
 					</div>
 					<div class="box-body">
 						<div class="row">
