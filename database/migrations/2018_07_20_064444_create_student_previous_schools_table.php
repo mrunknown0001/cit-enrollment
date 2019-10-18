@@ -21,11 +21,11 @@ class CreateStudentPreviousSchoolsTable extends Migration
             $table->string('elementary_year_graduated', 120)->nullable();
             $table->string('high_school', 120)->nullable();
             $table->string('high_school_year_graduated', 120)->nullable();
-            $table->string('college_school', 120)->nullable();
-            $table->string('college_year_graduated', 4)->nullable();
-            $table->string('school_last_attended', 120)->nullable();
-            $table->string('school_address', 120)->nullable();
-            $table->string('year_graduated', 4)->nullable();
+            // $table->string('college_school', 120)->nullable();
+            // $table->string('college_year_graduated', 4)->nullable();
+            // $table->string('school_last_attended', 120)->nullable();
+            // $table->string('school_address', 120)->nullable();
+            // $table->string('year_graduated', 4)->nullable();
             $table->timestamps();
         });
     }

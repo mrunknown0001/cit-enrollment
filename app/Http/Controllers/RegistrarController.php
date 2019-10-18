@@ -761,11 +761,11 @@ class RegistrarController extends Controller
                                 'elementary_year_graduated' => $row->elem_year_graduated,
                                 'high_school' => $row->high_school,
                                 'high_school_year_graduated' => $row->hs_year_graduated,
-                                'college_school' => $row->college_degree,
-                                'college_year_graduated' => $row->college_year_graduated,
-                                'school_last_attended' => $row->school_last_attended,
-                                'school_address' => $row->school_address,
-                                'year_graduated' => $row->year_graduated
+                                // 'college_school' => $row->college_degree,
+                                // 'college_year_graduated' => $row->college_year_graduated,
+                                // 'school_last_attended' => $row->school_last_attended,
+                                // 'school_address' => $row->school_address,
+                                // 'year_graduated' => $row->year_graduated
                             ];
 
                     }
