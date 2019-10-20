@@ -20,9 +20,9 @@
 				@include('admin.includes.modal-year-level-add')  --}}
 
 				<p>
-					{{-- <button class="btn btn-danger" data-toggle="modal" data-target="#incrementYearLevel">
-						<i class="fa fa-plus"></i> Add Year Level
-					</button> --}}
+					<button class="btn btn-danger" data-toggle="modal" data-target="#incrementYearLevel">
+						<i class="fa fa-plus"></i> Add Curriculum
+					</button>
 				</p>
 
 				@include('includes.all')

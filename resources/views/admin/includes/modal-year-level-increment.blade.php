@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p><strong>Are you sure you want to add year level?</strong></p>
+        <p><strong>Are you sure you want to add Curriculum?</strong></p>
 
 
       </div>
