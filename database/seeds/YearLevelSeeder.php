@@ -13,17 +13,23 @@ class YearLevelSeeder extends Seeder
     {
         DB::table('year_levels')->insert([
         	[
-        		'name' => 'First Year'
+        		'name' => 'Grade 7'
         	],
         	[
-        		'name' => 'Second Year'
+        		'name' => 'Grade 8'
         	],
         	[
-        		'name' => 'Third Year'
+        		'name' => 'Grade 9'
         	],
         	[
-        		'name' => 'Fourth Year'
-        	]
+        		'name' => 'Grade 10'
+        	],
+            [
+                'name' => 'Grade 11',
+            ],
+            [
+                'name' => 'Grade 12',
+            ],
         ]);
     }
 }

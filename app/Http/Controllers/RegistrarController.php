@@ -163,7 +163,8 @@ class RegistrarController extends Controller
             'student_number' => 'nullable|numeric'
         ]);
 
-        $courses = Course::where('active', 1)->orderBy('title', 'asc')->get();
+        // $courses = Course::where('active', 1)->orderBy('title', 'asc')->get();
+        $strands = \App\Strand::where('active', 1)->orderBy('code', 'asc')->get();
         $yl = YearLevel::get();
 
         $sn = $request['sn'];
@@ -177,17 +178,18 @@ class RegistrarController extends Controller
         $yl_id = $request['yl_id'];
 
     	return view('registrar.student-add', [
-            'courses' => $courses,
+            // 'courses' => $courses,
+            'strands' => $strands,
             'yl' => $yl,
             'sn' => $sn, // student number
             'firstname' => $firstname,
             'lastname' => $lastname,
             'middlename' => $middlename,
             'suffix' => $suffix,
-            'course_id' => $course_id,
-            'major_id' => $major_id,
+            // 'course_id' => $course_id,
+            // 'major_id' => $major_id,
             'curriculum_id' => $curriculum_id,
-            'yl_id' => $yl_id
+            // 'yl_id' => $yl_id
         ]);
     }
 
@@ -200,9 +202,9 @@ class RegistrarController extends Controller
             'firstname' => 'nullable|regex:/^[\pL\s\-]+$/u',
             'lastname' => 'nullable|regex:/^[\pL\s\-]+$/u',
             'middlename' => 'nullable|regex:/^[\pL\s\-]+$/u',
-            'course' => 'required',
+            // 'course' => 'required',
             'curriculum' => 'required',
-            'year_level' => 'required',
+            // 'year_level' => 'required',
             'student_number' => 'nullable|numeric'
         ]);
 
@@ -212,10 +214,10 @@ class RegistrarController extends Controller
         $lastname = $request['lastname'];
         $middlename = $request['middlename'];
         $suffix = $request['suffix_name'];
-        $course_id = $request['course'];
-        $major_id = $request['major'];
+        // $course_id = $request['course'];
+        // $major_id = $request['major'];
         $curriculum_id = $request['curriculum'];
-        $yl_id = $request['year_level'];
+        // $yl_id = $request['year_level'];
 
         $sex = $request['sex'];
         $civil_status = $request['civil_status'];
@@ -237,10 +239,10 @@ class RegistrarController extends Controller
             'lastname' => $lastname,
             'middlename' => $middlename,
             'suffix' => $suffix,
-            'course_id' => $course_id,
-            'major_id' => $major_id,
+            // 'course_id' => $course_id,
+            // 'major_id' => $major_id,
             'curriculum_id' => $curriculum_id,
-            'yl_id' => $yl_id,
+            // 'yl_id' => $yl_id,
 
             'sex' => $sex,
             'civil_status' => $civil_status,
@@ -272,10 +274,10 @@ class RegistrarController extends Controller
         $lastname = $request['lastname'];
         $middlename = $request['middlename'];
         $suffix = $request['suffix'];
-        $course_id = $request['course_id'];
-        $major_id = $request['major_id'];
+        // $course_id = $request['course_id'];
+        // $major_id = $request['major_id'];
         $curriculum_id = $request['curriculum_id'];
-        $yl_id = $request['yl_id'];
+        // $yl_id = $request['yl_id'];
 
         $sex = $request['sex'];
         $civil_status = $request['civil_status'];
@@ -297,10 +299,10 @@ class RegistrarController extends Controller
             'lastname' => $lastname,
             'middlename' => $middlename,
             'suffix' => $suffix,
-            'course_id' => $course_id,
-            'major_id' => $major_id,
+            // 'course_id' => $course_id,
+            // 'major_id' => $major_id,
             'curriculum_id' => $curriculum_id,
-            'yl_id' => $yl_id,
+            // 'yl_id' => $yl_id,
 
             'sex' => $sex,
             'civil_status' => $civil_status,
@@ -332,10 +334,10 @@ class RegistrarController extends Controller
         $middlename = $request['middlename'];
         $suffix = $request['suffix'];
 
-        $course_id = $request['course_id'];
-        $major_id = $request['major_id'];
+        // $course_id = $request['course_id'];
+        // $major_id = $request['major_id'];
         $curriculum_id = $request['curriculum_id'];
-        $yl_id = $request['yl_id'];
+        // $yl_id = $request['yl_id'];
 
         $sex = $request['sex'];
         $civil_status = $request['civil_status'];
@@ -355,15 +357,15 @@ class RegistrarController extends Controller
         $elem_year_graduated = $request['elementary_year_graduated'];
         $hs = $request['high_school'];
         $hs_year_graduated = $request['high_school_year_graduated'];
-        $college = $request['college'];
-        $college_year_graduated = $request['college_year_graduated'];
-        $school_last_attended = $request['school_last_attended'];
-        $school_address = $request['school_address'];
-        $year_graduated = $request['year_graduated'];
+        // $college = $request['college'];
+        // $college_year_graduated = $request['college_year_graduated'];
+        // $school_last_attended = $request['school_last_attended'];
+        // $school_address = $request['school_address'];
+        // $year_graduated = $request['year_graduated'];
 
-        $year_level = YearLevel::find($yl_id);
-        $course = Course::find($course_id);
-        $curriculum = Curriculum::find($curriculum_id);
+        // $year_level = YearLevel::find($yl_id);
+        // $course = Course::find($course_id);
+        // $curriculum = Curriculum::find($curriculum_id);
 
         // add to user as students
     	$student = new User();
@@ -375,17 +377,18 @@ class RegistrarController extends Controller
     	$student->save();
 
         // add course enrolled
-        $ce = new CourseEnrolled();
-        $ce->student_id = $student->id;
-        $ce->course_id = $course->id;
-        $ce->major_id = $major_id;
-        $ce->curriculum_id = $curriculum->id;
-        $ce->save();
+        // $ce = new CourseEnrolled();
+        // $ce->student_id = $student->id;
+        // $ce->course_id = $course->id;
+        // $ce->major_id = $major_id;
+        // $ce->curriculum_id = $curriculum->id;
+        // $ce->save();
 
         // add student info record
         $info = new StudentInfo();
         $info->student_id = $student->id;
-        $info->year_level_id = $year_level->id;
+        // $info->year_level_id = $year_level->id;
+        $info->curriculum_id = $curriculum_id;
         $info->sex = $sex;
         $info->mobile_number = $mobile_number;
         $info->email = $email;
@@ -408,11 +411,11 @@ class RegistrarController extends Controller
         $prev->elementary_year_graduated = $elem_year_graduated;
         $prev->high_school = $hs;
         $prev->high_school_year_graduated = $hs_year_graduated;
-        $prev->college_school = $college;
-        $prev->college_year_graduated = $college_year_graduated;
-        $prev->school_last_attended = $school_last_attended;
-        $prev->school_address = $school_address;
-        $prev->year_graduated = $year_graduated;
+        // $prev->college_school = $college;
+        // $prev->college_year_graduated = $college_year_graduated;
+        // $prev->school_last_attended = $school_last_attended;
+        // $prev->school_address = $school_address;
+        // $prev->year_graduated = $year_graduated;
         $prev->save();
 
     	// add activitly log

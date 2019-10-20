@@ -34,9 +34,9 @@
 						<div class="row">
 							<div class="col-md-12">
 								<p><strong>{{ ucwords(Auth::user()->firstname . ' ' . Auth::user()->lastname) }} - {{ Auth::user()->student_number }}</strong></p>
-								<p>Course: <strong>{{ Auth::user()->enrolled->course->title }}</strong></p>
+								{{-- <p>Course: <strong>{{ Auth::user()->enrolled->course->title }}</strong></p>
 								<p>Year Level: <strong>{{ Auth::user()->info->year_level->name }}</strong></p>
-								<div class="row">
+								<div class="row"> --}}
 									<div class="col-md-6">
 										<p>Address: <strong>{{ ucwords(Auth::user()->info->home_address) }}</strong></p>
 									</div>
@@ -77,9 +77,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="box-footer">
+					{{-- <div class="box-footer">
 						
-					</div>
+					</div> --}}
 				</div>
 			</div>
 		</div>

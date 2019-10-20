@@ -48,7 +48,7 @@
 							<thead>
 								<tr>
 									<th class="text-center">Name</th>
-									<th class="text-center">Student Number</th>
+									<th class="text-center">LRN</th>
 									<th class="text-center">Registered</th>
 									<th class="text-center">Action</th>
 								</tr>

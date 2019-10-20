@@ -14,9 +14,9 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p><a href="{{ route('registrar.students') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Students</a></p>
+				<p><a href="{{ route('registrar.students') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Students</a></p>
 				@include('includes.all')
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-graduation-cap"></i> Add Student: {{ ucwords($firstname . ' ' . $lastname) }} - {{ $sn }}</strong>
 					</div>
@@ -29,10 +29,10 @@
 							<input type="hidden" name="lastname" value="{{ $lastname }}">
 							<input type="hidden" name="middlename" value="{{ $middlename }}">
 							<input type="hidden" name="suffix" value="{{ $suffix }}">
-							<input type="hidden" name="course_id" value="{{ $course_id }}">
-							<input type="hidden" name="major_id" value="{{ $major_id }}">
+							{{-- <input type="hidden" name="course_id" value="{{ $course_id }}">
+							<input type="hidden" name="major_id" value="{{ $major_id }}"> --}}
 							<input type="hidden" name="curriculum_id" value="{{ $curriculum_id }}">
-							<input type="hidden" name="yl_id" value="{{ $yl_id }}">
+							{{-- <input type="hidden" name="yl_id" value="{{ $yl_id }}"> --}}
 							
 							<input type="hidden" name="sex" value="{{ $sex }}">
 							<input type="hidden" name="civil_status" value="{{ $civil_status }}">
@@ -93,7 +93,7 @@
 							        @endif
 									</div>
 								</div>
-								<div class="col-md-6">
+								{{-- <div class="col-md-6">
 							      <div class="form-group{{ $errors->has('college') ? ' has-error' : '' }}">
 							      	<label for="college">Enter College Degree (if any)</label>
 							      	<input type="text" name="college" id="college" class="form-control" placeholder="Enter College Degree">
@@ -103,8 +103,8 @@
 							            </span>
 							        @endif
 									</div>
-								</div>
-								<div class="col-md-6">
+								</div> --}}
+								{{-- <div class="col-md-6">
 							      <div class="form-group{{ $errors->has('college_year_graduated') ? ' has-error' : '' }}">
 							      	<label for="college_year_graduated">Enter College Year Graduated</label>
 							      	<input type="text" name="college_year_graduated" id="college_year_graduated" class="form-control" placeholder="Enter College Year Graduated">
@@ -114,8 +114,8 @@
 							            </span>
 							        @endif
 									</div>
-								</div>
-								<div class="col-md-6">
+								</div> --}}
+								{{-- <div class="col-md-6">
 							      <div class="form-group{{ $errors->has('school_last_attended') ? ' has-error' : '' }}">
 							      	<label for="school_last_attended">Enter School Last Attended</label>
 							      	<input type="text" name="school_last_attended" id="school_last_attended" class="form-control" placeholder="Enter School Last Attended">
@@ -125,8 +125,8 @@
 							            </span>
 							        @endif
 									</div>
-								</div>
-								<div class="col-md-6">
+								</div> --}}
+								{{-- <div class="col-md-6">
 							      <div class="form-group{{ $errors->has('school_address') ? ' has-error' : '' }}">
 							      	<label for="school_address">Enter School Address</label>
 							      	<input type="text" name="school_address" id="school_address" class="form-control" placeholder="Enter School Address">
@@ -147,10 +147,10 @@
 							            </span>
 							        @endif
 									</div>
-								</div>
+								</div> --}}
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save Student Information</button>
+								<button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> Save Student Information</button>
 							</div>
 						</form>
 						<div class="row">
@@ -163,11 +163,11 @@
 									<input type="hidden" name="lastname" value="{{ $lastname }}">
 									<input type="hidden" name="middlename" value="{{ $middlename }}">
 									<input type="hidden" name="suffix_name" value="{{ $suffix }}">
-									<input type="hidden" name="course_id" value="{{ $course_id }}">
-									<input type="hidden" name="major_id" value="{{ $major_id }}">
+									{{-- <input type="hidden" name="course_id" value="{{ $course_id }}"> --}}
+									{{-- <input type="hidden" name="major_id" value="{{ $major_id }}"> --}}
 									<input type="hidden" name="curriculum_id" value="{{ $curriculum_id }}">
-									<input type="hidden" name="yl_id" value="{{ $yl_id }}">
-									<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-arrow-left"></i> Back to Basic Information</button>
+									{{-- <input type="hidden" name="yl_id" value="{{ $yl_id }}"> --}}
+									<button type="submit" class="btn btn-danger btn-block"><i class="fa fa-arrow-left"></i> Back to Basic Information</button>
 								</form>
 							</div>
 							<div class="col-md-3">
@@ -177,10 +177,10 @@
 									<input type="hidden" name="lastname" value="{{ $lastname }}">
 									<input type="hidden" name="middlename" value="{{ $middlename }}">
 									<input type="hidden" name="suffix_name" value="{{ $suffix }}">
-									<input type="hidden" name="course_id" value="{{ $course_id }}">
-									<input type="hidden" name="major_id" value="{{ $major_id }}">
+									{{-- <input type="hidden" name="course_id" value="{{ $course_id }}">
+									<input type="hidden" name="major_id" value="{{ $major_id }}"> --}}
 									<input type="hidden" name="curriculum_id" value="{{ $curriculum_id }}">
-									<input type="hidden" name="yl_id" value="{{ $yl_id }}">
+									{{-- <input type="hidden" name="yl_id" value="{{ $yl_id }}"> --}}
 
 									<input type="hidden" name="sex" value="{{ $sex }}">
 									<input type="hidden" name="civil_status" value="{{ $civil_status }}">
@@ -195,7 +195,7 @@
 									<input type="hidden" name="mother" value="{{ $mother }}">
 									<input type="hidden" name="guardian" value="{{ $guardian }}">
 									<input type="hidden" name="guardians_address" value="{{ $guardians_address }}">
-									<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-arrow-left"></i> Back to Personal Information</button>
+									<button type="submit" class="btn btn- btn-block"><i class="fa fa-arrow-left"></i> Back to Personal Information</button>
 								</form>
 							</div>
 							<div class="col-md-3"></div>

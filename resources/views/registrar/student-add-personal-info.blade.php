@@ -14,9 +14,9 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<p><a href="{{ route('registrar.students') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Students</a></p>
+				<p><a href="{{ route('registrar.students') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Students</a></p>
 				@include('includes.all')
-				<div class="box box-primary">
+				<div class="box box-danger">
 					<div class="box-header with-border">
 						<strong><i class="fa fa-graduation-cap"></i> Add Student: {{ ucwords($firstname . ' ' . $lastname) }} - {{ $sn }}</strong>
 					</div>
@@ -29,10 +29,9 @@
 							<input type="hidden" name="lastname" value="{{ $lastname }}">
 							<input type="hidden" name="middlename" value="{{ $middlename }}">
 							<input type="hidden" name="suffix" value="{{ $suffix }}">
-							<input type="hidden" name="course_id" value="{{ $course_id }}">
-							<input type="hidden" name="major_id" value="{{ $major_id }}">
+							
 							<input type="hidden" name="curriculum_id" value="{{ $curriculum_id }}">
-							<input type="hidden" name="yl_id" value="{{ $yl_id }}">
+							
 							<div class="row">
 								<div class="col-md-6">
 							      <div class="form-group{{ $errors->has('sex') ? ' has-error' : '' }}">
@@ -194,7 +193,7 @@
 							<div class="form-group">
 								<div class="row">
 									<div class="col-md-2">
-										<button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i> Continue</button>
+										<button type="submit" class="btn btn-danger"><i class="fa fa-arrow-right"></i> Continue</button>
 									</div>
 							</form>
 									<div class="col-md-5"></div>
@@ -206,11 +205,11 @@
 											<input type="hidden" name="lastname" value="{{ $lastname }}">
 											<input type="hidden" name="middlename" value="{{ $middlename }}">
 											<input type="hidden" name="suffix_name" value="{{ $suffix }}">
-											<input type="hidden" name="course_id" value="{{ $course_id }}">
-											<input type="hidden" name="major_id" value="{{ $major_id }}">
+											{{-- <input type="hidden" name="course_id" value="{{ $course_id }}"> --}}
+											{{-- <input type="hidden" name="major_id" value="{{ $major_id }}"> --}}
 											<input type="hidden" name="curriculum_id" value="{{ $curriculum_id }}">
-											<input type="hidden" name="yl_id" value="{{ $yl_id }}">
-											<button type="submit" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back to Basic Information</button>
+											{{-- <input type="hidden" name="yl_id" value="{{ $yl_id }}"> --}}
+											<button type="submit" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Basic Information</button>
 										</form>
 									</div>
 								</div>
