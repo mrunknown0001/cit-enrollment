@@ -53,7 +53,7 @@
       </li>
       <li class="{{ route('admin.year.level') == url()->current() ? 'active' : '' }}">
         <a href="{{ route('admin.year.level') }}">
-          <i class="fa fa-bars"></i> <span>Year Level</span>
+          <i class="fa fa-bars"></i> <span>Curriculum</span>
         </a>
       </li>
       <li class="{{ route('admin.school.calendar') == url()->current() ? 'active' : '' }}">

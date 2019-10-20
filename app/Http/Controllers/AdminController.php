@@ -258,7 +258,7 @@ class AdminController extends Controller
     	GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added Dean');
 
     	// return to deans and add admin with message
-    	return redirect()->route('admin.deans')->with('success', 'Dean Added!');
+    	return redirect()->route('admin.deans')->with('success', 'Principal Added!');
 
     }
 
@@ -310,7 +310,7 @@ class AdminController extends Controller
     	GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Dean Information');
 
     	// return to deans and add admin with message
-    	return redirect()->route('admin.deans')->with('success', 'Dean Information Updated!');
+    	return redirect()->route('admin.deans')->with('success', 'Principal Information Updated!');
     }
 
 
@@ -324,10 +324,10 @@ class AdminController extends Controller
         $dean->save();
 
         // activty log
-        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Reset Password of Dean');
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Reset Password of Principal');
 
         // return response
-        return redirect()->back()->with('success', 'Password of Dean has Successfully Reset!');
+        return redirect()->back()->with('success', 'Password of Principal has Successfully Reset!');
 
     }
 
@@ -1470,7 +1470,7 @@ class AdminController extends Controller
 
         GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Updated Yearl Level');
 
-        return redirect()->route('admin.year.level')->with('success', 'Year Level Updated!');
+        return redirect()->route('admin.year.level')->with('success', 'Curriculum Updated!');
     }
 
 

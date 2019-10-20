@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <strong>Add Year Level</strong>
+        <strong>Add Curriculum</strong>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -15,8 +15,8 @@
               <div class="row">
                 <div class="col-md-12">
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                      <label for="name">Year Level Name</label><label class="label-required">*</label>
-                      <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Enter Year Level Name" required>
+                      <label for="name">Year Curriculum</label><label class="label-required">*</label>
+                      <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Enter Curriculum Name" required>
                       @if ($errors->has('name'))
                           <span class="help-block">
                               <strong>{{ $errors->first('name') }}</strong>
@@ -26,7 +26,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-danger"><i class="fa fa-plus"></i> Add Year Level</button>
+                <button type="submit" class="btn btn-danger"><i class="fa fa-plus"></i> Add Curriculum</button>
               </div>
             </form>
 

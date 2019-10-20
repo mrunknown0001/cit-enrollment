@@ -94,7 +94,7 @@
 							        @endif
 									</div>
 								</div>
-								<div class="col-md-6">
+								{{-- <div class="col-md-6">
 							      <div class="form-group{{ $errors->has('college') ? ' has-error' : '' }}">
 							      	<label for="college">Enter College Degree (if any)</label>
 							      	<input type="text" name="college" id="college" value="{{ $student->prev->college_school }}" class="form-control" placeholder="Enter College Degree">
@@ -148,7 +148,7 @@
 							            </span>
 							        @endif
 									</div>
-								</div>
+								</div> --}}
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Update Student Information</button>

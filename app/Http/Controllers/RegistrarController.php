@@ -431,9 +431,10 @@ class RegistrarController extends Controller
     {
         $student = User::findorfail($id);
         $courses = Course::where('active', 1)->orderBy('title', 'asc')->get();
+        $strands = \App\Strand::where('active', 1)->orderBy('strand', 1)->get();
         $yl = YearLevel::get();
 
-        return view('registrar.student-update', ['student' => $student, 'courses' => $courses, 'yl' => $yl]);
+        return view('registrar.student-update', ['student' => $student, 'strands' => $strands,'courses' => $courses, 'yl' => $yl]);
     }
 
 
@@ -456,9 +457,9 @@ class RegistrarController extends Controller
             'student_number' => 'required',
             'firstname' => 'required',
             'lastname' => 'required',
-            'course' => 'required',
+            // 'course' => 'required',
             'curriculum' => 'required',
-            'year_level' => 'required'
+            // 'year_level' => 'required'
         ]);
 
         $student_id = $request['student_id'];
@@ -467,10 +468,10 @@ class RegistrarController extends Controller
         $lastname = $request['lastname'];
         $middlename = $request['middlename'];
         $suffix = $request['suffix_name'];
-        $course_id = $request['course'];
-        $major_id = $request['major'];
+        // $course_id = $request['course'];
+        // $major_id = $request['major'];
         $curriculum_id = $request['curriculum'];
-        $yl_id = $request['year_level'];
+        // $yl_id = $request['year_level'];
 
         $student = User::findorfail($student_id);
 
@@ -482,10 +483,10 @@ class RegistrarController extends Controller
             'lastname' => $lastname,
             'middlename' => $middlename,
             'suffix' => $suffix,
-            'course_id' => $course_id,
-            'major_id' => $major_id,
+            // 'course_id' => $course_id,
+            // 'major_id' => $major_id,
             'curriculum_id' => $curriculum_id,
-            'yl_id' => $yl_id
+            // 'yl_id' => $yl_id
         ]);
     }
 
@@ -500,10 +501,10 @@ class RegistrarController extends Controller
         $lastname = $request['lastname'];
         $middlename = $request['middlename'];
         $suffix = $request['suffix'];
-        $course_id = $request['course_id'];
-        $major_id = $request['major_id'];
+        // $course_id = $request['course_id'];
+        // $major_id = $request['major_id'];
         $curriculum_id = $request['curriculum_id'];
-        $yl_id = $request['yl_id'];
+        // $yl_id = $request['yl_id'];
 
         $student = User::findorfail($student_id);
 
@@ -529,10 +530,10 @@ class RegistrarController extends Controller
             'lastname' => $lastname,
             'middlename' => $middlename,
             'suffix' => $suffix,
-            'course_id' => $course_id,
-            'major_id' => $major_id,
+            // 'course_id' => $course_id,
+            // 'major_id' => $major_id,
             'curriculum_id' => $curriculum_id,
-            'yl_id' => $yl_id,
+            // 'yl_id' => $yl_id,
 
             'sex' => $sex,
             'civil_status' => $civil_status,
@@ -561,10 +562,10 @@ class RegistrarController extends Controller
         $middlename = $request['middlename'];
         $suffix = $request['suffix'];
 
-        $course_id = $request['course_id'];
-        $major_id = $request['major_id'];
+        // $course_id = $request['course_id'];
+        // $major_id = $request['major_id'];
         $curriculum_id = $request['curriculum_id'];
-        $yl_id = $request['yl_id'];
+        // $yl_id = $request['yl_id'];
 
         $sex = $request['sex'];
         $civil_status = $request['civil_status'];
@@ -599,9 +600,9 @@ class RegistrarController extends Controller
             return redirect()->back()->with('error', 'LRN Already Exist!');
         }
 
-        $year_level = YearLevel::findorfail($yl_id);
-        $course = Course::findorfail($course_id);
-        $curriculum = Curriculum::findorfail($curriculum_id);
+        // $year_level = YearLevel::findorfail($yl_id);
+        // $course = Course::findorfail($course_id);
+        // $curriculum = Curriculum::findorfail($curriculum_id);
 
         // save to user as students
         $student->student_number = $sn;
@@ -612,15 +613,16 @@ class RegistrarController extends Controller
         $student->save();
 
         // save to course enrolled
-        $ce = CourseEnrolled::whereStudentId($student->id)->first();
-        $ce->course_id = $course->id;
-        $ce->major_id = $major_id;
-        $ce->curriculum_id = $curriculum->id;
-        $ce->save();
+        // $ce = CourseEnrolled::whereStudentId($student->id)->first();
+        // $ce->course_id = $course->id;
+        // $ce->major_id = $major_id;
+        // $ce->curriculum_id = $curriculum->id;
+        // $ce->save();
 
         // save to student info record
         $info = StudentInfo::whereStudentId($student->id)->first();
-        $info->year_level_id = $year_level->id;
+        // $info->year_level_id = $year_level->id;
+        $info->curriculum_id = $curriculum_id;
         $info->sex = $sex;
         $info->mobile_number = $mobile_number;
         $info->email = $email;
@@ -641,11 +643,11 @@ class RegistrarController extends Controller
         $prev->elementary_year_graduated = $elem_year_graduated;
         $prev->high_school = $hs;
         $prev->high_school_year_graduated = $hs_year_graduated;
-        $prev->college_school = $college;
-        $prev->college_year_graduated = $college_year_graduated;
-        $prev->school_last_attended = $school_last_attended;
-        $prev->school_address = $school_address;
-        $prev->year_graduated = $year_graduated;
+        // $prev->college_school = $college;
+        // $prev->college_year_graduated = $college_year_graduated;
+        // $prev->school_last_attended = $school_last_attended;
+        // $prev->school_address = $school_address;
+        // $prev->year_graduated = $year_graduated;
         $prev->save();
 
         // add activitly log
@@ -661,8 +663,9 @@ class RegistrarController extends Controller
     {
         $courses = Course::where('active', 1)->orderBy('title', 'asc')->get();
         $yl = YearLevel::get();
+        $strands = \App\Strand::where('active', 1)->orderBy('strand', 'asc')->get();
 
-        return view('registrar.students-import', ['courses' => $courses, 'yl' => $yl]);
+        return view('registrar.students-import', ['courses' => $courses, 'yl' => $yl, 'strands' => $strands]);
     }
 
 

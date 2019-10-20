@@ -13,9 +13,6 @@ class YearLevelSeeder extends Seeder
     {
         DB::table('year_levels')->insert([
         	[
-        		'name' => 'Grade 7'
-        	],
-        	[
         		'name' => 'Grade 8'
         	],
         	[

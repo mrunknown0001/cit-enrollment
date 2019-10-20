@@ -128,7 +128,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], func
 	// clear session to registrar
 	Route::get('/session/clear/registrar/{un}', 'GeneralController@clearRegistrarSession');
 	// clear session to dean
-	Route::get('/session/clear/dean/{un}', 'GeneralController@clearDeanSession');
+	Route::get('/session/clear/principal/{un}', 'GeneralController@clearDeanSession');
 	// clear session to admin
 	Route::get('/session/clear/admin/{id}', 'GeneralController@clearAdminSession');
 

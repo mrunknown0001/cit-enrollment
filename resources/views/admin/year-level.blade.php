@@ -1,14 +1,14 @@
 @extends('layouts.admin-layout')
 
-@section('title') Year Level @endsection
+@section('title') Curriculum @endsection
 
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Year Level</h1>
+		<h1>Curriculum</h1>
 		<ol class="breadcrumb">
 			<li><a href="javascript:void(0)"><i class="fa fa-bars"></i> Home</a></li>
-			<li class="active">Year Level</li>
+			<li class="active">Curriculum</li>
 		</ol>
 	</section>
 	<section class="content">
@@ -20,9 +20,9 @@
 				@include('admin.includes.modal-year-level-add')  --}}
 
 				<p>
-					<button class="btn btn-danger" data-toggle="modal" data-target="#incrementYearLevel">
+					{{-- <button class="btn btn-danger" data-toggle="modal" data-target="#incrementYearLevel">
 						<i class="fa fa-plus"></i> Add Year Level
-					</button>
+					</button> --}}
 				</p>
 
 				@include('includes.all')
@@ -30,7 +30,7 @@
 				@if(count($year_levels) > 0)
 				<div class="box box-danger">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-bars"></i> Year Level</strong>
+						<strong><i class="fa fa-bars"></i> Curriculum</strong>
 					</div>
 					<div class="box-body">
 						<table class="table table-bordered table-hover">
@@ -63,7 +63,7 @@
 					</div>
 				</div>
 				@else
-				<p class="text-center">No Year Level Available</p>
+				<p class="text-center">No Curriculum Available</p>
 				@endif
 			</div>
 		</div>

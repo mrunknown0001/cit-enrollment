@@ -86,6 +86,46 @@
 							</div>
 							<div class="row">
 								<div class="col-md-6">
+							     <div class="form-group{{ $errors->has('curriculum') ? ' has-error' : '' }}">
+							      	<label for="curriculum">Select Curriculum</label><label class="label-required">*</label>
+							        <select name="curriculum" id="curriculum" class="form-control" required="">
+							        	<option value="">Select Curriculum</option>
+							        	@if(count($yl)> 0)
+													@foreach($yl as $y)
+														<option value="{{ $y->id }}">{{ $y->name }}</option>
+													@endforeach
+							        	@else
+													
+							      		@endif
+							        </select>
+							        @if ($errors->has('curriculum'))
+							            <span class="help-block">
+							                <strong>{{ $errors->first('curriculum') }}</strong>
+							            </span>
+							        @endif
+										</div>
+								</div>
+								<div class="col-md-6">
+							      <div class="form-group{{ $errors->has('strand') ? ' has-error' : '' }}">
+							      	<label for="strand">Select Strand</label> <label class="label-required"><small>for Grade 11 & 12 only</small></label>
+							        <select name="strand" id="strand" class="form-control" >
+							        	<option value="">Select Strand</option>
+							        	@if(count($strands) > 0)
+											@foreach($strands as $s)
+												<option value="{{ $s->id }}">{{ $c->strand }}</option>
+											@endforeach
+							        	@else
+											<option value="">No Available Strand</option>
+							        	@endif
+							        </select>
+							        @if ($errors->has('strand'))
+							            <span class="help-block">
+							                <strong>{{ $errors->first('strand') }}</strong>
+							            </span>
+							        @endif
+									</div>
+								</div>
+								{{-- <div class="col-md-6">
 							      <div class="form-group{{ $errors->has('course') ? ' has-error' : '' }}">
 							      	<label for="course">Select Course</label><label class="label-required">*</label>
 							        <select name="course" id="course" class="form-control" required="">
@@ -104,8 +144,8 @@
 							            </span>
 							        @endif
 									</div>
-								</div>
-								<div class="col-md-6">
+								</div> --}}
+								{{-- <div class="col-md-6">
 							      <div class="form-group{{ $errors->has('curriculum') ? ' has-error' : '' }}">
 							      	<label for="curriculum">Select Curriculum</label><label class="label-required">*</label>
 							        <select name="curriculum" id="curriculum" class="form-control" required="">
@@ -118,8 +158,8 @@
 							            </span>
 							        @endif
 									</div>
-								</div>
-								<div class="col-md-6">
+								</div> --}}
+								{{-- <div class="col-md-6">
 							      <div class="form-group{{ $errors->has('year_level') ? ' has-error' : '' }}">
 							      	<label for="year_level">Select Year Level</label><label class="label-required">*</label>
 							        <select name="year_level" id="year_level" class="form-control" required="">
@@ -138,8 +178,8 @@
 							            </span>
 							        @endif
 									</div>
-								</div>
-								<div class="col-md-6">
+								</div> --}}
+								{{-- <div class="col-md-6">
 							      <div class="form-group{{ $errors->has('major') ? ' has-error' : '' }}">
 							      	<label for="major">Select Course Major</label>
 							        <select name="major" id="major" class="form-control">
@@ -152,7 +192,7 @@
 							            </span>
 							        @endif
 									</div>
-								</div>
+								</div> --}}
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right"></i> Continue</button>
@@ -167,7 +207,7 @@
 		</div>
 	</section>
 </div>
-<script>
+{{-- <script>
 	$("#course").change(function () {
 
 		var courseId = $("#course").val();
@@ -211,5 +251,5 @@
 	    }});
 
 	});
-</script>
+</script> --}}
 @endsection
