@@ -674,19 +674,19 @@ class RegistrarController extends Controller
     {
         $request->validate([
             'students' => 'required',
-            'course' => 'required',
+            // 'course' => 'required',
             'curriculum' => 'required',
-            'year_level' => 'required'
+            // 'year_level' => 'required'
         ]);
 
-        $course_id = $request['course'];
+        // $course_id = $request['course'];
         $curriculum_id = $request['curriculum'];
-        $year_level_id = $request['year_level'];
-        $major_id = $request['major'];
+        // $year_level_id = $request['year_level'];
+        // $major_id = $request['major'];
 
-        $year_level = YearLevel::findorfail($year_level_id);
-        $course = Course::findorfail($course_id);
-        $curriculum = Curriculum::findorfail($curriculum_id);
+        // $year_level = YearLevel::findorfail($year_level_id);
+        // $course = Course::findorfail($course_id);
+        // $curriculum = Curriculum::findorfail($curriculum_id);
 
         if(Input::hasFile('students')){
             $path = Input::file('students')->getRealPath();
@@ -718,6 +718,8 @@ class RegistrarController extends Controller
             foreach ($value as $row) {
                 if($row->student_number != null) {
 
+                    // add validation on Stuent number LRN
+
                     // check each student number if it is already in database
                     $check_student_number = User::where('student_number', $row->student_number)->first();
 
@@ -730,23 +732,27 @@ class RegistrarController extends Controller
 
                         // for users table
                         $insert[] = [
-                                'student_number' => $row->student_number,
+                                'lrn' => $row->student_number,
                                 'lastname' => $row->lastname,
                                 'firstname' => $row->firstname
                             ];
 
 
-                        $enrolled[] = [
-                                'student_id' => $ref_id,
-                                'course_id' => $course->id,
-                                'curriculum_id' => $curriculum->id,
-                                'major_id' => $major_id
-                            ];
+                        // $enrolled[] = [
+                        //         'student_id' => $ref_id,
+                        //         'course_id' => $course->id,
+                        //         'curriculum_id' => $curriculum->id,
+                        //         'major_id' => $major_id
+                        //     ];
+
+                        // change to strand
 
                         // for student info table
                         $info[] = [
                                 'student_id' => $ref_id,
-                                'year_level_id' => $year_level->id,
+                                'esc_scholar' => $row->esc_scholar,
+                                // 'year_level_id' => $year_level->id,
+                                'curriculum_id' => $curriculum_id,
                                 'sex' => $row->sex,
                                 'date_of_birth' => date('Y-m-d', strtotime($row->birthday)),
                                 'home_address' => $row->address,
@@ -765,8 +771,8 @@ class RegistrarController extends Controller
                                 'student_id' => $ref_id,
                                 'elementary_school' => $row->elementary_school,
                                 'elementary_year_graduated' => $row->elem_year_graduated,
-                                'high_school' => $row->high_school,
-                                'high_school_year_graduated' => $row->hs_year_graduated,
+                                // 'high_school' => $row->high_school,
+                                // 'high_school_year_graduated' => $row->hs_year_graduated,
                                 // 'college_school' => $row->college_degree,
                                 // 'college_year_graduated' => $row->college_year_graduated,
                                 // 'school_last_attended' => $row->school_last_attended,
@@ -792,7 +798,9 @@ class RegistrarController extends Controller
             DB::table('student_infos')->insert($info);
 
             // insert to course_enrolled
-            DB::table('course_enrolleds')->insert($enrolled);
+            // DB::table('course_enrolleds')->insert($enrolled);
+
+            // strand enrolled
 
             // insert to student_previous_schools
             DB::table('student_previous_schools')->insert($last_school);
