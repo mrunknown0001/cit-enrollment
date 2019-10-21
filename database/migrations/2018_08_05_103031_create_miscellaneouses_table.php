@@ -15,6 +15,7 @@ class CreateMiscellaneousesTable extends Migration
     {
         Schema::create('miscellaneouses', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('type', 20)->nullable();
             $table->string('name', 50);
             $table->float('amount', 8,2);
             $table->timestamps();

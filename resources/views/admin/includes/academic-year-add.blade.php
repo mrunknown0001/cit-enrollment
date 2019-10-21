@@ -35,6 +35,6 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<button type="submit" class="btn btn-danger">Add Academic Year</button>
+		<button type="submit" class="btn btn-danger">Add School Year</button>
 	</div>
 </form>

@@ -1,14 +1,14 @@
 @extends('layouts.admin-layout')
 
-@section('title') Academic Year @endsection
+@section('title') School Year @endsection
 
 @section('content')
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Academic Year</h1>
+		<h1>School Year</h1>
 		<ol class="breadcrumb">
 			<li><a href="javascript:void(0)"><i class="fa fa-calendar"></i> Home</a></li>
-			<li class="active">Academic Year</li>
+			<li class="active">School Year</li>
 		</ol>
 	</section>
 	<section class="content">
@@ -23,21 +23,21 @@
 		        @endif
 				<div class="box box-danger">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-calendar"></i> Academic Year</strong>
+						<strong><i class="fa fa-calendar"></i> School Year</strong>
 					</div>
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-6">
 								@if(!empty($ay))
-									<p>Current Academic Year: <strong>{{ $ay->from . '-' . $ay->to }}</strong></p>
-									<p>Semester: <strong>{{ $sem->name }}</strong></p>
+									<p>Current School Year: <strong>{{ $ay->from . '-' . $ay->to }}</strong></p>
+									{{-- <p>Semester: <strong>{{ $sem->name }}</strong></p>
 									@if($sem->id == 1)
 									@include('admin.includes.select-second-semester')
 									@elseif($sem->id == 2)
 									@include('admin.includes.select-summer')
-									@else
+									@else --}}
 									@include('admin.includes.close-academic-year')
-									@endif
+									{{-- @endif --}}
 								@else
 									@include('admin.includes.academic-year-add')
 								@endif

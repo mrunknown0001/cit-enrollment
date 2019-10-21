@@ -1203,7 +1203,7 @@ class AdminController extends Controller
         $check_active_ay = AcademicYear::where('active', 1)->first();
 
         if(!empty($check_active_ay)) {
-            return redirect()->back()->with('error', 'There is an active Academic Year. Please close first!');
+            return redirect()->back()->with('error', 'There is an active School Year. Please close first!');
         }
 
         $check_duplicate_ay = AcademicYear::where('from', $sy)
@@ -1211,7 +1211,7 @@ class AdminController extends Controller
                                     ->first();
 
         if(!empty($check_duplicate_ay)) {
-            return redirect()->back()->with('error', 'Duplicate Academic Year!');
+            return redirect()->back()->with('error', 'Duplicate School Year!');
         }
 
         // add academic year
@@ -1227,10 +1227,10 @@ class AdminController extends Controller
         $sem->save();
 
         // add activty log
-        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added New Academic Year and Activated First Semester');
+        GeneralController::activity_log(Auth::guard('admin')->user()->id, 1, 'Admin Added New School Year and Activated First Semester');
 
         // return with message
-        return redirect()->route('admin.academic.year')->with('success', 'Added New Academic Year!');
+        return redirect()->route('admin.academic.year')->with('success', 'Added New School Year!');
     }
 
 
@@ -1548,15 +1548,18 @@ class AdminController extends Controller
     public function postAddMiscFee(Request $request)
     {
         $request->validate([
+            'for' => 'required',
             'name' => 'required',
             'amount' => 'required|numeric'
         ]);
 
+        $for = $request['for'];
         $name = $request['name'];
         $amount = $request['amount'];
 
         // save new misc fee
         $misc = new Miscellaneous();
+        $misc->type = $for;
         $misc->name = $name;
         $misc->amount = $amount;
         $misc->save();
@@ -1581,10 +1584,12 @@ class AdminController extends Controller
     public function postUpdateMiscFee(Request $request)
     {
         $request->validate([
+            'for' => 'required',
             'name' => 'required',
             'amount' => 'required|numeric'
         ]);
 
+        $for = $request['for'];
         $name = $request['name'];
         $amount = $request['amount'];
         $misc_id = $request['misc_id'];
@@ -1592,6 +1597,7 @@ class AdminController extends Controller
         $misc = Miscellaneous::findorfail($misc_id);
 
         $misc->name = $name;
+        $misc->type = $for;
         $misc->amount = $amount;
         $misc->save();
 

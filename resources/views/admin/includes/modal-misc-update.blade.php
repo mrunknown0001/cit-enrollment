@@ -12,6 +12,19 @@
                 <p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
                 <form action="{{ route('admin.update.misc.fee.post') }}" method="POST" autocomplete="off">
                   {{ csrf_field() }}
+                  <div class="form-group{{ $errors->has('for') ? ' has-error' : '' }}">
+                        <label for="for">Miscellaneous Fee For</label><label class="label-required">*</label>
+                        <select class="form-control" name="for" id="for" required>
+                          <option value="">Please Select One</option>
+                          <option value="Junior">Junior High</option>
+                          <option value="Senior">Senior High</option>
+                        </select>
+                        @if ($errors->has('for'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('for') }}</strong>
+                            </span>
+                        @endif
+                      </div>
                   <input type="hidden" name="misc_id" value="{{ $m->id }}">
                       <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="name">Miscellaneous Fee Name</label><label class="label-required">*</label>

@@ -112,7 +112,7 @@
 							        	<option value="">Select Strand</option>
 							        	@if(count($strands) > 0)
 											@foreach($strands as $s)
-												<option value="{{ $s->id }}">{{ $c->strand }}</option>
+												<option value="{{ $s->id }}">{{ $s->strand }}</option>
 											@endforeach
 							        	@else
 											<option value="">No Available Strand</option>
