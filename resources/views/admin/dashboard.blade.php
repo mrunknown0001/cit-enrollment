@@ -33,7 +33,7 @@
 			</div>
 
 
-			<div class="col-lg-3 col-xs-6">
+			{{-- <div class="col-lg-3 col-xs-6">
 				<div class="small-box bg-danger">
 					<div class="inner">
 						<h3>{{ $courses }}</h3>
@@ -44,7 +44,7 @@
 					</div>
 					<a href="{{ route('admin.courses') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
-			</div>
+			</div> --}}
 		</div>
 	</section>
 </div>

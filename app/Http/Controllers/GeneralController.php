@@ -141,7 +141,7 @@ class GeneralController extends Controller
             $log->ip_address = 'N/A';
         }
 
-        $log->date_time = strtotime(now()) - 950400;
+        $log->date_time = strtotime(now());
         $log->save();
     }
 
