@@ -115,22 +115,29 @@ Route::get('/logout', 'GeneralController@logout')->name('logout');
 
 
 /*
+ * Session Clear
+ */
+
+// clear session to student
+Route::get('/session/clear/student/{sn}', 'GeneralController@clearStudentSession');
+// clear session to faculty
+Route::get('/session/clear/faculty/{un}', 'GeneralController@clearFacultySession');
+// clear session to cashier
+Route::get('/session/clear/cashier/{un}', 'GeneralController@clearCashierSession');
+// clear session to registrar
+Route::get('/session/clear/registrar/{un}', 'GeneralController@clearRegistrarSession');
+// clear session to dean
+Route::get('/session/clear/principal/{un}', 'GeneralController@clearDeanSession');
+// clear session to admin
+Route::get('/session/clear/admin/{id}', 'GeneralController@clearAdminSession');
+
+
+
+/*
  * Route group admin
  * route protected guard in controller 
  */
 Route::group(['prefix' => 'admin', 'middleware' => 'prevent-back-history'], function () {
-	// clear session to student
-	Route::get('/session/clear/student/{sn}', 'GeneralController@clearStudentSession');
-	// clear session to faculty
-	Route::get('/session/clear/faculty/{un}', 'GeneralController@clearFacultySession');
-	// clear session to cashier
-	Route::get('/session/clear/cashier/{un}', 'GeneralController@clearCashierSession');
-	// clear session to registrar
-	Route::get('/session/clear/registrar/{un}', 'GeneralController@clearRegistrarSession');
-	// clear session to dean
-	Route::get('/session/clear/principal/{un}', 'GeneralController@clearDeanSession');
-	// clear session to admin
-	Route::get('/session/clear/admin/{id}', 'GeneralController@clearAdminSession');
 
 	// clear unfinished(active == 0)
 	Route::get('/payment/unfinished/clear', 'GeneralController@clearUnfinishedPayments');
