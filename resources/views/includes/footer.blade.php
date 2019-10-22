@@ -2,5 +2,5 @@
     <div class="pull-right hidden-xs">
       
     </div>
-    <strong>Copyright &copy; 2018 </strong>
+    <strong>Copyright &copy; 2019 </strong>
   </footer>
