@@ -143,7 +143,7 @@
 									<div class="form-group{{ $errors->has('strand') ? ' has-error' : '' }}">
 										<label for="strand">Select Strand</label> <label class="label-required"><small>for Grade 11 & 12 only</small></label>
 										<select name="strand" id="strand" class="form-control">
-											<option value="">Select Strand</option>
+											<option value="">No Strand</option>
 											@if(count($strands) > 0)
 												@foreach($strands as $s)
 													<option value="{{ $s->id }}">{{ $s->code }}</option>

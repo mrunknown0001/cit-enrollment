@@ -11,6 +11,12 @@ class Subject extends Model
     	return $this->belongsTo('App\Strand', 'strand_id');
     }
 
+
+    public function curriculum()
+    {
+    	return $this->hasOne('App\YearLevel', 'id', 'year_level_id');
+    }
+
     // public function major()
     // {
     // 	return $this->belongsTo('App\CourseMajor', 'major_id');

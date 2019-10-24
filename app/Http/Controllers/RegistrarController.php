@@ -916,7 +916,7 @@ class RegistrarController extends Controller
     // method use to view subjects
     public function subjects()
     {
-        $subjects = Subject::orderBy('course_id', 'asc')
+        $subjects = Subject::where('active', 1)
                         ->orderBy('code', 'asc')
                         ->paginate(15);
 
@@ -943,7 +943,7 @@ class RegistrarController extends Controller
         $request->validate([
             'code' => 'required|unique:subjects',
 
-            'code' => 'required|unique:subjects,code,NULL,NULL,course_id, ' . $request['course'],
+            // 'code' => 'required|unique:subjects,code,NULL,NULL,strand, ' . $request['course'],
             // 'course' => 'required|unique:subjects,course_id,NULL,NULL,code, ' . $request['code'],
 
             'description' => 'required',
@@ -957,11 +957,11 @@ class RegistrarController extends Controller
 
         $code = $request['code'];
         $description = $request['description'];
-        $units = $request['units'];
-        $lab_units = $request['lab_units'];
+        // $units = $request['units'];
+        // $lab_units = $request['lab_units'];
         // $course_id = $request['course'];
         // $major_id = $request['major'];
-        $year_level_id = $request['year_level'];
+        $year_level_id = $request['year_level']; // curriculu
         $semester_id = $request['semester'];
         // $curriculum_id = $request['curriculum'];
         // $prerequisite = $request['prerequisite'];
@@ -969,13 +969,33 @@ class RegistrarController extends Controller
 
         // $course = Course::findorfail($course_id);
         // $major = CourseMajor::find($major_id);
+        // 
+        // 
+        /*
+         * Add condition if grade 11 and 12 as strand
+         */
+        if($year_level_id > 3) {
+            if($strand == NULL) {
+                return redirect()->back()->with('error', 'Strand is Required!');
+            }
+        }
+
+
+        /*
+         * No strand if grade 10 and below
+         */
+        if($year_level_id < 4) {
+            if($strand != NULL) {
+                return redirect()->back()->with('error', 'Strand Must be Null!');
+            }
+        }
 
         // save new subject
         $sub = new Subject();
         $sub->code = $code;
         $sub->description = $description;
-        $sub->units = $units;
-        $sub->lab_units = $lab_units;
+        // $sub->units = $units;
+        // $sub->lab_units = $lab_units;
         // $sub->course_id = $course->id;
         // if(!empty($major)) {
         //     $sub->major_id = $major->id;
@@ -986,8 +1006,8 @@ class RegistrarController extends Controller
         // $sub->prerequisite = $prerequisite;
         // $sub->curriculum_id = $curriculum_id;
         $sub->strand_id = $strand;
-        $sub->year_level_id = $year_level_id;
-        $sub->semester_id = $semester_id;
+        $sub->year_level_id = $year_level_id; // curriculum
+        // $sub->semester_id = $semester_id;
         $sub->save();
 
         GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Registrar Added New Subject');
@@ -1017,28 +1037,45 @@ class RegistrarController extends Controller
         $request->validate([
             'code' => 'required',
             'description' => 'required',
-            'units' => 'required|numeric',
+            // 'units' => 'required|numeric',
             // 'course' => 'required',
             'year_level' => 'required',
-            'semester' => 'required',
+            // 'semester' => 'required',
             // 'curriculum' => 'required',
-            'strand' => 'required',
+            'strand' => 'nullable',
         ]);
 
         $subject_id = $request['subject_id'];
         $code = $request['code'];
         $description = $request['description'];
-        $units = $request['units'];
-        $lab_units = $request['lab_units'];
+        // $units = $request['units'];
+        // $lab_units = $request['lab_units'];
         // $course_id = $request['course'];
         // $major_id = $request['major'];
         $year_level_id = $request['year_level'];
-        $semester_id = $request['semester'];
+        // $semester_id = $request['semester'];
         // $curriculum_id = $request['curriculum'];
         // $prerequisite = $request['prerequisite'];
         $strand = $request['strand'];
 
+        /*
+         * Add condition if grade 11 and 12 as strand
+         */
+        if($year_level_id > 3) {
+            if($strand == NULL) {
+                return redirect()->back()->with('error', 'Strand is Required!');
+            }
+        }
 
+
+        /*
+         * No strand if grade 10 and below
+         */
+        if($year_level_id < 4) {
+            if($strand != NULL) {
+                return redirect()->back()->with('error', 'Strand Must be Null!');
+            }
+        }
 
         // $course = Course::findorfail($course_id);
         // $major = CourseMajor::find($major_id);
@@ -1059,8 +1096,8 @@ class RegistrarController extends Controller
 
         $sub->code = $code;
         $sub->description = $description;
-        $sub->units = $units;
-        $sub->lab_units = $lab_units;
+        // $sub->units = $units;
+        // $sub->lab_units = $lab_units;
         // $sub->course_id = $course->id;
         // if(!empty($major)) {
         //     $sub->major_id = $major->id;
@@ -1072,7 +1109,7 @@ class RegistrarController extends Controller
         // $sub->curriculum_id = $curriculum_id;
         $sub->strand_id = $strand;
         $sub->year_level_id = $year_level_id;
-        $sub->semester_id = $semester_id;
+        // $sub->semester_id = $semester_id;
         $sub->save();
 
         GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Admin Updated Subject');

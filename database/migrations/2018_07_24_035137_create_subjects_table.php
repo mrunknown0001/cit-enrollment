@@ -17,17 +17,17 @@ class CreateSubjectsTable extends Migration
             $table->increments('id');
             $table->string('code', 20);
             $table->string('description', 190)->nullable();
-            $table->integer('units');
-            $table->integer('lab_units')->nullable();
+            // $table->integer('units');
+            // $table->integer('lab_units')->nullable();
             // $table->integer('prerequisite')->nullable(); // subject id of prerequisite subject
             // $table->integer('course_id')->unsigned();
             // $table->foreign('course_id')->references('id')->on('courses');
             // $table->integer('major_id')->unsigned()->nullable();
             // $table->integer('curriculum_id')->unsigned();
-            $table->integer('strand_id')->unsigned();
+            $table->integer('strand_id')->unsigned()->nullable();
             $table->foreign('strand_id')->references('id')->on('strands');
-            $table->integer('year_level_id')->unsigned();
-            $table->integer('semester_id')->unsigned();
+            $table->integer('year_level_id')->unsigned(); // curriculum
+            // $table->integer('semester_id')->unsigned();
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
         });

@@ -27,10 +27,10 @@
 								<tr>
 									<th class="text-center">Code</th>
 									<th class="text-center">Description</th>
-									<th class="text-center">Strand</th>
 									<th class="text-center">Curriculum</th>
-									<th class="text-center">Lecture Units</th>
-									<th class="text-center">Lab Units</th>
+									<th class="text-center">Strand</th>
+									{{-- <th class="text-center">Lecture Units</th>
+									<th class="text-center">Lab Units</th> --}}
 									<th class="text-center">Action</th>
 								</tr>
 							</thead>
@@ -39,11 +39,18 @@
 								<tr>
 									<td class="text-center">{{ strtoupper($s->code) }}</td>
 									<td>{{ ucwords($s->description) }}</td>
-									<td class="text-center">{{ $s->strand->code }}</td>
-									<td>{{ $s->major_id ? $s->major->name : 'N/A' }}</td>
+									<td>{{ $s->curriculum->name }}</td>
+									<td class="text-center">
+										@if($s->strand != NULL)
+											{{ $s->strand->code}}
+										@else
+											NULL
+										@endif
+									</td>
+									{{-- <td>{{ $s->major_id ? $s->major->name : 'N/A' }}</td>
 									<td class="text-center">{{ $s->units }}
 									</td>
-									<td class="text-center">{{ $s->lab_units ? $s->lab_units : 'N/A' }}</td>
+									<td class="text-center">{{ $s->lab_units ? $s->lab_units : 'N/A' }}</td> --}}
 									<td class="text-center">
 										<a href="{{ route('registrar.update.subject', ['id' => $s->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a>
 									</td>
