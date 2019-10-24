@@ -40,9 +40,10 @@
 										<td>{{ $s->strand }}</td>
 										<td>{{ $s->code }}</td>
 										<td>
-											<a href="" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> Update</a>
+											<a class="btn btn-default btn-xs" data-toggle="modal" data-target="#updateStrand-{{ $s->id }}"><i class="fa fa-pencil"></i> Update</a>
 										</td>
 									</tr>
+									@include('admin.includes.modal-strand-update')
 								@endforeach
 							</tbody>
 							<tfoot>
