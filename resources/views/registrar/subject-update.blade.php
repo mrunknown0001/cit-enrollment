@@ -45,7 +45,7 @@
 										</span>
 										@endif
 									</div>
-									<div class="form-group{{ $errors->has('units') ? ' has-error' : '' }}">
+									{{-- <div class="form-group{{ $errors->has('units') ? ' has-error' : '' }}">
 										<label for="units">Subject Lecture Units</label><label class="label-required">*</label>
 										<input id="units" type="number" class="form-control" name="units" value="{{ $subject->units }}" placeholder="Enter Subject Units" required>
 										@if ($errors->has('units'))
@@ -53,8 +53,8 @@
 											<strong>{{ $errors->first('units') }}</strong>
 										</span>
 										@endif
-									</div>
-									<div class="form-group{{ $errors->has('lab_units') ? ' has-error' : '' }}">
+									</div> --}}
+									{{-- <div class="form-group{{ $errors->has('lab_units') ? ' has-error' : '' }}">
 										<label for="lab_units">Subject Laboratory Units</label>
 										<input id="lab_units" type="number" class="form-control" name="lab_units" value="{{ $subject->lab_units }}" placeholder="Enter Subject Laboratory Units" required>
 										@if ($errors->has('lab_units'))
@@ -62,8 +62,8 @@
 											<strong>{{ $errors->first('lab_units') }}</strong>
 										</span>
 										@endif
-									</div>
-									<div class="form-group{{ $errors->has('prerequisite') ? ' has-error' : '' }}">
+									</div> --}}
+									{{-- <div class="form-group{{ $errors->has('prerequisite') ? ' has-error' : '' }}">
 										<label for="prerequisite">Subject Prerequisite</label>
 										<select class="form-control" id="prerequisite" name="prerequisite">
 											<option value="">No Prerequisite</option>
@@ -82,7 +82,7 @@
 											<strong>{{ $errors->first('prerequisite') }}</strong>
 										</span>
 										@endif
-									</div>
+									</div> --}}
 								</div>
 								<div class="col-md-6">
 									{{-- <div class="form-group{{ $errors->has('course') ? ' has-error' : '' }}">
@@ -127,22 +127,6 @@
 										</span>
 										@endif
 									</div> --}}
-									<div class="form-group{{ $errors->has('strand') ? ' has-error' : '' }}">
-										<label for="strand">Select Strand</label><label class="label-required">*</label>
-										<select name="strand" id="strand" class="form-control">
-											<option value="">Select Strand</option>
-											@if(count($strands) > 0)
-												@foreach($strands as $s)
-													<option value="{{ $s->id }}">{{ $s->code }}</option>
-												@endforeach
-											@endif
-										</select>
-										@if ($errors->has('strand'))
-										<span class="help-block">
-											<strong>{{ $errors->first('strand') }}</strong>
-										</span>
-										@endif
-									</div>
 									<div class="form-group{{ $errors->has('year_level') ? ' has-error' : '' }}">
 										<label for="year_level">Select Year Level</label><label class="label-required">*</label>
 										<select name="year_level" id="year_level" class="form-control" required="">
@@ -161,7 +145,23 @@
 										</span>
 										@endif
 									</div>
-									<div class="form-group{{ $errors->has('semester') ? ' has-error' : '' }}">
+									<div class="form-group{{ $errors->has('strand') ? ' has-error' : '' }}">
+										<label for="strand">Select Strand</label><label class="label-required">*</label>
+										<select name="strand" id="strand" class="form-control">
+											<option value="">Select Strand</option>
+											@if(count($strands) > 0)
+												@foreach($strands as $s)
+													<option value="{{ $s->id }}">{{ $s->code }}</option>
+												@endforeach
+											@endif
+										</select>
+										@if ($errors->has('strand'))
+										<span class="help-block">
+											<strong>{{ $errors->first('strand') }}</strong>
+										</span>
+										@endif
+									</div>
+									{{-- <div class="form-group{{ $errors->has('semester') ? ' has-error' : '' }}">
 										<label for="semester">Select Semester</label><label class="label-required">*</label>
 										<select name="semester" id="semester" class="form-control" required="">
 											<option value="">Select Semester</option>
@@ -178,7 +178,7 @@
 											<strong>{{ $errors->first('semester') }}</strong>
 										</span>
 										@endif
-									</div>
+									</div> --}}
 								</div>
 							</div>
 							<div class="form-group">
