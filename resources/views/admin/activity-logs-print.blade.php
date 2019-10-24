@@ -68,7 +68,7 @@
 												@if($log->user_type == 1)
 					                            Administrator
 					                            @elseif($log->user_type == 2)
-					                            Dean
+					                            Principal
 					                            @elseif($log->user_type == 3)
 					                            Registrar
 					                            @elseif($log->user_type == 4)
