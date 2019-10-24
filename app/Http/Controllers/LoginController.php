@@ -185,7 +185,7 @@ class LoginController extends Controller
             // check if the session id is not null
             if(Auth::guard('dean')->user()->session_id != null) {
                 Auth::guard('dean')->logout();
-                return redirect()->back()->with('error', '<Principal></Principal> is currently logged in!!!');
+                return redirect()->back()->with('error', 'Principal is currently logged in!!!');
             }
 
             Auth::guard('dean')->user()->session_id = Session::getId();
