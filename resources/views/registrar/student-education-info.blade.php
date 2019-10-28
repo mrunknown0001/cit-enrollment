@@ -32,7 +32,7 @@
 								<p>Year: <strong>{{ $student->prev->elementary_year_graduated }}</strong></p>
 							</div>
 
-							<div class="col-md-9">
+							{{-- <div class="col-md-9">
 								<p>High School Completed at: <strong>{{ ucwords($student->prev->high_school) }}</strong></p>
 							</div>
 							<div class="col-md-3">
@@ -55,7 +55,7 @@
 
 							<div class="col-md-12">
 								<p>School Location: <strong>{{ ucwords($student->prev->school_address) }}</strong></p>
-							</div>
+							</div> --}}
 						</div>
 						
 					</div>
