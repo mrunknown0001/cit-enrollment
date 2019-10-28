@@ -77,5 +77,5 @@
 		</div>
 	</section>
 </div>
-@include('admin.includes.modal-faculty-add-load')
+{{-- @include('admin.includes.modal-faculty-add-load') --}}
 @endsection

@@ -595,15 +595,15 @@ class AdminController extends Controller
                             ->orderBy('lastname', 'asc')
                             ->get();
 
-        $sem = Semester::whereActive(1)->first();
+        // $sem = Semester::whereActive(1)->first();
 
-        if(empty($sem)) {
-            return redirect()->back()->with('error', 'Please Set Semester!');
-        }
+        // if(empty($sem)) {
+        //     return redirect()->back()->with('error', 'Please Set Semester!');
+        // }
 
-        $subjects = Subject::whereSemesterId($sem->id)->get();
+        // $subjects = Subject::whereSemesterId($sem->id)->get();
 
-        return view('admin.faculties', ['faculties' => $faculties, 'sem' => $sem, 'subjects' => $subjects]);
+        return view('admin.faculties', ['faculties' => $faculties,]);
     }
 
 
