@@ -26,12 +26,11 @@
 
 					<div class="row">
 						<div class="col-md-6">
-							<p>Course: <strong>{{ ucwords($schedule->course->title) }}</strong></p>
-							<p>Section: <strong>{{ strtoupper($schedule->section->name) }}</strong></p>
-						</div>
-						<div class="col-md-6">
+							{{-- <p>Course: <strong>{{ ucwords($schedule->course->title) }}</strong></p> --}}
 							<p>Curriculum: <strong>{{ strtoupper($schedule->curriculum->name) }}</strong></p>
-							<p>Year Level: <strong>{{ ucwords($schedule->year_level->name) }}</strong></p>
+							{{-- <p>Strand: <strong>{{ $strand != NULL ? $strand->strand : 'N/A' }}</strong></p> --}}
+							<p>Section: <strong>{{ strtoupper($schedule->section->name) }}</strong></p>
+							{{-- <p>Year Level: <strong>{{ ucwords($schedule->year_level->name) }}</strong></p> --}}
 						</div>
 					</div>
 					<div class="row">

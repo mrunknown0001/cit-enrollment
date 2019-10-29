@@ -34,7 +34,7 @@
 									{{ ucwords($l->faculty->firstname . ' ' . $l->faculty->lastname) }}
 								</td>
 								<td class="text-center">
-									{{ strtoupper($l->course->code) . ' ' . ucwords($l->year_level->name) . ' ' . strtoupper($l->section->name) . ' - ' . strtoupper($l->subject->code) }}
+									{{  ucwords($l->curriculum->name) . ' ' . strtoupper($l->section->name) . ' - ' . strtoupper($l->subject->code) }}
 								</td>
 								<td class="text-center">
 									<a href="{{ route('dean.delete.faculty.load', ['id' => $l->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>

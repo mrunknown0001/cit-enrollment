@@ -143,25 +143,26 @@ class FacultyController extends Controller
 
 
     // method use to view students in the subject
-    public function viewStudentSectionSubject($course_id = null, $curriculum_id = null, $yl_id = null, $section_id = null, $subject_id = null)
+    public function viewStudentSectionSubject($curriculum_id = null, $section_id = null, $subject_id = null)
     {
         $ay = AcademicYear::whereActive(1)->first();
-        $sem = Semester::whereActive(1)->first();
+        // $sem = Semester::whereActive(1)->first();
 
-        if(empty($ay) || empty($sem)) {
-            return redirect()->back()->with('error', 'No Active Academic Year or Semester. Please report to the adminsitrator.');
+        if(empty($ay)) {
+            return redirect()->back()->with('error', 'No Active School Year. Please report to the adminsitrator.');
         }
 
-        $course = Course::findorfail($course_id);
-        $curriculum = Curriculum::findorfail($curriculum_id);
-        $yl = YearLevel::findorfail($yl_id);
+        // $course = Course::findorfail($course_id);
+        // $curriculum = Curriculum::findorfail($curriculum_id);
+        $yl = YearLevel::findorfail($curriculum_id);
         $section = Section::findorfail($section_id);
         $subject = Subject::findorfail($subject_id);
 
         // get the list of student enrolled in this course year level section
-        $student_ids = Assessment::where('course_id', $course->id)
-                                ->where('curriculum_id', $curriculum->id)
-                                ->where('year_level_id', $yl->id)
+        $student_ids = Assessment::
+                                // where('course_id', $course->id)
+                                where('curriculum_id', $yl->id)
+                                // ->where('year_level_id', $yl->id)
                                 ->where('section_id', $section->id)
                                 ->whereActive(1)
                                 ->get(['student_id']);
@@ -169,10 +170,11 @@ class FacultyController extends Controller
         $students = User::find($student_ids);
 
         // check if subject is encoded
-        $encoded = EncodedGrade::where('course_id', $course->id)
-                        ->where('curriculum_id', $curriculum->id)
-                        ->where('year_level_id', $yl->id)
-                        ->where('semester_id', $sem->id)
+        $encoded = EncodedGrade::
+                        // where('course_id', $course->id)
+                        where('curriculum_id', $yl->id)
+                        // ->where('year_level_id', $yl->id)
+                        // ->where('semester_id', $sem->id)
                         ->where('academic_year_id', $ay->id)
                         ->where('section_id', $section->id)
                         ->where('subject_id', $subject->id)
@@ -182,9 +184,9 @@ class FacultyController extends Controller
 
 
         return view('faculty.subject-load-students', [
-            'course' => $course,
-            'curriculum' => $curriculum,
-            'yl' => $yl,
+            // 'course' => $course,
+            'curriculum' => $yl,
+            // 'yl' => $yl,
             'section' => $section,
             'subject' => $subject,
             'students' => $students,

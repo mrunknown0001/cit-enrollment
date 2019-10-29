@@ -22,12 +22,12 @@
 					@foreach($loads as $l)
 						<p>
 							<a href="{{ route('faculty.student.section.subject', [
-								'course_id' => $l->course->id,
-								'curriculum_id' => $l->curriculum->id,
-								'yl_id' => $l->year_level->id,
+								{{-- 'course_id' => $l->course->id, --}}
+								'curriculum_id' => $l->curriculum_id,
+								{{-- 'yl_id' => $l->year_level->id, --}}
 								'section_id' => $l->section->id,
 								'subject_id' => $l->subject->id 
-							]) }}" class="btn btn-danger btn-block"><i class="fa fa-book"></i> {{ strtoupper($l->course->code) . ' - ' . ucwords($l->year_level->name) . ' ' . strtoupper($l->section->name) . ' ' . strtoupper($l->subject->code) }}</a>
+							]) }}" class="btn btn-danger btn-block"><i class="fa fa-book"></i> {{ ucwords($l->curriculum->name) . ' ' . strtoupper($l->section->name) . ' ' . strtoupper($l->subject->code) }}</a>
 						</p>
 
 					@endforeach

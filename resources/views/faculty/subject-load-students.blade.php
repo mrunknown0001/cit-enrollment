@@ -19,13 +19,13 @@
 				
 				<div class="row">
 					<div class="col-md-6">
-						<p>Course: <strong>{{ ucwords($course->title) }}</strong></p>
+						{{-- <p>Course: <strong>{{ ucwords($course->title) }}</strong></p> --}}
 						<p>Section: <strong>{{ strtoupper($section->name) }}</strong></p>
 						<p>Subject: <strong>{{ strtoupper($subject->code) }}</strong></p>
 					</div>
 					<div class="col-md-6">
 						<p>Curriculum: <strong>{{ strtoupper($curriculum->name) }}</strong></p>
-						<p>Year Level: <strong>{{ ucwords($yl->name) }}</strong></p>
+						{{-- <p>Year Level: <strong>{{ ucwords($yl->name) }}</strong></p> --}}
 						<p>Subject Description: <strong>{{ ucwords($subject->description) }}</strong></p>
 					</div>
 				</div>
@@ -34,9 +34,9 @@
 					@if(count($encoded) < 1)
 					<p>
 						<a href="{{ route('faculty.encode.student.subject.grade', [
-								'course_id' => $course->id,
-								'curriculum_id' => $curriculum->id,
-								'yl_id' => $yl->id,
+								{{-- 'course_id' => $course->id, --}}
+								'curriculum_id' => $yl->id,
+								{{-- 'yl_id' => $yl->id, --}}
 								'section_id' => $section->id,
 								'subject_id' => $subject->id 
 							]) }}" class="btn btn-danger btn-sm"><i class="fa fa"></i> Encode Grades</a>
@@ -44,9 +44,9 @@
 					@else
 					<p>
 						<a href="{{ route('faculty.view.student.subject.grade', [
-								'course_id' => $course->id,
-								'curriculum_id' => $curriculum->id,
-								'yl_id' => $yl->id,
+								{{-- 'course_id' => $course->id, --}}
+								'curriculum_id' => $yl->id,
+								{{-- 'yl_id' => $yl->id, --}}
 								'section_id' => $section->id,
 								'subject_id' => $subject->id 
 							]) }}" class="btn btn-danger btn-sm"><i class="fa fa"></i> View Grades</a>

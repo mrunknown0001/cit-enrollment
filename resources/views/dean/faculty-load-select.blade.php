@@ -30,12 +30,12 @@
 							<form action="{{ route('dean.select.faculty.load') }}" method="GET" autocomplete="off">
 								{{ csrf_field() }}
 								<div class="form-group">
-									<label>Select Course/Year Level/Section</label><label class="label-required">*</label>
+									<label>Select Section</label><label class="label-required">*</label>
 									<select name="section" id="section" class="form-control" required>
 										<option value="">Please Select One</option>
 										@if(count($sections) > 0)
 											@foreach($sections as $s)
-											<option value="{{ $s->id }}">{{ strtoupper($s->code) . ' - ' . ucwords($s->name) . ' - Section ' . strtoupper($s->section_name) }}</option>
+											<option value="{{ $s->id }}">{{ ucwords($s->name) . ' - Section ' . strtoupper($s->section_name) }}</option>
 											@endforeach
 										@else
 

@@ -23,15 +23,16 @@
 					<div class="box-body">
 					<div class="row">
 						<div class="col-md-6">
-							<p>Course: <strong>{{ ucwords($course->title) }}</strong></p>
+							{{-- <p>Course: <strong>{{ ucwords($course->title) }}</strong></p> --}}
 							<p>Curriculum: <strong>{{ strtoupper($curriculum->name) }}</strong></p>
+							<p>Strand: <strong>{{ $strand != NULL ? $strand->strand : "N/A" }}</strong></p>
 							<p>Section: <strong>{{ strtoupper($section->name) }}</strong></p>
 						</div>
-						<div class="col-md-6">
+						{{-- <div class="col-md-6">
 							<p>Major: <strong>{{ count($major) > 0 ? ucwords($major->name) : 'N/A' }}</strong></p>
 							<p>Year Level: <strong>{{ ucwords($yl->name) }}</strong></p>
 							<p>Semester: <strong>{{ ucwords($sem->name) }}</strong></p>
-						</div>
+						</div> --}}
 					</div>
 						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
 					<div class="row">

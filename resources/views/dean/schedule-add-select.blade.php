@@ -18,7 +18,7 @@
 				@include('includes.all')
 				<div class="box box-danger">
 					<div class="box-header with-border">
-						<strong><i class="fa fa-calendar-check-o"></i> Select Course, Year Level &amp; Section</strong>
+						<strong><i class="fa fa-calendar-check-o"></i> Select Curriculum, Strand &amp; Section</strong>
 					</div>
 					<div class="box-body">
 						<p><em>Field with red asterisk (<label class="label-required">*</label>) are required fields.</em></p>
@@ -27,7 +27,7 @@
 							<form action="{{ route('dean.add.schedule') }}" method="GET">
 								{{ csrf_field() }}
 								<div class="row">
-									<div class="col-md-6">
+									{{-- <div class="col-md-6">
 										<div class="form-group">
 											<label>Select Course</label><label class="label-required">*</label>
 											<select name="course" id="course" class="form-control" required>
@@ -41,8 +41,8 @@
 												@endif
 											</select>
 										</div>										
-									</div>
-									<div class="col-md-6">
+									</div> --}}
+									{{-- <div class="col-md-6">
 										<div class="form-group">
 											<label>Select Major</label>
 											<select class="form-control" name="major" id="major">
@@ -57,18 +57,33 @@
 												<option class="">Select Curriculum</option>
 											</select>
 										</div>
-									</div>
+									</div> --}}
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Select Year Level</label><label class="label-required">*</label>
-											<select class="form-control" name="year_level" id="year_level" required>
-												<option value="">Select Year Level</option>
+											<label>Select Curriculum</label><label class="label-required">*</label>
+											<select class="form-control" name="curriculum" id="curriculum" required>
+												<option value="">Select Curriculum</option>
 												@if(count($yl) > 0)
 												@foreach($yl as $y)
 												<option value="{{ $y->id }}">{{ ucwords($y->name) }}</option>
 												@endforeach
 												@else
-												<option value="">No Year Level Found</option>
+												<option value="">No Curriculum Found</option>
+												@endif
+											</select>
+										</div>										
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Select Strand</label><label class="label-required"><small>for Grade 11 & 12 only</small></label>
+											<select class="form-control" name="strand" id="strand">
+												<option value="">Select Strand</option>
+												@if(count($strands) > 0)
+												@foreach($strands as $s)
+												<option value="{{ $s->id }}">{{ ucwords($s->strand) }}</option>
+												@endforeach
+												@else
+												<option value="">No Strand Found</option>
 												@endif
 											</select>
 										</div>										
@@ -109,7 +124,7 @@
 		</div>
 	</section>
 </div>
-<script>
+{{-- <script>
 	$("#course").change(function () {
 
 		var courseId = $("#course").val();
@@ -155,5 +170,5 @@
 			});
 	    }});
 	});
-</script>
+</script> --}}
 @endsection

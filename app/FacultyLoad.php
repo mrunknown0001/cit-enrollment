@@ -23,7 +23,7 @@ class FacultyLoad extends Model
 
     public function curriculum()
     {
-    	return $this->belongsTo('App\Curriculum', 'curriculum_id');
+    	return $this->belongsTo('App\YearLevel', 'curriculum_id');
     }
 
     public function year_level()

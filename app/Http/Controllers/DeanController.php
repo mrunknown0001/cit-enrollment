@@ -180,8 +180,15 @@ class DeanController extends Controller
         $courses = Course::orderBy('code', 'asc')->get();
         $yl = YearLevel::get(['id', 'name']);
         $sections = Section::orderBy('name', 'asc')->get(['id', 'name']);
+        $strands = \App\Strand::orderBy('strand', 'asc')->get();
 
-        return view('dean.schedule-add-select', ['courses' => $courses, 'yl' => $yl, 'sections' => $sections]);
+        $ay = AcademicYear::whereActive(1)->first();
+
+        if(empty($ay)) {
+            return redirect()->route('dean.schedules')->with('error', 'No Active School Year! Please report to admin');
+        }
+
+        return view('dean.schedule-add-select', ['courses' => $courses, 'yl' => $yl, 'sections' => $sections, 'strands' => $strands]);
     }
 
 
@@ -189,42 +196,51 @@ class DeanController extends Controller
     public function addSchedule(Request $request)
     {
         $request->validate([
-            'course' => 'required',
-            'year_level' => 'required',
+            // 'course' => 'required',
+            // 'year_level' => 'required',
             'curriculum' => 'required',
+            'strand' => 'nullable',
             'section' => 'required' 
         ]);
 
-        $course_id = $request['course'];
-        $major_id = $request['major'];
-        $yl_id = $request['year_level'];
+        // $course_id = $request['course'];
+        // $major_id = $request['major'];
+        // $yl_id = $request['year_level'];
         $section_id = $request['section'];
         $curriculum_id = $request['curriculum'];
+        $strand_id = $request['strand'];
 
-        $course = Course::findorfail($course_id);
-        $yl = YearLevel::findorfail($yl_id);
+        // $course = Course::findorfail($course_id);
+        $yl = YearLevel::findorfail($curriculum_id);
         $section = Section::findorfail($section_id);
-        $major = CourseMajor::find($major_id);
-        $curriculum = Curriculum::findorfail($curriculum_id);
+        $strand = NULL;
 
-        $sem = Semester::where('active', 1)->first();
+        // $major = CourseMajor::find($major_id);
+        // $curriculum = Curriculum::findorfail($curriculum_id);
 
-        if(!empty($sem)) {
-            return redirect()->route('dean.schedules')->with('error', 'Semester Not Selected! Please report to admin');
-        }
+        // $sem = Semester::where('active', 1)->first();
+
+        // if(!empty($sem)) {
+        //     return redirect()->route('dean.schedules')->with('error', 'Semester Not Selected! Please report to admin');
+        // }
 
         // room, subjects, time, days
         $rooms = Room::orderBy('name', 'asc')->get();
 
+
+        if($strand_id != NULL) {
+            $strand = \App\Strand::findorfail($strand_id);
+        }
+
         $subjects = Subject::where('active', 1)
-                    ->where('course_id', $course->id)
-                    ->where('curriculum_id', $curriculum->id)
-                    ->where('semester_id', $sem->id)
+                    // ->where('course_id', $course->id)
                     ->where('year_level_id', $yl->id)
+                    // ->where('semester_id', $sem->id)
+                    // ->where('year_level_id', $yl->id)
                     ->orderBy('code', 'asc')
                     ->get();
 
-        return view('dean.schedule-add', ['rooms' => $rooms, 'subjects' => $subjects, 'course' => $course, 'yl' => $yl, 'sem' => $sem, 'section' => $section, 'major' => $major, 'curriculum' => $curriculum]);
+        return view('dean.schedule-add', ['rooms' => $rooms, 'subjects' => $subjects, 'section' => $section,  'curriculum' => $yl, 'strand' => $strand]);
     }
 
 
@@ -239,17 +255,20 @@ class DeanController extends Controller
             'end_time' => 'required'
         ]);
 
-        $course_id = $request['course'];
-        $major_id = $request['major'];
-        $yl_id = $request['year_level'];
+        // $course_id = $request['course'];
+        // $major_id = $request['major'];
+        // $yl_id = $request['year_level'];
         $section_id = $request['section'];
         $curriculum_id = $request['curriculum'];
+        $strand = $request['strand'];
 
-        $course = Course::findorfail($course_id);
-        $yl = YearLevel::findorfail($yl_id);
+
+
+        // $course = Course::findorfail($course_id);
+        $yl = YearLevel::findorfail($curriculum_id);
         $section = Section::findorfail($section_id);
-        $major = CourseMajor::find($major_id);
-        $curriculum = Curriculum::findorfail($curriculum_id);
+        // $major = CourseMajor::find($major_id);
+        // $curriculum = Curriculum::findorfail($curriculum_id);
 
         $room_id = $request['room'];
         $subject_id = $request['subject'];
@@ -258,7 +277,7 @@ class DeanController extends Controller
         $et = $request['end_time'];
 
         $ay = AcademicYear::where('active', 1)->first();
-        $sem = Semester::where('active', 1)->first();
+        // $sem = Semester::where('active', 1)->first();
 
         $subject = Subject::findorfail($subject_id);
         $room = Room::findorfail($room_id);
@@ -351,9 +370,10 @@ class DeanController extends Controller
         $sched->start_time = $st;
         $sched->end_time = $et;
         $sched->section_id = $section->id;
-        $sched->year_level_id = $yl->id;
-        $sched->course_id = $course->id;
-        $sched->curriculum_id = $curriculum->id;
+        $sched->curriculum_id = $yl->id;
+        // $sched->course_id = $course->id;
+        // $sched->curriculum_id = $curriculum->id;
+        $sched->strand_id = $strand;
         $sched->save();
 
         // add activty log
@@ -381,26 +401,31 @@ class DeanController extends Controller
     {
         $schedule = Schedule::findorfail($id);
 
-        $course = Course::findorfail($schedule->course_id);
-        $major = CourseMajor::find($schedule->major_id);
-        $curriculum = Curriculum::findorfail($schedule->curriculum_id);
-        $yl = YearLevel::findorfail($schedule->year_level_id);
+        // $course = Course::findorfail($schedule->course_id);
+        // $major = CourseMajor::find($schedule->major_id);
+        // $curriculum = Curriculum::findorfail($schedule->curriculum_id);
+        $yl = YearLevel::findorfail($schedule->curriculum_id);
         $section = Section::findorfail($schedule->section_id);
+        $strand = NULL;
+
+        if($schedule->strand_id != NULL) {
+            $strand = \App\Strand::findorfail($schedule->strand_id);
+        }
 
         $sem = Semester::whereActive(1)->first();
 
         // room, subjects, time, days
         $rooms = Room::orderBy('name', 'asc')->get();
         $subjects = Subject::where('active', 1)
-                    ->where('curriculum_id', $schedule->curriculum_id)
-                    ->where('semester_id', $sem->id)
-                    ->where('year_level_id', $schedule->year_level_id)
+                    // ->where('curriculum_id', $schedule->curriculum_id)
+                    // ->where('semester_id', $sem->id)
+                    ->where('year_level_id', $schedule->curriculum_id)
                     ->orderBy('code', 'asc')
                     ->get();
 
         // return view('dean.schedule-update', ['rooms' => $rooms, 'subjects' => $subjects, 'schedule' => $schedule]);
 
-        return view('dean.schedule-update', ['rooms' => $rooms, 'subjects' => $subjects, 'course' => $course, 'yl' => $yl, 'sem' => $sem, 'section' => $section, 'major' => $major, 'curriculum' => $curriculum, 'schedule' => $schedule]);
+        return view('dean.schedule-update', ['rooms' => $rooms, 'subjects' => $subjects, 'section' => $section, 'curriculum' => $yl, 'schedule' => $schedule, 'strand' => $strand]);
 
     }
 
@@ -426,7 +451,7 @@ class DeanController extends Controller
         $sched = Schedule::findorfail($schedule_id);
 
         $ay = AcademicYear::where('active', 1)->first();
-        $sem = Semester::where('active', 1)->first();
+        // $sem = Semester::where('active', 1)->first();
 
         $subject = Subject::findorfail($subject_id);
         $room = Room::findorfail($room_id);
@@ -766,11 +791,11 @@ class DeanController extends Controller
         //             ->get(['id', 'course_id', 'year_level_id', 'section_id']);
 
         $sections = DB::table('schedules')
-                ->groupBy('schedules.course_id', 'schedules.year_level_id', 'schedules.section_id')
-                ->join('courses', 'courses.id', '=', 'schedules.course_id')
-                ->join('year_levels', 'year_levels.id', '=', 'schedules.year_level_id')
+                // ->groupBy('schedules.course_id', 'schedules.year_level_id', 'schedules.section_id')
+                // ->join('courses', 'courses.id', '=', 'schedules.course_id')
+                ->join('year_levels', 'year_levels.id', '=', 'schedules.curriculum_id')
                 ->join('sections', 'sections.id', '=', 'schedules.section_id')
-                ->select('schedules.id', 'courses.code', 'year_levels.name',\DB::raw('sections.name as section_name'))
+                ->select('schedules.id', 'year_levels.name',\DB::raw('sections.name as section_name'))
                 ->get();
 
 
@@ -793,7 +818,7 @@ class DeanController extends Controller
 
         // get all subjects in the schedule having same course, curriculum, yearl level and section
         $subject_ids = Schedule::whereActive(1)
-                    ->where('course_id', $schedule->course_id)
+                    // ->where('course_id', $schedule->course_id)
                     ->distinct()
                     ->get(['subject_id']);
 
@@ -810,11 +835,11 @@ class DeanController extends Controller
     // method use to add faculty laod 
     public function addFacultyLoad()
     {
-        $sem = Semester::whereActive(1)->first();
+        // $sem = Semester::whereActive(1)->first();
 
-        if(!empty($sem)) {
-            return redirect()->back()->with('error', 'No Active Semester. Please report to admin.');
-        }
+        // if(!empty($sem)) {
+        //     return redirect()->back()->with('error', 'No Active Semester. Please report to admin.');
+        // }
 
         // get all faculty
         $faculty = Faculty::orderBy('lastname', 'asc')->get(['id', 'firstname', 'lastname']);
@@ -848,18 +873,17 @@ class DeanController extends Controller
         $subject = Subject::findorfail($subject_id);
 
         $ay = AcademicYear::whereActive(1)->first();
-        $sem = Semester::whereActive(1)->first();
+        // $sem = Semester::whereActive(1)->first();
 
-        if(empty($ay) || empty($sem)) {
-            return redirect()->back()->with('error', 'No Active Academic Year or Semester. Please contact the administrator.');
+        if(empty($ay)) {
+            return redirect()->back()->with('error', 'No Active School Year. Please contact the administrator.');
         }
 
         // check duplicate subject Assignment
-        $check_conflict = FacultyLoad::where('course_id', $schedule->course->id)
-                                    ->where('curriculum_id', $schedule->curriculum->id)
-                                    ->where('year_level_id', $schedule->year_level->id)
+        $check_conflict = FacultyLoad::where('curriculum_id', $schedule->curriculum_id)
+                                    // ->where('year_level_id', $schedule->year_level->id)
                                     ->where('academic_year_id', $ay->id)
-                                    ->where('semester_id', $sem->id)
+                                    // ->where('semester_id', $sem->id)
                                     ->where('section_id', $schedule->section->id)
                                     ->where('subject_id', $subject->id)
                                     ->whereActive(1)
@@ -872,11 +896,11 @@ class DeanController extends Controller
         // add to database 
         $assign = new FacultyLoad();
         $assign->faculty_id = $faculty->id;
-        $assign->course_id = $schedule->course->id;
-        $assign->curriculum_id = $schedule->curriculum->id;
-        $assign->year_level_id = $schedule->year_level->id;
+        // $assign->course_id = $schedule->course->id;
+        $assign->curriculum_id = $schedule->curriculum_id;
+        // $assign->year_level_id = $schedule->year_level->id;
         $assign->academic_year_id = $ay->id;
-        $assign->semester_id = $sem->id;
+        // $assign->semester_id = $sem->id;
         $assign->section_id = $schedule->section->id;
         $assign->subject_id = $subject->id;
         $assign->save();

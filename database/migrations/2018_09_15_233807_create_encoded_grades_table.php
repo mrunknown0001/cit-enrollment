@@ -15,11 +15,11 @@ class CreateEncodedGradesTable extends Migration
     {
         Schema::create('encoded_grades', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('course_id')->unsigned();
-            $table->foreign('course_id')->references('id')->on('courses');
+            // $table->integer('course_id')->unsigned();
+            // $table->foreign('course_id')->references('id')->on('courses');
             $table->integer('curriculum_id')->unsigned();
-            $table->integer('year_level_id')->unsigned();
-            $table->integer('semester_id')->unsigned();
+            // $table->integer('year_level_id')->unsigned();
+            // $table->integer('semester_id')->unsigned();
             $table->integer('academic_year_id')->unsigned();
             $table->integer('section_id')->unsigned();
             $table->integer('subject_id')->unsigned();

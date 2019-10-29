@@ -30,10 +30,10 @@
 							<input type="hidden" name="lastname" value="{{ $lastname }}">
 							<input type="hidden" name="middlename" value="{{ $middlename }}">
 							<input type="hidden" name="suffix" value="{{ $suffix }}">
-							<input type="hidden" name="course_id" value="{{ $course_id }}">
-							<input type="hidden" name="major_id" value="{{ $major_id }}">
+							{{-- <input type="hidden" name="course_id" value="{{ $course_id }}"> --}}
+							{{-- <input type="hidden" name="major_id" value="{{ $major_id }}"> --}}
 							<input type="hidden" name="curriculum_id" value="{{ $curriculum_id }}">
-							<input type="hidden" name="yl_id" value="{{ $yl_id }}">
+							{{-- <input type="hidden" name="yl_id" value="{{ $yl_id }}"> --}}
 							
 							<input type="hidden" name="sex" value="{{ $sex }}">
 							<input type="hidden" name="civil_status" value="{{ $civil_status }}">

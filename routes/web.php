@@ -840,7 +840,7 @@ Route::group(['prefix' => 'faculty', 'middleware' => 'prevent-back-history'], fu
 	Route::get('/subject/loads', 'FacultyController@subjectLoads')->name('faculty.subject.loads');
 
 	// route to view all subjects in the course year level section subject
-	Route::get('/student/course/{course_id}/curriculum/{curriculum_id}/year/{yl_id}/section/{section_id}/subject/{subject_id}/view', 'FacultyController@viewStudentSectionSubject')->name('faculty.student.section.subject');
+	Route::get('/student/curriculum/{curriculum_id}/section/{section_id}/subject/{subject_id}/view', 'FacultyController@viewStudentSectionSubject')->name('faculty.student.section.subject');
 
 	// route to encode grade of student per subject
 	Route::get('/student/course/{course_id}/curriculum/{curriculum_id}/year/{yl_id}/section/{section_id}/subject/{subject_id}/grade/encode/', 'FacultyController@studentSubjectGradeEncode')->name('faculty.encode.student.subject.grade');
