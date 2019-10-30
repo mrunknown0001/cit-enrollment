@@ -27,7 +27,7 @@
     <form action="{{ route('student.show.details.post') }}" method="POST" autocomplete="off">
       {{ csrf_field() }}
       <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
-        <input id="username" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" placeholder="Enter Student Number" autofocus>
+        <input id="username" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}" placeholder="Enter LRN" autofocus>
         @if ($errors->has('student_number'))
             <span class="help-block">
                 <strong>{{ $errors->first('student_number') }}</strong>
