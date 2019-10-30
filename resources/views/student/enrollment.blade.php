@@ -38,14 +38,14 @@
 								<p id="student" style="visibility: hidden;">{{ Auth::user()->firstname . ' ' . Auth::user()->lastname . ' - - ' . Auth::user()->student_number }}</p>
 								<div class="col-md-6">
 
-									<p>Course: <strong>{{ ucwords($course->title) }}</strong></p>
-									<p>Curriculum: <strong>{{ strtoupper($curriculum->name) }}</strong></p>
+									{{-- <p>Course: <strong>{{ ucwords($course->title) }}</strong></p> --}}
+									<p>Curriculum: <strong>{{ strtoupper($yl->name) }}</strong></p>
 									<p>Section: <strong>{{ strtoupper($section->name) }}</strong></p>
 								</div>
 								<div class="col-md-6">
-									<p>Major: <strong>{{ count($major) > 0 ? ucwords($major->name) : 'N/A' }}</strong></p>
-									<p>Year Level: <strong>{{ ucwords($yl->name) }}</strong></p>
-									<p>Semester: <strong>{{ ucwords($sem->name) }}</strong></p>
+									{{-- <p>Major: <strong>{{ count($major) > 0 ? ucwords($major->name) : 'N/A' }}</strong></p> --}}
+									{{-- <p>Year Level: <strong>{{ ucwords($yl->name) }}</strong></p> --}}
+									{{-- <p>Semester: <strong>{{ ucwords($sem->name) }}</strong></p> --}}
 								</div>
 								<div class="col-md-12">
 									<table class="table table-bordered table-hover">
