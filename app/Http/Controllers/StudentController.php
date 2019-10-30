@@ -223,9 +223,9 @@ class StudentController extends Controller
         }
 
         $ay = AcademicYear::whereActive(1)->first();
-        $sem = Semester::whereActive(1)->first();
+        // $sem = Semester::whereActive(1)->first();
 
-        if(empty($ay) || empty($sem)) {
+        if(empty($ay)) {
             return redirect()->route('student.dashboard')->with('error', 'Academic Year or Semester Not Set!');
         }
 
@@ -252,21 +252,21 @@ class StudentController extends Controller
         }
 
         // check student if first year and if the semester is first they can't take assessment
-        if($student->info->year_level_id == 1 && $sem->id == 1) {
+        if($student->info->curriculum_id == 1 && $sem->id == 1) {
             return redirect()->route('student.dashboard')->with('info', 'Unable to take assessment. You can take next Semester! Study harder! God Bless!');
         }
 
-        $course_id = $student->enrolled->course_id;
-        $curriculum_id = $student->enrolled->curriculum_id;
-        $major_id = $student->enrolled->major_id;
-        $yl_id = $student->info->year_level_id;
+        // $course_id = $student->enrolled->course_id;
+        // $curriculum_id = $student->enrolled->curriculum_id;
+        // $major_id = $student->enrolled->major_id;
+        $yl_id = $student->info->curriculum_id;
 
 
         $section_ids = DB::table('schedules')
                     ->where('active', 1)
-                    ->where('course_id', $course_id)
-                    ->where('curriculum_id', $curriculum_id)
-                    ->where('year_level_id', $yl_id)
+                    // ->where('course_id', $course_id)
+                    ->where('curriculum_id', $yl_id)
+                    // ->where('year_level_id', $yl_id)
                     ->distinct('section_id')
                     ->get(['section_id']);
 
