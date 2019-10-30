@@ -30,7 +30,7 @@
 								<tr>
 									<th class="text-center">Code</th>
 									<th class="text-center">Description</th>
-									<th class="text-center">Unit[Lec|Lab]</th>
+									{{-- <th class="text-center">Unit[Lec|Lab]</th> --}}
 								</tr>
 							</thead>
 							<tbody>
@@ -38,7 +38,7 @@
 								<tr>
 									<td class="text-center">{{ $s->code }}</td>
 									<td class="text-center">{{ $s->description }}</td>
-									<td class="text-center">{{ $s->units }}{{ $s->lab_units ? '|' . $s->lab_units : '' }}</td>
+									{{-- <td class="text-center">{{ $s->units }}{{ $s->lab_units ? '|' . $s->lab_units : '' }}</td> --}}
 								</tr>
 								@endforeach
 							</tbody>
