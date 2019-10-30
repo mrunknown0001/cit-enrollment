@@ -299,37 +299,39 @@ class StudentController extends Controller
             return redirect()->back()->with('error', 'Sorry You Cant Enroll!');
         }
 
-        $course_id = $student->enrolled->course_id;
-        $curriculum_id = $student->enrolled->curriculum_id;
-        $major_id = $student->enrolled->major_id;
-        $yl_id = $student->info->year_level_id;
+        // $course_id = $student->enrolled->course_id;
+        // $curriculum_id = $student->enrolled->curriculum_id;
+        // $major_id = $student->enrolled->major_id;
+        $yl_id = $student->info->curriculum_id;
 
-        $course = Course::find($course_id);
-        $curriculum = Curriculum::find($curriculum_id);
-        $major = CourseMajor::find($major_id);
+        // $course = Course::find($course_id);
+        // $curriculum = Curriculum::find($curriculum_id);
+        // $major = CourseMajor::find($major_id);
         $yl = YearLevel::find($yl_id);
 
         $ay = AcademicYear::whereActive(1)->first();
-        $sem = Semester::whereActive(1)->first();
+        // $sem = Semester::whereActive(1)->first();
 
         // get scheudles
-        $schedules = Schedule::where('course_id', $course_id)
-                        ->where('curriculum_id', $curriculum_id)
-                        ->where('year_level_id', $yl_id)
+        $schedules = Schedule::
+                        // where('course_id', $course_id)
+                        ->where('curriculum_id', $yl->id)
+                        // ->where('year_level_id', $yl_id)
                         ->where('section_id', $section->id)
                         ->orderBy('day', 'asc')
                         ->orderBy('start_time', 'asc')
                         ->get();
 
-        $subjects = Subject::where('course_id', $course_id)
-                        ->where('curriculum_id', $curriculum_id)
-                        ->where('year_level_id', $yl_id)
-                        ->where('semester_id', $sem->id)
+        $subjects = Subject::
+                        // where('course_id', $course_id)
+                        // ->where('curriculum_id', $curriculum_id)
+                        where('year_level_id', $yl_id)
+                        // ->where('semester_id', $sem->id)
                         ->orderBy('code', 'asc')
                         ->get();
 
         // show the scheudle of the subjects in students
-        return view('student.assessment-schedule-show', ['schedules' => $schedules, 'subjects' => $subjects, 'section' => $section, 'course' => $course, 'curriculum' => $curriculum, 'yl' => $yl, 'major' => $major, 'sem' => $sem]);
+        return view('student.assessment-schedule-show', ['schedules' => $schedules, 'subjects' => $subjects, 'section' => $section, 'yl' => $yl]);
     }
 
 

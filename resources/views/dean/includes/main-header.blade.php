@@ -19,7 +19,7 @@
               <li class="user-header">
                 <img src="{{ asset('uploads/avatar.jpg') }}" class="img-circle" alt="User Image">
                 <p>
-                  <small>Principal Member</small>
+                  <small>Principal</small>
                 </p>
               </li>
               <li class="user-body">
