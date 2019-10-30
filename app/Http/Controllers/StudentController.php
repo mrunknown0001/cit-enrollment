@@ -480,12 +480,12 @@ class StudentController extends Controller
     {
         // check active academic year and active semester
         $ay = AcademicYear::where('active', 1)->first();
-        $sem = Semester::where('active', 1)->first();
+        // $sem = Semester::where('active', 1)->first();
 
         $es = EnrollmentSetting::find(1);
         $rp = RegistrationPayment::where('student_id', Auth::user()->id)->where('active', 1)->first();
 
-        if(empty($ay) && empty($sem)) {
+        if(empty($ay)) {
             return redirect()->route('student.dashboard')->with('error', 'No active Academic Year or Semester!');
         }
 
@@ -513,31 +513,33 @@ class StudentController extends Controller
 
         $balance = Balance::where('student_id', $student->id)
                         ->where('academic_year_id', $ay->id)
-                        ->where('semester_id', $sem->id)
+                        // ->where('semester_id', $sem->id)
                         ->first();
 
-        $course_id = $student->enrolled->course_id;
+        // $course_id = $student->enrolled->course_id;
         $curriculum_id = $student->enrolled->curriculum_id;
-        $major_id = $student->enrolled->major_id;
-        $yl_id = $student->info->year_level_id;
+        // $major_id = $student->enrolled->major_id;
+        // $yl_id = $student->info->year_level_id;
 
-        $course = Course::find($course_id);
-        $curriculum = Curriculum::find($curriculum_id);
-        $major = CourseMajor::find($major_id);
-        $yl = YearLevel::find($yl_id);
+        // $course = Course::find($course_id);
+        // $curriculum = Curriculum::find($curriculum_id);
+        // $major = CourseMajor::find($major_id);
+        $yl = YearLevel::find($curriculum_id);
         $section = Section::find($assessment->section_id);
 
 
-        $subjects = Subject::where('course_id', $course_id)
-                        ->where('curriculum_id', $curriculum_id)
-                        ->where('year_level_id', $yl_id)
-                        ->where('semester_id', $sem->id)
+        $subjects = Subject::
+                        // where('course_id', $course_id)
+                        where('curriculum_id', $yl->id)
+                        // ->where('year_level_id', $yl_id)
+                        // ->where('semester_id', $sem->id)
                         ->orderBy('code', 'asc')
                         ->get();
 
-        $schedules = Schedule::where('course_id', $course_id)
-                        ->where('curriculum_id', $curriculum_id)
-                        ->where('year_level_id', $yl_id)
+        $schedules = Schedule::
+                        // where('course_id', $course_id)
+                        where('curriculum_id', $yl->id)
+                        // ->where('year_level_id', $yl_id)
                         ->where('section_id', $section->id)
                         ->orderBy('day', 'asc')
                         ->orderBy('start_time', 'asc')
@@ -553,12 +555,12 @@ class StudentController extends Controller
                 'es' => $es,
                 'rp' => $rp,
                 'student' => $student,
-                'course' => $course,
-                'curriculum' => $curriculum,
-                'major' => $major,
+                // 'course' => $course,
+                // 'curriculum' => $curriculum,
+                // 'major' => $major,
                 'section' => $section,
                 'yl' => $yl,
-                'sem' => $sem
+                // 'sem' => $sem
             ]);
 
         // check if paid for pre-registration
