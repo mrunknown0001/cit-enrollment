@@ -820,15 +820,15 @@ class RegistrarController extends Controller
     public function getCurrentEnrolledStudents()
     {
         $ay = AcademicYear::whereActive(1)->first();
-        $sem = Semester::whereActive(1)->first();
+        // $sem = Semester::whereActive(1)->first();
 
-        if(empty($ay) || empty($sem)) {
+        if(empty($ay)) {
             return redirect()->back()->with('info', 'Please Check AcademicYear and Semester in Admin!');
         }
 
 
         $stds = EnrolledStudent::whereAcademicYearId($ay->id)
-                                ->whereSemesterId($sem->id)
+                                // ->whereSemesterId($sem->id)
                                 ->whereStatus(1)
                                 ->get();
 

@@ -30,11 +30,11 @@ class RegistrationController extends Controller
     	$student = User::where('student_number', $sn)->first();
 
     	if(empty($student)) {
-    		return redirect()->route('registration')->with('error', 'Student Number not found!');
+    		return redirect()->route('registration')->with('error', 'LRN not found!');
     	}
 
     	if($student->registered == 1) {
-    		return redirect()->route('registration')->with('error', 'Student Number Already Registered!');
+    		return redirect()->route('registration')->with('error', 'Student Already Registered!');
     	}
 
     	return view('registration-show-details', ['student' => $student]);
