@@ -375,7 +375,7 @@ class StudentController extends Controller
         $subject_ids = Subject::
                         //where('course_id', $course_id)
                         // ->where('curriculum_id', $curriculum_id)
-                        ->where('year_level_id', $yl_id)
+                        where('year_level_id', $yl_id)
                         // ->where('semester_id', $sem->id)
                         ->orderBy('code', 'asc')
                         ->get(['id']);
