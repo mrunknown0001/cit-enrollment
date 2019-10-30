@@ -16,7 +16,7 @@
 			<div class="col-md-12">
 				@include('includes.all')
 				@if($es->active == 1)
-					@if(count($rp) < 1) 
+					@if(empty($rp)) 
 						@include('student.includes.registration-payment')
 						{{--<p><button class="btn btn-danger" onclick="window.print()"><i class="fa fa-print"></i>  Print Pre Assessment</button></p>--}}
 						<p><button class="btn btn-danger" onclick="printAreaDiv()"><i class="fa fa-print"></i>  Print Pre Assessment</button></p>
