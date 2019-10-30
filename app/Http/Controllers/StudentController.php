@@ -519,7 +519,8 @@ class StudentController extends Controller
                         ->first();
 
         // $course_id = $student->enrolled->course_id;
-        $curriculum_id = $student->enrolled->curriculum_id;
+        // $curriculum_id = $student->enrolled->curriculum_id;
+        $curriculum_id = $student->info->curriculum_id;
         // $major_id = $student->enrolled->major_id;
         // $yl_id = $student->info->year_level_id;
 
