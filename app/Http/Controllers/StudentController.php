@@ -252,9 +252,9 @@ class StudentController extends Controller
         }
 
         // check student if first year and if the semester is first they can't take assessment
-        if($student->info->curriculum_id == 1 && $sem->id == 1) {
-            return redirect()->route('student.dashboard')->with('info', 'Unable to take assessment. You can take next Semester! Study harder! God Bless!');
-        }
+        // if($student->info->curriculum_id == 1) {
+        //     return redirect()->route('student.dashboard')->with('info', 'Unable to take assessment. You can take next Semester! Study harder! God Bless!');
+        // }
 
         // $course_id = $student->enrolled->course_id;
         // $curriculum_id = $student->enrolled->curriculum_id;

@@ -30,8 +30,8 @@
 					</div>
 				</div>
 				<p><strong>Students:</strong></p>
-				@if(count($students) > 0)
-					@if(count($encoded) < 1)
+				@if($students != NULL)
+					@if(empty($encoded))
 					<p>
 						<a href="{{ route('faculty.encode.student.subject.grade', [
 								{{-- 'course_id' => $course->id, --}}

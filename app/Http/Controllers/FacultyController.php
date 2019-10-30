@@ -199,21 +199,22 @@ class FacultyController extends Controller
     public function studentSubjectGradeEncode($course_id = null, $curriculum_id = null, $yl_id = null, $section_id = null, $subject_id = null)
     {
         $ay = AcademicYear::whereActive(1)->first();
-        $sem = Semester::whereActive(1)->first();
+        // $sem = Semester::whereActive(1)->first();
 
-        if(empty($ay) || empty($sem)) {
+        if(empty($ay)) {
             return redirect()->back()->with('error', 'No Active Academic Year or Semester. Please report to the adminsitrator.');
         }
 
-        $course = Course::findorfail($course_id);
-        $curriculum = Curriculum::findorfail($curriculum_id);
+        // $course = Course::findorfail($course_id);
+        // $curriculum = Curriculum::findorfail($curriculum_id);
         $yl = YearLevel::findorfail($yl_id);
         $section = Section::findorfail($section_id);
         $subject = Subject::findorfail($subject_id);
 
         // get the list of student enrolled in this course year level section
-        $student_ids = Assessment::where('course_id', $course->id)
-                                ->where('curriculum_id', $curriculum->id)
+        $student_ids = Assessment::
+                                // where('course_id', $course->id)
+                                // ->where('curriculum_id', $curriculum->id)
                                 ->where('year_level_id', $yl->id)
                                 ->where('section_id', $section->id)
                                 ->whereActive(1)
@@ -223,9 +224,9 @@ class FacultyController extends Controller
 
         // get the view for adding grades
         return view('faculty.subject-load-students-encode-grade', [
-            'sem' => $sem,
-            'course' => $course,
-            'curriculum' => $curriculum,
+            // 'sem' => $sem,
+            // 'course' => $course,
+            // 'curriculum' => $curriculum,
             'yl' => $yl,
             'section' => $section,
             'subject' => $subject,

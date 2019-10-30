@@ -19,14 +19,14 @@
 				
 				<div class="row">
 					<div class="col-md-6">
-						<p>Course: <strong>{{ ucwords($course->title) }}</strong></p>
+						{{-- <p>Course: <strong>{{ ucwords($course->title) }}</strong></p> --}}
 						<p>Section: <strong>{{ strtoupper($section->name) }}</strong></p>
 						<p>Subject: <strong>{{ strtoupper($subject->code) }}</strong></p>
-						<p>Semester: <strong>{{ ucwords($sem->name) }}</strong></p>
+						{{-- <p>Semester: <strong>{{ ucwords($sem->name) }}</strong></p> --}}
 					</div>
 					<div class="col-md-6">
-						<p>Curriculum: <strong>{{ strtoupper($curriculum->name) }}</strong></p>
-						<p>Year Level: <strong>{{ ucwords($yl->name) }}</strong></p>
+						{{-- <p>Curriculum: <strong>{{ strtoupper($curriculum->name) }}</strong></p> --}}
+						<p>Curriculum: <strong>{{ ucwords($yl->name) }}</strong></p>
 						<p>Subject Description: <strong>{{ ucwords($subject->description) }}</strong></p>
 					</div>
 				</div>
@@ -44,8 +44,8 @@
 							<tbody>
 								<form action="{{ route('faculty.student.encode.grade.post') }}" method="POST" autocomplete="off">
 									{{ csrf_field() }}
-									<input type="hidden" name="course_id" value="{{ $course->id }}">
-									<input type="hidden" name="curriculum_id" value="{{ $curriculum->id }}">
+									{{-- <input type="hidden" name="course_id" value="{{ $course->id }}"> --}}
+									{{-- <input type="hidden" name="curriculum_id" value="{{ $curriculum->id }}"> --}}
 									<input type="hidden" name="yl_id" value="{{ $yl->id }}">
 									<input type="hidden" name="section_id" value="{{ $section->id }}">
 									<input type="hidden" name="subject_id" value="{{ $subject->id }}">
