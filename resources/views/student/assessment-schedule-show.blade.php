@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				{{-- <p>Course: <strong>{{ ucwords($course->title) }}</strong></p> --}}
-				<p>Curriculum: <strong>{{ strtoupper($curriculum->name) }}</strong></p>
+				<p>Curriculum: <strong>{{ strtoupper($yl->name) }}</strong></p>
 				<p>Strand: <strong>N/A</strong></p>
 				<p>Section: <strong>{{ strtoupper($section->name) }}</strong></p>
 			</div>
