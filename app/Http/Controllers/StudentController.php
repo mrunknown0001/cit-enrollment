@@ -637,7 +637,7 @@ class StudentController extends Controller
         }
 
     
-        return view('student.grades', ['grades' => $grades, 'sem' => $sem]);
+        return view('student.grades', ['grades' => $grades]);
     }
 
 
