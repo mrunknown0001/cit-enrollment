@@ -315,7 +315,7 @@ class StudentController extends Controller
         // get scheudles
         $schedules = Schedule::
                         // where('course_id', $course_id)
-                        ->where('curriculum_id', $yl->id)
+                        where('curriculum_id', $yl->id)
                         // ->where('year_level_id', $yl_id)
                         ->where('section_id', $section->id)
                         ->orderBy('day', 'asc')
