@@ -161,7 +161,7 @@ class FacultyController extends Controller
         // get the list of student enrolled in this course year level section
         $student_ids = Assessment::
                                 // where('course_id', $course->id)
-                                where('curriculum_id', $yl->id)
+                                where('year_level_id', $yl->id)
                                 // ->where('year_level_id', $yl->id)
                                 ->where('section_id', $section->id)
                                 ->whereActive(1)
