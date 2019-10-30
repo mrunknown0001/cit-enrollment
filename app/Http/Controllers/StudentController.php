@@ -605,19 +605,16 @@ class StudentController extends Controller
         $student = Auth::user();
 
         $ay = AcademicYear::whereActive(1)->first();
-        $sem = Semester::whereActive(1)->first();
+        // $sem = Semester::whereActive(1)->first();
 
-        if(empty($ay) && empty($sem)) {
+        if(empty($ay)) {
             return redirect()->route('student.dashboard')->with('error', 'No Active Academic Year');
         }
 
         $prev_sem_id = 2;
         $prev_ay_id = null;
 
-        if($sem->id == 2) {
-            $prev_sem_id = 1;
-        }
-        else {
+        if($ay) {
             $prev_ay_id = $ay->id - 1;
         }
 
@@ -632,15 +629,14 @@ class StudentController extends Controller
         if(!empty($prev_ay)) {
             $grades = Grade::where('student_id', $student->id)
                     ->where('academic_year_id', $prev_ay->id)
-                    ->where('semester_id', $prev_sem_id)
+                    // ->where('semester_id', $prev_sem_id)
                     ->get();
         }
         else {
             $grades = null;
         }
 
-        
-
+    
         return view('student.grades', ['grades' => $grades, 'sem' => $sem]);
     }
 
