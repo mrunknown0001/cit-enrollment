@@ -848,7 +848,7 @@ class RegistrarController extends Controller
         }
 
         // download in excel format
-        $filename = 'Students Enrolled in ' . $sem->name . '-' . $ay->from . '-' . $ay->to;
+        $filename = 'Students Enrolled in ' . $ay->from . '-' . $ay->to;
 
         Excel::create($filename, function($excel) use ($students) {
             $excel->sheet('Enrolled Students', function($sheet) use ($students)
