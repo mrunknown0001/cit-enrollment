@@ -25,7 +25,7 @@ class CreateSchedulesTable extends Migration
             $table->integer('section_id')->unsigned()->nullable();
             // $table->integer('year_level_id')->unsigned()->nullable();
             // $table->integer('course_id')->unsigned()->nullable();
-            $table->integer('curriculum_id')->unsigned()->nullable();
+            $table->integer('curriculum_id')->unsigned()->nullable(); // grade level
             $table->integer('strand_id')->unsigned()->nullable();
             // $table->integer('major_id')->unsigned()->nullable();
             $table->tinyInteger('active')->default(1);
