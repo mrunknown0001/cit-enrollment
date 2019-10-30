@@ -17,10 +17,11 @@ class CreateCourseEnrolledsTable extends Migration
             $table->increments('id');
             $table->integer('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('users');
-            $table->integer('course_id')->unsigned();
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->integer('major_id')->unsigned()->nullable();
+            // $table->integer('course_id')->unsigned();
+            // $table->foreign('course_id')->references('id')->on('courses');
+            // $table->integer('major_id')->unsigned()->nullable();
             $table->integer('curriculum_id')->unsigned();
+            $table->integer('strand_id')->unsigned()->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
         });

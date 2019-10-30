@@ -18,7 +18,7 @@ class CreateEnrolledStudentsTable extends Migration
             $table->integer('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('users');
             $table->integer('academic_year_id')->unsigned();
-            $table->integer('semester_id')->unsigned();
+            // $table->integer('semester_id')->unsigned();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

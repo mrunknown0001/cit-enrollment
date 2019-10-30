@@ -16,13 +16,13 @@ class EnrollmentController extends Controller
     	$student = User::find($id);
 
     	$ay = AcademicYear::where('active', 1)->first();
-    	$sem = Semester::where('active', 1)->first();
+    	// $sem = Semester::where('active', 1)->first();
 
     	// add to enrolled student
     	$enrolled = new EnrolledStudent();
     	$enrolled->student_id = $student->id;
     	$enrolled->academic_year_id = $ay->id;
-    	$enrolled->semester_id = $sem->id;
+    	// $enrolled->semester_id = $sem->id;
     	$enrolled->save();
     }
 }
