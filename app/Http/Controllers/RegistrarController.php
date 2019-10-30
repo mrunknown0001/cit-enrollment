@@ -884,18 +884,19 @@ class RegistrarController extends Controller
         $student = User::findorfail($id);
 
         $ay = AcademicYear::whereActive(1)->first();
-        $sem = Semester::whereActive(1)->first();
+        // $sem = Semester::whereActive(1)->first();
 
-        if(empty($ay) || empty($sem)) {
+        if(empty($ay)) {
             return redirect()->back()->with('error', 'No Active AcademicYear or Semester. Contact Admin!');
         }
 
-        $curriculum_id = $student->enrolled->curriculum_id;
-        $yl_id = $student->info->year_level_id;
+        // $curriculum_id = $student->enrolled->curriculum_id;
+        $yl_id = $student->info->curriculum_id;
 
-        $subjects = Subject::whereCurriculumId($curriculum_id)
-                        ->whereYearLevelId($yl_id)
-                        ->whereSemesterId($sem->id)
+        $subjects = Subject::
+                        // whereCurriculumId($curriculum_id)
+                        whereYearLevelId($yl_id)
+                        // ->whereSemesterId($sem->id)
                         ->get();
 
         return view('registrar.student-subjects', ['subjects' => $subjects, 'student' => $student]);

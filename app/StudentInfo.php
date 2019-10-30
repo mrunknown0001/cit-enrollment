@@ -8,6 +8,6 @@ class StudentInfo extends Model
 {
     public function year_level()
     {
-    	return $this->belongsTo('App\YearLevel', 'year_level_id');
+    	return $this->belongsTo('App\YearLevel', 'curriculum_id');
     }
 }

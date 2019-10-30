@@ -29,8 +29,8 @@
 							<p>Father: <strong>{{ $student->info->fathers_name }}</strong></p>
 						</div>
 						<div class="col-md-6">
-							<p>Course: <strong>{{ $student->enrolled->course->title }}</strong></p>
-							<p>Year Level: <strong>{{ $student->info->year_level->name }}</strong></p>
+							{{-- <p>Course: <strong>{{ $student->enrolled->course->title }}</strong></p> --}}
+							<p>Curriculum: <strong>{{ $student->info->year_level->name }}</strong></p>
 							<p>Place of Birth: <strong>{{ $student->info->place_of_birth }}</strong></p>
 							<p>Civil Status: <strong>{{ $student->info->civil_status }}</strong></p>
 							<p>Address: <strong>{{ $student->info->home_address }}</strong></p>
