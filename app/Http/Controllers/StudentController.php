@@ -345,36 +345,38 @@ class StudentController extends Controller
 
         $student = User::find(Auth::user()->id);
 
-        $course_id = $student->enrolled->course_id;
-        $curriculum_id = $student->enrolled->curriculum_id;
-        $major_id = $student->enrolled->major_id;
-        $yl_id = $student->info->year_level_id;
+        // $course_id = $student->enrolled->course_id;
+        // $curriculum_id = $student->enrolled->curriculum_id;
+        // $major_id = $student->enrolled->major_id;
+        $yl_id = $student->info->curriculum_id;
 
-        $course = Course::find($course_id);
-        $curriculum = Curriculum::find($curriculum_id);
-        $major = CourseMajor::find($major_id);
+        // $course = Course::find($course_id);
+        // $curriculum = Curriculum::find($curriculum_id);
+        // $major = CourseMajor::find($major_id);
         $yl = YearLevel::find($yl_id);
 
         $ay = AcademicYear::whereActive(1)->first();
-        $sem = Semester::whereActive(1)->first();
+        // $sem = Semester::whereActive(1)->first();
 
 
         // get the subject
         // count the number of lecture units multiplied by the unit price
         // add the miscellaneous and add 1k if there is lab units to get the total amount of tuition fee
-        $subjects = Subject::where('course_id', $course_id)
-                        ->where('curriculum_id', $curriculum_id)
-                        ->where('year_level_id', $yl_id)
-                        ->where('semester_id', $sem->id)
+        $subjects = Subject::
+                        // where('course_id', $course_id)
+                        // ->where('curriculum_id', $curriculum_id)
+                        where('year_level_id', $yl_id)
+                        // ->where('semester_id', $sem->id)
                         ->orderBy('code', 'asc')
                         ->get();
 
 
         // get the subject ids
-        $subject_ids = Subject::where('course_id', $course_id)
-                        ->where('curriculum_id', $curriculum_id)
+        $subject_ids = Subject::
+                        //where('course_id', $course_id)
+                        // ->where('curriculum_id', $curriculum_id)
                         ->where('year_level_id', $yl_id)
-                        ->where('semester_id', $sem->id)
+                        // ->where('semester_id', $sem->id)
                         ->orderBy('code', 'asc')
                         ->get(['id']);
 
@@ -390,10 +392,11 @@ class StudentController extends Controller
 
 
         // check if the there is existing assessment counter for the section
-        $check_counter = AssessmentCounter::where('course_id', $course->id)
-                                    ->where('curriculum_id', $curriculum->id)
-                                    ->where('year_level_id', $yl->id)
-                                    ->where('semester_id', $sem->id)
+        $check_counter = AssessmentCounter::
+                                    // where('course_id', $course->id)
+                                    // ->where('curriculum_id', $curriculum->id)
+                                    where('year_level_id', $yl->id)
+                                    // ->where('semester_id', $sem->id)
                                     ->where('academic_year_id', $ay->id)
                                     ->where('section_id', $section->id)
                                     ->first();
@@ -416,10 +419,10 @@ class StudentController extends Controller
         else {
             // create counter and the student count of 1
             $counter = new AssessmentCounter();
-            $counter->course_id = $course->id;
-            $counter->curriculum_id = $curriculum->id;
+            // $counter->course_id = $course->id;
+            // $counter->curriculum_id = $curriculum->id;
             $counter->year_level_id = $yl->id;
-            $counter->semester_id = $sem->id;
+            // $counter->semester_id = $sem->id;
             $counter->academic_year_id = $ay->id;
             $counter->section_id = $section->id;
             $counter->student_count = 1;
@@ -451,10 +454,10 @@ class StudentController extends Controller
         $assessment = new Assessment();
         $assessment->student_id = $student->id;
         $assessment->academic_year_id = $ay->id;
-        $assessment->semester_id = $sem->id;
+        // $assessment->semester_id = $sem->id;
         $assessment->year_level_id = $yl->id;
-        $assessment->course_id = $course->id;
-        $assessment->curriculum_id = $curriculum->id;
+        // $assessment->course_id = $course->id;
+        // $assessment->curriculum_id = $curriculum->id;
         $assessment->section_id = $section->id;
         $assessment->amount = $total_payable;
         $assessment->save();
@@ -463,7 +466,7 @@ class StudentController extends Controller
         $balance = new Balance();
         $balance->student_id = $student->id;
         $balance->academic_year_id = $ay->id;
-        $balance->semester_id = $sem->id;
+        // $balance->semester_id = $sem->id;
         $balance->balance = $total_payable;
         $balance->total = $total_payable;
         $balance->save();
