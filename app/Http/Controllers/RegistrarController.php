@@ -706,7 +706,7 @@ class RegistrarController extends Controller
 
         // get last student id of student in the student_infos table
         $last_student = StudentInfo::orderBy('id', 'desc')->first(['id']);
-        if(!emtpy($last_student)) {
+        if(!empty($last_student)) {
             $ref_id = $last_student->id + 1;
         }
         else {

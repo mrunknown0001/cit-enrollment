@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
 
-        <p><a href="{{ route('registrar.get.current.enrolled.students') }}" class="btn btn-danger">Get All Enrolled Students in current Semester</a></p>
+        <p><a href="{{ route('registrar.get.current.enrolled.students') }}" class="btn btn-danger">Get All Enrolled Students in current School Year</a></p>
 
 
 
