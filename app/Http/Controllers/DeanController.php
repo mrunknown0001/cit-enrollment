@@ -890,7 +890,7 @@ class DeanController extends Controller
                                     ->first();
 
         if(!empty($check_conflict) ) {
-            return redirect()->back()->with('error', 'Subject in this Course Year Level and Section has been already Assigned!');
+            return redirect()->back()->with('error', 'Subject in this Year Level and Section has been already Assigned!');
         }
 
         // add to database 
