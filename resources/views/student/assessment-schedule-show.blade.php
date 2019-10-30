@@ -30,7 +30,7 @@
 						<tr>
 							<th class="text-center">Subjects</th>
 							<th class="text-center">Days</th>
-							<th class="text-center">Units</th>
+							{{-- <th class="text-center">Units</th> --}}
 							<th class="text-center">Room</th>
 							<th class="text-center">Time</th>
 						</tr>
@@ -58,7 +58,7 @@
 									@endif
 								@endforeach
 							</td>
-							<td class="text-center">Lec: {{ $s->units }} {{ $s->lab_units ? '| Lab: ' . $s->lab_units : '' }}</td>
+							{{-- <td class="text-center">Lec: {{ $s->units }} {{ $s->lab_units ? '| Lab: ' . $s->lab_units : '' }}</td> --}}
 							<td class="text-center">
 								{{ $room_id = '' }}
 								@foreach($schedules as $sched)
