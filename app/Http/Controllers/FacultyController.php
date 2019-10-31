@@ -215,7 +215,7 @@ class FacultyController extends Controller
         $student_ids = Assessment::
                                 // where('course_id', $course->id)
                                 // ->where('curriculum_id', $curriculum->id)
-                                ->where('year_level_id', $yl->id)
+                                where('year_level_id', $yl->id)
                                 ->where('section_id', $section->id)
                                 ->whereActive(1)
                                 ->get(['student_id']);
