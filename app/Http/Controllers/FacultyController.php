@@ -196,7 +196,7 @@ class FacultyController extends Controller
 
 
     // method use to show encode of grade
-    public function studentSubjectGradeEncode($course_id = null, $curriculum_id = null, $yl_id = null, $section_id = null, $subject_id = null)
+    public function studentSubjectGradeEncode( $yl_id = null, $section_id = null, $subject_id = null)
     {
         $ay = AcademicYear::whereActive(1)->first();
         // $sem = Semester::whereActive(1)->first();
