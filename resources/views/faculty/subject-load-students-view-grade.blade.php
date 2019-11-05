@@ -20,14 +20,14 @@
 				
 				<div class="row">
 					<div class="col-md-6">
-						<p>Course: <strong>{{ ucwords($course->title) }}</strong></p>
+						{{-- <p>Course: <strong>{{ ucwords($course->title) }}</strong></p> --}}
 						<p>Section: <strong>{{ strtoupper($section->name) }}</strong></p>
 						<p>Subject: <strong>{{ strtoupper($subject->code) }}</strong></p>
-						<p>Semester: <strong>{{ ucwords($sem->name) }}</strong></p>
+						{{-- <p>Semester: <strong>{{ ucwords($sem->name) }}</strong></p> --}}
 					</div>
 					<div class="col-md-6">
-						<p>Curriculum: <strong>{{ strtoupper($curriculum->name) }}</strong></p>
-						<p>Year Level: <strong>{{ ucwords($yl->name) }}</strong></p>
+						<p>Curriculum: <strong>{{ strtoupper($yl->name) }}</strong></p>
+						{{-- <p>Year Level: <strong>{{ ucwords($yl->name) }}</strong></p> --}}
 						<p>Subject Description: <strong>{{ ucwords($subject->description) }}</strong></p>
 					</div>
 				</div>
