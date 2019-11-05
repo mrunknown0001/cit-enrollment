@@ -35,7 +35,7 @@
 					<p>
 						<a href="{{ route('faculty.encode.student.subject.grade', [
 								{{-- 'course_id' => $course->id, --}}
-								'curriculum_id' => $yl->id,
+								'curriculum_id' => $curriculum->id,
 								{{-- 'yl_id' => $yl->id, --}}
 								'section_id' => $section->id,
 								'subject_id' => $subject->id 
