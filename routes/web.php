@@ -853,7 +853,7 @@ Route::group(['prefix' => 'faculty', 'middleware' => 'prevent-back-history'], fu
 	});
 
 	// route to view grade of students when encoded by faculty
-	Route::get('/student/course/{course_id}/curriculum/{curriculum_id}/year/{yl_id}/section/{section_id}/subject/{subject_id}/grade/view/', 'FacultyController@viewStudentGrade')->name('faculty.view.student.subject.grade');
+	Route::get('/student/course/{course_id}/curriculum/{curriculum_id}/section/{section_id}/subject/{subject_id}/grade/view/', 'FacultyController@viewStudentGrade')->name('faculty.view.student.subject.grade');
 
 	// route to update grade of student
 	Route::post('/student/grade/update', 'FacultyController@postUpdateStudentGrade')->name('faculty.update.studet.grade.post');
