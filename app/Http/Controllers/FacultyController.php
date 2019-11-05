@@ -239,30 +239,31 @@ class FacultyController extends Controller
     public function postStudentEncodeGrade(Request $request)
     {
         $ay = AcademicYear::whereActive(1)->first();
-        $sem = Semester::whereActive(1)->first();
+        // $sem = Semester::whereActive(1)->first();
 
-        if(empty($ay) || empty($sem)) {
+        if(empty($ay)) {
             return redirect()->back()->with('error', 'No Active Academic Year or Semester. Please report to the adminsitrator.');
         }
 
         // get all hidden important values course, curriculum, year level, section, subject
-        $course_id = $request['course_id'];
-        $curriculum_id = $request['curriculum_id'];
+        // $course_id = $request['course_id'];
+        // $curriculum_id = $request['curriculum_id'];
         $yl_id = $request['yl_id'];
         $section_id = $request['section_id'];
         $subject_id = $request['subject_id'];
 
-        $course = Course::findorfail($course_id);
-        $curriculum = Curriculum::findorfail($curriculum_id);
+        // $course = Course::findorfail($course_id);
+        // $curriculum = Curriculum::findorfail($curriculum_id);
         $yl = YearLevel::findorfail($yl_id);
         $section = Section::findorfail($section_id);
         $subject = Subject::findorfail($subject_id);
 
         // get all students
         // get the list of student enrolled in this course year level section
-        $student_ids = Assessment::where('course_id', $course->id)
-                                ->where('curriculum_id', $curriculum->id)
-                                ->where('year_level_id', $yl->id)
+        $student_ids = Assessment::
+                                // where('course_id', $course->id)
+                                // ->where('curriculum_id', $curriculum->id)
+                                where('year_level_id', $yl->id)
                                 ->where('section_id', $section->id)
                                 ->whereActive(1)
                                 ->get(['student_id']);
@@ -277,7 +278,7 @@ class FacultyController extends Controller
             $grades[] = [
                 'student_id' => $s->id,
                 'academic_year_id' => $ay->id,
-                'semester_id' => $sem->id,
+                // 'semester_id' => $sem->id,
                 'subject_id' => $subject->id,
                 'grade' => $request[$s->student_number]
             ];
@@ -292,10 +293,10 @@ class FacultyController extends Controller
         
         // add to record of encoded grades
         $enc = new EncodedGrade();
-        $enc->course_id = $course->id;
-        $enc->curriculum_id = $curriculum->id;
-        $enc->year_level_id = $yl->id;
-        $enc->semester_id = $sem->id;
+        // $enc->course_id = $course->id;
+        // $enc->curriculum_id = $curriculum->id;
+        $enc->curriculum_id = $yl->id;
+        // $enc->semester_id = $sem->id;
         $enc->academic_year_id = $ay->id;
         $enc->section_id = $section->id;
         $enc->subject_id = $subject->id;
@@ -306,8 +307,8 @@ class FacultyController extends Controller
 
         // return
         return redirect()->route('faculty.student.section.subject', [
-                                'course_id' => $course->id,
-                                'curriculum_id' => $curriculum->id,
+                                // 'course_id' => $course->id,
+                                // 'curriculum_id' => $curriculum->id,
                                 'yl_id' => $yl->id,
                                 'section_id' => $section->id,
                                 'subject_id' => $subject->id 
