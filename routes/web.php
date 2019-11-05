@@ -843,7 +843,7 @@ Route::group(['prefix' => 'faculty', 'middleware' => 'prevent-back-history'], fu
 	Route::get('/student/curriculum/{curriculum_id}/section/{section_id}/subject/{subject_id}/view', 'FacultyController@viewStudentSectionSubject')->name('faculty.student.section.subject');
 
 	// route to encode grade of student per subject
-	Route::get('/student/course/{course_id}/curriculum/{curriculum_id}/section/{section_id}/subject/{subject_id}/grade/encode/', 'FacultyController@studentSubjectGradeEncode')->name('faculty.encode.student.subject.grade');
+	Route::get('/student/curriculum/{curriculum_id}/section/{section_id}/subject/{subject_id}/grade/encode/', 'FacultyController@studentSubjectGradeEncode')->name('faculty.encode.student.subject.grade');
 
 	// route to save grade 
 	Route::post('/student/encode/grade', 'FacultyController@postStudentEncodeGrade')->name('faculty.student.encode.grade.post');
@@ -853,7 +853,7 @@ Route::group(['prefix' => 'faculty', 'middleware' => 'prevent-back-history'], fu
 	});
 
 	// route to view grade of students when encoded by faculty
-	Route::get('/student/course/{course_id}/curriculum/{curriculum_id}/section/{section_id}/subject/{subject_id}/grade/view/', 'FacultyController@viewStudentGrade')->name('faculty.view.student.subject.grade');
+	Route::get('/student/curriculum/{curriculum_id}/section/{section_id}/subject/{subject_id}/grade/view/', 'FacultyController@viewStudentGrade')->name('faculty.view.student.subject.grade');
 
 	// route to update grade of student
 	Route::post('/student/grade/update', 'FacultyController@postUpdateStudentGrade')->name('faculty.update.studet.grade.post');
