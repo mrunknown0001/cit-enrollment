@@ -55,7 +55,7 @@
 										{{ ucwords($s->firstname . ' ' . $s->lastname) }} - {{ $s->student_number }}
 									</td>
 									<td class="text-center">
-										<input type="number" name="{{ $s->student_number }}" class="form-control" min="1.00" max="5.00" step="0.25" required>
+										<input type="number" name="{{ $s->student_number }}" class="form-control" min="70" max="99" step="1" required>
 									</td>
 								</tr>
 								@endforeach

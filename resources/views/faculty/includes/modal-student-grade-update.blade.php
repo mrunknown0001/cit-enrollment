@@ -16,7 +16,7 @@
           {{ csrf_field() }}
           <input type="hidden" name="grade_id" value="{{ $s['grade_id'] }}">
           <div class="form-group">
-            <input type="number" name="grade" value="{{ $s['grade'] }}" class="form-control" min="1" max="5" step="0.25" required>
+            <input type="number" name="grade" value="{{ $s['grade'] }}" class="form-control" min="70" max="99" step="1" required>
           </div>
           <div class="form-group">
             <button class="btn btn-danger"><i class="fa fa-floppy-o"></i> Save Grade</button>
