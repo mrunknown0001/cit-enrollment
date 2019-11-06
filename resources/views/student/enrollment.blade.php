@@ -18,12 +18,12 @@
 				@if($es->active == 1)
 					@if(empty($rp)) 
 						{{-- @include('student.includes.registration-payment') --}}
-						{{--<p><button class="btn btn-danger" onclick="window.print()"><i class="fa fa-print"></i>  Print Pre Assessment</button></p>--}}
-						<p><button class="btn btn-danger" onclick="printAreaDiv()"><i class="fa fa-print"></i>  Print Pre Assessment</button></p>
+						<p><button class="btn btn-danger" onclick="window.print()"><i class="fa fa-print"></i>  Print Pre Assessment</button></p>
+						{{-- <p><button class="btn btn-danger" onclick="printAreaDiv()"><i class="fa fa-print"></i>  Print Pre Assessment</button></p> --}}
 						
 					@else
 					<p>
-						<button class="btn btn-danger" onclick="printAreaDiv()"><i class="fa fa-print"></i>  Print </button>
+						{{-- <button class="btn btn-danger" onclick="printAreaDiv()"><i class="fa fa-print"></i>  Print </button> --}}
 					</p>
 					@endif
 				@endif
