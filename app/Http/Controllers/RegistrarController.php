@@ -721,18 +721,18 @@ class RegistrarController extends Controller
                     // add validation on Stuent number LRN
 
                     // check each student number if it is already in database
-                    $check_student_number = User::where('student_number', $row->student_number)->first();
+                    $check_student_number = User::where('student_number', $row->lrn)->first();
 
 
                     if(!empty($check_student_number)) {
-                        return redirect()->back()->with('error', 'Student Exist! Please Remove Student with LRN: ' . $row->student_number . ' - ' . ucwords($row->firstname . ' ' . $row->lastname));
+                        return redirect()->back()->with('error', 'Student Exist! Please Remove Student with LRN: ' . $row->lrn . ' - ' . ucwords($row->firstname . ' ' . $row->lastname));
                     }
 
                     else {
 
                         // for users table
                         $insert[] = [
-                                'lrn' => $row->student_number,
+                                'lrn' => $row->lrn,
                                 'lastname' => $row->lastname,
                                 'firstname' => $row->firstname
                             ];
@@ -804,14 +804,17 @@ class RegistrarController extends Controller
 
             // insert to student_previous_schools
             DB::table('student_previous_schools')->insert($last_school);
+
+            // add activtiy log
+            GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Registrar Import Students');
+
+
+            // return with success message
+            return redirect()->route('registrar.students')->with('success', 'Students Import Successful!');
+
         }
 
-        // add activtiy log
-        GeneralController::activity_log(Auth::guard('registrar')->user()->id, 3, 'Registrar Import Students');
-
-
-        // return with success message
-        return redirect()->route('registrar.students')->with('success', 'Students Import Successful!');
+        return redirect()->route('registrar.students')->with('error', 'Students Import Error!');
         
     }
 
