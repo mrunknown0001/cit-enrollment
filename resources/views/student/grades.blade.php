@@ -17,7 +17,8 @@
 				@include('includes.all')
 
 				@if($grades != NULL)
-					<p><i>Available Grade for the Previous Semester You Enrolled.</i></p>
+					{{-- <p><i>Available Grade for the Previous Semester You Enrolled.</i></p> --}}
+					<p><i>Grades</i></p>
 					{{--<form>
 						<div class="form-group">
 							<select id="semester">
