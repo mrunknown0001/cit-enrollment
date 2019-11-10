@@ -18,7 +18,7 @@ class CreateGradesTable extends Migration
             $table->integer('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('users');
             $table->integer('academic_year_id')->unsigned();
-            $table->integer('semester_id')->unsigned();
+            // $table->integer('semester_id')->unsigned();
             $table->integer('subject_id')->unsigned();
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->float('grade', 8,2);

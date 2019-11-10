@@ -641,9 +641,11 @@ class StudentController extends Controller
                     ->get();
         }
         else {
-            $grades = null;
+            // $grades = null;
         }
 
+
+        
     
         return view('student.grades', ['grades' => $grades]);
     }
