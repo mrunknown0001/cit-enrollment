@@ -619,17 +619,17 @@ class StudentController extends Controller
             return redirect()->route('student.dashboard')->with('error', 'No Active Academic Year');
         }
 
-        $prev_sem_id = 2;
+        // $prev_sem_id = 2;
         $prev_ay_id = null;
 
         if($ay) {
             $prev_ay_id = $ay->id - 1;
         }
 
-        // $grades = Grade::where('student_id', $student->id)
-        //                 ->where('academic_year_id', $ay->id)
-        //                 ->where('semester_id', $sem->id)
-        //                 ->get();
+        $grades = Grade::where('student_id', $student->id)
+                        ->where('academic_year_id', $ay->id)
+                        // ->where('semester_id', $sem->id)
+                        ->get();
         
 
         $prev_ay = AcademicYear::find($prev_ay_id);
