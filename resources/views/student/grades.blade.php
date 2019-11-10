@@ -16,7 +16,7 @@
 			<div class="col-md-12">
 				@include('includes.all')
 
-				@if($grades) != NULL)
+				@if($grades != NULL)
 					<p><i>Available Grade for the Previous Semester You Enrolled.</i></p>
 					{{--<form>
 						<div class="form-group">
