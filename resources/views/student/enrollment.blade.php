@@ -104,6 +104,16 @@
 											@endforeach
 										</tbody>
 									</table>
+
+									<table class="table table-bordered table-hover">
+										<thead>
+											<th>Particulars</th>
+											<th>Fee</th>
+										</thead>
+										<tbody>
+											
+										</tbody>
+									</table>
 								</div>
 							</div>
 
