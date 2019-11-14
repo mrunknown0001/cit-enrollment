@@ -552,6 +552,16 @@ class StudentController extends Controller
                         ->get();
 
 
+        $miscs = NULL;
+
+        if($yl->id > 3) {
+            $miscs = \App\Miscellaneous::where('type', '
+                Senior')->get();
+        }
+        else {
+            $miscs = \App\Miscellaneous::where('type', 'Junior')->get();
+        }
+
 
         return view('student.enrollment', [
                 'assessment' => $assessment,
@@ -566,7 +576,8 @@ class StudentController extends Controller
                 // 'major' => $major,
                 'section' => $section,
                 'yl' => $yl,
-                // 'sem' => $sem
+                // 'sem' => $sem,
+                'miscs' => $miscs
             ]);
 
         // check if paid for pre-registration
