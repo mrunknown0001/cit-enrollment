@@ -94,6 +94,10 @@
 												</td>
 											</tr>
 											@endforeach
+											<tr>
+												<th colspan="3">Total</th>
+												<th>{{ $total }}</th>
+											</tr>
 										</tbody>
 									</table>
 									<table class="table table-bordered table-hover" id="particulars">
@@ -110,10 +114,6 @@
 													</tr>
 												@endforeach
 											@endif
-											<tr>
-												<th>Total</th>
-												<th>{{ $total }}</th>
-											</tr>
 										</tbody>
 									</table>
 								</div>
