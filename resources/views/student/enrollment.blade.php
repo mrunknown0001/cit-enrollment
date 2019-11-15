@@ -33,7 +33,7 @@
 					</div>
 					<div class="box-body">
 						<div id="printArea" class="">
-							
+							aaaa
 							<div class="row">
 								<p id="student" style="visibility: hidden;">{{ Auth::user()->firstname . ' ' . Auth::user()->lastname . ' - - ' . Auth::user()->student_number }}</p>
 								<div class="col-md-6">
