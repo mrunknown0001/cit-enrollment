@@ -25,6 +25,10 @@
     visibility: visible !important;
   }
 
+  #particulars {
+    visibility: visible !important;
+  }
+
   .studentPayment {
     margin-top: 0px;
   }

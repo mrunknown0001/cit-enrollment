@@ -34,8 +34,8 @@
 					<div class="box-body">
 						<div id="printArea" class="">
 							<div class="row">
-								<p id="student" style="visibility: hidden;">{{ Auth::user()->firstname . ' ' . Auth::user()->lastname . ' - - ' . Auth::user()->student_number }}</p>
 								<div class="col-md-6">
+									<p id="student" style="visibility: hidden;"><strong>{{ Auth::user()->firstname . ' ' . Auth::user()->lastname . ' - - ' . Auth::user()->student_number }}</strong></p>
 									<p>Curriculum: <strong>{{ strtoupper($yl->name) }}</strong></p>
 									<p>Section: <strong>{{ strtoupper($section->name) }}</strong></p>
 								</div>
