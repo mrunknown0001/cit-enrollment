@@ -7,7 +7,7 @@
     width: 100%;
   }
   #printArea, #printArea * {
-    visibility: visible;
+    visibility: visible !important;
   }
   #printArea {
     position: fixed;
@@ -22,7 +22,7 @@
   }
 
   #student {
-    visibility: visible;
+    visibility: visible !important;
   }
 
   .studentPayment {
