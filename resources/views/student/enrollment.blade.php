@@ -32,7 +32,7 @@
 						<strong><i class="fa fa-file-text-o"></i> Enrollment</strong>
 					</div>
 					<div class="box-body">
-						<div id="printArea" class="cor">
+						<div id="printArea" class="">
 							
 							<div class="row">
 								<p id="student" style="visibility: hidden;">{{ Auth::user()->firstname . ' ' . Auth::user()->lastname . ' - - ' . Auth::user()->student_number }}</p>
