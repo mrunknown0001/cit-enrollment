@@ -119,6 +119,10 @@
 													</tr>
 												@endforeach
 											@endif
+											<tr>
+												<th>Total</th>
+												<th>{{ $total }}</th>
+											</tr>
 										</tbody>
 									</table>
 								</div>

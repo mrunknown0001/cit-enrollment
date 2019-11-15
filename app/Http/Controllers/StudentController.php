@@ -553,13 +553,17 @@ class StudentController extends Controller
 
 
         $miscs = NULL;
+        $total = 0;
 
         if($yl->id > 3) {
             $miscs = \App\Miscellaneous::where('type', '
                 Senior')->get();
+            $total = \App\Miscellaneous::where('type', '
+                Senior')->sum('amount');
         }
         else {
             $miscs = \App\Miscellaneous::where('type', 'Junior')->get();
+            $total = \App\Miscellaneous::where('type', 'Junior')->sum('amount');
         }
 
 
@@ -577,7 +581,8 @@ class StudentController extends Controller
                 'section' => $section,
                 'yl' => $yl,
                 // 'sem' => $sem,
-                'miscs' => $miscs
+                'miscs' => $miscs,
+                'total' => $total,
             ]);
 
         // check if paid for pre-registration
