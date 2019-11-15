@@ -15,16 +15,6 @@
 		<div class="row">
 			<div class="col-md-12">
 				@include('includes.all')
-				
-				{{-- shwo if the assessment is already available --}}
-
-				{{-- check if student is regular or irregular --}}
-				{{-- show only if the student is regular and enrollment is active --}}
-				{{-- @if($es->active == 1)
-					@if(count($rp) < 1) 
-						@include('student.includes.registration-payment')
-					@endif
-				@endif --}}
 
 				<div class="box box-danger">
 					<div class="box-header with-border">
@@ -34,9 +24,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<p><strong>{{ ucwords(Auth::user()->firstname . ' ' . Auth::user()->lastname) }} - {{ Auth::user()->student_number }}</strong></p>
-								{{-- <p>Course: <strong>{{ Auth::user()->enrolled->course->title }}</strong></p>
-								<p>Year Level: <strong>{{ Auth::user()->info->year_level->name }}</strong></p>
-								<div class="row"> --}}
+								<div class="row">
 									<div class="col-md-6">
 										<p>Address: <strong>{{ ucwords(Auth::user()->info->home_address) }}</strong></p>
 									</div>
@@ -77,9 +65,9 @@
 							</div>
 						</div>
 					</div>
-					{{-- <div class="box-footer">
+					<div class="box-footer">
 						
-					</div> --}}
+					</div>
 				</div>
 			</div>
 		</div>
