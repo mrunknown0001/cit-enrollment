@@ -21,6 +21,10 @@
     float: none;
   }
 
+  #printArea #student {
+    visibility: visible;
+  }
+
   .studentPayment {
     margin-top: 0px;
   }
