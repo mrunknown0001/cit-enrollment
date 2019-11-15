@@ -111,7 +111,14 @@
 											<th>Fee</th>
 										</thead>
 										<tbody>
-											
+											@if($miscs != NULL)
+												@foreach($miscs as $m)
+													<tr>
+														<td>{{ $m->name }}</td>
+														<td>{{ $m->amount }}</td>
+													</tr>
+												@endforeach
+											@endif
 										</tbody>
 									</table>
 								</div>
