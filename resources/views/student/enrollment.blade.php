@@ -35,7 +35,7 @@
 						<div id="printArea" class="">
 							<div class="row">
 								<div class="col-md-6">
-									<p id="student" style="visibility: hidden;"><strong>{{ Auth::user()->firstname . ' ' . Auth::user()->lastname . ' - - ' . Auth::user()->student_number }}</strong></p>
+									<p id="student" style="visibility: hidden;">Student: <strong>{{ Auth::user()->firstname . ' ' . Auth::user()->lastname . ' - - ' . Auth::user()->student_number }}</strong></p>
 									<p>Curriculum: <strong>{{ strtoupper($yl->name) }}</strong></p>
 									<p>Section: <strong>{{ strtoupper($section->name) }}</strong></p>
 								</div>
@@ -96,7 +96,7 @@
 											@endforeach
 										</tbody>
 									</table>
-									<table class="table table-bordered table-hover">
+									<table class="table table-bordered table-hover" id="particulars">
 										<thead>
 											<th>Particulars</th>
 											<th>Fee</th>
