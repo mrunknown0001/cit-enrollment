@@ -38,7 +38,6 @@
 							<thead>
 								<tr>
 									<th class="text-center">Name of Student</th>
-									<th class="text-center">Course</th>
 									<th class="text-center">Action</th>
 								</tr>
 							</thead>
@@ -47,18 +46,12 @@
 								<tr>
 									<td>{{ ucwords($s->firstname . ' ' . $s->lastname) }}</td>
 									<td class="text-center">
-										{{ $s->enrolled->course->code }}
-									</td>
-									<td class="text-center">
 										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#studentInfo-{{ $s->id }}"><i class="fa fa-eye"></i> View Info</button>
 
-										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#studentBalance-{{ $s->id }}"><i class="fa fa-eye"></i> View Balance</button>
-
-										<a href="{{ route('cashier.make.payment', ['id' => $s->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-money"> Make Payment</i></a>
+									
 									</td>
 								</tr>
 								@include('cashier.includes.modal-student-info')
-								@include('cashier.includes.modal-student-balance')
 								@endforeach
 							</tbody>
 							<tfoot>
