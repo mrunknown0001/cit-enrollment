@@ -12,7 +12,7 @@
 		</ol>
 	</section>
 	<section class="content">
-		<p><a href="{{ route('cashier.payments') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Payments</a></p>
+		<p><a href="{{ route('cashier.payment.tagging') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back to Payments</a></p>
 		@include('includes.all')
 		<div class="row">
 			<div class="col-md-4">
@@ -47,11 +47,12 @@
 									<td>{{ ucwords($s->firstname . ' ' . $s->lastname) }}</td>
 									<td class="text-center">
 										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#studentInfo-{{ $s->id }}"><i class="fa fa-eye"></i> View Info</button>
-
+										<button class="btn btn-default btn-xs" data-toggle=modal" data-target="#tagging-{{ $s->id }}">Tag Payment</button>
 									
 									</td>
 								</tr>
 								@include('cashier.includes.modal-student-info')
+								@include('cashier.includes.modal-payment-tagging')
 								@endforeach
 							</tbody>
 							<tfoot>

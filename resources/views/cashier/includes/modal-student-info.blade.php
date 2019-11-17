@@ -11,7 +11,7 @@
 
 
         <p>Name: <strong>{{  $s->firstname . ' ' . $s->lastname }}</strong></p>
-        <p>Student Number: <strong>{{ $s->student_number }}</strong></p>
+        <p>LRN: <strong>{{ $s->student_number }}</strong></p>
 
 
       </div>
