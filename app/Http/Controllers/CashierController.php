@@ -134,6 +134,51 @@ class CashierController extends Controller
 
 
 
+
+    // full payment tagging
+    public function fullPaymentTagging($id)
+    {
+        // student 
+        $student = \App\User::findorfail($id);
+
+
+        
+        //  get assessment
+        $assessment = \App\Assessment::where('student_id', $student->id)->first();
+
+        // make assessment paid
+        if(!empty($assessment)) {
+            $assessment->paid = 1;
+            return redirect()->back()>with('success', 'Taggig Full Payment!');
+        }
+        else {
+            return redirect()->route('cashier.payment.tagging')->with('error', 'NO Assessment Found!');
+        }
+    }
+
+
+    public function partialPaymentTagging($id)
+    {
+         // student 
+        $student = \App\User::findorfail($id);
+
+
+        
+        //  get assessment
+        $assessment = \App\Assessment::where('student_id', $student->id)->first();
+
+        // make assessment paid
+        if(!empty($assessment)) {
+            $assessment->partial = 1;
+            return redirect()->back()>with('success', 'Taggig Partial Payment!');
+        }
+        else {
+            return redirect()->route('cashier.payment.tagging')->with('error', 'NO Assessment Found!');
+        }
+    }
+
+
+
     // method use to view balances of students
     public function balances()
     {

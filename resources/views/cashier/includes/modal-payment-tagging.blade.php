@@ -18,8 +18,8 @@
 
         <div class="row">
           <div class="col-md-12">
-            <a href="" class="btn btn-primary">Partial Payment</a>
-            <a href="" class="btn btn-success">Full Payment</a>
+            <a href="{{ route('cashier.partial.payment.tagging', ['id' => $s->id]) }}" class="btn btn-primary">Partial Payment</a>
+            <a href="{{ route('cashier.full.payment.tagging', ['id' => $s->id]) }}" class="btn btn-success">Full Payment</a>
           </div>
         </div>
 
