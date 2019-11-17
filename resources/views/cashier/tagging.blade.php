@@ -28,7 +28,6 @@
 				<h3 class="text-center"><em>Search Student</em></h3>
 			</div>
 		</div>
-		</div>
 	</section>
 </div>
 @endsection
