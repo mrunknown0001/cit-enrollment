@@ -149,7 +149,7 @@ class CashierController extends Controller
         // make assessment paid
         if(!empty($assessment)) {
             $assessment->paid = 1;
-            return redirect()->back()>with('success', 'Taggig Full Payment!');
+            return redirect()->back()->>with('success', 'Taggig Full Payment!');
         }
         else {
             return redirect()->route('cashier.payment.tagging')->with('error', 'NO Assessment Found!');
