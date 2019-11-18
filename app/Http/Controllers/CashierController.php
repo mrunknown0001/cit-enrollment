@@ -152,7 +152,7 @@ class CashierController extends Controller
             $assessment->paid = 1;
 
             $enrolled = new \App\EnrolledStudent();
-            $enrolled->studnet_id = $student->id;
+            $enrolled->student_id = $student->id;
             $enrolled->academic_year_id = $ay->id;
             $enrolled->save();
 
@@ -182,7 +182,7 @@ class CashierController extends Controller
             $assessment->partial = 1;
 
             $enrolled = new \App\EnrolledStudent();
-            $enrolled->studnet_id = $student->id;
+            $enrolled->student_id = $student->id;
             $enrolled->academic_year_id = $ay->id;
             $enrolled->save();
 
