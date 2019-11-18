@@ -145,7 +145,7 @@ class CashierController extends Controller
 
         
         //  get assessment
-        $assessment = \App\Assessment::('student_id', $student->id)->first();
+        $assessment = \App\Assessment::where('student_id', $student->id)->first();
 
         // make assessment paid
         if(!empty($assessment)) {
@@ -180,7 +180,7 @@ class CashierController extends Controller
         // make assessment paid
         if(!empty($assessment)) {
             $assessment->partial = 1;
-            
+
             $enrolled = new \App\EnrolledStudent();
             $enrolled->studnet_id = $student->id;
             $enrolled->academic_year_id = $ay->id;
