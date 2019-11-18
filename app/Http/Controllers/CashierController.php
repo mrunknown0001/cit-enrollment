@@ -157,7 +157,7 @@ class CashierController extends Controller
             $enrolled->save();
 
 
-            return redirect()->back()->with('success', 'Taggig Full Payment!');
+            return redirect()->back()->with('success', 'Tagging Full Payment!');
         }
         else {
             return redirect()->route('cashier.payment.tagging')->with('error', 'NO Assessment Found!');
@@ -186,7 +186,7 @@ class CashierController extends Controller
             $enrolled->academic_year_id = $ay->id;
             $enrolled->save();
 
-            return redirect()->back()->with('success', 'Taggig Partial Payment!');
+            return redirect()->back()->with('success', 'Tagging Partial Payment!');
         }
         else {
             return redirect()->route('cashier.payment.tagging')->with('error', 'NO Assessment Found!');
