@@ -210,6 +210,23 @@ class DeanController extends Controller
         $curriculum_id = $request['curriculum'];
         $strand_id = $request['strand'];
 
+
+        // if curriculum_id < 4 strand_id must be null
+        if($curriculum_id < 4) {
+            if($strand_id != NULL) {
+                return redirect()->back()->with('error', 'Strand Must Be No Value');
+            }
+        }
+
+
+        // if curriculum is > 3 strand_id must not null
+        if($curriculum_id > 3) {
+            if($strand_id == NULL) {
+                return redirect()->back()->with('error', 'Please Select Strand');
+            }
+        }
+
+
         // $course = Course::findorfail($course_id);
         $yl = YearLevel::findorfail($curriculum_id);
         $section = Section::findorfail($section_id);
