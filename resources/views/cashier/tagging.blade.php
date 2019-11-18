@@ -24,6 +24,7 @@
 					</div>
 				</form>	
 			</div>
+			<br>
 			<div class="col-md-12">
 				@include('includes.all')
 				<h3 class="text-center"><em>Search Student</em></h3>
