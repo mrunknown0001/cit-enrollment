@@ -140,15 +140,23 @@ class CashierController extends Controller
     {
         // student 
         $student = \App\User::findorfail($id);
+        $ay = AcademicYear::where('active', 1)->first();
 
 
         
         //  get assessment
-        $assessment = \App\Assessment::where('student_id', $student->id)->first();
+        $assessment = \App\Assessment::('student_id', $student->id)->first();
 
         // make assessment paid
         if(!empty($assessment)) {
             $assessment->paid = 1;
+
+            $enrolled = new \App\EnrolledStudent();
+            $enrolled->studnet_id = $student->id;
+            $enrolled->academic_year_id = $ay->id;
+            $enrolled->save();
+
+
             return redirect()->back()->with('success', 'Taggig Full Payment!');
         }
         else {
@@ -162,6 +170,8 @@ class CashierController extends Controller
          // student 
         $student = \App\User::findorfail($id);
 
+        $ay = AcademicYear::where('active', 1)->first();
+
 
         
         //  get assessment
@@ -170,6 +180,12 @@ class CashierController extends Controller
         // make assessment paid
         if(!empty($assessment)) {
             $assessment->partial = 1;
+            
+            $enrolled = new \App\EnrolledStudent();
+            $enrolled->studnet_id = $student->id;
+            $enrolled->academic_year_id = $ay->id;
+            $enrolled->save();
+
             return redirect()->back()->with('success', 'Taggig Partial Payment!');
         }
         else {
@@ -183,7 +199,7 @@ class CashierController extends Controller
     public function balances()
     {
         $ay = AcademicYear::where('active', 1)->first();
-        $sem = Semester::where('active', 1)->first();
+        // $sem = Semester::where('active', 1)->first();
 
         if(empty($ay) || empty($sem)) {
             return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
