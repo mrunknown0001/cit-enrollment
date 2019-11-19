@@ -503,7 +503,12 @@ class CashierController extends Controller
         $assessment = \App\Assessment::where('student_id', $id)->first();
 
         if(!empty($assessment)) {
-            return "With Assessment";
+            if($assessment->paid == 1) {
+                return "Paid Full Payment";
+            }
+            else if($assessment->partial == 1 && $assessment->paid == 0) {
+                return "Partial Payment";
+            }
         }
         else {
             return "No Assessment";
