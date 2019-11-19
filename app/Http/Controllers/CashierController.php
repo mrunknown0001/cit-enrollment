@@ -511,6 +511,9 @@ class CashierController extends Controller
             else if($assessment->partial == 1 && $assessment->paid == 0) {
                 return "Partial Payment";
             }
+            else {
+                return "No Payment";
+            }
         }
         else {
             return "No Assessment";
