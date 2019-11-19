@@ -44,7 +44,7 @@
 							<tbody>
 								@foreach($students as $s)
 								<tr>
-									<td>{{ ucwords($s->firstname . ' ' . $s->lastname) }}</td>
+									<td>{{ ucwords($s->firstname . ' ' . $s->lastname) }} - {{ $s->student_number }}</td>
 									<td class="text-center">
 										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#studentInfo-{{ $s->id }}"><i class="fa fa-eye"></i> View Info</button>
 										<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#tagging-{{ $s->id }}">Tag Payment</button>
