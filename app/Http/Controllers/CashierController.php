@@ -484,4 +484,30 @@ class CashierController extends Controller
        })->download('xls');        
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // check if full payment or partial payment
+    public static function checkPayment($id)
+    {
+        $assessment = \App\Assessment::where('student_id', $id)->first();
+
+        if(!empty($assessment)) {
+            return "With Assessment";
+        }
+        else {
+            return "No Assessment";
+        }
+    }
+
 }
