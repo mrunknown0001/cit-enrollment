@@ -150,6 +150,7 @@ class CashierController extends Controller
         // make assessment paid
         if(!empty($assessment)) {
             $assessment->paid = 1;
+            $assessment->save();
 
             $enrolled = new \App\EnrolledStudent();
             $enrolled->student_id = $student->id;
@@ -180,6 +181,7 @@ class CashierController extends Controller
         // make assessment paid
         if(!empty($assessment)) {
             $assessment->partial = 1;
+            $assessment->save();
 
             $enrolled = new \App\EnrolledStudent();
             $enrolled->student_id = $student->id;
