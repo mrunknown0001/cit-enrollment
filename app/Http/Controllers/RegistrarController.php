@@ -833,6 +833,7 @@ class RegistrarController extends Controller
         $stds = EnrolledStudent::whereAcademicYearId($ay->id)
                                 // ->whereSemesterId($sem->id)
                                 ->whereStatus(1)
+                                ->distinct('student_id')
                                 ->get();
 
         return $stds;
