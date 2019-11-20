@@ -836,7 +836,6 @@ class RegistrarController extends Controller
                                 ->distinct('student_id')
                                 ->get();
 
-        return $stds;
 
         if(count($stds) < 1) {
             return redirect()->back()->with('info', 'No Enrolled Students!');
