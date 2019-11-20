@@ -226,7 +226,7 @@ class StudentController extends Controller
         // $sem = Semester::whereActive(1)->first();
 
         if(empty($ay)) {
-            return redirect()->route('student.dashboard')->with('error', 'Academic Year or Semester Not Set!');
+            return redirect()->route('student.dashboard')->with('error', 'School Year is Not Set!');
         }
 
 
@@ -491,7 +491,7 @@ class StudentController extends Controller
         $rp = RegistrationPayment::where('student_id', Auth::user()->id)->where('active', 1)->first();
 
         if(empty($ay)) {
-            return redirect()->route('student.dashboard')->with('error', 'No active Academic Year or Semester!');
+            return redirect()->route('student.dashboard')->with('error', 'No active School Year!');
         }
 
         // check if enrollment is active
@@ -632,7 +632,7 @@ class StudentController extends Controller
         // $sem = Semester::whereActive(1)->first();
 
         if(empty($ay)) {
-            return redirect()->route('student.dashboard')->with('error', 'No Active Academic Year');
+            return redirect()->route('student.dashboard')->with('error', 'No Active School Year');
         }
 
         // $prev_sem_id = 2;
@@ -683,7 +683,7 @@ class StudentController extends Controller
         $sem = Semester::where('active', 1)->first();
 
         if(count($ay) < 1 && count($sem) < 1) {
-            return redirect()->route('student.dashboard')->with('error', 'Admin Setup not fisnished! No Active Academic Year!');
+            return redirect()->route('student.dashboard')->with('error', 'Admin Setup not fisnished! No Active School Year!');
         } 
 
         $balance = Balance::where('student_id', Auth::user()->id)
@@ -742,7 +742,7 @@ class StudentController extends Controller
         $sem = Semester::where('active', 1)->first();
 
         if(empty($ay) || empty($sem)) {
-            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+            return redirect()->back()->with('error', 'School Year Not Found! Please Report to Admin!');
         }
 
         // registration for the first payment of the student
@@ -803,7 +803,7 @@ class StudentController extends Controller
         $sem = Semester::where('active', 1)->first();
 
         if(empty($ay) || empty($sem)) {
-            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+            return redirect()->back()->with('error', 'School Year Not Found! Please Report to Admin!');
         }
 
         // check if there is pending payment subject for finishing
@@ -864,7 +864,7 @@ class StudentController extends Controller
         $sem = Semester::where('active', 1)->first();
 
         if(empty($ay) || empty($sem)) {
-            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+            return redirect()->back()->with('error', 'School Year Not Found! Please Report to Admin!');
         }
 
         // check if there is pending payment subject for finishing
@@ -976,7 +976,7 @@ class StudentController extends Controller
         $sem = Semester::where('active', 1)->first();
 
         if(empty($ay) || empty($sem)) {
-            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+            return redirect()->back()->with('error', 'School Year Not Found! Please Report to Admin!');
         }
 
         // check if there is pending payment subject for finishing
@@ -1008,7 +1008,7 @@ class StudentController extends Controller
         $sem = Semester::where('active', 1)->first();
 
         if(empty($ay) || empty($sem)) {
-            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+            return redirect()->back()->with('error', 'School Year Not Found! Please Report to Admin!');
         }
 
         $amount = $request['amount'];
@@ -1103,7 +1103,7 @@ class StudentController extends Controller
         $sem = Semester::where('active', 1)->first();
 
         if(empty($ay) || empty($sem)) {
-            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+            return redirect()->back()->with('error', 'School Year Not Found! Please Report to Admin!');
         }
 
         // check if there is pending payment subject for finishing
@@ -1140,7 +1140,7 @@ class StudentController extends Controller
         $sem = Semester::where('active', 1)->first();
 
         if(empty($ay) || empty($sem)) {
-            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+            return redirect()->back()->with('error', 'School Year Not Found! Please Report to Admin!');
         }
 
         // check if there is pending payment subject for finishing
@@ -1179,7 +1179,7 @@ class StudentController extends Controller
         $sem = Semester::where('active', 1)->first();
 
         if(empty($ay) || empty($sem)) {
-            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+            return redirect()->back()->with('error', 'School Year Not Found! Please Report to Admin!');
         }
 
         // check if there is pending payment subject for finishing
@@ -1227,7 +1227,7 @@ class StudentController extends Controller
         $sem = Semester::where('active', 1)->first();
 
         if(empty($ay) || empty($sem)) {
-            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+            return redirect()->back()->with('error', 'School Year Not Found! Please Report to Admin!');
         }
 
         // check if there is pending payment subject for finishing
@@ -1302,7 +1302,7 @@ class StudentController extends Controller
         $sem = Semester::where('active', 1)->first();
 
         if(empty($ay) || empty($sem)) {
-            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+            return redirect()->back()->with('error', 'School Year Not Found! Please Report to Admin!');
         }
 
         // check if there is pending payment subject for finishing
@@ -1345,7 +1345,7 @@ class StudentController extends Controller
         $sem = Semester::where('active', 1)->first();
 
         if(empty($ay) || empty($sem)) {
-            return redirect()->back()->with('error', 'Academic Year Not Found! Please Report to Admin!');
+            return redirect()->back()->with('error', 'School Year Not Found! Please Report to Admin!');
         }
 
         // check if there is pending payment subject for finishing
