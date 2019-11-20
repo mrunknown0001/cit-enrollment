@@ -835,6 +835,8 @@ class RegistrarController extends Controller
                                 ->whereStatus(1)
                                 ->get();
 
+        return $stds;
+
         if(count($stds) < 1) {
             return redirect()->back()->with('info', 'No Enrolled Students!');
         }
@@ -844,8 +846,8 @@ class RegistrarController extends Controller
         foreach($stds as $s) {
             array_push($students, [
                 'Student' => ucwords($s->student->firstname . ' ' . $s->student->lastname),
-                'Student Number' => $s->student->student_number,
-                'Year Level' => $s->student->info->year_level->name,
+                'LRN' => $s->student->student_number,
+                'Curriculum' => $s->student->info->year_level->name,
                 // 'Course' => $s->student->enrolled->course->title
             ]);
         }
