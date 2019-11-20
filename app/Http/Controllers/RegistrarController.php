@@ -822,7 +822,7 @@ class RegistrarController extends Controller
     // method use to get all enrooled students in the current semester
     public function getCurrentEnrolledStudents()
     {
-        return $ay = AcademicYear::whereActive(1)->first();
+        $ay = AcademicYear::whereActive(1)->first();
         // $sem = Semester::whereActive(1)->first();
 
         if(empty($ay)) {
