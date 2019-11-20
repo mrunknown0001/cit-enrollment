@@ -846,7 +846,7 @@ class RegistrarController extends Controller
                 'Student' => ucwords($s->student->firstname . ' ' . $s->student->lastname),
                 'Student Number' => $s->student->student_number,
                 'Year Level' => $s->student->info->year_level->name,
-                'Course' => $s->student->enrolled->course->title
+                // 'Course' => $s->student->enrolled->course->title
             ]);
         }
 
