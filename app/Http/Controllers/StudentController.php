@@ -530,7 +530,7 @@ class StudentController extends Controller
         // $course = Course::find($course_id);
         // $curriculum = Curriculum::find($curriculum_id);
         // $major = CourseMajor::find($major_id);
-        $yl = YearLevel::find($curriculum_id);
+        return $yl = YearLevel::find($curriculum_id);
         $section = Section::find($assessment->section_id);
 
 
