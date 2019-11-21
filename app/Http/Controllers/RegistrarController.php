@@ -716,7 +716,7 @@ class RegistrarController extends Controller
         foreach ($data as $value) {
             
             foreach ($value as $row) {
-                if($row->student_number != null) {
+                if($row->lrn != null) {
 
                     // add validation on Stuent number LRN
 
