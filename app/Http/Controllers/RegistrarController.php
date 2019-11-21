@@ -174,7 +174,7 @@ class RegistrarController extends Controller
         $suffix = $request['suffix_name'];
         $course_id = $request['course_id'];
         $major_id = $request['major'];
-        return $curriculum_id = $request['curriculum'];
+        $curriculum_id = $request['curriculum'];
         $yl_id = $request['yl_id'];
 
     	return view('registrar.student-add', [
@@ -216,7 +216,7 @@ class RegistrarController extends Controller
         $suffix = $request['suffix_name'];
         // $course_id = $request['course'];
         // $major_id = $request['major'];
-        $curriculum_id = $request['curriculum'];
+        return $curriculum_id = $request['curriculum'];
         // $yl_id = $request['year_level'];
 
         $sex = $request['sex'];
