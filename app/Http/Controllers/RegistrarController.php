@@ -896,7 +896,7 @@ class RegistrarController extends Controller
         }
 
         // $curriculum_id = $student->enrolled->curriculum_id;
-        $yl_id = $student->info->curriculum_id;
+        return $yl_id = $student->info->curriculum_id;
 
         $subjects = Subject::
                         // whereCurriculumId($curriculum_id)
