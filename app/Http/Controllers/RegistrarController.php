@@ -826,7 +826,7 @@ class RegistrarController extends Controller
         // $sem = Semester::whereActive(1)->first();
 
         if(empty($ay)) {
-            return redirect()->back()->with('info', 'Please Check AcademicYear and Semester in Admin!');
+            return redirect()->back()->with('info', 'Please Check School Year in Admin!');
         }
 
 
