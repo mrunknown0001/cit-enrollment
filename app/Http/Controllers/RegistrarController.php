@@ -732,7 +732,7 @@ class RegistrarController extends Controller
 
                         // for users table
                         $insert[] = [
-                                'lrn' => $row->lrn,
+                                'student_number' => $row->lrn,
                                 'lastname' => $row->lastname,
                                 'firstname' => $row->firstname
                             ];
