@@ -276,7 +276,7 @@ class RegistrarController extends Controller
         $suffix = $request['suffix'];
         // $course_id = $request['course_id'];
         // $major_id = $request['major_id'];
-        $curriculum_id = $request['curriculum_id'];
+        return $curriculum_id = $request['curriculum_id'];
         // $yl_id = $request['yl_id'];
 
         $sex = $request['sex'];

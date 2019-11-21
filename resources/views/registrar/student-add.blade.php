@@ -110,9 +110,9 @@
 							        <select name="curriculum" id="curriculum" class="form-control" required="">
 							        	<option value="">Select Curriculum</option>
 							        	@if(count($yl)> 0)
-													@foreach($yl as $y)
-														<option value="{{ $y->id }}">{{ $y->name }}</option>
-													@endforeach
+											@foreach($yl as $y)
+												<option value="{{ $y->id }}">{{ $y->name }}</option>
+											@endforeach
 							        	@else
 													
 							      		@endif
