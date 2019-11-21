@@ -750,7 +750,7 @@ class RegistrarController extends Controller
                         // for student info table
                         $info[] = [
                                 'student_id' => $ref_id,
-                                'esc_scholar' => $row->esc_scholar,
+                                'esc_scholar' => 0,
                                 // 'year_level_id' => $year_level->id,
                                 'curriculum_id' => $curriculum_id,
                                 'sex' => $row->sex,
