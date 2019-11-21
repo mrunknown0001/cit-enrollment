@@ -530,7 +530,7 @@ class StudentController extends Controller
         // $course = Course::find($course_id);
         // $curriculum = Curriculum::find($curriculum_id);
         // $major = CourseMajor::find($major_id);
-        return $yl = YearLevel::find($curriculum_id);
+        $yl = YearLevel::find($curriculum_id);
         $section = Section::find($assessment->section_id);
 
 
@@ -566,6 +566,8 @@ class StudentController extends Controller
             $total = \App\Miscellaneous::where('type', 'Junior')->sum('amount');
         }
 
+
+        return $miscs;
 
         return view('student.enrollment', [
                 'assessment' => $assessment,
