@@ -14,7 +14,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<button class="btn btn-primary" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
+				<button class="btn btn-danger" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
 				<hr>
 				@include('includes.all')
 				<div id="printArea">
