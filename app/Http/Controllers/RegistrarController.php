@@ -1129,7 +1129,7 @@ class RegistrarController extends Controller
     public function removeSubject($id)
     {
         $subject = \App\Subject::findorfail($id);
-        if(subject->delete()) {
+        if($subject->delete()) {
             return redirect()->back()->with('success', 'Subject Removed!');
         }
         else {
