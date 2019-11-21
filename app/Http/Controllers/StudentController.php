@@ -556,10 +556,8 @@ class StudentController extends Controller
         $total = 0;
 
         if($yl->id > 3) {
-            $miscs = \App\Miscellaneous::where('type', '
-                Senior')->get();
-            $total = \App\Miscellaneous::where('type', '
-                Senior')->sum('amount');
+            $miscs = \App\Miscellaneous::where('type', 'Senior')->get();
+            $total = \App\Miscellaneous::where('type', 'Senior')->sum('amount');
         }
         else {
             $miscs = \App\Miscellaneous::where('type', 'Junior')->get();
@@ -567,7 +565,7 @@ class StudentController extends Controller
         }
 
 
-        return $miscs;
+        // return $miscs;
 
         return view('student.enrollment', [
                 'assessment' => $assessment,
