@@ -1124,6 +1124,20 @@ class RegistrarController extends Controller
     }
 
 
+
+    // remove subject
+    public function removeSubject($id)
+    {
+        $subject = \App\Subject::findorfail($id);
+        if(subject->delete()) {
+            return redirect()->back()->with('success', 'Subject Removed!');
+        }
+        else {
+            return redirect()->back()->with('error', 'Error on Subject Removal!');
+        }
+    }
+
+
     // method use to show subjects in a course
     public function courseSubjects($id = null)
     {

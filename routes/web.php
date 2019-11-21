@@ -736,6 +736,9 @@ Route::group(['prefix' => 'registrar', 'middleware' => 'prevent-back-history'], 
 		return redirect()->route('registrar.subjects');
 	});
 
+	// route to delete subject
+	Route::get('/subject/remove/{id}', 'RegistrarController@removeSubject')->name('registrar.remove.subject');
+
 	// route to get course major on selected course
 	Route::get('/course/{id}/majors/get', 'RegistrarController@getCourseMajors')->name('admin.get.course.majors');
 

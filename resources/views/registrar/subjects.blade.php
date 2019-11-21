@@ -53,6 +53,7 @@
 									<td class="text-center">{{ $s->lab_units ? $s->lab_units : 'N/A' }}</td> --}}
 									<td class="text-center">
 										<a href="{{ route('registrar.update.subject', ['id' => $s->id]) }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span> Update</a>
+										<a href="{{ route('registrar.remove.subject', ['id' => $s->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
 									</td>
 								</tr>
 								@endforeach
