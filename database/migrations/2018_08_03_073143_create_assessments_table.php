@@ -21,6 +21,7 @@ class CreateAssessmentsTable extends Migration
             // $table->integer('semester_id')->unsigned();
             $table->integer('year_level_id')->unsigned()->nullable();
             // $table->integer('course_id')->unsigned();
+            // $table->integer('strand_id')->unsigned()->nullable();
             // $table->integer('curriculum_id')->unsigned();
             $table->integer('section_id')->unsinged();
             $table->string('subject_ids', 80)->nullable();
