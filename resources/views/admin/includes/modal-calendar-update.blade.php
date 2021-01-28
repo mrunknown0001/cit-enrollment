@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
                   <label for="title">Title</label><label class="label-required">*</label>
-                  <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Enter School Calendar" autofocus required>
+                  <input id="title" type="text" class="form-control" name="title" value="{{ $c->title }}" placeholder="Enter School Calendar" autofocus required>
                   @if ($errors->has('title'))
                       <span class="help-block">
                           <strong>{{ $errors->first('title') }}</strong>
@@ -28,7 +28,7 @@
             <div class="col-md-6">
                 <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
                   <label for="date">Date</label><label class="label-required">*</label>
-                  <input id="date" type="date" class="form-control" name="date" value="{{ old('date') }}" placeholder="" required>
+                  <input id="date" type="date" class="form-control" name="date" value="{{ date('mm/dd/yyyy', strtotime($c->date)) }}" placeholder="" required>
                   @if ($errors->has('date'))
                       <span class="help-block">
                           <strong>{{ $errors->first('date') }}</strong>
@@ -39,7 +39,7 @@
             <div class="col-md-12">
                 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                   <label for="description">Description</label>
-                  <input id="description" type="text" class="form-control" name="description" value="{{ old('description') }}" placeholder="Enter Description" >
+                  <input id="description" type="text" class="form-control" name="description" value="{{ $c->description }}" placeholder="Enter Description" >
                   @if ($errors->has('description'))
                       <span class="help-block">
                           <strong>{{ $errors->first('description') }}</strong>
