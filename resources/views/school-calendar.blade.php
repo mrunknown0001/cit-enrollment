@@ -64,11 +64,28 @@
     margin: 0 auto;
   }
 
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
 </style>
 </head>
 <body>
-  <a href="{{ route('landing.page') }}">back to Landing Page</a>
+
+  <div class="content">
+    <h2 style="text-align: center;">Mayantoc High School School Calendar</h2>
+
+    <a href="{{ route('landing.page') }}">back to Landing Page</a>
+    <p></p>
+  </div>
+
   <div id='calendar'></div>
+
+  <div class="content">
+    <p></p>
+    <p><strong>Copyright &copy; 2019 </strong></p>
+  </div>
 
 </body>
 </html>

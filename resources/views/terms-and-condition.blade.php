@@ -27,6 +27,7 @@
   <div class="row">
     <div class="col-md-12">
 
+      <h2 class="text-center">Online Enrollment for Mayantoc High School</h2>
       <h3>Privacy Statement</h3>
       <p class="italized">Last updated: October 7, 2019</p>
       <p>Please read the Privacy Statement carefully before using the https://mayantochs.com/ website (the "Service") operated by Online Enrollment for Mayantoc High School ("us", "we", or "our").</p>
@@ -50,7 +51,8 @@
       <p>If you have any questions about these Terms, please contact us.</p>
 
 
-
+      <p></p>
+      <p><strong>Copyright &copy; 2019 </strong></p>
     </div>
   </div>
 </div>
