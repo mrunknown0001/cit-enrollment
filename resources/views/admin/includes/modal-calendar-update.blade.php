@@ -28,7 +28,7 @@
             <div class="col-md-6">
                 <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
                   <label for="date">Date</label><label class="label-required">*</label>
-                  <input id="date" type="date" class="form-control" name="date" value="{{ date('mm/dd/yyyy', strtotime($c->date)) }}" placeholder="" required>
+                  <input id="date" type="date" class="form-control" name="date" value="{{ date('m/d/Y', strtotime($c->date)) }}" placeholder="" required>
                   @if ($errors->has('date'))
                       <span class="help-block">
                           <strong>{{ $errors->first('date') }}</strong>
