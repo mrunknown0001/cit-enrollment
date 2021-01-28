@@ -76,7 +76,7 @@
   <div class="content">
     <h2 style="text-align: center;">Mayantoc High School School Calendar</h2>
 
-    <a href="{{ route('landing.page') }}">back to Landing Page</a>
+    <a href="{{ route('landing.page') }}" class="btn btn-primar btn-sm">back to Landing Page</a>
     <p></p>
   </div>
 
