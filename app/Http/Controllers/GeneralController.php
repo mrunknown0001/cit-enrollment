@@ -43,6 +43,7 @@ class GeneralController extends Controller
             foreach($calendars as $c) {
                 $data[] = [
                     'title' => $c->title,
+                    'description' => $c->description,
                     'start' => $c->date,
                 ];
             }
