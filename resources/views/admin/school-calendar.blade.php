@@ -40,8 +40,9 @@
 										<td>{{ $c->title }}</td>
 										<td>{{ $c->date }}</td>
 										<td>
-											<button class="btn btn-xs"><i class="fa fa-pencil"></i> Update</button>
+											<button class="btn btn-xs" data-toggle="modal" data-target="#UpdateSchoolCalendar-{{ $c->id }}"><i class="fa fa-pencil"></i> Update</button>
 										</td>
+										@include('admin.includes.modal-calendar-update')
 									</tr>
 								@endforeach
 							</tbody>
