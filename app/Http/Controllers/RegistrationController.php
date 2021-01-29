@@ -22,7 +22,7 @@ class RegistrationController extends Controller
     public function studentShowDetails(Request $request)
     {
     	$request->validate([
-    		'student_number' => 'required'
+    		'lrn' => 'required'
 		]);
 
     	$sn = $request['student_number'];
